@@ -30,45 +30,71 @@ const RECENT_TRANSACTIONS = [
   { id: 5, type: 'top_up', description: 'Top up from Bank', amount: +1000.00, currency: 'EUR', date: '2025-01-19', icon: '+' }
 ];
 
-const CryptoCard = ({ crypto }) => {
+const CryptoCard = ({ crypto, portfolio }) => {
   const isPositive = crypto.change_24h >= 0;
+  const holding = portfolio[crypto.symbol] || 0;
+  const value = holding * crypto.price;
   
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-4 hover:shadow-md transition-shadow">
-      <div className="flex justify-between items-start mb-2">
-        <div>
-          <h3 className="font-semibold text-gray-900">{crypto.symbol}</h3>
-          <p className="text-sm text-gray-500">{crypto.name}</p>
+    <div className="crypto-card">
+      <div className="crypto-header">
+        <div className="crypto-info">
+          <div className={`crypto-icon ${crypto.symbol.toLowerCase()}`}>
+            {crypto.symbol.charAt(0)}
+          </div>
+          <div>
+            <h4 className="crypto-name">{crypto.symbol}</h4>
+            <p className="crypto-holding">{holding.toFixed(4)} {crypto.symbol}</p>
+          </div>
         </div>
-        <div className={`px-2 py-1 rounded-md text-xs font-medium ${
-          isPositive ? 'bg-green-100 text-green-700' : 'bg-red-100 text-red-700'
-        }`}>
+        <div className={`price-change ${isPositive ? 'positive' : 'negative'}`}>
           {isPositive ? '+' : ''}{crypto.change_24h?.toFixed(2)}%
         </div>
       </div>
       
-      <div className="space-y-1">
-        <p className="text-lg font-bold text-gray-900">
-          ${crypto.price?.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 6})}
-        </p>
-        <p className="text-xs text-gray-500">
-          Vol: ${(crypto.volume_24h / 1e9)?.toFixed(1)}B
-        </p>
+      <div className="crypto-values">
+        <div className="crypto-price">${crypto.price?.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 6})}</div>
+        <div className="crypto-value">${value.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
       </div>
     </div>
   );
 };
 
-const BalanceCard = ({ title, amount, currency, gradient, icon }) => (
-  <div className={`${gradient} rounded-xl p-6 text-white shadow-lg`}>
-    <div className="flex items-center justify-between mb-4">
-      <h3 className="text-lg font-medium opacity-90">{title}</h3>
-      <div className="text-2xl opacity-75">{icon}</div>
+const BalanceCard = ({ title, amount, currency, isMain, subtitle }) => (
+  <div className={`balance-card ${isMain ? 'main-balance' : 'secondary-balance'}`}>
+    <div className="balance-header">
+      <h3 className="balance-title">{title}</h3>
+      {subtitle && <p className="balance-subtitle">{subtitle}</p>}
     </div>
-    <p className="text-3xl font-bold">
-      {amount?.toLocaleString(undefined, {minimumFractionDigits: 2})} {currency}
-    </p>
+    <div className="balance-amount">
+      <span className="amount">{amount?.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+      <span className="currency">{currency}</span>
+    </div>
   </div>
+);
+
+const TransactionItem = ({ transaction }) => (
+  <div className="transaction-item">
+    <div className="transaction-icon">
+      <span>{transaction.icon}</span>
+    </div>
+    <div className="transaction-details">
+      <div className="transaction-description">{transaction.description}</div>
+      <div className="transaction-date">{transaction.date}</div>
+    </div>
+    <div className={`transaction-amount ${transaction.amount >= 0 ? 'positive' : 'negative'}`}>
+      {transaction.currency === 'SWAP' ? '' : 
+        `${transaction.amount >= 0 ? '+' : ''}${transaction.amount.toLocaleString(undefined, {minimumFractionDigits: 2})} ${transaction.currency}`
+      }
+    </div>
+  </div>
+);
+
+const QuickAction = ({ icon, title, onClick, color = 'primary' }) => (
+  <button className={`quick-action ${color}`} onClick={onClick}>
+    <div className="action-icon">{icon}</div>
+    <span className="action-title">{title}</span>
+  </button>
 );
 
 const SwapWidget = ({ cryptoPrices, onSwap }) => {
@@ -100,19 +126,18 @@ const SwapWidget = ({ cryptoPrices, onSwap }) => {
   const availableCryptos = Object.keys(cryptoPrices);
 
   return (
-    <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-      <h3 className="text-lg font-semibold text-gray-900 mb-4">Instant Crypto Swap</h3>
+    <div className="swap-widget">
+      <div className="swap-header">
+        <h3>Instant Swap</h3>
+        <p>Trade crypto instantly with live rates</p>
+      </div>
       
-      <div className="space-y-4">
+      <div className="swap-form">
         {/* From Section */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-700">From</label>
-          <div className="flex space-x-3">
-            <select
-              value={fromCrypto}
-              onChange={(e) => setFromCrypto(e.target.value)}
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
+        <div className="swap-section">
+          <label>From</label>
+          <div className="swap-input-group">
+            <select value={fromCrypto} onChange={(e) => setFromCrypto(e.target.value)} className="crypto-select">
               {availableCryptos.map(symbol => (
                 <option key={symbol} value={symbol}>{symbol}</option>
               ))}
@@ -122,54 +147,45 @@ const SwapWidget = ({ cryptoPrices, onSwap }) => {
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
               step="0.001"
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-              placeholder="Amount"
+              className="amount-input"
+              placeholder="0.00"
             />
           </div>
         </div>
 
-        {/* Swap Icon */}
-        <div className="flex justify-center">
-          <div className="bg-gray-100 p-2 rounded-full">
-            ⇅
-          </div>
+        {/* Swap Button */}
+        <div className="swap-button-container">
+          <button className="swap-toggle">
+            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
+              <path fillRule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
+            </svg>
+          </button>
         </div>
 
         {/* To Section */}
-        <div className="space-y-2">
-          <label className="text-sm font-medium text-gray-700">To</label>
-          <div className="flex space-x-3">
-            <select
-              value={toCrypto}
-              onChange={(e) => setToCrypto(e.target.value)}
-              className="flex-1 px-3 py-2 border border-gray-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent"
-            >
+        <div className="swap-section">
+          <label>To</label>
+          <div className="swap-input-group">
+            <select value={toCrypto} onChange={(e) => setToCrypto(e.target.value)} className="crypto-select">
               {availableCryptos.map(symbol => (
                 <option key={symbol} value={symbol}>{symbol}</option>
               ))}
             </select>
-            <div className="flex-1 px-3 py-2 bg-gray-50 border border-gray-200 rounded-lg">
+            <div className="amount-display">
               {estimatedReceive.toFixed(6)}
             </div>
           </div>
         </div>
 
-        {/* Fee Info */}
-        <div className="text-sm text-gray-500 bg-gray-50 p-3 rounded-lg">
-          <div className="flex justify-between">
-            <span>Exchange Rate:</span>
-            <span>1 {fromCrypto} = {estimatedReceive > 0 ? (estimatedReceive / parseFloat(amount || 1)).toFixed(6) : '0'} {toCrypto}</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Network Fee:</span>
-            <span>0.5%</span>
+        {/* Rate Info */}
+        <div className="swap-rate">
+          <div className="rate-info">
+            <span>Rate: 1 {fromCrypto} = {estimatedReceive > 0 ? (estimatedReceive / parseFloat(amount || 1)).toFixed(6) : '0'} {toCrypto}</span>
+            <span>Fee: 0.5%</span>
           </div>
         </div>
 
-        <button
-          onClick={handleSwap}
-          className="w-full bg-gradient-to-r from-blue-600 to-purple-600 text-white py-3 px-4 rounded-lg font-semibold hover:from-blue-700 hover:to-purple-700 transition-all duration-200 transform hover:scale-105"
-        >
+        <button onClick={handleSwap} className="swap-execute-button">
           Swap {fromCrypto} → {toCrypto}
         </button>
       </div>
@@ -181,11 +197,11 @@ function App() {
   const [cryptoPrices, setCryptoPrices] = useState({});
   const [loading, setLoading] = useState(true);
   const [user] = useState(DEMO_USER);
-  const [activeTab, setActiveTab] = useState('dashboard');
+  const [activeTab, setActiveTab] = useState('home');
 
   useEffect(() => {
     fetchCryptoPrices();
-    const interval = setInterval(fetchCryptoPrices, 30000); // Update every 30 seconds
+    const interval = setInterval(fetchCryptoPrices, 30000);
     return () => clearInterval(interval);
   }, []);
 
@@ -197,9 +213,11 @@ function App() {
       console.error('Error fetching crypto prices:', error);
       // Fallback mock data
       setCryptoPrices({
-        BTC: { symbol: 'BTC', name: 'Bitcoin', price: 42000, change_24h: 2.5, volume_24h: 15000000000 },
-        ETH: { symbol: 'ETH', name: 'Ethereum', price: 2500, change_24h: 1.8, volume_24h: 8000000000 },
-        BNB: { symbol: 'BNB', name: 'BNB', price: 320, change_24h: -0.5, volume_24h: 1000000000 }
+        BTC: { symbol: 'BTC', name: 'Bitcoin', price: 118922, change_24h: 2.5, volume_24h: 15000000000 },
+        ETH: { symbol: 'ETH', name: 'Ethereum', price: 3340, change_24h: 1.8, volume_24h: 8000000000 },
+        BNB: { symbol: 'BNB', name: 'BNB', price: 695, change_24h: -0.5, volume_24h: 1000000000 },
+        ADA: { symbol: 'ADA', name: 'Cardano', price: 1.15, change_24h: 3.2, volume_24h: 500000000 },
+        SOL: { symbol: 'SOL', name: 'Solana', price: 264, change_24h: 4.1, volume_24h: 2000000000 }
       });
     } finally {
       setLoading(false);
@@ -222,7 +240,7 @@ function App() {
     }
   };
 
-  const calculatePortfolioValue = () => {
+  const calculateTotalPortfolioValue = () => {
     let totalValue = 0;
     Object.entries(user.crypto_portfolio).forEach(([symbol, amount]) => {
       if (cryptoPrices[symbol]) {
@@ -232,180 +250,196 @@ function App() {
     return totalValue;
   };
 
-  const Navigation = () => (
-    <nav className="bg-white border-b border-gray-100 px-6 py-4">
-      <div className="flex items-center justify-between">
-        <div className="flex items-center space-x-8">
-          <h1 className="text-2xl font-bold bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">
-            Akka
-          </h1>
-          <div className="flex space-x-6">
-            <button
-              onClick={() => setActiveTab('dashboard')}
-              className={`px-3 py-2 rounded-lg font-medium transition-colors ${
-                activeTab === 'dashboard' 
-                  ? 'bg-blue-100 text-blue-700' 
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              Dashboard
-            </button>
-            <button
-              onClick={() => setActiveTab('market')}
-              className={`px-3 py-2 rounded-lg font-medium transition-colors ${
-                activeTab === 'market' 
-                  ? 'bg-blue-100 text-blue-700' 
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              Market
-            </button>
-            <button
-              onClick={() => setActiveTab('swap')}
-              className={`px-3 py-2 rounded-lg font-medium transition-colors ${
-                activeTab === 'swap' 
-                  ? 'bg-blue-100 text-blue-700' 
-                  : 'text-gray-600 hover:text-gray-900'
-              }`}
-            >
-              Swap
-            </button>
-          </div>
-        </div>
-        <div className="flex items-center space-x-4">
-          <div className="text-right">
-            <p className="text-sm font-medium text-gray-900">{user.name}</p>
-            <p className="text-xs text-gray-500">Premium Account</p>
-          </div>
-          <div className="w-8 h-8 bg-gradient-to-r from-blue-500 to-purple-500 rounded-full flex items-center justify-center">
-            <span className="text-white text-sm font-medium">A</span>
-          </div>
-        </div>
-      </div>
-    </nav>
-  );
+  const calculateTotalBalance = () => {
+    return user.eur_balance + user.try_balance * 0.029 + calculateTotalPortfolioValue(); // Convert TRY to EUR approximation
+  };
 
   if (loading) {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50 flex items-center justify-center">
-        <div className="text-center">
-          <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-blue-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Loading Akka...</p>
+      <div className="loading-screen">
+        <div className="akka-logo">
+          <div className="logo-gradient"></div>
+          <span>akka</span>
         </div>
+        <div className="loading-spinner"></div>
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-blue-50 via-white to-purple-50">
-      <Navigation />
-      
-      <div className="max-w-7xl mx-auto px-6 py-8">
-        {activeTab === 'dashboard' && (
-          <div className="space-y-8">
-            {/* Hero Section */}
-            <div className="relative rounded-2xl overflow-hidden bg-gradient-to-r from-blue-600 via-purple-600 to-indigo-700 p-8 text-white">
-              <div className="relative z-10">
-                <h2 className="text-3xl font-bold mb-2">Welcome back, {user.name}</h2>
-                <p className="text-blue-100 mb-6">Your crypto-banking super-app with everything in one place</p>
-                <div className="flex space-x-4">
-                  <button className="bg-white text-blue-600 px-6 py-2 rounded-lg font-semibold hover:bg-gray-100 transition-colors">
-                    Add Money
-                  </button>
-                  <button className="border border-white text-white px-6 py-2 rounded-lg font-semibold hover:bg-white hover:text-blue-600 transition-colors">
-                    Get Card
-                  </button>
-                </div>
-              </div>
-              <div className="absolute top-0 right-0 w-64 h-64 opacity-20">
-                <img 
-                  src="https://images.unsplash.com/photo-1639815188508-13f7370f664a?crop=entropy&cs=srgb&fm=jpg&ixid=M3w3NDQ2MzR8MHwxfHNlYXJjaHwyfHxjcnlwdG98ZW58MHx8fGJsdWV8MTc1MzE0Mjg5NXww&ixlib=rb-4.1.0&q=85"
-                  alt="Crypto Technology"
-                  className="w-full h-full object-cover"
-                />
-              </div>
-            </div>
+    <div className="akka-app">
+      {/* Header */}
+      <header className="app-header">
+        <div className="header-top">
+          <div className="user-greeting">
+            <h1>Good morning, {user.name.split(' ')[0]} ✨</h1>
+            <p>Tuesday, January 22</p>
+          </div>
+          <div className="header-actions">
+            <button className="notification-btn">
+              <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+              </svg>
+            </button>
+            <button className="profile-btn">
+              <div className="profile-avatar">{user.name.charAt(0)}</div>
+            </button>
+          </div>
+        </div>
+      </header>
 
-            {/* Balance Cards */}
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
+      {/* Main Content */}
+      <main className="app-main">
+        {activeTab === 'home' && (
+          <div className="home-content">
+            {/* Total Balance */}
+            <div className="total-balance-section">
               <BalanceCard
-                title="EUR Balance"
-                amount={user.eur_balance}
+                title="Total Balance"
+                amount={calculateTotalBalance()}
                 currency="EUR"
-                gradient="bg-gradient-to-r from-green-500 to-emerald-600"
-                icon="€"
-              />
-              <BalanceCard
-                title="TRY Balance"
-                amount={user.try_balance}
-                currency="TRY"
-                gradient="bg-gradient-to-r from-red-500 to-pink-600"
-                icon="₺"
-              />
-              <BalanceCard
-                title="Crypto Portfolio"
-                amount={calculatePortfolioValue()}
-                currency="USD"
-                gradient="bg-gradient-to-r from-orange-500 to-amber-600"
-                icon="₿"
+                isMain={true}
+                subtitle="All accounts"
               />
             </div>
 
-            {/* Portfolio Holdings */}
-            <div className="bg-white rounded-xl shadow-sm border border-gray-100 p-6">
-              <h3 className="text-lg font-semibold text-gray-900 mb-4">Your Portfolio</h3>
-              <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
-                {Object.entries(user.crypto_portfolio).map(([symbol, amount]) => {
-                  const price = cryptoPrices[symbol]?.price || 0;
-                  const value = amount * price;
-                  
-                  return (
-                    <div key={symbol} className="border border-gray-200 rounded-lg p-4">
-                      <div className="flex justify-between items-start mb-2">
-                        <div>
-                          <h4 className="font-semibold text-gray-900">{symbol}</h4>
-                          <p className="text-sm text-gray-500">{amount} {symbol}</p>
-                        </div>
-                      </div>
-                      <p className="text-lg font-bold text-gray-900">
-                        ${value.toLocaleString(undefined, {minimumFractionDigits: 2})}
-                      </p>
-                    </div>
-                  );
-                })}
+            {/* Account Balances */}
+            <div className="account-balances">
+              <div className="accounts-header">
+                <h3>Your Accounts</h3>
+                <button className="add-account-btn">+</button>
+              </div>
+              <div className="accounts-grid">
+                <BalanceCard title="Euro Account" amount={user.eur_balance} currency="EUR" />
+                <BalanceCard title="Turkish Lira" amount={user.try_balance} currency="TRY" />
+              </div>
+            </div>
+
+            {/* Quick Actions */}
+            <div className="quick-actions">
+              <div className="actions-header">
+                <h3>Quick Actions</h3>
+              </div>
+              <div className="actions-grid">
+                <QuickAction icon="+" title="Top Up" color="success" />
+                <QuickAction icon="↗" title="Send" color="primary" />
+                <QuickAction icon="🔄" title="Swap" onClick={() => setActiveTab('swap')} color="crypto" />
+                <QuickAction icon="💳" title="Card" color="secondary" />
+              </div>
+            </div>
+
+            {/* Recent Transactions */}
+            <div className="recent-transactions">
+              <div className="transactions-header">
+                <h3>Recent Activity</h3>
+                <button className="see-all-btn">See all</button>
+              </div>
+              <div className="transactions-list">
+                {RECENT_TRANSACTIONS.slice(0, 4).map(transaction => (
+                  <TransactionItem key={transaction.id} transaction={transaction} />
+                ))}
               </div>
             </div>
           </div>
         )}
 
-        {activeTab === 'market' && (
-          <div className="space-y-6">
-            <div className="flex justify-between items-center">
-              <h2 className="text-2xl font-bold text-gray-900">Crypto Market</h2>
-              <div className="text-sm text-gray-500">
-                Updated every 30 seconds • Powered by CoinMarketCap
+        {activeTab === 'crypto' && (
+          <div className="crypto-content">
+            <div className="crypto-header">
+              <h2>Your Crypto</h2>
+              <div className="crypto-total">
+                <span>Portfolio Value</span>
+                <span className="crypto-total-amount">${calculateTotalPortfolioValue().toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
               </div>
             </div>
             
-            <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+            <div className="crypto-list">
               {Object.values(cryptoPrices).map((crypto) => (
-                <CryptoCard key={crypto.symbol} crypto={crypto} />
+                <CryptoCard key={crypto.symbol} crypto={crypto} portfolio={user.crypto_portfolio} />
               ))}
             </div>
           </div>
         )}
 
         {activeTab === 'swap' && (
-          <div className="max-w-2xl mx-auto">
-            <div className="text-center mb-8">
-              <h2 className="text-2xl font-bold text-gray-900 mb-2">Instant Crypto Swap</h2>
-              <p className="text-gray-600">Trade between 300+ cryptocurrencies instantly</p>
-            </div>
-            
+          <div className="swap-content">
             <SwapWidget cryptoPrices={cryptoPrices} onSwap={handleSwap} />
           </div>
         )}
-      </div>
+
+        {activeTab === 'cards' && (
+          <div className="cards-content">
+            <div className="virtual-card">
+              <div className="card-header">
+                <h3>Virtual Card</h3>
+                <div className="card-status active">Active</div>
+              </div>
+              <div className="card-visual">
+                <div className="akka-card">
+                  <div className="card-top">
+                    <div className="card-logo">akka</div>
+                    <div className="card-type">VISA</div>
+                  </div>
+                  <div className="card-number">**** **** **** 8472</div>
+                  <div className="card-bottom">
+                    <div className="card-holder">{user.name.toUpperCase()}</div>
+                    <div className="card-expiry">12/28</div>
+                  </div>
+                </div>
+              </div>
+              <div className="card-actions">
+                <button className="card-action-btn primary">View Details</button>
+                <button className="card-action-btn secondary">Freeze Card</button>
+              </div>
+            </div>
+          </div>
+        )}
+      </main>
+
+      {/* Bottom Navigation */}
+      <nav className="bottom-nav">
+        <button 
+          className={`nav-item ${activeTab === 'home' ? 'active' : ''}`}
+          onClick={() => setActiveTab('home')}
+        >
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
+            <path d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+          </svg>
+          <span>Home</span>
+        </button>
+        
+        <button 
+          className={`nav-item ${activeTab === 'crypto' ? 'active' : ''}`}
+          onClick={() => setActiveTab('crypto')}
+        >
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M5.5 13a3.5 3.5 0 0 1-.369-6.98 5.5 5.5 0 0 1 10.738 0A3.5 3.5 0 0 1 10.5 13H5.5z"/>
+          </svg>
+          <span>Crypto</span>
+        </button>
+        
+        <button 
+          className={`nav-item ${activeTab === 'swap' ? 'active' : ''}`}
+          onClick={() => setActiveTab('swap')}
+        >
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path fillRule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
+          </svg>
+          <span>Swap</span>
+        </button>
+        
+        <button 
+          className={`nav-item ${activeTab === 'cards' ? 'active' : ''}`}
+          onClick={() => setActiveTab('cards')}
+        >
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0V4z"/>
+            <path d="M0 7v5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2V7H0zm3 2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z"/>
+          </svg>
+          <span>Cards</span>
+        </button>
+      </nav>
     </div>
   );
 }

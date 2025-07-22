@@ -2,114 +2,91 @@
 @tailwind components;
 @tailwind utilities;
 
+/* Custom Variables - Based on Brand Guidelines */
+:root {
+  --akka-primary: #17ECE5;
+  --akka-secondary: #704AE5;
+  --akka-navy: #001459;
+  --akka-gray-light: #FAF9F9;
+  --akka-gray-cloud: #E2E4F7;
+  --akka-gray-smoke: #D3D6E0;
+  --akka-gray-steel: #8C9FCC;
+  --akka-gray-space: #59A2B3;
+  --akka-gray-graphite: #667180;
+  --akka-gray-arsenic: #40424D;
+  --akka-gray-phantom: #1E1E24;
+  --akka-black: #000000;
+  
+  /* Semantic Colors */
+  --akka-success: #10B981;
+  --akka-warning: #F59E0B;
+  --akka-error: #EF4444;
+  
+  /* App Specific */
+  --akka-background: #FAFBFC;
+  --akka-surface: #FFFFFF;
+  --akka-border: #E5E7EB;
+  --akka-text-primary: #1F2937;
+  --akka-text-secondary: #6B7280;
+  --akka-text-tertiary: #9CA3AF;
+}
+
 * {
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
 }
 
 body {
-  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', 'Oxygen',
-    'Ubuntu', 'Cantarell', 'Fira Sans', 'Droid Sans', 'Helvetica Neue',
-    sans-serif;
+  font-family: 'Duplet', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: var(--akka-background);
+  color: var(--akka-text-primary);
+  line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  background: linear-gradient(135deg, #f0f9ff 0%, #ffffff 50%, #faf5ff 100%);
-  min-height: 100vh;
+  overflow-x: hidden;
 }
 
-.App {
-  min-height: 100vh;
+/* Loading Screen */
+.loading-screen {
+  position: fixed;
+  inset: 0;
+  background: linear-gradient(135deg, var(--akka-navy) 0%, var(--akka-secondary) 100%);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
 }
 
-/* Custom scrollbar */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
+.akka-logo {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 40px;
 }
 
-::-webkit-scrollbar-track {
-  background: #f1f5f9;
-  border-radius: 3px;
+.logo-gradient {
+  width: 32px;
+  height: 32px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-secondary) 100%);
 }
 
-::-webkit-scrollbar-thumb {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6);
-  border-radius: 3px;
+.akka-logo span {
+  font-size: 28px;
+  font-weight: 600;
+  color: white;
+  letter-spacing: -0.5px;
 }
 
-::-webkit-scrollbar-thumb:hover {
-  background: linear-gradient(135deg, #2563eb, #7c3aed);
-}
-
-/* Custom animations */
-@keyframes fadeInUp {
-  from {
-    opacity: 0;
-    transform: translateY(30px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.animate-fadeInUp {
-  animation: fadeInUp 0.6s ease-out;
-}
-
-/* Gradient text effects */
-.gradient-text {
-  background: linear-gradient(135deg, #3b82f6, #8b5cf6, #ec4899);
-  background-size: 200% 200%;
-  background-clip: text;
-  -webkit-background-clip: text;
-  -webkit-text-fill-color: transparent;
-  animation: gradientShift 3s ease infinite;
-}
-
-@keyframes gradientShift {
-  0% { background-position: 0% 50%; }
-  50% { background-position: 100% 50%; }
-  100% { background-position: 0% 50%; }
-}
-
-/* Glassmorphism effect */
-.glass {
-  background: rgba(255, 255, 255, 0.1);
-  backdrop-filter: blur(10px);
-  -webkit-backdrop-filter: blur(10px);
-  border: 1px solid rgba(255, 255, 255, 0.2);
-}
-
-/* Custom button hover effects */
-.btn-primary {
-  @apply bg-gradient-to-r from-blue-600 to-purple-600 text-white px-6 py-3 rounded-lg font-semibold;
-  @apply hover:from-blue-700 hover:to-purple-700 transition-all duration-300;
-  @apply transform hover:scale-105 active:scale-95;
-  @apply shadow-lg hover:shadow-xl;
-}
-
-.btn-secondary {
-  @apply border border-gray-300 bg-white text-gray-700 px-6 py-3 rounded-lg font-medium;
-  @apply hover:bg-gray-50 hover:border-gray-400 transition-all duration-200;
-  @apply transform hover:scale-105 active:scale-95;
-}
-
-/* Card hover effects */
-.card {
-  @apply bg-white rounded-xl shadow-sm border border-gray-100 p-6;
-  @apply hover:shadow-lg hover:border-gray-200 transition-all duration-300;
-  @apply transform hover:-translate-y-1;
-}
-
-/* Loading spinner */
-.spinner {
-  border: 2px solid #f3f4f6;
-  border-top: 2px solid #3b82f6;
+.loading-spinner {
+  width: 32px;
+  height: 32px;
+  border: 2px solid rgba(255, 255, 255, 0.2);
+  border-top: 2px solid white;
   border-radius: 50%;
-  width: 20px;
-  height: 20px;
   animation: spin 1s linear infinite;
 }
 
@@ -118,223 +95,907 @@ body {
   100% { transform: rotate(360deg); }
 }
 
-/* Price change indicators */
-.price-up {
-  @apply text-green-600 bg-green-50 px-2 py-1 rounded-md text-xs font-medium;
+/* Main App Container */
+.akka-app {
+  min-height: 100vh;
+  background-color: var(--akka-background);
+  padding-bottom: 80px;
+  max-width: 430px;
+  margin: 0 auto;
+  position: relative;
 }
 
-.price-down {
-  @apply text-red-600 bg-red-50 px-2 py-1 rounded-md text-xs font-medium;
+/* Header */
+.app-header {
+  background: var(--akka-surface);
+  padding: 20px 24px 16px;
+  border-bottom: 1px solid var(--akka-border);
 }
 
-/* Mobile responsiveness */
-@media (max-width: 768px) {
-  .mobile-padding {
-    @apply px-4;
-  }
-  
-  .mobile-text {
-    @apply text-sm;
-  }
+.header-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
 }
 
-/* Dark mode support (future enhancement) */
-@media (prefers-color-scheme: dark) {
-  /* Dark mode styles can be added here */
+.user-greeting h1 {
+  font-size: 24px;
+  font-weight: 600;
+  color: var(--akka-text-primary);
+  margin-bottom: 4px;
+  letter-spacing: -0.3px;
 }
 
-/* Custom focus styles */
-input:focus,
-select:focus,
-button:focus {
-  @apply outline-none ring-2 ring-blue-500 ring-opacity-50;
+.user-greeting p {
+  font-size: 14px;
+  color: var(--akka-text-secondary);
+  font-weight: 500;
 }
 
-/* Crypto symbols styling */
-.crypto-symbol {
-  @apply inline-flex items-center justify-center w-8 h-8 rounded-full;
-  @apply bg-gradient-to-r from-orange-400 to-yellow-500 text-white text-xs font-bold;
+.header-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
-.crypto-symbol.btc {
-  @apply from-orange-400 to-orange-600;
+.notification-btn, .profile-btn {
+  width: 40px;
+  height: 40px;
+  border: none;
+  border-radius: 12px;
+  background: var(--akka-gray-light);
+  color: var(--akka-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.crypto-symbol.eth {
-  @apply from-blue-400 to-indigo-600;
+.notification-btn:hover, .profile-btn:hover {
+  background: var(--akka-gray-cloud);
+  transform: scale(1.05);
 }
 
-.crypto-symbol.bnb {
-  @apply from-yellow-400 to-yellow-600;
+.profile-avatar {
+  width: 28px;
+  height: 28px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-secondary) 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  font-size: 14px;
 }
 
-/* Status indicators */
-.status-online {
-  @apply w-3 h-3 bg-green-500 rounded-full animate-pulse;
+/* Main Content */
+.app-main {
+  padding: 24px;
 }
 
-.status-offline {
-  @apply w-3 h-3 bg-gray-400 rounded-full;
+/* Balance Cards */
+.total-balance-section {
+  margin-bottom: 32px;
 }
 
-/* Notification badges */
-.notification-badge {
-  @apply absolute -top-1 -right-1 bg-red-500 text-white text-xs rounded-full;
-  @apply w-5 h-5 flex items-center justify-center font-medium;
-}
-
-/* Transaction status indicators */
-.tx-pending {
-  @apply bg-yellow-100 text-yellow-800 px-2 py-1 rounded-full text-xs font-medium;
-}
-
-.tx-completed {
-  @apply bg-green-100 text-green-800 px-2 py-1 rounded-full text-xs font-medium;
-}
-
-.tx-failed {
-  @apply bg-red-100 text-red-800 px-2 py-1 rounded-full text-xs font-medium;
-}
-
-/* Balance card animations */
 .balance-card {
-  @apply transform transition-all duration-300 hover:scale-105;
-  background: linear-gradient(135deg, rgba(255,255,255,0.1) 0%, rgba(255,255,255,0.05) 100%);
-  backdrop-filter: blur(10px);
-  border: 1px solid rgba(255,255,255,0.2);
+  background: var(--akka-surface);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--akka-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-/* Swap widget styling */
-.swap-widget {
-  @apply bg-white rounded-2xl shadow-lg border border-gray-100 p-8;
-  background: linear-gradient(135deg, #ffffff 0%, #f8fafc 100%);
+.balance-card.main-balance {
+  background: linear-gradient(135deg, var(--akka-navy) 0%, var(--akka-secondary) 100%);
+  color: white;
+  border: none;
+  box-shadow: 0 4px 20px rgba(0, 20, 89, 0.2);
 }
 
-/* Market data table */
-.market-table {
-  @apply w-full border-collapse;
+.balance-header {
+  margin-bottom: 8px;
 }
 
-.market-table th {
-  @apply bg-gray-50 px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider;
+.balance-title {
+  font-size: 14px;
+  font-weight: 500;
+  color: inherit;
+  opacity: 0.8;
+  margin-bottom: 4px;
 }
 
-.market-table td {
-  @apply px-6 py-4 whitespace-nowrap text-sm text-gray-900;
+.balance-subtitle {
+  font-size: 12px;
+  opacity: 0.6;
+  margin: 0;
 }
 
-.market-table tr:hover {
-  @apply bg-gray-50;
+.balance-amount {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
 }
 
-/* Responsive grid layouts */
-.responsive-grid {
+.balance-amount .amount {
+  font-size: 32px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.balance-amount .currency {
+  font-size: 16px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+/* Account Balances */
+.account-balances {
+  margin-bottom: 32px;
+}
+
+.accounts-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.accounts-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--akka-text-primary);
+}
+
+.add-account-btn {
+  width: 32px;
+  height: 32px;
+  border: 2px dashed var(--akka-border);
+  border-radius: 8px;
+  background: transparent;
+  color: var(--akka-text-secondary);
+  font-size: 18px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-account-btn:hover {
+  border-color: var(--akka-primary);
+  color: var(--akka-primary);
+}
+
+.accounts-grid {
   display: grid;
-  gap: 1.5rem;
-  grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
 }
 
-.responsive-grid-small {
+.secondary-balance .balance-amount .amount {
+  font-size: 20px;
+}
+
+.secondary-balance .balance-amount .currency {
+  font-size: 14px;
+}
+
+/* Quick Actions */
+.quick-actions {
+  margin-bottom: 32px;
+}
+
+.actions-header {
+  margin-bottom: 16px;
+}
+
+.actions-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--akka-text-primary);
+}
+
+.actions-grid {
   display: grid;
-  gap: 1rem;
-  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  grid-template-columns: repeat(4, 1fr);
+  gap: 16px;
 }
 
-/* Custom shadows */
-.shadow-soft {
-  box-shadow: 0 2px 15px -3px rgba(0, 0, 0, 0.07), 0 10px 20px -2px rgba(0, 0, 0, 0.04);
+.quick-action {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  aspect-ratio: 1;
+  background: var(--akka-surface);
+  border: 1px solid var(--akka-border);
+  border-radius: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
 }
 
-.shadow-medium {
-  box-shadow: 0 4px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+.quick-action:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }
 
-.shadow-strong {
-  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+.quick-action.success:hover { border-color: var(--akka-success); }
+.quick-action.primary:hover { border-color: var(--akka-primary); }
+.quick-action.crypto:hover { border-color: var(--akka-secondary); }
+.quick-action.secondary:hover { border-color: var(--akka-gray-steel); }
+
+.action-icon {
+  font-size: 20px;
+  margin-bottom: 8px;
 }
 
-/* Fintech specific styling */
-.fintech-gradient {
-  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+.action-title {
+  font-size: 12px;
+  font-weight: 500;
+  color: var(--akka-text-secondary);
 }
 
-.banking-gradient {
-  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+/* Recent Transactions */
+.recent-transactions {
+  margin-bottom: 32px;
 }
 
-.crypto-gradient {
-  background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);
+.transactions-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
 }
 
-/* Chart container styling */
-.chart-container {
-  @apply bg-white rounded-xl shadow-sm border border-gray-100 p-6;
-  height: 400px;
+.transactions-header h3 {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--akka-text-primary);
 }
 
-/* Mobile navigation */
-@media (max-width: 768px) {
-  .mobile-nav {
-    @apply fixed bottom-0 left-0 right-0 bg-white border-t border-gray-200 px-4 py-2;
-    @apply grid grid-cols-4 gap-1;
-  }
-  
-  .mobile-nav-item {
-    @apply flex flex-col items-center justify-center py-2 px-1 rounded-lg;
-    @apply text-xs font-medium text-gray-600;
-  }
-  
-  .mobile-nav-item.active {
-    @apply text-blue-600 bg-blue-50;
-  }
+.see-all-btn {
+  background: none;
+  border: none;
+  color: var(--akka-primary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
 }
 
-/* Performance optimizations */
-.will-change-transform {
-  will-change: transform;
+.see-all-btn:hover {
+  background: rgba(23, 236, 229, 0.1);
 }
 
-.will-change-opacity {
-  will-change: opacity;
-}
-
-/* Accessibility improvements */
-.sr-only {
-  position: absolute;
-  width: 1px;
-  height: 1px;
-  padding: 0;
-  margin: -1px;
+.transactions-list {
+  background: var(--akka-surface);
+  border-radius: 16px;
+  border: 1px solid var(--akka-border);
   overflow: hidden;
-  clip: rect(0, 0, 0, 0);
-  white-space: nowrap;
-  border: 0;
 }
 
-/* Focus visible for better keyboard navigation */
-.focus-visible:focus {
-  @apply outline-none ring-2 ring-blue-500 ring-opacity-75;
+.transaction-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--akka-border);
+  transition: background-color 0.2s ease;
 }
 
-/* High contrast mode support */
-@media (prefers-contrast: high) {
-  .gradient-text {
-    background: none;
-    color: #000;
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-item:hover {
+  background: var(--akka-gray-light);
+}
+
+.transaction-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--akka-gray-light);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  font-size: 16px;
+}
+
+.transaction-details {
+  flex: 1;
+}
+
+.transaction-description {
+  font-size: 15px;
+  font-weight: 500;
+  color: var(--akka-text-primary);
+  margin-bottom: 2px;
+}
+
+.transaction-date {
+  font-size: 13px;
+  color: var(--akka-text-secondary);
+}
+
+.transaction-amount {
+  font-size: 15px;
+  font-weight: 600;
+  text-align: right;
+}
+
+.transaction-amount.positive {
+  color: var(--akka-success);
+}
+
+.transaction-amount.negative {
+  color: var(--akka-text-primary);
+}
+
+/* Crypto Content */
+.crypto-content {
+  padding-bottom: 20px;
+}
+
+.crypto-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 24px;
+}
+
+.crypto-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--akka-text-primary);
+}
+
+.crypto-total {
+  text-align: right;
+}
+
+.crypto-total span:first-child {
+  display: block;
+  font-size: 12px;
+  color: var(--akka-text-secondary);
+  margin-bottom: 4px;
+}
+
+.crypto-total-amount {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--akka-text-primary);
+}
+
+.crypto-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.crypto-card {
+  background: var(--akka-surface);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--akka-border);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  transition: all 0.2s ease;
+}
+
+.crypto-card:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.crypto-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.crypto-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.crypto-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-secondary) 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+}
+
+.crypto-icon.btc { background: linear-gradient(135deg, #F7931A 0%, #FF9500 100%); }
+.crypto-icon.eth { background: linear-gradient(135deg, #627EEA 0%, #8A92B2 100%); }
+.crypto-icon.bnb { background: linear-gradient(135deg, #F3BA2F 0%, #E8B923 100%); }
+.crypto-icon.ada { background: linear-gradient(135deg, #0033AD 0%, #1E3A8A 100%); }
+.crypto-icon.sol { background: linear-gradient(135deg, #9945FF 0%, #14F195 100%); }
+
+.crypto-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--akka-text-primary);
+  margin: 0;
+}
+
+.crypto-holding {
+  font-size: 13px;
+  color: var(--akka-text-secondary);
+  margin: 0;
+}
+
+.price-change {
+  padding: 4px 8px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.price-change.positive {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--akka-success);
+}
+
+.price-change.negative {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--akka-error);
+}
+
+.crypto-values {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.crypto-price {
+  font-size: 14px;
+  color: var(--akka-text-secondary);
+}
+
+.crypto-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--akka-text-primary);
+}
+
+/* Swap Widget */
+.swap-content {
+  padding-bottom: 20px;
+}
+
+.swap-widget {
+  background: var(--akka-surface);
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid var(--akka-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.swap-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.swap-header h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--akka-text-primary);
+  margin-bottom: 8px;
+}
+
+.swap-header p {
+  font-size: 14px;
+  color: var(--akka-text-secondary);
+}
+
+.swap-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.swap-section {
+  position: relative;
+}
+
+.swap-section label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--akka-text-primary);
+  margin-bottom: 8px;
+}
+
+.swap-input-group {
+  display: flex;
+  background: var(--akka-gray-light);
+  border-radius: 12px;
+  overflow: hidden;
+  border: 2px solid transparent;
+  transition: border-color 0.2s ease;
+}
+
+.swap-input-group:focus-within {
+  border-color: var(--akka-primary);
+}
+
+.crypto-select {
+  flex: 0 0 80px;
+  background: transparent;
+  border: none;
+  padding: 16px 12px;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--akka-text-primary);
+  outline: none;
+}
+
+.amount-input {
+  flex: 1;
+  background: transparent;
+  border: none;
+  padding: 16px 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--akka-text-primary);
+  outline: none;
+  text-align: right;
+}
+
+.amount-display {
+  flex: 1;
+  padding: 16px 12px;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--akka-text-secondary);
+  text-align: right;
+  background: transparent;
+}
+
+.swap-button-container {
+  display: flex;
+  justify-content: center;
+  margin: -8px 0;
+}
+
+.swap-toggle {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: var(--akka-surface);
+  border: 2px solid var(--akka-border);
+  color: var(--akka-text-secondary);
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: all 0.2s ease;
+  z-index: 1;
+}
+
+.swap-toggle:hover {
+  border-color: var(--akka-primary);
+  color: var(--akka-primary);
+  transform: rotate(180deg);
+}
+
+.swap-rate {
+  background: var(--akka-gray-light);
+  border-radius: 12px;
+  padding: 16px;
+}
+
+.rate-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.rate-info span {
+  font-size: 13px;
+  color: var(--akka-text-secondary);
+}
+
+.swap-execute-button {
+  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-secondary) 100%);
+  color: white;
+  border: none;
+  border-radius: 12px;
+  padding: 16px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 8px;
+}
+
+.swap-execute-button:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(23, 236, 229, 0.3);
+}
+
+/* Cards Content */
+.cards-content {
+  padding-bottom: 20px;
+}
+
+.virtual-card {
+  background: var(--akka-surface);
+  border-radius: 20px;
+  padding: 24px;
+  border: 1px solid var(--akka-border);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 24px;
+}
+
+.card-header h3 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--akka-text-primary);
+}
+
+.card-status {
+  padding: 4px 12px;
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.card-status.active {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--akka-success);
+}
+
+.card-visual {
+  margin-bottom: 24px;
+  display: flex;
+  justify-content: center;
+}
+
+.akka-card {
+  width: 320px;
+  height: 200px;
+  background: linear-gradient(135deg, var(--akka-navy) 0%, var(--akka-secondary) 100%);
+  border-radius: 16px;
+  padding: 24px;
+  color: white;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 8px 32px rgba(0, 20, 89, 0.3);
+}
+
+.akka-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 120px;
+  height: 120px;
+  background: linear-gradient(135deg, rgba(23, 236, 229, 0.2) 0%, transparent 70%);
+  border-radius: 50%;
+  transform: translate(30px, -30px);
+}
+
+.card-top {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+}
+
+.card-logo {
+  font-size: 20px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+}
+
+.card-type {
+  font-size: 16px;
+  font-weight: 700;
+  opacity: 0.8;
+}
+
+.card-number {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  text-align: center;
+  margin: 20px 0;
+}
+
+.card-bottom {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+}
+
+.card-holder {
+  font-size: 12px;
+  font-weight: 600;
+  opacity: 0.8;
+}
+
+.card-expiry {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.card-actions {
+  display: flex;
+  gap: 12px;
+}
+
+.card-action-btn {
+  flex: 1;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-action-btn.primary {
+  background: var(--akka-primary);
+  color: white;
+  border: none;
+}
+
+.card-action-btn.secondary {
+  background: var(--akka-gray-light);
+  color: var(--akka-text-primary);
+  border: 1px solid var(--akka-border);
+}
+
+.card-action-btn:hover {
+  transform: translateY(-1px);
+}
+
+/* Bottom Navigation */
+.bottom-nav {
+  position: fixed;
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  max-width: 430px;
+  width: 100%;
+  background: var(--akka-surface);
+  border-top: 1px solid var(--akka-border);
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  padding: 12px 24px 20px;
+  z-index: 100;
+}
+
+.nav-item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 12px;
+  transition: all 0.2s ease;
+  color: var(--akka-text-tertiary);
+  min-width: 60px;
+}
+
+.nav-item:hover {
+  background: var(--akka-gray-light);
+}
+
+.nav-item.active {
+  color: var(--akka-primary);
+  background: rgba(23, 236, 229, 0.1);
+}
+
+.nav-item span {
+  font-size: 11px;
+  font-weight: 600;
+}
+
+/* Responsive Design */
+@media (max-width: 430px) {
+  .akka-app {
+    max-width: 100%;
   }
   
-  .glass {
-    background: rgba(255, 255, 255, 0.9);
-    border: 2px solid #000;
+  .app-main {
+    padding: 20px;
+  }
+  
+  .akka-card {
+    width: 100%;
+    max-width: 300px;
+  }
+  
+  .accounts-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
+  }
+  
+  .actions-grid {
+    grid-template-columns: repeat(4, 1fr);
+    gap: 12px;
   }
 }
 
-/* Reduced motion support */
+@media (min-width: 431px) {
+  .akka-app {
+    border-left: 1px solid var(--akka-border);
+    border-right: 1px solid var(--akka-border);
+  }
+}
+
+/* Custom Scrollbar */
+::-webkit-scrollbar {
+  width: 4px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--akka-gray-light);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--akka-gray-steel);
+  border-radius: 2px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--akka-gray-space);
+}
+
+/* Accessibility */
 @media (prefers-reduced-motion: reduce) {
   * {
     animation-duration: 0.01ms !important;
     animation-iteration-count: 1 !important;
     transition-duration: 0.01ms !important;
-    scroll-behavior: auto !important;
+  }
+}
+
+/* Focus States */
+button:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 2px solid var(--akka-primary);
+  outline-offset: 2px;
+}
+
+/* Selection */
+::selection {
+  background: rgba(23, 236, 229, 0.2);
+  color: var(--akka-navy);
+}
+
+/* Print Styles */
+@media print {
+  .bottom-nav,
+  .header-actions,
+  .quick-actions {
+    display: none !important;
   }
 }

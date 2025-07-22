@@ -5,11 +5,11 @@ import axios from 'axios';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-// Mock user data for Bit2Me clone
+// Mock user data for Akka clone
 const DEMO_USER = {
   id: "demo-user-123",
-  name: "Carlos Martínez",
-  email: "carlos@bit2me.com",
+  name: "Carlos Martinez",
+  email: "carlos@akka.com",
   verified: true,
   balance_eur: 3250.45,
   total_portfolio: 8750.30,
@@ -54,7 +54,7 @@ const CryptoListItem = ({ crypto, onBuy }) => {
           {isPositive ? '+' : ''}{crypto.change_24h?.toFixed(2)}%
         </div>
         <button className="buy-btn" onClick={() => onBuy(crypto)}>
-          Comprar
+          Buy
         </button>
       </div>
     </div>
@@ -92,11 +92,11 @@ const TransactionItem = ({ transaction }) => {
 
   const getTransactionText = (transaction) => {
     switch(transaction.type) {
-      case 'buy': return `Compra ${transaction.crypto}`;
-      case 'sell': return `Venta ${transaction.crypto}`;
-      case 'deposit': return `Depósito EUR`;
-      case 'withdraw': return `Retirada ${transaction.crypto}`;
-      default: return 'Transacción';
+      case 'buy': return `Buy ${transaction.crypto}`;
+      case 'sell': return `Sell ${transaction.crypto}`;
+      case 'deposit': return `EUR Deposit`;
+      case 'withdraw': return `Withdraw ${transaction.crypto}`;
+      default: return 'Transaction';
     }
   };
 
@@ -112,7 +112,7 @@ const TransactionItem = ({ transaction }) => {
       <div className="transaction-amount">
         {transaction.eur_amount ? `€${transaction.eur_amount}` : `${transaction.amount} ${transaction.crypto}`}
         <div className={`transaction-status ${transaction.status}`}>
-          {transaction.status === 'completed' ? 'Completada' : 'Pendiente'}
+          {transaction.status === 'completed' ? 'Completed' : 'Pending'}
         </div>
       </div>
     </div>
@@ -135,7 +135,7 @@ const BuySellModal = ({ crypto, onClose, onConfirm }) => {
     <div className="modal-overlay">
       <div className="buy-sell-modal">
         <div className="modal-header">
-          <h3>Comprar {crypto.symbol}</h3>
+          <h3>Buy {crypto.symbol}</h3>
           <button className="close-btn" onClick={onClose}>×</button>
         </div>
         
@@ -151,7 +151,7 @@ const BuySellModal = ({ crypto, onClose, onConfirm }) => {
           </div>
 
           <div className="input-group">
-            <label>Cantidad de {crypto.symbol}</label>
+            <label>Amount of {crypto.symbol}</label>
             <input
               type="number"
               value={amount}
@@ -161,7 +161,7 @@ const BuySellModal = ({ crypto, onClose, onConfirm }) => {
           </div>
 
           <div className="input-group">
-            <label>Importe en EUR</label>
+            <label>Amount in EUR</label>
             <input
               type="number"
               value={eurAmount}
@@ -177,7 +177,7 @@ const BuySellModal = ({ crypto, onClose, onConfirm }) => {
 
           <div className="transaction-summary">
             <div className="summary-row">
-              <span>Comisión (1.5%)</span>
+              <span>Fee (1.5%)</span>
               <span>€{(eurAmount * 0.015).toFixed(2)}</span>
             </div>
             <div className="summary-row total">
@@ -190,7 +190,7 @@ const BuySellModal = ({ crypto, onClose, onConfirm }) => {
             className="confirm-buy-btn"
             onClick={() => onConfirm(crypto, amount, eurAmount)}
           >
-            Confirmar compra
+            Confirm purchase
           </button>
         </div>
       </div>
@@ -202,7 +202,7 @@ function App() {
   const [cryptoPrices, setCryptoPrices] = useState({});
   const [loading, setLoading] = useState(true);
   const [user] = useState(DEMO_USER);
-  const [activeTab, setActiveTab] = useState('mercado');
+  const [activeTab, setActiveTab] = useState('market');
   const [showBuyModal, setShowBuyModal] = useState(false);
   const [selectedCrypto, setSelectedCrypto] = useState(null);
 
@@ -252,17 +252,17 @@ function App() {
 
   const handleConfirmBuy = (crypto, amount, eurAmount) => {
     // Simulate purchase
-    alert(`Compra confirmada: ${amount} ${crypto.symbol} por €${eurAmount}`);
+    alert(`Purchase confirmed: ${amount} ${crypto.symbol} for €${eurAmount}`);
     setShowBuyModal(false);
     setSelectedCrypto(null);
   };
 
   if (loading) {
     return (
-      <div className="bit2me-loading">
-        <div className="bit2me-logo">
-          <div className="logo-icon">B</div>
-          <span>Bit2Me</span>
+      <div className="akka-loading">
+        <div className="akka-logo">
+          <div className="logo-icon">A</div>
+          <span>Akka</span>
         </div>
         <div className="loading-spinner"></div>
       </div>
@@ -270,14 +270,14 @@ function App() {
   }
 
   return (
-    <div className="bit2me-app">
+    <div className="akka-app">
       {/* Header */}
-      <header className="bit2me-header">
+      <header className="akka-header">
         <div className="header-content">
           <div className="logo-section">
-            <div className="bit2me-logo-header">
-              <div className="logo-icon">B</div>
-              <span>Bit2Me</span>
+            <div className="akka-logo-header">
+              <div className="logo-icon">A</div>
+              <span>Akka</span>
             </div>
           </div>
           <div className="header-actions">
@@ -295,28 +295,28 @@ function App() {
       </header>
 
       {/* Main Content */}
-      <main className="bit2me-main">
-        {activeTab === 'inicio' && (
+      <main className="akka-main">
+        {activeTab === 'home' && (
           <div className="home-content">
             {/* Portfolio Summary */}
             <div className="portfolio-summary">
               <div className="summary-header">
-                <h2>Hola, {user.name.split(' ')[0]} 👋</h2>
+                <h2>Hello, {user.name.split(' ')[0]} 👋</h2>
                 <div className="verification-badge">
                   <span className="verified-icon">✓</span>
-                  Verificado
+                  Verified
                 </div>
               </div>
               
               <div className="balance-cards">
                 <div className="balance-card main">
-                  <div className="balance-label">Valor total del portfolio</div>
+                  <div className="balance-label">Total portfolio value</div>
                   <div className="balance-amount">€{user.total_portfolio.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
                   <div className="balance-change positive">+€245.30 (+2.87%)</div>
                 </div>
                 
                 <div className="balance-card secondary">
-                  <div className="balance-label">Saldo EUR</div>
+                  <div className="balance-label">EUR Balance</div>
                   <div className="balance-amount">€{user.balance_eur.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
                 </div>
               </div>
@@ -324,29 +324,29 @@ function App() {
 
             {/* Quick Actions */}
             <div className="quick-actions">
-              <button className="action-btn primary" onClick={() => setActiveTab('mercado')}>
+              <button className="action-btn primary" onClick={() => setActiveTab('market')}>
                 <span className="action-icon">+</span>
-                Comprar
+                Buy
               </button>
               <button className="action-btn secondary">
                 <span className="action-icon">-</span>
-                Vender
+                Sell
               </button>
               <button className="action-btn secondary">
                 <span className="action-icon">↗</span>
-                Enviar
+                Send
               </button>
               <button className="action-btn secondary">
                 <span className="action-icon">↙</span>
-                Recibir
+                Receive
               </button>
             </div>
 
             {/* Portfolio */}
             <div className="home-portfolio">
               <div className="section-header">
-                <h3>Tu portfolio</h3>
-                <button className="see-all-btn">Ver todo</button>
+                <h3>Your portfolio</h3>
+                <button className="see-all-btn">View all</button>
               </div>
               <div className="portfolio-list">
                 {Object.entries(user.crypto_portfolio).map(([crypto, data]) => (
@@ -358,8 +358,8 @@ function App() {
             {/* Recent Activity */}
             <div className="recent-activity">
               <div className="section-header">
-                <h3>Actividad reciente</h3>
-                <button className="see-all-btn">Ver todo</button>
+                <h3>Recent activity</h3>
+                <button className="see-all-btn">View all</button>
               </div>
               <div className="transactions-list">
                 {RECENT_TRANSACTIONS.slice(0, 3).map(transaction => (
@@ -370,10 +370,10 @@ function App() {
           </div>
         )}
 
-        {activeTab === 'mercado' && (
+        {activeTab === 'market' && (
           <div className="market-content">
             <div className="market-header">
-              <h2>Mercado</h2>
+              <h2>Market</h2>
               <div className="market-stats">
                 <span>24h Vol: €2.4B</span>
                 <span className="positive">+3.2%</span>
@@ -381,7 +381,7 @@ function App() {
             </div>
 
             <div className="market-search">
-              <input type="text" placeholder="Buscar criptomoneda..." />
+              <input type="text" placeholder="Search cryptocurrency..." />
             </div>
 
             <div className="crypto-list">
@@ -405,15 +405,15 @@ function App() {
             <div className="portfolio-header">
               <h2>Portfolio</h2>
               <div className="portfolio-total">
-                <span>Valor total</span>
+                <span>Total value</span>
                 <span className="total-value">€{user.total_portfolio.toLocaleString()}</span>
               </div>
             </div>
 
             <div className="portfolio-chart-placeholder">
               <div className="chart-info">
-                <span>Gráfico del portfolio</span>
-                <span className="chart-period">7 días</span>
+                <span>Portfolio chart</span>
+                <span className="chart-period">7 days</span>
               </div>
               <div className="chart-visual">
                 <svg viewBox="0 0 300 100" className="chart-svg">
@@ -423,7 +423,7 @@ function App() {
             </div>
 
             <div className="portfolio-breakdown">
-              <h3>Desglose de activos</h3>
+              <h3>Asset breakdown</h3>
               <div className="assets-list">
                 {Object.entries(user.crypto_portfolio).map(([crypto, data]) => (
                   <PortfolioItem key={crypto} crypto={crypto} data={data} />
@@ -433,14 +433,14 @@ function App() {
           </div>
         )}
 
-        {activeTab === 'historial' && (
+        {activeTab === 'history' && (
           <div className="history-content">
             <div className="history-header">
-              <h2>Historial</h2>
+              <h2>History</h2>
               <div className="history-filters">
-                <button className="filter-btn active">Todo</button>
-                <button className="filter-btn">Compras</button>
-                <button className="filter-btn">Ventas</button>
+                <button className="filter-btn active">All</button>
+                <button className="filter-btn">Buys</button>
+                <button className="filter-btn">Sells</button>
               </div>
             </div>
 
@@ -452,7 +452,7 @@ function App() {
           </div>
         )}
 
-        {activeTab === 'perfil' && (
+        {activeTab === 'profile' && (
           <div className="profile-content">
             <div className="profile-header">
               <div className="profile-avatar-large">
@@ -462,70 +462,70 @@ function App() {
               <p>{user.email}</p>
               <div className="verification-status">
                 <span className="verified-icon">✓</span>
-                Cuenta verificada
+                Verified account
               </div>
             </div>
 
             <div className="profile-menu">
               <div className="menu-item">
                 <span className="menu-icon">👤</span>
-                <span>Información personal</span>
+                <span>Personal information</span>
                 <span className="menu-arrow">›</span>
               </div>
               <div className="menu-item">
                 <span className="menu-icon">🔒</span>
-                <span>Seguridad</span>
+                <span>Security</span>
                 <span className="menu-arrow">›</span>
               </div>
               <div className="menu-item">
                 <span className="menu-icon">💳</span>
-                <span>Métodos de pago</span>
+                <span>Payment methods</span>
                 <span className="menu-arrow">›</span>
               </div>
               <div className="menu-item">
                 <span className="menu-icon">📄</span>
-                <span>Documentos</span>
+                <span>Documents</span>
                 <span className="menu-arrow">›</span>
               </div>
               <div className="menu-item">
                 <span className="menu-icon">❓</span>
-                <span>Ayuda y soporte</span>
+                <span>Help & support</span>
                 <span className="menu-arrow">›</span>
               </div>
               <div className="menu-item">
                 <span className="menu-icon">⚙️</span>
-                <span>Configuración</span>
+                <span>Settings</span>
                 <span className="menu-arrow">›</span>
               </div>
             </div>
 
             <button className="logout-btn">
-              Cerrar sesión
+              Sign out
             </button>
           </div>
         )}
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="bit2me-nav">
+      <nav className="akka-nav">
         <button 
-          className={`nav-item ${activeTab === 'inicio' ? 'active' : ''}`}
-          onClick={() => setActiveTab('inicio')}
+          className={`nav-item ${activeTab === 'home' ? 'active' : ''}`}
+          onClick={() => setActiveTab('home')}
         >
           <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
             <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6z"/>
           </svg>
-          <span>Inicio</span>
+          <span>Home</span>
         </button>
         
         <button 
-          className={`nav-item ${activeTab === 'mercado' ? 'active' : ''}`}
-          onClick={() => setActiveTab('mercado')}
+          className={`nav-item ${activeTab === 'market' ? 'active' : ''}`}
+          onClick={() => setActiveTab('market')}
         >
           <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
             <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3zM5 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V2zM9 5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V5z"/>
           </svg>
-          <span>Mercado</span>
+          <span>Market</span>
         </button>
         
         <button 
@@ -540,24 +540,24 @@ function App() {
         </button>
         
         <button 
-          className={`nav-item ${activeTab === 'historial' ? 'active' : ''}`}
-          onClick={() => setActiveTab('historial')}
+          className={`nav-item ${activeTab === 'history' ? 'active' : ''}`}
+          onClick={() => setActiveTab('history')}
         >
           <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
             <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
             <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
           </svg>
-          <span>Historial</span>
+          <span>History</span>
         </button>
         
         <button 
-          className={`nav-item ${activeTab === 'perfil' ? 'active' : ''}`}
-          onClick={() => setActiveTab('perfil')}
+          className={`nav-item ${activeTab === 'profile' ? 'active' : ''}`}
+          onClick={() => setActiveTab('profile')}
         >
           <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
             <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
           </svg>
-          <span>Perfil</span>
+          <span>Profile</span>
         </button>
       </nav>
 

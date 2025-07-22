@@ -2,32 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Bit2Me Brand Variables */
+/* Akka Brand Variables */
 :root {
-  --bit2me-primary: #1E3A8A;      /* Deep Blue */
-  --bit2me-secondary: #FF6B35;    /* Orange */
-  --bit2me-accent: #3B82F6;       /* Bright Blue */
-  --bit2me-success: #10B981;      /* Green */
-  --bit2me-error: #EF4444;        /* Red */
-  --bit2me-warning: #F59E0B;      /* Amber */
+  --akka-primary: #1E3A8A;      /* Deep Blue */
+  --akka-secondary: #FF6B35;    /* Orange */
+  --akka-accent: #3B82F6;       /* Bright Blue */
+  --akka-success: #10B981;      /* Green */
+  --akka-error: #EF4444;        /* Red */
+  --akka-warning: #F59E0B;      /* Amber */
   
   /* Grays */
-  --bit2me-gray-50: #F9FAFB;
-  --bit2me-gray-100: #F3F4F6;
-  --bit2me-gray-200: #E5E7EB;
-  --bit2me-gray-300: #D1D5DB;
-  --bit2me-gray-400: #9CA3AF;
-  --bit2me-gray-500: #6B7280;
-  --bit2me-gray-600: #4B5563;
-  --bit2me-gray-700: #374151;
-  --bit2me-gray-800: #1F2937;
-  --bit2me-gray-900: #111827;
+  --akka-gray-50: #F9FAFB;
+  --akka-gray-100: #F3F4F6;
+  --akka-gray-200: #E5E7EB;
+  --akka-gray-300: #D1D5DB;
+  --akka-gray-400: #9CA3AF;
+  --akka-gray-500: #6B7280;
+  --akka-gray-600: #4B5563;
+  --akka-gray-700: #374151;
+  --akka-gray-800: #1F2937;
+  --akka-gray-900: #111827;
   
   /* App Specific */
-  --bit2me-background: #FAFBFC;
-  --bit2me-surface: #FFFFFF;
-  --bit2me-border: #E5E7EB;
-  --bit2me-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  --akka-background: #FAFBFC;
+  --akka-surface: #FFFFFF;
+  --akka-border: #E5E7EB;
+  --akka-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -39,18 +39,18 @@
 
 body {
   font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background-color: var(--bit2me-background);
-  color: var(--bit2me-gray-900);
+  background-color: var(--akka-background);
+  color: var(--akka-gray-900);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 
 /* Loading Screen */
-.bit2me-loading {
+.akka-loading {
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, var(--bit2me-primary) 0%, var(--bit2me-accent) 100%);
+  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-accent) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -58,7 +58,7 @@ body {
   z-index: 1000;
 }
 
-.bit2me-logo {
+.akka-logo {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -70,7 +70,7 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 8px;
-  background: linear-gradient(135deg, var(--bit2me-secondary) 0%, #FF8A65 100%);
+  background: linear-gradient(135deg, var(--akka-secondary) 0%, #FF8A65 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -79,7 +79,7 @@ body {
   font-size: 20px;
 }
 
-.bit2me-logo span {
+.akka-logo span {
   font-size: 28px;
   font-weight: 700;
   letter-spacing: -0.5px;
@@ -100,9 +100,9 @@ body {
 }
 
 /* Main App Container */
-.bit2me-app {
+.akka-app {
   min-height: 100vh;
-  background-color: var(--bit2me-background);
+  background-color: var(--akka-background);
   max-width: 430px;
   margin: 0 auto;
   position: relative;
@@ -110,9 +110,9 @@ body {
 }
 
 /* Header */
-.bit2me-header {
-  background: var(--bit2me-surface);
-  border-bottom: 1px solid var(--bit2me-border);
+.akka-header {
+  background: var(--akka-surface);
+  border-bottom: 1px solid var(--akka-border);
   position: sticky;
   top: 0;
   z-index: 100;
@@ -125,22 +125,22 @@ body {
   padding: 16px 20px;
 }
 
-.bit2me-logo-header {
+.akka-logo-header {
   display: flex;
   align-items: center;
   gap: 8px;
 }
 
-.bit2me-logo-header .logo-icon {
+.akka-logo-header .logo-icon {
   width: 32px;
   height: 32px;
   font-size: 16px;
 }
 
-.bit2me-logo-header span {
+.akka-logo-header span {
   font-size: 20px;
   font-weight: 700;
-  color: var(--bit2me-primary);
+  color: var(--akka-primary);
 }
 
 .header-actions {
@@ -155,8 +155,8 @@ body {
   height: 40px;
   border: none;
   border-radius: 12px;
-  background: var(--bit2me-gray-100);
-  color: var(--bit2me-gray-600);
+  background: var(--akka-gray-100);
+  color: var(--akka-gray-600);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -165,14 +165,14 @@ body {
 }
 
 .notification-btn:hover {
-  background: var(--bit2me-gray-200);
+  background: var(--akka-gray-200);
 }
 
 .notification-badge {
   position: absolute;
   top: -2px;
   right: -2px;
-  background: var(--bit2me-error);
+  background: var(--akka-error);
   color: white;
   border-radius: 50%;
   width: 18px;
@@ -188,7 +188,7 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--bit2me-primary) 0%, var(--bit2me-accent) 100%);
+  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-accent) 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -198,7 +198,7 @@ body {
 }
 
 /* Main Content */
-.bit2me-main {
+.akka-main {
   padding: 0 20px 20px;
 }
 
@@ -221,7 +221,7 @@ body {
 .summary-header h2 {
   font-size: 24px;
   font-weight: 700;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .verification-badge {
@@ -229,7 +229,7 @@ body {
   align-items: center;
   gap: 4px;
   background: rgba(16, 185, 129, 0.1);
-  color: var(--bit2me-success);
+  color: var(--akka-success);
   padding: 4px 8px;
   border-radius: 12px;
   font-size: 12px;
@@ -247,15 +247,15 @@ body {
 }
 
 .balance-card {
-  background: var(--bit2me-surface);
+  background: var(--akka-surface);
   border-radius: 16px;
   padding: 20px;
-  box-shadow: var(--bit2me-shadow);
-  border: 1px solid var(--bit2me-border);
+  box-shadow: var(--akka-shadow);
+  border: 1px solid var(--akka-border);
 }
 
 .balance-card.main {
-  background: linear-gradient(135deg, var(--bit2me-primary) 0%, var(--bit2me-accent) 100%);
+  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-accent) 100%);
   color: white;
   border: none;
 }
@@ -276,7 +276,7 @@ body {
 
 .balance-card.secondary .balance-amount {
   font-size: 20px;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .balance-change {
@@ -285,7 +285,7 @@ body {
 }
 
 .balance-change.positive {
-  color: var(--bit2me-success);
+  color: var(--akka-success);
 }
 
 /* Quick Actions */
@@ -308,18 +308,18 @@ body {
   transition: all 0.2s ease;
   font-size: 14px;
   font-weight: 600;
-  box-shadow: var(--bit2me-shadow);
+  box-shadow: var(--akka-shadow);
 }
 
 .action-btn.primary {
-  background: linear-gradient(135deg, var(--bit2me-secondary) 0%, #FF8A65 100%);
+  background: linear-gradient(135deg, var(--akka-secondary) 0%, #FF8A65 100%);
   color: white;
 }
 
 .action-btn.secondary {
-  background: var(--bit2me-surface);
-  color: var(--bit2me-gray-700);
-  border: 1px solid var(--bit2me-border);
+  background: var(--akka-surface);
+  color: var(--akka-gray-700);
+  border: 1px solid var(--akka-border);
 }
 
 .action-btn:hover {
@@ -347,13 +347,13 @@ body {
 .section-header h3 {
   font-size: 18px;
   font-weight: 700;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .see-all-btn {
   background: none;
   border: none;
-  color: var(--bit2me-accent);
+  color: var(--akka-accent);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -367,9 +367,9 @@ body {
 }
 
 .portfolio-list, .transactions-list {
-  background: var(--bit2me-surface);
+  background: var(--akka-surface);
   border-radius: 16px;
-  border: 1px solid var(--bit2me-border);
+  border: 1px solid var(--akka-border);
   overflow: hidden;
 }
 
@@ -379,7 +379,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid var(--bit2me-border);
+  border-bottom: 1px solid var(--akka-border);
   transition: background-color 0.2s ease;
 }
 
@@ -388,7 +388,7 @@ body {
 }
 
 .portfolio-item:hover {
-  background: var(--bit2me-gray-50);
+  background: var(--akka-gray-50);
 }
 
 .portfolio-crypto {
@@ -401,7 +401,7 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--bit2me-secondary) 0%, #FF8A65 100%);
+  background: linear-gradient(135deg, var(--akka-secondary) 0%, #FF8A65 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -427,12 +427,12 @@ body {
 .portfolio-crypto-name {
   font-size: 16px;
   font-weight: 600;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .portfolio-amount {
   font-size: 13px;
-  color: var(--bit2me-gray-500);
+  color: var(--akka-gray-500);
 }
 
 .portfolio-value {
@@ -442,7 +442,7 @@ body {
 .value-eur {
   font-size: 16px;
   font-weight: 600;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .value-change {
@@ -451,7 +451,7 @@ body {
 }
 
 .value-change.positive {
-  color: var(--bit2me-success);
+  color: var(--akka-success);
 }
 
 /* Transaction Item */
@@ -459,7 +459,7 @@ body {
   display: flex;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid var(--bit2me-border);
+  border-bottom: 1px solid var(--akka-border);
   transition: background-color 0.2s ease;
 }
 
@@ -468,7 +468,7 @@ body {
 }
 
 .transaction-item:hover {
-  background: var(--bit2me-gray-50);
+  background: var(--akka-gray-50);
 }
 
 .transaction-icon {
@@ -485,22 +485,22 @@ body {
 
 .transaction-icon.buy {
   background: rgba(16, 185, 129, 0.1);
-  color: var(--bit2me-success);
+  color: var(--akka-success);
 }
 
 .transaction-icon.sell {
   background: rgba(239, 68, 68, 0.1);
-  color: var(--bit2me-error);
+  color: var(--akka-error);
 }
 
 .transaction-icon.deposit {
   background: rgba(59, 130, 246, 0.1);
-  color: var(--bit2me-accent);
+  color: var(--akka-accent);
 }
 
 .transaction-icon.withdraw {
   background: rgba(107, 114, 128, 0.1);
-  color: var(--bit2me-gray-600);
+  color: var(--akka-gray-600);
 }
 
 .transaction-details {
@@ -510,20 +510,20 @@ body {
 .transaction-description {
   font-size: 15px;
   font-weight: 600;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
   margin-bottom: 2px;
 }
 
 .transaction-date {
   font-size: 13px;
-  color: var(--bit2me-gray-500);
+  color: var(--akka-gray-500);
 }
 
 .transaction-amount {
   text-align: right;
   font-size: 15px;
   font-weight: 600;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .transaction-status {
@@ -532,11 +532,11 @@ body {
 }
 
 .transaction-status.completed {
-  color: var(--bit2me-success);
+  color: var(--akka-success);
 }
 
 .transaction-status.pending {
-  color: var(--bit2me-warning);
+  color: var(--akka-warning);
 }
 
 /* Market Content */
@@ -554,7 +554,7 @@ body {
 .market-header h2 {
   font-size: 24px;
   font-weight: 700;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .market-stats {
@@ -563,7 +563,7 @@ body {
 }
 
 .market-stats .positive {
-  color: var(--bit2me-success);
+  color: var(--akka-success);
   font-weight: 600;
 }
 
@@ -574,22 +574,22 @@ body {
 .market-search input {
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid var(--bit2me-border);
+  border: 2px solid var(--akka-border);
   border-radius: 12px;
   font-size: 16px;
-  background: var(--bit2me-surface);
+  background: var(--akka-surface);
   transition: border-color 0.2s ease;
 }
 
 .market-search input:focus {
   outline: none;
-  border-color: var(--bit2me-accent);
+  border-color: var(--akka-accent);
 }
 
 .crypto-list {
-  background: var(--bit2me-surface);
+  background: var(--akka-surface);
   border-radius: 16px;
-  border: 1px solid var(--bit2me-border);
+  border: 1px solid var(--akka-border);
   overflow: hidden;
 }
 
@@ -598,7 +598,7 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid var(--bit2me-border);
+  border-bottom: 1px solid var(--akka-border);
   transition: background-color 0.2s ease;
 }
 
@@ -607,7 +607,7 @@ body {
 }
 
 .crypto-list-item:hover {
-  background: var(--bit2me-gray-50);
+  background: var(--akka-gray-50);
 }
 
 .crypto-info {
@@ -631,17 +631,17 @@ body {
 .crypto-name .symbol {
   font-size: 16px;
   font-weight: 700;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .crypto-name .name {
   font-size: 13px;
-  color: var(--bit2me-gray-500);
+  color: var(--akka-gray-500);
 }
 
 .crypto-price {
   font-size: 14px;
-  color: var(--bit2me-gray-600);
+  color: var(--akka-gray-600);
 }
 
 .crypto-actions {
@@ -661,16 +661,16 @@ body {
 
 .price-change.positive {
   background: rgba(16, 185, 129, 0.1);
-  color: var(--bit2me-success);
+  color: var(--akka-success);
 }
 
 .price-change.negative {
   background: rgba(239, 68, 68, 0.1);
-  color: var(--bit2me-error);
+  color: var(--akka-error);
 }
 
 .buy-btn {
-  background: linear-gradient(135deg, var(--bit2me-secondary) 0%, #FF8A65 100%);
+  background: linear-gradient(135deg, var(--akka-secondary) 0%, #FF8A65 100%);
   color: white;
   border: none;
   padding: 8px 16px;
@@ -701,7 +701,7 @@ body {
 .portfolio-header h2 {
   font-size: 24px;
   font-weight: 700;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .portfolio-total {
@@ -711,21 +711,21 @@ body {
 .portfolio-total span:first-child {
   display: block;
   font-size: 12px;
-  color: var(--bit2me-gray-500);
+  color: var(--akka-gray-500);
   margin-bottom: 4px;
 }
 
 .total-value {
   font-size: 20px;
   font-weight: 700;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .portfolio-chart-placeholder {
-  background: var(--bit2me-surface);
+  background: var(--akka-surface);
   border-radius: 16px;
   padding: 20px;
-  border: 1px solid var(--bit2me-border);
+  border: 1px solid var(--akka-border);
   margin-bottom: 24px;
 }
 
@@ -739,13 +739,13 @@ body {
 .chart-info span:first-child {
   font-size: 16px;
   font-weight: 600;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .chart-period {
   font-size: 12px;
-  color: var(--bit2me-gray-500);
-  background: var(--bit2me-gray-100);
+  color: var(--akka-gray-500);
+  background: var(--akka-gray-100);
   padding: 4px 8px;
   border-radius: 6px;
 }
@@ -765,7 +765,7 @@ body {
 .portfolio-breakdown h3 {
   font-size: 18px;
   font-weight: 700;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
   margin-bottom: 16px;
 }
 
@@ -781,7 +781,7 @@ body {
 .history-header h2 {
   font-size: 24px;
   font-weight: 700;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
   margin-bottom: 16px;
 }
 
@@ -792,10 +792,10 @@ body {
 
 .filter-btn {
   padding: 8px 16px;
-  border: 1px solid var(--bit2me-border);
+  border: 1px solid var(--akka-border);
   border-radius: 20px;
-  background: var(--bit2me-surface);
-  color: var(--bit2me-gray-600);
+  background: var(--akka-surface);
+  color: var(--akka-gray-600);
   font-size: 14px;
   font-weight: 500;
   cursor: pointer;
@@ -803,9 +803,9 @@ body {
 }
 
 .filter-btn.active {
-  background: var(--bit2me-accent);
+  background: var(--akka-accent);
   color: white;
-  border-color: var(--bit2me-accent);
+  border-color: var(--akka-accent);
 }
 
 /* Profile Content */
@@ -822,7 +822,7 @@ body {
   width: 80px;
   height: 80px;
   border-radius: 20px;
-  background: linear-gradient(135deg, var(--bit2me-primary) 0%, var(--bit2me-accent) 100%);
+  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-accent) 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -835,13 +835,13 @@ body {
 .profile-header h2 {
   font-size: 24px;
   font-weight: 700;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
   margin-bottom: 4px;
 }
 
 .profile-header p {
   font-size: 16px;
-  color: var(--bit2me-gray-500);
+  color: var(--akka-gray-500);
   margin-bottom: 12px;
 }
 
@@ -850,7 +850,7 @@ body {
   align-items: center;
   gap: 6px;
   background: rgba(16, 185, 129, 0.1);
-  color: var(--bit2me-success);
+  color: var(--akka-success);
   padding: 8px 16px;
   border-radius: 20px;
   font-size: 14px;
@@ -858,9 +858,9 @@ body {
 }
 
 .profile-menu {
-  background: var(--bit2me-surface);
+  background: var(--akka-surface);
   border-radius: 16px;
-  border: 1px solid var(--bit2me-border);
+  border: 1px solid var(--akka-border);
   overflow: hidden;
   margin-bottom: 24px;
 }
@@ -869,7 +869,7 @@ body {
   display: flex;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid var(--bit2me-border);
+  border-bottom: 1px solid var(--akka-border);
   cursor: pointer;
   transition: background-color 0.2s ease;
 }
@@ -879,7 +879,7 @@ body {
 }
 
 .menu-item:hover {
-  background: var(--bit2me-gray-50);
+  background: var(--akka-gray-50);
 }
 
 .menu-icon {
@@ -891,19 +891,19 @@ body {
   flex: 1;
   font-size: 16px;
   font-weight: 500;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .menu-arrow {
-  color: var(--bit2me-gray-400);
+  color: var(--akka-gray-400);
   font-size: 18px;
 }
 
 .logout-btn {
   width: 100%;
   background: none;
-  border: 2px solid var(--bit2me-error);
-  color: var(--bit2me-error);
+  border: 2px solid var(--akka-error);
+  color: var(--akka-error);
   padding: 16px;
   border-radius: 12px;
   font-size: 16px;
@@ -913,7 +913,7 @@ body {
 }
 
 .logout-btn:hover {
-  background: var(--bit2me-error);
+  background: var(--akka-error);
   color: white;
 }
 
@@ -930,7 +930,7 @@ body {
 }
 
 .buy-sell-modal {
-  background: var(--bit2me-surface);
+  background: var(--akka-surface);
   border-radius: 20px;
   width: 100%;
   max-width: 400px;
@@ -944,13 +944,13 @@ body {
   justify-content: space-between;
   align-items: center;
   padding: 20px;
-  border-bottom: 1px solid var(--bit2me-border);
+  border-bottom: 1px solid var(--akka-border);
 }
 
 .modal-header h3 {
   font-size: 18px;
   font-weight: 700;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .close-btn {
@@ -958,15 +958,15 @@ body {
   height: 32px;
   border: none;
   border-radius: 8px;
-  background: var(--bit2me-gray-100);
-  color: var(--bit2me-gray-600);
+  background: var(--akka-gray-100);
+  color: var(--akka-gray-600);
   font-size: 20px;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
 .close-btn:hover {
-  background: var(--bit2me-gray-200);
+  background: var(--akka-gray-200);
 }
 
 .modal-content {
@@ -979,19 +979,19 @@ body {
   gap: 12px;
   margin-bottom: 24px;
   padding: 16px;
-  background: var(--bit2me-gray-50);
+  background: var(--akka-gray-50);
   border-radius: 12px;
 }
 
 .crypto-name-modal {
   font-size: 16px;
   font-weight: 700;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
 }
 
 .crypto-price-modal {
   font-size: 14px;
-  color: var(--bit2me-gray-600);
+  color: var(--akka-gray-600);
 }
 
 .input-group {
@@ -1002,27 +1002,27 @@ body {
   display: block;
   font-size: 14px;
   font-weight: 600;
-  color: var(--bit2me-gray-900);
+  color: var(--akka-gray-900);
   margin-bottom: 8px;
 }
 
 .input-group input {
   width: 100%;
   padding: 12px 16px;
-  border: 2px solid var(--bit2me-border);
+  border: 2px solid var(--akka-border);
   border-radius: 12px;
   font-size: 16px;
-  background: var(--bit2me-surface);
+  background: var(--akka-surface);
   transition: border-color 0.2s ease;
 }
 
 .input-group input:focus {
   outline: none;
-  border-color: var(--bit2me-accent);
+  border-color: var(--akka-accent);
 }
 
 .transaction-summary {
-  background: var(--bit2me-gray-50);
+  background: var(--akka-gray-50);
   border-radius: 12px;
   padding: 16px;
   margin: 24px 0;
@@ -1043,15 +1043,15 @@ body {
 .summary-row.total {
   font-weight: 700;
   font-size: 16px;
-  color: var(--bit2me-gray-900);
-  border-top: 1px solid var(--bit2me-border);
+  color: var(--akka-gray-900);
+  border-top: 1px solid var(--akka-border);
   padding-top: 8px;
   margin-top: 8px;
 }
 
 .confirm-buy-btn {
   width: 100%;
-  background: linear-gradient(135deg, var(--bit2me-secondary) 0%, #FF8A65 100%);
+  background: linear-gradient(135deg, var(--akka-secondary) 0%, #FF8A65 100%);
   color: white;
   border: none;
   padding: 16px;
@@ -1068,15 +1068,15 @@ body {
 }
 
 /* Bottom Navigation */
-.bit2me-nav {
+.akka-nav {
   position: fixed;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   max-width: 430px;
   width: 100%;
-  background: var(--bit2me-surface);
-  border-top: 1px solid var(--bit2me-border);
+  background: var(--akka-surface);
+  border-top: 1px solid var(--akka-border);
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -1095,16 +1095,16 @@ body {
   padding: 8px 12px;
   border-radius: 12px;
   transition: all 0.2s ease;
-  color: var(--bit2me-gray-500);
+  color: var(--akka-gray-500);
   min-width: 60px;
 }
 
 .nav-item:hover {
-  background: var(--bit2me-gray-100);
+  background: var(--akka-gray-100);
 }
 
 .nav-item.active {
-  color: var(--bit2me-accent);
+  color: var(--akka-accent);
   background: rgba(59, 130, 246, 0.1);
 }
 
@@ -1115,11 +1115,11 @@ body {
 
 /* Responsive Design */
 @media (max-width: 430px) {
-  .bit2me-app {
+  .akka-app {
     max-width: 100%;
   }
   
-  .bit2me-main {
+  .akka-main {
     padding: 0 16px 20px;
   }
   
@@ -1133,9 +1133,9 @@ body {
 }
 
 @media (min-width: 431px) {
-  .bit2me-app {
-    border-left: 1px solid var(--bit2me-border);
-    border-right: 1px solid var(--bit2me-border);
+  .akka-app {
+    border-left: 1px solid var(--akka-border);
+    border-right: 1px solid var(--akka-border);
     box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
 }
@@ -1146,16 +1146,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--bit2me-gray-100);
+  background: var(--akka-gray-100);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--bit2me-gray-400);
+  background: var(--akka-gray-400);
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--bit2me-gray-500);
+  background: var(--akka-gray-500);
 }
 
 /* Accessibility */
@@ -1169,11 +1169,11 @@ body {
 
 button:focus-visible,
 input:focus-visible {
-  outline: 2px solid var(--bit2me-accent);
+  outline: 2px solid var(--akka-accent);
   outline-offset: 2px;
 }
 
 ::selection {
   background: rgba(59, 130, 246, 0.2);
-  color: var(--bit2me-primary);
+  color: var(--akka-primary);
 }

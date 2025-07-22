@@ -156,8 +156,8 @@ async def get_trending():
     """Get top trending cryptocurrencies"""
     prices = await CoinMarketCapService.get_crypto_prices("BTC,ETH,BNB,ADA,SOL,XRP,DOGE,AVAX,DOT,MATIC,LINK,UNI,LTC,BCH,ATOM")
     
-    # Sort by market cap descending
-    trending = sorted(prices.values(), key=lambda x: x["market_cap"], reverse=True)[:10]
+    # Sort by market cap descending, handle None values
+    trending = sorted(prices.values(), key=lambda x: x.get("market_cap", 0) or 0, reverse=True)[:10]
     return {"trending": trending}
 
 @api_router.post("/users", response_model=User)

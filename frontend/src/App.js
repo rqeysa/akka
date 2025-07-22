@@ -5,189 +5,194 @@ import axios from 'axios';
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-// Mock user data for demo
+// Mock user data for Bit2Me clone
 const DEMO_USER = {
   id: "demo-user-123",
-  name: "Alex Thompson",
-  email: "alex@akka.com",
-  eur_balance: 2450.75,
-  try_balance: 35750.20,
+  name: "Carlos Martínez",
+  email: "carlos@bit2me.com",
+  verified: true,
+  balance_eur: 3250.45,
+  total_portfolio: 8750.30,
   crypto_portfolio: {
-    BTC: 0.05,
-    ETH: 1.2,
-    BNB: 25.0,
-    ADA: 1000.0,
-    SOL: 15.5
+    BTC: { amount: 0.1250, value: 14865.25 },
+    ETH: { amount: 2.5, value: 8350.00 },
+    ADA: { amount: 1500, value: 1725.00 },
+    DOT: { amount: 75, value: 525.00 },
+    SOL: { amount: 12, value: 3168.00 }
   }
 };
 
-// Recent transactions mock data
 const RECENT_TRANSACTIONS = [
-  { id: 1, type: 'crypto_buy', description: 'Bitcoin Purchase', amount: -500.00, currency: 'EUR', date: '2025-01-21', icon: '₿' },
-  { id: 2, type: 'transfer_out', description: 'Transfer to Sarah', amount: -150.00, currency: 'EUR', date: '2025-01-21', icon: '↗' },
-  { id: 3, type: 'card_payment', description: 'Starbucks Coffee', amount: -4.85, currency: 'EUR', date: '2025-01-20', icon: '☕' },
-  { id: 4, type: 'crypto_swap', description: 'ETH → BTC', amount: 0, currency: 'SWAP', date: '2025-01-20', icon: '🔄' },
-  { id: 5, type: 'top_up', description: 'Top up from Bank', amount: +1000.00, currency: 'EUR', date: '2025-01-19', icon: '+' }
+  { id: 1, type: 'buy', crypto: 'BTC', amount: 0.025, eur_amount: 2970.50, date: '2025-01-22 14:30', status: 'completed' },
+  { id: 2, type: 'sell', crypto: 'ETH', amount: 0.5, eur_amount: 1670.00, date: '2025-01-22 12:15', status: 'completed' },
+  { id: 3, type: 'deposit', crypto: 'EUR', amount: 500.00, date: '2025-01-21 18:45', status: 'completed' },
+  { id: 4, type: 'buy', crypto: 'ADA', amount: 500, eur_amount: 575.00, date: '2025-01-21 16:20', status: 'pending' },
+  { id: 5, type: 'withdraw', crypto: 'BTC', amount: 0.01, date: '2025-01-21 10:30', status: 'completed' }
 ];
 
-const CryptoCard = ({ crypto, portfolio }) => {
+const FEATURED_CRYPTOS = ['BTC', 'ETH', 'ADA', 'DOT', 'SOL', 'MATIC', 'LINK', 'AVAX'];
+
+const CryptoListItem = ({ crypto, onBuy }) => {
   const isPositive = crypto.change_24h >= 0;
-  const holding = portfolio[crypto.symbol] || 0;
-  const value = holding * crypto.price;
   
   return (
-    <div className="crypto-card">
-      <div className="crypto-header">
-        <div className="crypto-info">
-          <div className={`crypto-icon ${crypto.symbol.toLowerCase()}`}>
-            {crypto.symbol.charAt(0)}
-          </div>
-          <div>
-            <h4 className="crypto-name">{crypto.symbol}</h4>
-            <p className="crypto-holding">{holding.toFixed(4)} {crypto.symbol}</p>
-          </div>
+    <div className="crypto-list-item">
+      <div className="crypto-info">
+        <div className={`crypto-icon ${crypto.symbol.toLowerCase()}`}>
+          {crypto.symbol.charAt(0)}
         </div>
+        <div className="crypto-details">
+          <div className="crypto-name">
+            <span className="symbol">{crypto.symbol}</span>
+            <span className="name">{crypto.name}</span>
+          </div>
+          <div className="crypto-price">€{crypto.price?.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 6})}</div>
+        </div>
+      </div>
+      <div className="crypto-actions">
         <div className={`price-change ${isPositive ? 'positive' : 'negative'}`}>
           {isPositive ? '+' : ''}{crypto.change_24h?.toFixed(2)}%
         </div>
-      </div>
-      
-      <div className="crypto-values">
-        <div className="crypto-price">${crypto.price?.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 6})}</div>
-        <div className="crypto-value">${value.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
+        <button className="buy-btn" onClick={() => onBuy(crypto)}>
+          Comprar
+        </button>
       </div>
     </div>
   );
 };
 
-const BalanceCard = ({ title, amount, currency, isMain, subtitle }) => (
-  <div className={`balance-card ${isMain ? 'main-balance' : 'secondary-balance'}`}>
-    <div className="balance-header">
-      <h3 className="balance-title">{title}</h3>
-      {subtitle && <p className="balance-subtitle">{subtitle}</p>}
+const PortfolioItem = ({ crypto, data }) => (
+  <div className="portfolio-item">
+    <div className="portfolio-crypto">
+      <div className={`crypto-icon ${crypto.toLowerCase()}`}>
+        {crypto.charAt(0)}
+      </div>
+      <div className="portfolio-details">
+        <div className="portfolio-crypto-name">{crypto}</div>
+        <div className="portfolio-amount">{data.amount} {crypto}</div>
+      </div>
     </div>
-    <div className="balance-amount">
-      <span className="amount">{amount?.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
-      <span className="currency">{currency}</span>
-    </div>
-  </div>
-);
-
-const TransactionItem = ({ transaction }) => (
-  <div className="transaction-item">
-    <div className="transaction-icon">
-      <span>{transaction.icon}</span>
-    </div>
-    <div className="transaction-details">
-      <div className="transaction-description">{transaction.description}</div>
-      <div className="transaction-date">{transaction.date}</div>
-    </div>
-    <div className={`transaction-amount ${transaction.amount >= 0 ? 'positive' : 'negative'}`}>
-      {transaction.currency === 'SWAP' ? '' : 
-        `${transaction.amount >= 0 ? '+' : ''}${transaction.amount.toLocaleString(undefined, {minimumFractionDigits: 2})} ${transaction.currency}`
-      }
+    <div className="portfolio-value">
+      <div className="value-eur">€{data.value.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
+      <div className="value-change positive">+2.45%</div>
     </div>
   </div>
 );
 
-const QuickAction = ({ icon, title, onClick, color = 'primary' }) => (
-  <button className={`quick-action ${color}`} onClick={onClick}>
-    <div className="action-icon">{icon}</div>
-    <span className="action-title">{title}</span>
-  </button>
-);
-
-const SwapWidget = ({ cryptoPrices, onSwap }) => {
-  const [fromCrypto, setFromCrypto] = useState('BTC');
-  const [toCrypto, setToCrypto] = useState('ETH');
-  const [amount, setAmount] = useState('0.01');
-  const [estimatedReceive, setEstimatedReceive] = useState(0);
-
-  useEffect(() => {
-    if (cryptoPrices[fromCrypto] && cryptoPrices[toCrypto] && amount) {
-      const fromPrice = cryptoPrices[fromCrypto].price;
-      const toPrice = cryptoPrices[toCrypto].price;
-      const rate = fromPrice / toPrice;
-      const receive = parseFloat(amount) * rate * 0.995; // 0.5% fee
-      setEstimatedReceive(receive);
-    }
-  }, [fromCrypto, toCrypto, amount, cryptoPrices]);
-
-  const handleSwap = () => {
-    if (onSwap) {
-      onSwap({
-        from_currency: fromCrypto,
-        to_currency: toCrypto,
-        amount: parseFloat(amount)
-      });
+const TransactionItem = ({ transaction }) => {
+  const getTransactionIcon = (type) => {
+    switch(type) {
+      case 'buy': return '↗';
+      case 'sell': return '↙';
+      case 'deposit': return '+';
+      case 'withdraw': return '↗';
+      default: return '•';
     }
   };
 
-  const availableCryptos = Object.keys(cryptoPrices);
+  const getTransactionText = (transaction) => {
+    switch(transaction.type) {
+      case 'buy': return `Compra ${transaction.crypto}`;
+      case 'sell': return `Venta ${transaction.crypto}`;
+      case 'deposit': return `Depósito EUR`;
+      case 'withdraw': return `Retirada ${transaction.crypto}`;
+      default: return 'Transacción';
+    }
+  };
 
   return (
-    <div className="swap-widget">
-      <div className="swap-header">
-        <h3>Instant Swap</h3>
-        <p>Trade crypto instantly with live rates</p>
+    <div className="transaction-item">
+      <div className={`transaction-icon ${transaction.type}`}>
+        {getTransactionIcon(transaction.type)}
       </div>
-      
-      <div className="swap-form">
-        {/* From Section */}
-        <div className="swap-section">
-          <label>From</label>
-          <div className="swap-input-group">
-            <select value={fromCrypto} onChange={(e) => setFromCrypto(e.target.value)} className="crypto-select">
-              {availableCryptos.map(symbol => (
-                <option key={symbol} value={symbol}>{symbol}</option>
-              ))}
-            </select>
+      <div className="transaction-details">
+        <div className="transaction-description">{getTransactionText(transaction)}</div>
+        <div className="transaction-date">{transaction.date}</div>
+      </div>
+      <div className="transaction-amount">
+        {transaction.eur_amount ? `€${transaction.eur_amount}` : `${transaction.amount} ${transaction.crypto}`}
+        <div className={`transaction-status ${transaction.status}`}>
+          {transaction.status === 'completed' ? 'Completada' : 'Pendiente'}
+        </div>
+      </div>
+    </div>
+  );
+};
+
+const BuySellModal = ({ crypto, onClose, onConfirm }) => {
+  const [amount, setAmount] = useState('');
+  const [eurAmount, setEurAmount] = useState('');
+
+  useEffect(() => {
+    if (amount && crypto) {
+      setEurAmount((parseFloat(amount) * crypto.price).toFixed(2));
+    }
+  }, [amount, crypto]);
+
+  if (!crypto) return null;
+
+  return (
+    <div className="modal-overlay">
+      <div className="buy-sell-modal">
+        <div className="modal-header">
+          <h3>Comprar {crypto.symbol}</h3>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
+        
+        <div className="modal-content">
+          <div className="crypto-info-modal">
+            <div className={`crypto-icon ${crypto.symbol.toLowerCase()}`}>
+              {crypto.symbol.charAt(0)}
+            </div>
+            <div>
+              <div className="crypto-name-modal">{crypto.symbol}</div>
+              <div className="crypto-price-modal">€{crypto.price?.toLocaleString()}</div>
+            </div>
+          </div>
+
+          <div className="input-group">
+            <label>Cantidad de {crypto.symbol}</label>
             <input
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              step="0.001"
-              className="amount-input"
-              placeholder="0.00"
+              placeholder={`0.00 ${crypto.symbol}`}
             />
           </div>
-        </div>
 
-        {/* Swap Button */}
-        <div className="swap-button-container">
-          <button className="swap-toggle">
-            <svg width="16" height="16" fill="currentColor" viewBox="0 0 16 16">
-              <path fillRule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
-            </svg>
-          </button>
-        </div>
+          <div className="input-group">
+            <label>Importe en EUR</label>
+            <input
+              type="number"
+              value={eurAmount}
+              onChange={(e) => {
+                setEurAmount(e.target.value);
+                if (e.target.value && crypto) {
+                  setAmount((parseFloat(e.target.value) / crypto.price).toFixed(6));
+                }
+              }}
+              placeholder="0.00 EUR"
+            />
+          </div>
 
-        {/* To Section */}
-        <div className="swap-section">
-          <label>To</label>
-          <div className="swap-input-group">
-            <select value={toCrypto} onChange={(e) => setToCrypto(e.target.value)} className="crypto-select">
-              {availableCryptos.map(symbol => (
-                <option key={symbol} value={symbol}>{symbol}</option>
-              ))}
-            </select>
-            <div className="amount-display">
-              {estimatedReceive.toFixed(6)}
+          <div className="transaction-summary">
+            <div className="summary-row">
+              <span>Comisión (1.5%)</span>
+              <span>€{(eurAmount * 0.015).toFixed(2)}</span>
+            </div>
+            <div className="summary-row total">
+              <span>Total</span>
+              <span>€{(parseFloat(eurAmount || 0) * 1.015).toFixed(2)}</span>
             </div>
           </div>
-        </div>
 
-        {/* Rate Info */}
-        <div className="swap-rate">
-          <div className="rate-info">
-            <span>Rate: 1 {fromCrypto} = {estimatedReceive > 0 ? (estimatedReceive / parseFloat(amount || 1)).toFixed(6) : '0'} {toCrypto}</span>
-            <span>Fee: 0.5%</span>
-          </div>
+          <button 
+            className="confirm-buy-btn"
+            onClick={() => onConfirm(crypto, amount, eurAmount)}
+          >
+            Confirmar compra
+          </button>
         </div>
-
-        <button onClick={handleSwap} className="swap-execute-button">
-          Swap {fromCrypto} → {toCrypto}
-        </button>
       </div>
     </div>
   );
@@ -197,7 +202,9 @@ function App() {
   const [cryptoPrices, setCryptoPrices] = useState({});
   const [loading, setLoading] = useState(true);
   const [user] = useState(DEMO_USER);
-  const [activeTab, setActiveTab] = useState('home');
+  const [activeTab, setActiveTab] = useState('mercado');
+  const [showBuyModal, setShowBuyModal] = useState(false);
+  const [selectedCrypto, setSelectedCrypto] = useState(null);
 
   useEffect(() => {
     fetchCryptoPrices();
@@ -208,58 +215,54 @@ function App() {
   const fetchCryptoPrices = async () => {
     try {
       const response = await axios.get(`${API}/crypto/prices`);
-      setCryptoPrices(response.data.prices);
+      const prices = response.data.prices;
+      
+      // Convert USD to EUR (approximate)
+      const eurPrices = {};
+      Object.keys(prices).forEach(symbol => {
+        eurPrices[symbol] = {
+          ...prices[symbol],
+          price: prices[symbol].price * 0.92 // USD to EUR conversion
+        };
+      });
+      
+      setCryptoPrices(eurPrices);
     } catch (error) {
       console.error('Error fetching crypto prices:', error);
-      // Fallback mock data
+      // Fallback mock data in EUR
       setCryptoPrices({
-        BTC: { symbol: 'BTC', name: 'Bitcoin', price: 118922, change_24h: 2.5, volume_24h: 15000000000 },
-        ETH: { symbol: 'ETH', name: 'Ethereum', price: 3340, change_24h: 1.8, volume_24h: 8000000000 },
-        BNB: { symbol: 'BNB', name: 'BNB', price: 695, change_24h: -0.5, volume_24h: 1000000000 },
-        ADA: { symbol: 'ADA', name: 'Cardano', price: 1.15, change_24h: 3.2, volume_24h: 500000000 },
-        SOL: { symbol: 'SOL', name: 'Solana', price: 264, change_24h: 4.1, volume_24h: 2000000000 }
+        BTC: { symbol: 'BTC', name: 'Bitcoin', price: 109408, change_24h: 2.1, volume_24h: 13800000000 },
+        ETH: { symbol: 'ETH', name: 'Ethereum', price: 3073, change_24h: 1.5, volume_24h: 7360000000 },
+        ADA: { symbol: 'ADA', name: 'Cardano', price: 1.06, change_24h: 3.2, volume_24h: 460000000 },
+        DOT: { symbol: 'DOT', name: 'Polkadot', price: 7.00, change_24h: -1.8, volume_24h: 180000000 },
+        SOL: { symbol: 'SOL', name: 'Solana', price: 264, change_24h: 4.1, volume_24h: 1840000000 },
+        MATIC: { symbol: 'MATIC', name: 'Polygon', price: 0.45, change_24h: 2.8, volume_24h: 150000000 },
+        LINK: { symbol: 'LINK', name: 'Chainlink', price: 15.20, change_24h: 1.2, volume_24h: 280000000 },
+        AVAX: { symbol: 'AVAX', name: 'Avalanche', price: 45.60, change_24h: -0.8, volume_24h: 320000000 }
       });
     } finally {
       setLoading(false);
     }
   };
 
-  const handleSwap = async (swapData) => {
-    try {
-      const response = await axios.post(`${API}/swap`, {
-        user_id: user.id,
-        ...swapData
-      });
-      
-      if (response.data.success) {
-        alert(`Swap successful! You received ${response.data.receive_amount.toFixed(6)} ${swapData.to_currency}`);
-      }
-    } catch (error) {
-      console.error('Swap error:', error);
-      alert('Swap simulated successfully! (Demo mode)');
-    }
+  const handleBuyCrypto = (crypto) => {
+    setSelectedCrypto(crypto);
+    setShowBuyModal(true);
   };
 
-  const calculateTotalPortfolioValue = () => {
-    let totalValue = 0;
-    Object.entries(user.crypto_portfolio).forEach(([symbol, amount]) => {
-      if (cryptoPrices[symbol]) {
-        totalValue += amount * cryptoPrices[symbol].price;
-      }
-    });
-    return totalValue;
-  };
-
-  const calculateTotalBalance = () => {
-    return user.eur_balance + user.try_balance * 0.029 + calculateTotalPortfolioValue(); // Convert TRY to EUR approximation
+  const handleConfirmBuy = (crypto, amount, eurAmount) => {
+    // Simulate purchase
+    alert(`Compra confirmada: ${amount} ${crypto.symbol} por €${eurAmount}`);
+    setShowBuyModal(false);
+    setSelectedCrypto(null);
   };
 
   if (loading) {
     return (
-      <div className="loading-screen">
-        <div className="akka-logo">
-          <div className="logo-gradient"></div>
-          <span>akka</span>
+      <div className="bit2me-loading">
+        <div className="bit2me-logo">
+          <div className="logo-icon">B</div>
+          <span>Bit2Me</span>
         </div>
         <div className="loading-spinner"></div>
       </div>
@@ -267,75 +270,99 @@ function App() {
   }
 
   return (
-    <div className="akka-app">
+    <div className="bit2me-app">
       {/* Header */}
-      <header className="app-header">
-        <div className="header-top">
-          <div className="user-greeting">
-            <h1>Good morning, {user.name.split(' ')[0]} ✨</h1>
-            <p>Tuesday, January 22</p>
+      <header className="bit2me-header">
+        <div className="header-content">
+          <div className="logo-section">
+            <div className="bit2me-logo-header">
+              <div className="logo-icon">B</div>
+              <span>Bit2Me</span>
+            </div>
           </div>
           <div className="header-actions">
             <button className="notification-btn">
               <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917zM14.22 12c.223.447.481.801.78 1H1c.299-.199.557-.553.78-1C2.68 10.2 3 6.88 3 6c0-2.42 1.72-4.44 4.005-4.901a1 1 0 1 1 1.99 0A5.002 5.002 0 0 1 13 6c0 .88.32 4.2 1.22 6z"/>
+                <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917z"/>
               </svg>
+              <span className="notification-badge">3</span>
             </button>
-            <button className="profile-btn">
-              <div className="profile-avatar">{user.name.charAt(0)}</div>
-            </button>
+            <div className="user-avatar">
+              {user.name.charAt(0)}
+            </div>
           </div>
         </div>
       </header>
 
       {/* Main Content */}
-      <main className="app-main">
-        {activeTab === 'home' && (
+      <main className="bit2me-main">
+        {activeTab === 'inicio' && (
           <div className="home-content">
-            {/* Total Balance */}
-            <div className="total-balance-section">
-              <BalanceCard
-                title="Total Balance"
-                amount={calculateTotalBalance()}
-                currency="EUR"
-                isMain={true}
-                subtitle="All accounts"
-              />
-            </div>
-
-            {/* Account Balances */}
-            <div className="account-balances">
-              <div className="accounts-header">
-                <h3>Your Accounts</h3>
-                <button className="add-account-btn">+</button>
+            {/* Portfolio Summary */}
+            <div className="portfolio-summary">
+              <div className="summary-header">
+                <h2>Hola, {user.name.split(' ')[0]} 👋</h2>
+                <div className="verification-badge">
+                  <span className="verified-icon">✓</span>
+                  Verificado
+                </div>
               </div>
-              <div className="accounts-grid">
-                <BalanceCard title="Euro Account" amount={user.eur_balance} currency="EUR" />
-                <BalanceCard title="Turkish Lira" amount={user.try_balance} currency="TRY" />
+              
+              <div className="balance-cards">
+                <div className="balance-card main">
+                  <div className="balance-label">Valor total del portfolio</div>
+                  <div className="balance-amount">€{user.total_portfolio.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
+                  <div className="balance-change positive">+€245.30 (+2.87%)</div>
+                </div>
+                
+                <div className="balance-card secondary">
+                  <div className="balance-label">Saldo EUR</div>
+                  <div className="balance-amount">€{user.balance_eur.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
+                </div>
               </div>
             </div>
 
             {/* Quick Actions */}
             <div className="quick-actions">
-              <div className="actions-header">
-                <h3>Quick Actions</h3>
+              <button className="action-btn primary" onClick={() => setActiveTab('mercado')}>
+                <span className="action-icon">+</span>
+                Comprar
+              </button>
+              <button className="action-btn secondary">
+                <span className="action-icon">-</span>
+                Vender
+              </button>
+              <button className="action-btn secondary">
+                <span className="action-icon">↗</span>
+                Enviar
+              </button>
+              <button className="action-btn secondary">
+                <span className="action-icon">↙</span>
+                Recibir
+              </button>
+            </div>
+
+            {/* Portfolio */}
+            <div className="home-portfolio">
+              <div className="section-header">
+                <h3>Tu portfolio</h3>
+                <button className="see-all-btn">Ver todo</button>
               </div>
-              <div className="actions-grid">
-                <QuickAction icon="+" title="Top Up" color="success" />
-                <QuickAction icon="↗" title="Send" color="primary" />
-                <QuickAction icon="🔄" title="Swap" onClick={() => setActiveTab('swap')} color="crypto" />
-                <QuickAction icon="💳" title="Card" color="secondary" />
+              <div className="portfolio-list">
+                {Object.entries(user.crypto_portfolio).map(([crypto, data]) => (
+                  <PortfolioItem key={crypto} crypto={crypto} data={data} />
+                ))}
               </div>
             </div>
 
-            {/* Recent Transactions */}
-            <div className="recent-transactions">
-              <div className="transactions-header">
-                <h3>Recent Activity</h3>
-                <button className="see-all-btn">See all</button>
+            {/* Recent Activity */}
+            <div className="recent-activity">
+              <div className="section-header">
+                <h3>Actividad reciente</h3>
+                <button className="see-all-btn">Ver todo</button>
               </div>
               <div className="transactions-list">
-                {RECENT_TRANSACTIONS.slice(0, 4).map(transaction => (
+                {RECENT_TRANSACTIONS.slice(0, 3).map(transaction => (
                   <TransactionItem key={transaction.id} transaction={transaction} />
                 ))}
               </div>
@@ -343,103 +370,205 @@ function App() {
           </div>
         )}
 
-        {activeTab === 'crypto' && (
-          <div className="crypto-content">
-            <div className="crypto-header">
-              <h2>Your Crypto</h2>
-              <div className="crypto-total">
-                <span>Portfolio Value</span>
-                <span className="crypto-total-amount">${calculateTotalPortfolioValue().toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+        {activeTab === 'mercado' && (
+          <div className="market-content">
+            <div className="market-header">
+              <h2>Mercado</h2>
+              <div className="market-stats">
+                <span>24h Vol: €2.4B</span>
+                <span className="positive">+3.2%</span>
               </div>
             </div>
-            
+
+            <div className="market-search">
+              <input type="text" placeholder="Buscar criptomoneda..." />
+            </div>
+
             <div className="crypto-list">
-              {Object.values(cryptoPrices).map((crypto) => (
-                <CryptoCard key={crypto.symbol} crypto={crypto} portfolio={user.crypto_portfolio} />
+              {FEATURED_CRYPTOS.map(symbol => {
+                const crypto = cryptoPrices[symbol];
+                if (!crypto) return null;
+                return (
+                  <CryptoListItem 
+                    key={symbol} 
+                    crypto={crypto} 
+                    onBuy={handleBuyCrypto}
+                  />
+                );
+              })}
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'portfolio' && (
+          <div className="portfolio-content">
+            <div className="portfolio-header">
+              <h2>Portfolio</h2>
+              <div className="portfolio-total">
+                <span>Valor total</span>
+                <span className="total-value">€{user.total_portfolio.toLocaleString()}</span>
+              </div>
+            </div>
+
+            <div className="portfolio-chart-placeholder">
+              <div className="chart-info">
+                <span>Gráfico del portfolio</span>
+                <span className="chart-period">7 días</span>
+              </div>
+              <div className="chart-visual">
+                <svg viewBox="0 0 300 100" className="chart-svg">
+                  <path d="M0,60 Q75,20 150,40 T300,30" stroke="#FF6B35" strokeWidth="2" fill="none"/>
+                </svg>
+              </div>
+            </div>
+
+            <div className="portfolio-breakdown">
+              <h3>Desglose de activos</h3>
+              <div className="assets-list">
+                {Object.entries(user.crypto_portfolio).map(([crypto, data]) => (
+                  <PortfolioItem key={crypto} crypto={crypto} data={data} />
+                ))}
+              </div>
+            </div>
+          </div>
+        )}
+
+        {activeTab === 'historial' && (
+          <div className="history-content">
+            <div className="history-header">
+              <h2>Historial</h2>
+              <div className="history-filters">
+                <button className="filter-btn active">Todo</button>
+                <button className="filter-btn">Compras</button>
+                <button className="filter-btn">Ventas</button>
+              </div>
+            </div>
+
+            <div className="transactions-full-list">
+              {RECENT_TRANSACTIONS.map(transaction => (
+                <TransactionItem key={transaction.id} transaction={transaction} />
               ))}
             </div>
           </div>
         )}
 
-        {activeTab === 'swap' && (
-          <div className="swap-content">
-            <SwapWidget cryptoPrices={cryptoPrices} onSwap={handleSwap} />
-          </div>
-        )}
-
-        {activeTab === 'cards' && (
-          <div className="cards-content">
-            <div className="virtual-card">
-              <div className="card-header">
-                <h3>Virtual Card</h3>
-                <div className="card-status active">Active</div>
+        {activeTab === 'perfil' && (
+          <div className="profile-content">
+            <div className="profile-header">
+              <div className="profile-avatar-large">
+                {user.name.charAt(0)}
               </div>
-              <div className="card-visual">
-                <div className="akka-card">
-                  <div className="card-top">
-                    <div className="card-logo">akka</div>
-                    <div className="card-type">VISA</div>
-                  </div>
-                  <div className="card-number">**** **** **** 8472</div>
-                  <div className="card-bottom">
-                    <div className="card-holder">{user.name.toUpperCase()}</div>
-                    <div className="card-expiry">12/28</div>
-                  </div>
-                </div>
-              </div>
-              <div className="card-actions">
-                <button className="card-action-btn primary">View Details</button>
-                <button className="card-action-btn secondary">Freeze Card</button>
+              <h2>{user.name}</h2>
+              <p>{user.email}</p>
+              <div className="verification-status">
+                <span className="verified-icon">✓</span>
+                Cuenta verificada
               </div>
             </div>
+
+            <div className="profile-menu">
+              <div className="menu-item">
+                <span className="menu-icon">👤</span>
+                <span>Información personal</span>
+                <span className="menu-arrow">›</span>
+              </div>
+              <div className="menu-item">
+                <span className="menu-icon">🔒</span>
+                <span>Seguridad</span>
+                <span className="menu-arrow">›</span>
+              </div>
+              <div className="menu-item">
+                <span className="menu-icon">💳</span>
+                <span>Métodos de pago</span>
+                <span className="menu-arrow">›</span>
+              </div>
+              <div className="menu-item">
+                <span className="menu-icon">📄</span>
+                <span>Documentos</span>
+                <span className="menu-arrow">›</span>
+              </div>
+              <div className="menu-item">
+                <span className="menu-icon">❓</span>
+                <span>Ayuda y soporte</span>
+                <span className="menu-arrow">›</span>
+              </div>
+              <div className="menu-item">
+                <span className="menu-icon">⚙️</span>
+                <span>Configuración</span>
+                <span className="menu-arrow">›</span>
+              </div>
+            </div>
+
+            <button className="logout-btn">
+              Cerrar sesión
+            </button>
           </div>
         )}
       </main>
 
       {/* Bottom Navigation */}
-      <nav className="bottom-nav">
+      <nav className="bit2me-nav">
         <button 
-          className={`nav-item ${activeTab === 'home' ? 'active' : ''}`}
-          onClick={() => setActiveTab('home')}
+          className={`nav-item ${activeTab === 'inicio' ? 'active' : ''}`}
+          onClick={() => setActiveTab('inicio')}
         >
           <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6zm5-.793V6l-2-2V2.5a.5.5 0 0 1 .5-.5h1a.5.5 0 0 1 .5.5z"/>
-            <path d="M7.293 1.5a1 1 0 0 1 1.414 0l6.647 6.646a.5.5 0 0 1-.708.708L8 2.207 1.354 8.854a.5.5 0 1 1-.708-.708L7.293 1.5z"/>
+            <path d="m8 3.293 6 6V13.5a1.5 1.5 0 0 1-1.5 1.5h-9A1.5 1.5 0 0 1 2 13.5V9.293l6-6z"/>
           </svg>
-          <span>Home</span>
+          <span>Inicio</span>
         </button>
         
         <button 
-          className={`nav-item ${activeTab === 'crypto' ? 'active' : ''}`}
-          onClick={() => setActiveTab('crypto')}
+          className={`nav-item ${activeTab === 'mercado' ? 'active' : ''}`}
+          onClick={() => setActiveTab('mercado')}
         >
           <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M5.5 13a3.5 3.5 0 0 1-.369-6.98 5.5 5.5 0 0 1 10.738 0A3.5 3.5 0 0 1 10.5 13H5.5z"/>
+            <path d="M1 11a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v3a1 1 0 0 1-1 1H2a1 1 0 0 1-1-1v-3zM5 2a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v12a1 1 0 0 1-1 1H6a1 1 0 0 1-1-1V2zM9 5a1 1 0 0 1 1-1h2a1 1 0 0 1 1 1v9a1 1 0 0 1-1 1h-2a1 1 0 0 1-1-1V5z"/>
           </svg>
-          <span>Crypto</span>
+          <span>Mercado</span>
         </button>
         
         <button 
-          className={`nav-item ${activeTab === 'swap' ? 'active' : ''}`}
-          onClick={() => setActiveTab('swap')}
+          className={`nav-item ${activeTab === 'portfolio' ? 'active' : ''}`}
+          onClick={() => setActiveTab('portfolio')}
         >
           <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-            <path fillRule="evenodd" d="M11.5 15a.5.5 0 0 0 .5-.5V2.707l3.146 3.147a.5.5 0 0 0 .708-.708l-4-4a.5.5 0 0 0-.708 0l-4 4a.5.5 0 1 0 .708.708L11 2.707V14.5a.5.5 0 0 0 .5.5zm-7-14a.5.5 0 0 1 .5.5v11.793l3.146-3.147a.5.5 0 0 1 .708.708l-4 4a.5.5 0 0 1-.708 0l-4-4a.5.5 0 0 1 .708-.708L4 13.293V1.5a.5.5 0 0 1 .5-.5z"/>
+            <path d="M5.5 7a.5.5 0 0 0 0 1h5a.5.5 0 0 0 0-1h-5zM5 9.5a.5.5 0 0 1 .5-.5h7a.5.5 0 0 1 0 1h-7a.5.5 0 0 1-.5-.5zm0 2a.5.5 0 0 1 .5-.5h4a.5.5 0 0 1 0 1h-4a.5.5 0 0 1-.5-.5z"/>
+            <path d="M9.5 0H4a2 2 0 0 0-2 2v12a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2V4.5L9.5 0z"/>
           </svg>
-          <span>Swap</span>
+          <span>Portfolio</span>
         </button>
         
         <button 
-          className={`nav-item ${activeTab === 'cards' ? 'active' : ''}`}
-          onClick={() => setActiveTab('cards')}
+          className={`nav-item ${activeTab === 'historial' ? 'active' : ''}`}
+          onClick={() => setActiveTab('historial')}
         >
           <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
-            <path d="M0 4a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2v1H0V4z"/>
-            <path d="M0 7v5a2 2 0 0 1 2-2h12a2 2 0 0 1 2 2V7H0zm3 2h1a1 1 0 0 1 1 1v1a1 1 0 0 1-1 1H3a1 1 0 0 1-1-1v-1a1 1 0 0 1 1-1z"/>
+            <path d="M8 3a5 5 0 1 0 4.546 2.914.5.5 0 0 1 .908-.417A6 6 0 1 1 8 2v1z"/>
+            <path d="M8 4.466V.534a.25.25 0 0 1 .41-.192l2.36 1.966c.12.1.12.284 0 .384L8.41 4.658A.25.25 0 0 1 8 4.466z"/>
           </svg>
-          <span>Cards</span>
+          <span>Historial</span>
+        </button>
+        
+        <button 
+          className={`nav-item ${activeTab === 'perfil' ? 'active' : ''}`}
+          onClick={() => setActiveTab('perfil')}
+        >
+          <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
+            <path d="M8 8a3 3 0 1 0 0-6 3 3 0 0 0 0 6zm2-3a2 2 0 1 1-4 0 2 2 0 0 1 4 0zm4 8c0 1-1 1-1 1H3s-1 0-1-1 1-4 6-4 6 3 6 4zm-1-.004c-.001-.246-.154-.986-.832-1.664C11.516 10.68 10.289 10 8 10c-2.29 0-3.516.68-4.168 1.332-.678.678-.83 1.418-.832 1.664h10z"/>
+          </svg>
+          <span>Perfil</span>
         </button>
       </nav>
+
+      {/* Buy/Sell Modal */}
+      {showBuyModal && (
+        <BuySellModal
+          crypto={selectedCrypto}
+          onClose={() => setShowBuyModal(false)}
+          onConfirm={handleConfirmBuy}
+        />
+      )}
     </div>
   );
 }

@@ -2,33 +2,32 @@
 @tailwind components;
 @tailwind utilities;
 
-/* Custom Variables - Based on Brand Guidelines */
+/* Bit2Me Brand Variables */
 :root {
-  --akka-primary: #17ECE5;
-  --akka-secondary: #704AE5;
-  --akka-navy: #001459;
-  --akka-gray-light: #FAF9F9;
-  --akka-gray-cloud: #E2E4F7;
-  --akka-gray-smoke: #D3D6E0;
-  --akka-gray-steel: #8C9FCC;
-  --akka-gray-space: #59A2B3;
-  --akka-gray-graphite: #667180;
-  --akka-gray-arsenic: #40424D;
-  --akka-gray-phantom: #1E1E24;
-  --akka-black: #000000;
+  --bit2me-primary: #1E3A8A;      /* Deep Blue */
+  --bit2me-secondary: #FF6B35;    /* Orange */
+  --bit2me-accent: #3B82F6;       /* Bright Blue */
+  --bit2me-success: #10B981;      /* Green */
+  --bit2me-error: #EF4444;        /* Red */
+  --bit2me-warning: #F59E0B;      /* Amber */
   
-  /* Semantic Colors */
-  --akka-success: #10B981;
-  --akka-warning: #F59E0B;
-  --akka-error: #EF4444;
+  /* Grays */
+  --bit2me-gray-50: #F9FAFB;
+  --bit2me-gray-100: #F3F4F6;
+  --bit2me-gray-200: #E5E7EB;
+  --bit2me-gray-300: #D1D5DB;
+  --bit2me-gray-400: #9CA3AF;
+  --bit2me-gray-500: #6B7280;
+  --bit2me-gray-600: #4B5563;
+  --bit2me-gray-700: #374151;
+  --bit2me-gray-800: #1F2937;
+  --bit2me-gray-900: #111827;
   
   /* App Specific */
-  --akka-background: #FAFBFC;
-  --akka-surface: #FFFFFF;
-  --akka-border: #E5E7EB;
-  --akka-text-primary: #1F2937;
-  --akka-text-secondary: #6B7280;
-  --akka-text-tertiary: #9CA3AF;
+  --bit2me-background: #FAFBFC;
+  --bit2me-surface: #FFFFFF;
+  --bit2me-border: #E5E7EB;
+  --bit2me-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 * {
@@ -39,20 +38,19 @@
 }
 
 body {
-  font-family: 'Duplet', -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
-  background-color: var(--akka-background);
-  color: var(--akka-text-primary);
+  font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'Roboto', sans-serif;
+  background-color: var(--bit2me-background);
+  color: var(--bit2me-gray-900);
   line-height: 1.5;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  overflow-x: hidden;
 }
 
 /* Loading Screen */
-.loading-screen {
+.bit2me-loading {
   position: fixed;
   inset: 0;
-  background: linear-gradient(135deg, var(--akka-navy) 0%, var(--akka-secondary) 100%);
+  background: linear-gradient(135deg, var(--bit2me-primary) 0%, var(--bit2me-accent) 100%);
   display: flex;
   flex-direction: column;
   align-items: center;
@@ -60,24 +58,30 @@ body {
   z-index: 1000;
 }
 
-.akka-logo {
+.bit2me-logo {
   display: flex;
   align-items: center;
   gap: 12px;
   margin-bottom: 40px;
-}
-
-.logo-gradient {
-  width: 32px;
-  height: 32px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-secondary) 100%);
-}
-
-.akka-logo span {
-  font-size: 28px;
-  font-weight: 600;
   color: white;
+}
+
+.logo-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: linear-gradient(135deg, var(--bit2me-secondary) 0%, #FF8A65 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 20px;
+}
+
+.bit2me-logo span {
+  font-size: 28px;
+  font-weight: 700;
   letter-spacing: -0.5px;
 }
 
@@ -96,40 +100,47 @@ body {
 }
 
 /* Main App Container */
-.akka-app {
+.bit2me-app {
   min-height: 100vh;
-  background-color: var(--akka-background);
-  padding-bottom: 80px;
+  background-color: var(--bit2me-background);
   max-width: 430px;
   margin: 0 auto;
   position: relative;
+  padding-bottom: 80px;
 }
 
 /* Header */
-.app-header {
-  background: var(--akka-surface);
-  padding: 20px 24px 16px;
-  border-bottom: 1px solid var(--akka-border);
+.bit2me-header {
+  background: var(--bit2me-surface);
+  border-bottom: 1px solid var(--bit2me-border);
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.header-top {
+.header-content {
   display: flex;
   justify-content: space-between;
-  align-items: flex-start;
+  align-items: center;
+  padding: 16px 20px;
 }
 
-.user-greeting h1 {
-  font-size: 24px;
-  font-weight: 600;
-  color: var(--akka-text-primary);
-  margin-bottom: 4px;
-  letter-spacing: -0.3px;
+.bit2me-logo-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
 }
 
-.user-greeting p {
-  font-size: 14px;
-  color: var(--akka-text-secondary);
-  font-weight: 500;
+.bit2me-logo-header .logo-icon {
+  width: 32px;
+  height: 32px;
+  font-size: 16px;
+}
+
+.bit2me-logo-header span {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--bit2me-primary);
 }
 
 .header-actions {
@@ -138,13 +149,14 @@ body {
   gap: 12px;
 }
 
-.notification-btn, .profile-btn {
+.notification-btn {
+  position: relative;
   width: 40px;
   height: 40px;
   border: none;
   border-radius: 12px;
-  background: var(--akka-gray-light);
-  color: var(--akka-text-secondary);
+  background: var(--bit2me-gray-100);
+  color: var(--bit2me-gray-600);
   display: flex;
   align-items: center;
   justify-content: center;
@@ -152,213 +164,196 @@ body {
   transition: all 0.2s ease;
 }
 
-.notification-btn:hover, .profile-btn:hover {
-  background: var(--akka-gray-cloud);
-  transform: scale(1.05);
+.notification-btn:hover {
+  background: var(--bit2me-gray-200);
 }
 
-.profile-avatar {
-  width: 28px;
-  height: 28px;
-  border-radius: 8px;
-  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-secondary) 100%);
+.notification-badge {
+  position: absolute;
+  top: -2px;
+  right: -2px;
+  background: var(--bit2me-error);
+  color: white;
+  border-radius: 50%;
+  width: 18px;
+  height: 18px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 600;
+}
+
+.user-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: linear-gradient(135deg, var(--bit2me-primary) 0%, var(--bit2me-accent) 100%);
   color: white;
   display: flex;
   align-items: center;
   justify-content: center;
   font-weight: 600;
-  font-size: 14px;
+  font-size: 16px;
 }
 
 /* Main Content */
-.app-main {
-  padding: 24px;
+.bit2me-main {
+  padding: 0 20px 20px;
 }
 
-/* Balance Cards */
-.total-balance-section {
-  margin-bottom: 32px;
+/* Home Content */
+.home-content {
+  padding-top: 20px;
 }
 
-.balance-card {
-  background: var(--akka-surface);
-  border-radius: 16px;
-  padding: 20px;
-  border: 1px solid var(--akka-border);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+.portfolio-summary {
+  margin-bottom: 24px;
 }
 
-.balance-card.main-balance {
-  background: linear-gradient(135deg, var(--akka-navy) 0%, var(--akka-secondary) 100%);
-  color: white;
-  border: none;
-  box-shadow: 0 4px 20px rgba(0, 20, 89, 0.2);
-}
-
-.balance-header {
-  margin-bottom: 8px;
-}
-
-.balance-title {
-  font-size: 14px;
-  font-weight: 500;
-  color: inherit;
-  opacity: 0.8;
-  margin-bottom: 4px;
-}
-
-.balance-subtitle {
-  font-size: 12px;
-  opacity: 0.6;
-  margin: 0;
-}
-
-.balance-amount {
-  display: flex;
-  align-items: baseline;
-  gap: 8px;
-}
-
-.balance-amount .amount {
-  font-size: 32px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
-
-.balance-amount .currency {
-  font-size: 16px;
-  font-weight: 600;
-  opacity: 0.8;
-}
-
-/* Account Balances */
-.account-balances {
-  margin-bottom: 32px;
-}
-
-.accounts-header {
+.summary-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
-  margin-bottom: 16px;
+  margin-bottom: 20px;
 }
 
-.accounts-header h3 {
-  font-size: 18px;
+.summary-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--bit2me-gray-900);
+}
+
+.verification-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--bit2me-success);
+  padding: 4px 8px;
+  border-radius: 12px;
+  font-size: 12px;
   font-weight: 600;
-  color: var(--akka-text-primary);
 }
 
-.add-account-btn {
-  width: 32px;
-  height: 32px;
-  border: 2px dashed var(--akka-border);
-  border-radius: 8px;
-  background: transparent;
-  color: var(--akka-text-secondary);
-  font-size: 18px;
-  font-weight: 500;
-  cursor: pointer;
-  transition: all 0.2s ease;
+.verified-icon {
+  font-size: 10px;
 }
 
-.add-account-btn:hover {
-  border-color: var(--akka-primary);
-  color: var(--akka-primary);
-}
-
-.accounts-grid {
+.balance-cards {
   display: grid;
-  grid-template-columns: 1fr 1fr;
   gap: 12px;
+  margin-bottom: 24px;
 }
 
-.secondary-balance .balance-amount .amount {
-  font-size: 20px;
+.balance-card {
+  background: var(--bit2me-surface);
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: var(--bit2me-shadow);
+  border: 1px solid var(--bit2me-border);
 }
 
-.secondary-balance .balance-amount .currency {
+.balance-card.main {
+  background: linear-gradient(135deg, var(--bit2me-primary) 0%, var(--bit2me-accent) 100%);
+  color: white;
+  border: none;
+}
+
+.balance-label {
   font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 8px;
+  font-weight: 500;
+}
+
+.balance-amount {
+  font-size: 28px;
+  font-weight: 700;
+  letter-spacing: -0.5px;
+  margin-bottom: 4px;
+}
+
+.balance-card.secondary .balance-amount {
+  font-size: 20px;
+  color: var(--bit2me-gray-900);
+}
+
+.balance-change {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.balance-change.positive {
+  color: var(--bit2me-success);
 }
 
 /* Quick Actions */
 .quick-actions {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
   margin-bottom: 32px;
 }
 
-.actions-header {
-  margin-bottom: 16px;
-}
-
-.actions-header h3 {
-  font-size: 18px;
-  font-weight: 600;
-  color: var(--akka-text-primary);
-}
-
-.actions-grid {
-  display: grid;
-  grid-template-columns: repeat(4, 1fr);
-  gap: 16px;
-}
-
-.quick-action {
+.action-btn {
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   aspect-ratio: 1;
-  background: var(--akka-surface);
-  border: 1px solid var(--akka-border);
   border-radius: 16px;
+  border: none;
   cursor: pointer;
   transition: all 0.2s ease;
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+  font-size: 14px;
+  font-weight: 600;
+  box-shadow: var(--bit2me-shadow);
 }
 
-.quick-action:hover {
+.action-btn.primary {
+  background: linear-gradient(135deg, var(--bit2me-secondary) 0%, #FF8A65 100%);
+  color: white;
+}
+
+.action-btn.secondary {
+  background: var(--bit2me-surface);
+  color: var(--bit2me-gray-700);
+  border: 1px solid var(--bit2me-border);
+}
+
+.action-btn:hover {
   transform: translateY(-2px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
 }
-
-.quick-action.success:hover { border-color: var(--akka-success); }
-.quick-action.primary:hover { border-color: var(--akka-primary); }
-.quick-action.crypto:hover { border-color: var(--akka-secondary); }
-.quick-action.secondary:hover { border-color: var(--akka-gray-steel); }
 
 .action-icon {
-  font-size: 20px;
-  margin-bottom: 8px;
+  font-size: 18px;
+  margin-bottom: 4px;
 }
 
-.action-title {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--akka-text-secondary);
-}
-
-/* Recent Transactions */
-.recent-transactions {
+/* Portfolio & Sections */
+.home-portfolio, .recent-activity {
   margin-bottom: 32px;
 }
 
-.transactions-header {
+.section-header {
   display: flex;
   justify-content: space-between;
   align-items: center;
   margin-bottom: 16px;
 }
 
-.transactions-header h3 {
+.section-header h3 {
   font-size: 18px;
-  font-weight: 600;
-  color: var(--akka-text-primary);
+  font-weight: 700;
+  color: var(--bit2me-gray-900);
 }
 
 .see-all-btn {
   background: none;
   border: none;
-  color: var(--akka-primary);
+  color: var(--bit2me-accent);
   font-size: 14px;
   font-weight: 600;
   cursor: pointer;
@@ -368,137 +363,35 @@ body {
 }
 
 .see-all-btn:hover {
-  background: rgba(23, 236, 229, 0.1);
+  background: rgba(59, 130, 246, 0.1);
 }
 
-.transactions-list {
-  background: var(--akka-surface);
+.portfolio-list, .transactions-list {
+  background: var(--bit2me-surface);
   border-radius: 16px;
-  border: 1px solid var(--akka-border);
+  border: 1px solid var(--bit2me-border);
   overflow: hidden;
 }
 
-.transaction-item {
+/* Portfolio Item */
+.portfolio-item {
   display: flex;
+  justify-content: space-between;
   align-items: center;
   padding: 16px 20px;
-  border-bottom: 1px solid var(--akka-border);
+  border-bottom: 1px solid var(--bit2me-border);
   transition: background-color 0.2s ease;
 }
 
-.transaction-item:last-child {
+.portfolio-item:last-child {
   border-bottom: none;
 }
 
-.transaction-item:hover {
-  background: var(--akka-gray-light);
+.portfolio-item:hover {
+  background: var(--bit2me-gray-50);
 }
 
-.transaction-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: var(--akka-gray-light);
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  margin-right: 12px;
-  font-size: 16px;
-}
-
-.transaction-details {
-  flex: 1;
-}
-
-.transaction-description {
-  font-size: 15px;
-  font-weight: 500;
-  color: var(--akka-text-primary);
-  margin-bottom: 2px;
-}
-
-.transaction-date {
-  font-size: 13px;
-  color: var(--akka-text-secondary);
-}
-
-.transaction-amount {
-  font-size: 15px;
-  font-weight: 600;
-  text-align: right;
-}
-
-.transaction-amount.positive {
-  color: var(--akka-success);
-}
-
-.transaction-amount.negative {
-  color: var(--akka-text-primary);
-}
-
-/* Crypto Content */
-.crypto-content {
-  padding-bottom: 20px;
-}
-
-.crypto-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-end;
-  margin-bottom: 24px;
-}
-
-.crypto-header h2 {
-  font-size: 24px;
-  font-weight: 700;
-  color: var(--akka-text-primary);
-}
-
-.crypto-total {
-  text-align: right;
-}
-
-.crypto-total span:first-child {
-  display: block;
-  font-size: 12px;
-  color: var(--akka-text-secondary);
-  margin-bottom: 4px;
-}
-
-.crypto-total-amount {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--akka-text-primary);
-}
-
-.crypto-list {
-  display: flex;
-  flex-direction: column;
-  gap: 12px;
-}
-
-.crypto-card {
-  background: var(--akka-surface);
-  border-radius: 16px;
-  padding: 20px;
-  border: 1px solid var(--akka-border);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
-  transition: all 0.2s ease;
-}
-
-.crypto-card:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
-}
-
-.crypto-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 16px;
-}
-
-.crypto-info {
+.portfolio-crypto {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -508,7 +401,7 @@ body {
   width: 40px;
   height: 40px;
   border-radius: 12px;
-  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-secondary) 100%);
+  background: linear-gradient(135deg, var(--bit2me-secondary) 0%, #FF8A65 100%);
   color: white;
   display: flex;
   align-items: center;
@@ -519,21 +412,242 @@ body {
 
 .crypto-icon.btc { background: linear-gradient(135deg, #F7931A 0%, #FF9500 100%); }
 .crypto-icon.eth { background: linear-gradient(135deg, #627EEA 0%, #8A92B2 100%); }
-.crypto-icon.bnb { background: linear-gradient(135deg, #F3BA2F 0%, #E8B923 100%); }
 .crypto-icon.ada { background: linear-gradient(135deg, #0033AD 0%, #1E3A8A 100%); }
+.crypto-icon.dot { background: linear-gradient(135deg, #E6007A 0%, #F5A2C0 100%); }
 .crypto-icon.sol { background: linear-gradient(135deg, #9945FF 0%, #14F195 100%); }
+.crypto-icon.matic { background: linear-gradient(135deg, #8247E5 0%, #A663FF 100%); }
+.crypto-icon.link { background: linear-gradient(135deg, #2A5ADA 0%, #4A7BFF 100%); }
+.crypto-icon.avax { background: linear-gradient(135deg, #E84142 0%, #FF6B6B 100%); }
 
-.crypto-name {
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--akka-text-primary);
-  margin: 0;
+.portfolio-details {
+  display: flex;
+  flex-direction: column;
 }
 
-.crypto-holding {
+.portfolio-crypto-name {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--bit2me-gray-900);
+}
+
+.portfolio-amount {
   font-size: 13px;
-  color: var(--akka-text-secondary);
-  margin: 0;
+  color: var(--bit2me-gray-500);
+}
+
+.portfolio-value {
+  text-align: right;
+}
+
+.value-eur {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--bit2me-gray-900);
+}
+
+.value-change {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.value-change.positive {
+  color: var(--bit2me-success);
+}
+
+/* Transaction Item */
+.transaction-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--bit2me-border);
+  transition: background-color 0.2s ease;
+}
+
+.transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-item:hover {
+  background: var(--bit2me-gray-50);
+}
+
+.transaction-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-right: 12px;
+  font-size: 16px;
+  font-weight: 700;
+}
+
+.transaction-icon.buy {
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--bit2me-success);
+}
+
+.transaction-icon.sell {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--bit2me-error);
+}
+
+.transaction-icon.deposit {
+  background: rgba(59, 130, 246, 0.1);
+  color: var(--bit2me-accent);
+}
+
+.transaction-icon.withdraw {
+  background: rgba(107, 114, 128, 0.1);
+  color: var(--bit2me-gray-600);
+}
+
+.transaction-details {
+  flex: 1;
+}
+
+.transaction-description {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--bit2me-gray-900);
+  margin-bottom: 2px;
+}
+
+.transaction-date {
+  font-size: 13px;
+  color: var(--bit2me-gray-500);
+}
+
+.transaction-amount {
+  text-align: right;
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--bit2me-gray-900);
+}
+
+.transaction-status {
+  font-size: 11px;
+  margin-top: 2px;
+}
+
+.transaction-status.completed {
+  color: var(--bit2me-success);
+}
+
+.transaction-status.pending {
+  color: var(--bit2me-warning);
+}
+
+/* Market Content */
+.market-content {
+  padding-top: 20px;
+}
+
+.market-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.market-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--bit2me-gray-900);
+}
+
+.market-stats {
+  text-align: right;
+  font-size: 14px;
+}
+
+.market-stats .positive {
+  color: var(--bit2me-success);
+  font-weight: 600;
+}
+
+.market-search {
+  margin-bottom: 24px;
+}
+
+.market-search input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--bit2me-border);
+  border-radius: 12px;
+  font-size: 16px;
+  background: var(--bit2me-surface);
+  transition: border-color 0.2s ease;
+}
+
+.market-search input:focus {
+  outline: none;
+  border-color: var(--bit2me-accent);
+}
+
+.crypto-list {
+  background: var(--bit2me-surface);
+  border-radius: 16px;
+  border: 1px solid var(--bit2me-border);
+  overflow: hidden;
+}
+
+.crypto-list-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--bit2me-border);
+  transition: background-color 0.2s ease;
+}
+
+.crypto-list-item:last-child {
+  border-bottom: none;
+}
+
+.crypto-list-item:hover {
+  background: var(--bit2me-gray-50);
+}
+
+.crypto-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.crypto-details {
+  display: flex;
+  flex-direction: column;
+}
+
+.crypto-name {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 2px;
+}
+
+.crypto-name .symbol {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--bit2me-gray-900);
+}
+
+.crypto-name .name {
+  font-size: 13px;
+  color: var(--bit2me-gray-500);
+}
+
+.crypto-price {
+  font-size: 14px;
+  color: var(--bit2me-gray-600);
+}
+
+.crypto-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
 }
 
 .price-change {
@@ -541,350 +655,432 @@ body {
   border-radius: 6px;
   font-size: 12px;
   font-weight: 600;
+  min-width: 60px;
+  text-align: center;
 }
 
 .price-change.positive {
   background: rgba(16, 185, 129, 0.1);
-  color: var(--akka-success);
+  color: var(--bit2me-success);
 }
 
 .price-change.negative {
   background: rgba(239, 68, 68, 0.1);
-  color: var(--akka-error);
+  color: var(--bit2me-error);
 }
 
-.crypto-values {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.crypto-price {
-  font-size: 14px;
-  color: var(--akka-text-secondary);
-}
-
-.crypto-value {
-  font-size: 18px;
-  font-weight: 700;
-  color: var(--akka-text-primary);
-}
-
-/* Swap Widget */
-.swap-content {
-  padding-bottom: 20px;
-}
-
-.swap-widget {
-  background: var(--akka-surface);
-  border-radius: 20px;
-  padding: 24px;
-  border: 1px solid var(--akka-border);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.swap-header {
-  text-align: center;
-  margin-bottom: 24px;
-}
-
-.swap-header h3 {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--akka-text-primary);
-  margin-bottom: 8px;
-}
-
-.swap-header p {
-  font-size: 14px;
-  color: var(--akka-text-secondary);
-}
-
-.swap-form {
-  display: flex;
-  flex-direction: column;
-  gap: 16px;
-}
-
-.swap-section {
-  position: relative;
-}
-
-.swap-section label {
-  display: block;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--akka-text-primary);
-  margin-bottom: 8px;
-}
-
-.swap-input-group {
-  display: flex;
-  background: var(--akka-gray-light);
-  border-radius: 12px;
-  overflow: hidden;
-  border: 2px solid transparent;
-  transition: border-color 0.2s ease;
-}
-
-.swap-input-group:focus-within {
-  border-color: var(--akka-primary);
-}
-
-.crypto-select {
-  flex: 0 0 80px;
-  background: transparent;
-  border: none;
-  padding: 16px 12px;
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--akka-text-primary);
-  outline: none;
-}
-
-.amount-input {
-  flex: 1;
-  background: transparent;
-  border: none;
-  padding: 16px 12px;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--akka-text-primary);
-  outline: none;
-  text-align: right;
-}
-
-.amount-display {
-  flex: 1;
-  padding: 16px 12px;
-  font-size: 16px;
-  font-weight: 600;
-  color: var(--akka-text-secondary);
-  text-align: right;
-  background: transparent;
-}
-
-.swap-button-container {
-  display: flex;
-  justify-content: center;
-  margin: -8px 0;
-}
-
-.swap-toggle {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: var(--akka-surface);
-  border: 2px solid var(--akka-border);
-  color: var(--akka-text-secondary);
-  cursor: pointer;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  transition: all 0.2s ease;
-  z-index: 1;
-}
-
-.swap-toggle:hover {
-  border-color: var(--akka-primary);
-  color: var(--akka-primary);
-  transform: rotate(180deg);
-}
-
-.swap-rate {
-  background: var(--akka-gray-light);
-  border-radius: 12px;
-  padding: 16px;
-}
-
-.rate-info {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-}
-
-.rate-info span {
-  font-size: 13px;
-  color: var(--akka-text-secondary);
-}
-
-.swap-execute-button {
-  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-secondary) 100%);
+.buy-btn {
+  background: linear-gradient(135deg, var(--bit2me-secondary) 0%, #FF8A65 100%);
   color: white;
   border: none;
-  border-radius: 12px;
-  padding: 16px;
-  font-size: 16px;
-  font-weight: 600;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  margin-top: 8px;
-}
-
-.swap-execute-button:hover {
-  transform: translateY(-1px);
-  box-shadow: 0 8px 25px rgba(23, 236, 229, 0.3);
-}
-
-/* Cards Content */
-.cards-content {
-  padding-bottom: 20px;
-}
-
-.virtual-card {
-  background: var(--akka-surface);
-  border-radius: 20px;
-  padding: 24px;
-  border: 1px solid var(--akka-border);
-  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
-}
-
-.card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 24px;
-}
-
-.card-header h3 {
-  font-size: 20px;
-  font-weight: 700;
-  color: var(--akka-text-primary);
-}
-
-.card-status {
-  padding: 4px 12px;
-  border-radius: 20px;
+  padding: 8px 16px;
+  border-radius: 8px;
   font-size: 12px;
   font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.card-status.active {
-  background: rgba(16, 185, 129, 0.1);
-  color: var(--akka-success);
+.buy-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
 }
 
-.card-visual {
-  margin-bottom: 24px;
-  display: flex;
-  justify-content: center;
+/* Portfolio Content */
+.portfolio-content {
+  padding-top: 20px;
 }
 
-.akka-card {
-  width: 320px;
-  height: 200px;
-  background: linear-gradient(135deg, var(--akka-navy) 0%, var(--akka-secondary) 100%);
-  border-radius: 16px;
-  padding: 24px;
-  color: white;
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  position: relative;
-  overflow: hidden;
-  box-shadow: 0 8px 32px rgba(0, 20, 89, 0.3);
-}
-
-.akka-card::before {
-  content: '';
-  position: absolute;
-  top: 0;
-  right: 0;
-  width: 120px;
-  height: 120px;
-  background: linear-gradient(135deg, rgba(23, 236, 229, 0.2) 0%, transparent 70%);
-  border-radius: 50%;
-  transform: translate(30px, -30px);
-}
-
-.card-top {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-}
-
-.card-logo {
-  font-size: 20px;
-  font-weight: 700;
-  letter-spacing: -0.5px;
-}
-
-.card-type {
-  font-size: 16px;
-  font-weight: 700;
-  opacity: 0.8;
-}
-
-.card-number {
-  font-size: 18px;
-  font-weight: 600;
-  letter-spacing: 2px;
-  text-align: center;
-  margin: 20px 0;
-}
-
-.card-bottom {
+.portfolio-header {
   display: flex;
   justify-content: space-between;
   align-items: flex-end;
+  margin-bottom: 24px;
 }
 
-.card-holder {
+.portfolio-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--bit2me-gray-900);
+}
+
+.portfolio-total {
+  text-align: right;
+}
+
+.portfolio-total span:first-child {
+  display: block;
   font-size: 12px;
-  font-weight: 600;
-  opacity: 0.8;
+  color: var(--bit2me-gray-500);
+  margin-bottom: 4px;
 }
 
-.card-expiry {
-  font-size: 14px;
-  font-weight: 600;
+.total-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--bit2me-gray-900);
 }
 
-.card-actions {
+.portfolio-chart-placeholder {
+  background: var(--bit2me-surface);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--bit2me-border);
+  margin-bottom: 24px;
+}
+
+.chart-info {
   display: flex;
-  gap: 12px;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
 }
 
-.card-action-btn {
-  flex: 1;
-  padding: 12px;
-  border-radius: 12px;
+.chart-info span:first-child {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--bit2me-gray-900);
+}
+
+.chart-period {
+  font-size: 12px;
+  color: var(--bit2me-gray-500);
+  background: var(--bit2me-gray-100);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.chart-visual {
+  height: 120px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.chart-svg {
+  width: 100%;
+  height: 80px;
+}
+
+.portfolio-breakdown h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--bit2me-gray-900);
+  margin-bottom: 16px;
+}
+
+/* History Content */
+.history-content {
+  padding-top: 20px;
+}
+
+.history-header {
+  margin-bottom: 24px;
+}
+
+.history-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--bit2me-gray-900);
+  margin-bottom: 16px;
+}
+
+.history-filters {
+  display: flex;
+  gap: 8px;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border: 1px solid var(--bit2me-border);
+  border-radius: 20px;
+  background: var(--bit2me-surface);
+  color: var(--bit2me-gray-600);
   font-size: 14px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.filter-btn.active {
+  background: var(--bit2me-accent);
+  color: white;
+  border-color: var(--bit2me-accent);
+}
+
+/* Profile Content */
+.profile-content {
+  padding-top: 20px;
+}
+
+.profile-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.profile-avatar-large {
+  width: 80px;
+  height: 80px;
+  border-radius: 20px;
+  background: linear-gradient(135deg, var(--bit2me-primary) 0%, var(--bit2me-accent) 100%);
+  color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 32px;
+  margin: 0 auto 16px;
+}
+
+.profile-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--bit2me-gray-900);
+  margin-bottom: 4px;
+}
+
+.profile-header p {
+  font-size: 16px;
+  color: var(--bit2me-gray-500);
+  margin-bottom: 12px;
+}
+
+.verification-status {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  background: rgba(16, 185, 129, 0.1);
+  color: var(--bit2me-success);
+  padding: 8px 16px;
+  border-radius: 20px;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.profile-menu {
+  background: var(--bit2me-surface);
+  border-radius: 16px;
+  border: 1px solid var(--bit2me-border);
+  overflow: hidden;
+  margin-bottom: 24px;
+}
+
+.menu-item {
+  display: flex;
+  align-items: center;
+  padding: 16px 20px;
+  border-bottom: 1px solid var(--bit2me-border);
+  cursor: pointer;
+  transition: background-color 0.2s ease;
+}
+
+.menu-item:last-child {
+  border-bottom: none;
+}
+
+.menu-item:hover {
+  background: var(--bit2me-gray-50);
+}
+
+.menu-icon {
+  margin-right: 12px;
+  font-size: 16px;
+}
+
+.menu-item span:nth-child(2) {
+  flex: 1;
+  font-size: 16px;
+  font-weight: 500;
+  color: var(--bit2me-gray-900);
+}
+
+.menu-arrow {
+  color: var(--bit2me-gray-400);
+  font-size: 18px;
+}
+
+.logout-btn {
+  width: 100%;
+  background: none;
+  border: 2px solid var(--bit2me-error);
+  color: var(--bit2me-error);
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 16px;
   font-weight: 600;
   cursor: pointer;
   transition: all 0.2s ease;
 }
 
-.card-action-btn.primary {
-  background: var(--akka-primary);
+.logout-btn:hover {
+  background: var(--bit2me-error);
+  color: white;
+}
+
+/* Buy/Sell Modal */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+  padding: 20px;
+}
+
+.buy-sell-modal {
+  background: var(--bit2me-surface);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 400px;
+  max-height: 80vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  border-bottom: 1px solid var(--bit2me-border);
+}
+
+.modal-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--bit2me-gray-900);
+}
+
+.close-btn {
+  width: 32px;
+  height: 32px;
+  border: none;
+  border-radius: 8px;
+  background: var(--bit2me-gray-100);
+  color: var(--bit2me-gray-600);
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.close-btn:hover {
+  background: var(--bit2me-gray-200);
+}
+
+.modal-content {
+  padding: 20px;
+}
+
+.crypto-info-modal {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 24px;
+  padding: 16px;
+  background: var(--bit2me-gray-50);
+  border-radius: 12px;
+}
+
+.crypto-name-modal {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--bit2me-gray-900);
+}
+
+.crypto-price-modal {
+  font-size: 14px;
+  color: var(--bit2me-gray-600);
+}
+
+.input-group {
+  margin-bottom: 16px;
+}
+
+.input-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--bit2me-gray-900);
+  margin-bottom: 8px;
+}
+
+.input-group input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--bit2me-border);
+  border-radius: 12px;
+  font-size: 16px;
+  background: var(--bit2me-surface);
+  transition: border-color 0.2s ease;
+}
+
+.input-group input:focus {
+  outline: none;
+  border-color: var(--bit2me-accent);
+}
+
+.transaction-summary {
+  background: var(--bit2me-gray-50);
+  border-radius: 12px;
+  padding: 16px;
+  margin: 24px 0;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+  font-size: 14px;
+}
+
+.summary-row:last-child {
+  margin-bottom: 0;
+}
+
+.summary-row.total {
+  font-weight: 700;
+  font-size: 16px;
+  color: var(--bit2me-gray-900);
+  border-top: 1px solid var(--bit2me-border);
+  padding-top: 8px;
+  margin-top: 8px;
+}
+
+.confirm-buy-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--bit2me-secondary) 0%, #FF8A65 100%);
   color: white;
   border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
 }
 
-.card-action-btn.secondary {
-  background: var(--akka-gray-light);
-  color: var(--akka-text-primary);
-  border: 1px solid var(--akka-border);
-}
-
-.card-action-btn:hover {
+.confirm-buy-btn:hover {
   transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(255, 107, 53, 0.3);
 }
 
 /* Bottom Navigation */
-.bottom-nav {
+.bit2me-nav {
   position: fixed;
   bottom: 0;
   left: 50%;
   transform: translateX(-50%);
   max-width: 430px;
   width: 100%;
-  background: var(--akka-surface);
-  border-top: 1px solid var(--akka-border);
+  background: var(--bit2me-surface);
+  border-top: 1px solid var(--bit2me-border);
   display: flex;
   justify-content: space-around;
   align-items: center;
-  padding: 12px 24px 20px;
+  padding: 12px 20px 20px;
   z-index: 100;
 }
 
@@ -896,20 +1092,20 @@ body {
   background: none;
   border: none;
   cursor: pointer;
-  padding: 8px 16px;
+  padding: 8px 12px;
   border-radius: 12px;
   transition: all 0.2s ease;
-  color: var(--akka-text-tertiary);
+  color: var(--bit2me-gray-500);
   min-width: 60px;
 }
 
 .nav-item:hover {
-  background: var(--akka-gray-light);
+  background: var(--bit2me-gray-100);
 }
 
 .nav-item.active {
-  color: var(--akka-primary);
-  background: rgba(23, 236, 229, 0.1);
+  color: var(--bit2me-accent);
+  background: rgba(59, 130, 246, 0.1);
 }
 
 .nav-item span {
@@ -919,34 +1115,28 @@ body {
 
 /* Responsive Design */
 @media (max-width: 430px) {
-  .akka-app {
+  .bit2me-app {
     max-width: 100%;
   }
   
-  .app-main {
-    padding: 20px;
+  .bit2me-main {
+    padding: 0 16px 20px;
   }
   
-  .akka-card {
-    width: 100%;
-    max-width: 300px;
+  .header-content {
+    padding: 16px;
   }
   
-  .accounts-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
-  }
-  
-  .actions-grid {
-    grid-template-columns: repeat(4, 1fr);
-    gap: 12px;
+  .home-content {
+    padding-top: 16px;
   }
 }
 
 @media (min-width: 431px) {
-  .akka-app {
-    border-left: 1px solid var(--akka-border);
-    border-right: 1px solid var(--akka-border);
+  .bit2me-app {
+    border-left: 1px solid var(--bit2me-border);
+    border-right: 1px solid var(--bit2me-border);
+    box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
   }
 }
 
@@ -956,16 +1146,16 @@ body {
 }
 
 ::-webkit-scrollbar-track {
-  background: var(--akka-gray-light);
+  background: var(--bit2me-gray-100);
 }
 
 ::-webkit-scrollbar-thumb {
-  background: var(--akka-gray-steel);
+  background: var(--bit2me-gray-400);
   border-radius: 2px;
 }
 
 ::-webkit-scrollbar-thumb:hover {
-  background: var(--akka-gray-space);
+  background: var(--bit2me-gray-500);
 }
 
 /* Accessibility */
@@ -977,25 +1167,13 @@ body {
   }
 }
 
-/* Focus States */
 button:focus-visible,
-input:focus-visible,
-select:focus-visible {
-  outline: 2px solid var(--akka-primary);
+input:focus-visible {
+  outline: 2px solid var(--bit2me-accent);
   outline-offset: 2px;
 }
 
-/* Selection */
 ::selection {
-  background: rgba(23, 236, 229, 0.2);
-  color: var(--akka-navy);
-}
-
-/* Print Styles */
-@media print {
-  .bottom-nav,
-  .header-actions,
-  .quick-actions {
-    display: none !important;
-  }
+  background: rgba(59, 130, 246, 0.2);
+  color: var(--bit2me-primary);
 }

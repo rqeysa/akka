@@ -10,15 +10,25 @@ const DEMO_USER = {
   id: "demo-user-123",
   name: "Alex Thompson",
   email: "alex@akka.com",
-  eur_balance: 1250.0,
-  try_balance: 25000.0,
+  eur_balance: 2450.75,
+  try_balance: 35750.20,
   crypto_portfolio: {
     BTC: 0.05,
     ETH: 1.2,
     BNB: 25.0,
-    ADA: 1000.0
+    ADA: 1000.0,
+    SOL: 15.5
   }
 };
+
+// Recent transactions mock data
+const RECENT_TRANSACTIONS = [
+  { id: 1, type: 'crypto_buy', description: 'Bitcoin Purchase', amount: -500.00, currency: 'EUR', date: '2025-01-21', icon: '₿' },
+  { id: 2, type: 'transfer_out', description: 'Transfer to Sarah', amount: -150.00, currency: 'EUR', date: '2025-01-21', icon: '↗' },
+  { id: 3, type: 'card_payment', description: 'Starbucks Coffee', amount: -4.85, currency: 'EUR', date: '2025-01-20', icon: '☕' },
+  { id: 4, type: 'crypto_swap', description: 'ETH → BTC', amount: 0, currency: 'SWAP', date: '2025-01-20', icon: '🔄' },
+  { id: 5, type: 'top_up', description: 'Top up from Bank', amount: +1000.00, currency: 'EUR', date: '2025-01-19', icon: '+' }
+];
 
 const CryptoCard = ({ crypto }) => {
   const isPositive = crypto.change_24h >= 0;

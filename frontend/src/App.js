@@ -1,11 +1,22 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, createContext, useContext } from 'react';
 import './App.css';
 import axios from 'axios';
 
 const BACKEND_URL = process.env.REACT_APP_BACKEND_URL;
 const API = `${BACKEND_URL}/api`;
 
-// Mock user data for Akka clone
+// Authentication Context
+const AuthContext = createContext();
+
+const useAuth = () => {
+  const context = useContext(AuthContext);
+  if (!context) {
+    throw new Error('useAuth must be used within an AuthProvider');
+  }
+  return context;
+};
+
+// Mock user data for demo
 const DEMO_USER = {
   id: "demo-user-123",
   name: "Carlos Martinez",
@@ -32,6 +43,248 @@ const RECENT_TRANSACTIONS = [
 
 const FEATURED_CRYPTOS = ['BTC', 'ETH', 'ADA', 'DOT', 'SOL', 'MATIC', 'LINK', 'AVAX'];
 
+// Login Page Component
+const LoginPage = ({ onLogin, onSwitchToSignup }) => {
+  const [email, setEmail] = useState('');
+  const [password, setPassword] = useState('');
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleLogin = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      if (email && password) {
+        onLogin({
+          email,
+          name: email.split('@')[0],
+          id: 'user-' + Date.now()
+        });
+      } else {
+        setError('Please fill in all fields');
+      }
+    } catch (err) {
+      setError('Login failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="auth-container">
+      <div className="auth-content">
+        {/* Logo */}
+        <div className="auth-logo">
+          <div className="logo-icon"></div>
+          <h1>Akka</h1>
+        </div>
+
+        {/* Welcome Text */}
+        <div className="auth-header">
+          <h2>Welcome back</h2>
+          <p>Sign in to your Akka account</p>
+        </div>
+
+        {/* Login Form */}
+        <form onSubmit={handleLogin} className="auth-form">
+          {error && <div className="error-message">{error}</div>}
+          
+          <div className="input-group">
+            <label>Email</label>
+            <input
+              type="email"
+              value={email}
+              onChange={(e) => setEmail(e.target.value)}
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Password</label>
+            <input
+              type="password"
+              value={password}
+              onChange={(e) => setPassword(e.target.value)}
+              placeholder="Enter your password"
+              required
+            />
+          </div>
+
+          <button type="submit" className="auth-submit-btn" disabled={loading}>
+            {loading ? 'Signing in...' : 'Sign In'}
+          </button>
+        </form>
+
+        {/* Forgot Password */}
+        <button className="forgot-password-btn">
+          Forgot password?
+        </button>
+
+        {/* Switch to Signup */}
+        <div className="auth-switch">
+          <span>Don't have an account? </span>
+          <button onClick={onSwitchToSignup} className="switch-btn">
+            Sign up
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Signup Page Component
+const SignupPage = ({ onSignup, onSwitchToLogin }) => {
+  const [formData, setFormData] = useState({
+    name: '',
+    email: '',
+    password: '',
+    confirmPassword: ''
+  });
+  const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleChange = (e) => {
+    setFormData({
+      ...formData,
+      [e.target.name]: e.target.value
+    });
+  };
+
+  const handleSignup = async (e) => {
+    e.preventDefault();
+    setLoading(true);
+    setError('');
+
+    try {
+      // Validate form
+      if (!formData.name || !formData.email || !formData.password) {
+        setError('Please fill in all fields');
+        return;
+      }
+
+      if (formData.password !== formData.confirmPassword) {
+        setError('Passwords do not match');
+        return;
+      }
+
+      if (formData.password.length < 6) {
+        setError('Password must be at least 6 characters');
+        return;
+      }
+
+      // Simulate API call
+      await new Promise(resolve => setTimeout(resolve, 1000));
+      
+      onSignup({
+        email: formData.email,
+        name: formData.name,
+        id: 'user-' + Date.now()
+      });
+    } catch (err) {
+      setError('Signup failed. Please try again.');
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  return (
+    <div className="auth-container">
+      <div className="auth-content">
+        {/* Logo */}
+        <div className="auth-logo">
+          <div className="logo-icon"></div>
+          <h1>Akka</h1>
+        </div>
+
+        {/* Welcome Text */}
+        <div className="auth-header">
+          <h2>Create account</h2>
+          <p>Join Akka and start trading crypto</p>
+        </div>
+
+        {/* Signup Form */}
+        <form onSubmit={handleSignup} className="auth-form">
+          {error && <div className="error-message">{error}</div>}
+          
+          <div className="input-group">
+            <label>Full Name</label>
+            <input
+              type="text"
+              name="name"
+              value={formData.name}
+              onChange={handleChange}
+              placeholder="Enter your full name"
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Email</label>
+            <input
+              type="email"
+              name="email"
+              value={formData.email}
+              onChange={handleChange}
+              placeholder="Enter your email"
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Password</label>
+            <input
+              type="password"
+              name="password"
+              value={formData.password}
+              onChange={handleChange}
+              placeholder="Create a password"
+              required
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Confirm Password</label>
+            <input
+              type="password"
+              name="confirmPassword"
+              value={formData.confirmPassword}
+              onChange={handleChange}
+              placeholder="Confirm your password"
+              required
+            />
+          </div>
+
+          <button type="submit" className="auth-submit-btn" disabled={loading}>
+            {loading ? 'Creating account...' : 'Create Account'}
+          </button>
+        </form>
+
+        {/* Terms */}
+        <p className="auth-terms">
+          By creating an account, you agree to our{' '}
+          <button className="terms-link">Terms of Service</button> and{' '}
+          <button className="terms-link">Privacy Policy</button>
+        </p>
+
+        {/* Switch to Login */}
+        <div className="auth-switch">
+          <span>Already have an account? </span>
+          <button onClick={onSwitchToLogin} className="switch-btn">
+            Sign in
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Main App Components (keeping existing ones)
 const CryptoListItem = ({ crypto, onBuy }) => {
   const isPositive = crypto.change_24h >= 0;
   
@@ -198,10 +451,11 @@ const BuySellModal = ({ crypto, onClose, onConfirm }) => {
   );
 };
 
-function App() {
+// Main App Component
+const MainApp = () => {
+  const { user, logout } = useAuth();
   const [cryptoPrices, setCryptoPrices] = useState({});
   const [loading, setLoading] = useState(true);
-  const [user] = useState(DEMO_USER);
   const [activeTab, setActiveTab] = useState('market');
   const [showBuyModal, setShowBuyModal] = useState(false);
   const [selectedCrypto, setSelectedCrypto] = useState(null);
@@ -255,6 +509,10 @@ function App() {
     alert(`Purchase confirmed: ${amount} ${crypto.symbol} for €${eurAmount}`);
     setShowBuyModal(false);
     setSelectedCrypto(null);
+  };
+
+  const handleLogout = () => {
+    logout();
   };
 
   if (loading) {
@@ -311,13 +569,13 @@ function App() {
               <div className="balance-cards">
                 <div className="balance-card main">
                   <div className="balance-label">Total portfolio value</div>
-                  <div className="balance-amount">€{user.total_portfolio.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
+                  <div className="balance-amount">€{DEMO_USER.total_portfolio.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
                   <div className="balance-change positive">+€245.30 (+2.87%)</div>
                 </div>
                 
                 <div className="balance-card secondary">
                   <div className="balance-label">EUR Balance</div>
-                  <div className="balance-amount">€{user.balance_eur.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
+                  <div className="balance-amount">€{DEMO_USER.balance_eur.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
                 </div>
               </div>
             </div>
@@ -349,7 +607,7 @@ function App() {
                 <button className="see-all-btn">View all</button>
               </div>
               <div className="portfolio-list">
-                {Object.entries(user.crypto_portfolio).map(([crypto, data]) => (
+                {Object.entries(DEMO_USER.crypto_portfolio).map(([crypto, data]) => (
                   <PortfolioItem key={crypto} crypto={crypto} data={data} />
                 ))}
               </div>
@@ -406,7 +664,7 @@ function App() {
               <h2>Portfolio</h2>
               <div className="portfolio-total">
                 <span>Total value</span>
-                <span className="total-value">€{user.total_portfolio.toLocaleString()}</span>
+                <span className="total-value">€{DEMO_USER.total_portfolio.toLocaleString()}</span>
               </div>
             </div>
 
@@ -417,7 +675,7 @@ function App() {
               </div>
               <div className="chart-visual">
                 <svg viewBox="0 0 300 100" className="chart-svg">
-                  <path d="M0,60 Q75,20 150,40 T300,30" stroke="#FF6B35" strokeWidth="2" fill="none"/>
+                  <path d="M0,60 Q75,20 150,40 T300,30" stroke="#17ECE5" strokeWidth="2" fill="none"/>
                 </svg>
               </div>
             </div>
@@ -425,7 +683,7 @@ function App() {
             <div className="portfolio-breakdown">
               <h3>Asset breakdown</h3>
               <div className="assets-list">
-                {Object.entries(user.crypto_portfolio).map(([crypto, data]) => (
+                {Object.entries(DEMO_USER.crypto_portfolio).map(([crypto, data]) => (
                   <PortfolioItem key={crypto} crypto={crypto} data={data} />
                 ))}
               </div>
@@ -499,7 +757,7 @@ function App() {
               </div>
             </div>
 
-            <button className="logout-btn">
+            <button className="logout-btn" onClick={handleLogout}>
               Sign out
             </button>
           </div>
@@ -571,6 +829,100 @@ function App() {
       )}
     </div>
   );
+};
+
+// Auth Provider Component
+const AuthProvider = ({ children }) => {
+  const [user, setUser] = useState(null);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Check for stored user session
+    const storedUser = localStorage.getItem('akka_user');
+    if (storedUser) {
+      setUser(JSON.parse(storedUser));
+    }
+    setLoading(false);
+  }, []);
+
+  const login = (userData) => {
+    setUser(userData);
+    localStorage.setItem('akka_user', JSON.stringify(userData));
+  };
+
+  const signup = (userData) => {
+    setUser(userData);
+    localStorage.setItem('akka_user', JSON.stringify(userData));
+  };
+
+  const logout = () => {
+    setUser(null);
+    localStorage.removeItem('akka_user');
+  };
+
+  const value = {
+    user,
+    login,
+    signup,
+    logout,
+    loading
+  };
+
+  return (
+    <AuthContext.Provider value={value}>
+      {children}
+    </AuthContext.Provider>
+  );
+};
+
+// Main App Component
+function App() {
+  const [authMode, setAuthMode] = useState('login'); // 'login' or 'signup'
+
+  return (
+    <AuthProvider>
+      <AuthWrapper authMode={authMode} setAuthMode={setAuthMode} />
+    </AuthProvider>
+  );
 }
+
+// Auth Wrapper Component
+const AuthWrapper = ({ authMode, setAuthMode }) => {
+  const { user, login, signup, loading } = useAuth();
+
+  if (loading) {
+    return (
+      <div className="akka-loading">
+        <div className="akka-logo">
+          <div className="logo-icon"></div>
+          <span>Akka</span>
+        </div>
+        <div className="loading-spinner"></div>
+      </div>
+    );
+  }
+
+  // If user is logged in, show main app
+  if (user) {
+    return <MainApp />;
+  }
+
+  // If not logged in, show auth pages
+  if (authMode === 'login') {
+    return (
+      <LoginPage
+        onLogin={login}
+        onSwitchToSignup={() => setAuthMode('signup')}
+      />
+    );
+  }
+
+  return (
+    <SignupPage
+      onSignup={signup}
+      onSwitchToLogin={() => setAuthMode('login')}
+    />
+  );
+};
 
 export default App;

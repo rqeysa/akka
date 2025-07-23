@@ -46,6 +46,191 @@ body {
   -moz-osx-font-smoothing: grayscale;
 }
 
+/* Authentication Styles */
+.auth-container {
+  min-height: 100vh;
+  background: var(--akka-background);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.auth-content {
+  width: 100%;
+  max-width: 400px;
+  background: var(--akka-surface);
+  border-radius: 24px;
+  padding: 40px 32px;
+  border: 1px solid var(--akka-border);
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.3);
+}
+
+.auth-logo {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-bottom: 32px;
+}
+
+.auth-logo h1 {
+  font-size: 32px;
+  font-weight: 700;
+  color: var(--akka-gray-900);
+  margin-top: 16px;
+  letter-spacing: -0.5px;
+}
+
+.auth-header {
+  text-align: center;
+  margin-bottom: 32px;
+}
+
+.auth-header h2 {
+  font-size: 24px;
+  font-weight: 700;
+  color: var(--akka-gray-900);
+  margin-bottom: 8px;
+}
+
+.auth-header p {
+  font-size: 16px;
+  color: var(--akka-gray-500);
+}
+
+.auth-form {
+  margin-bottom: 24px;
+}
+
+.auth-form .input-group {
+  margin-bottom: 20px;
+}
+
+.auth-form .input-group label {
+  display: block;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--akka-gray-900);
+  margin-bottom: 8px;
+}
+
+.auth-form .input-group input {
+  width: 100%;
+  padding: 16px;
+  border: 2px solid var(--akka-border);
+  border-radius: 12px;
+  font-size: 16px;
+  background: var(--akka-background);
+  color: var(--akka-gray-900);
+  transition: border-color 0.2s ease;
+}
+
+.auth-form .input-group input:focus {
+  outline: none;
+  border-color: var(--akka-primary);
+  box-shadow: 0 0 0 3px rgba(23, 236, 229, 0.1);
+}
+
+.auth-form .input-group input::placeholder {
+  color: var(--akka-gray-400);
+}
+
+.error-message {
+  background: rgba(239, 68, 68, 0.1);
+  color: var(--akka-error);
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  margin-bottom: 20px;
+  border: 1px solid rgba(239, 68, 68, 0.2);
+}
+
+.auth-submit-btn {
+  width: 100%;
+  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-secondary) 100%);
+  color: white;
+  border: none;
+  padding: 16px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 20px;
+}
+
+.auth-submit-btn:hover:not(:disabled) {
+  transform: translateY(-1px);
+  box-shadow: 0 8px 25px rgba(23, 236, 229, 0.3);
+}
+
+.auth-submit-btn:disabled {
+  opacity: 0.7;
+  cursor: not-allowed;
+}
+
+.forgot-password-btn {
+  background: none;
+  border: none;
+  color: var(--akka-primary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 16px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+  display: block;
+  margin: 0 auto 24px;
+}
+
+.forgot-password-btn:hover {
+  background: rgba(23, 236, 229, 0.1);
+}
+
+.auth-switch {
+  text-align: center;
+  color: var(--akka-gray-500);
+  font-size: 14px;
+}
+
+.switch-btn {
+  background: none;
+  border: none;
+  color: var(--akka-primary);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 4px 8px;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+}
+
+.switch-btn:hover {
+  background: rgba(23, 236, 229, 0.1);
+}
+
+.auth-terms {
+  font-size: 12px;
+  color: var(--akka-gray-400);
+  text-align: center;
+  margin-bottom: 24px;
+  line-height: 1.5;
+}
+
+.terms-link {
+  background: none;
+  border: none;
+  color: var(--akka-primary);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  text-decoration: underline;
+}
+
+.terms-link:hover {
+  color: var(--akka-secondary);
+}
+
 /* Loading Screen */
 .akka-loading {
   position: fixed;
@@ -591,12 +776,17 @@ body {
   border-radius: 12px;
   font-size: 16px;
   background: var(--akka-surface);
+  color: var(--akka-gray-900);
   transition: border-color 0.2s ease;
 }
 
 .market-search input:focus {
   outline: none;
   border-color: var(--akka-accent);
+}
+
+.market-search input::placeholder {
+  color: var(--akka-gray-400);
 }
 
 .crypto-list {
@@ -1026,12 +1216,17 @@ body {
   border-radius: 12px;
   font-size: 16px;
   background: var(--akka-surface);
+  color: var(--akka-gray-900);
   transition: border-color 0.2s ease;
 }
 
 .input-group input:focus {
   outline: none;
   border-color: var(--akka-accent);
+}
+
+.input-group input::placeholder {
+  color: var(--akka-gray-400);
 }
 
 .transaction-summary {
@@ -1142,6 +1337,10 @@ body {
   
   .home-content {
     padding-top: 16px;
+  }
+
+  .auth-content {
+    padding: 32px 24px;
   }
 }
 

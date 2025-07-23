@@ -303,15 +303,18 @@ frontend:
 
   - task: "Quick Action Buttons"
     implemented: true
-    working: "NA"
+    working: false
     file: "frontend/src/App.js"
-    stuck_count: 0
-    priority: "medium"
+    stuck_count: 1
+    priority: "high"
     needs_retesting: true
     status_history:
         - working: "NA"
           agent: "testing"
           comment: "Ready for testing - Buy, Sell, Send, Receive buttons on Home tab"
+        - working: false
+          agent: "user"
+          comment: "USER FEEDBACK: Buy button works (takes to different page), but Sell, Send, and Receive buttons don't work - need to fix these three buttons"
 
   - task: "Portfolio Display"
     implemented: true

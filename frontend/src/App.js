@@ -1147,6 +1147,7 @@ const MainApp = () => {
   const [historyFilter, setHistoryFilter] = useState('all'); // all, buys, sells, sends, receives
   const [showCardsSection, setShowCardsSection] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
+  const [cryptoSearchQuery, setCryptoSearchQuery] = useState('');
 
   useEffect(() => {
     fetchCryptoPrices();

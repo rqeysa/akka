@@ -2101,6 +2101,76 @@ input:checked + .slider:before {
   color: white;
 }
 
+/* Transaction Icons for New Types */
+.transaction-icon.send {
+  background: var(--akka-warning);
+  color: white;
+}
+
+.transaction-icon.receive {
+  background: var(--akka-success);
+  color: white;
+}
+
+/* History Filters Update */
+.history-filters {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding: 0 0 4px 0;
+}
+
+.filter-btn {
+  padding: 8px 16px;
+  border: 2px solid var(--akka-border);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--akka-gray-500);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.filter-btn.active {
+  background: var(--akka-accent);
+  color: white;
+  border-color: var(--akka-accent);
+}
+
+.filter-btn:hover:not(.active) {
+  border-color: var(--akka-accent);
+  color: var(--akka-accent);
+}
+
+/* Transaction Amount Colors */
+.transaction-amount {
+  text-align: right;
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.transaction-item .transaction-amount:has-text("-") {
+  color: var(--akka-error);
+}
+
+.transaction-item .transaction-amount:has-text("+") {
+  color: var(--akka-success);
+}
+
+/* Notification Button Hover */
+.notification-btn {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.notification-btn:hover {
+  transform: scale(1.05);
+  opacity: 0.8;
+}
+
 /* Bottom Navigation */
 .akka-nav {
   position: fixed;

@@ -38,7 +38,14 @@ const RECENT_TRANSACTIONS = [
   { id: 2, type: 'sell', crypto: 'ETH', amount: 0.5, eur_amount: 1670.00, date: '2025-01-22 12:15', status: 'completed' },
   { id: 3, type: 'deposit', crypto: 'EUR', amount: 500.00, date: '2025-01-21 18:45', status: 'completed' },
   { id: 4, type: 'buy', crypto: 'ADA', amount: 500, eur_amount: 575.00, date: '2025-01-21 16:20', status: 'pending' },
-  { id: 5, type: 'withdraw', crypto: 'BTC', amount: 0.01, date: '2025-01-21 10:30', status: 'completed' }
+  { id: 5, type: 'send', crypto: 'BTC', amount: 0.01, eur_amount: 1185.30, recipient: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa', date: '2025-01-21 10:30', status: 'completed' },
+  { id: 6, type: 'receive', crypto: 'ETH', amount: 1.2, eur_amount: 4020.00, sender: 'John Doe', date: '2025-01-20 22:45', status: 'completed' },
+  { id: 7, type: 'send', crypto: 'EUR', amount: 250.00, recipient: 'Maria Garcia', recipient_iban: 'ES12 1234 5678 9012 3456 7890', date: '2025-01-20 16:30', status: 'completed' },
+  { id: 8, type: 'buy', crypto: 'SOL', amount: 15, eur_amount: 2730.00, date: '2025-01-20 11:20', status: 'completed' },
+  { id: 9, type: 'receive', crypto: 'USD', amount: 800.00, sender: 'David Smith', sender_iban: 'DE89 3704 0044 0532 0130 00', date: '2025-01-19 19:15', status: 'completed' },
+  { id: 10, type: 'sell', crypto: 'ADA', amount: 200, eur_amount: 230.00, date: '2025-01-19 14:10', status: 'completed' },
+  { id: 11, type: 'send', crypto: 'DOT', amount: 25, eur_amount: 175.25, recipient: '13UVJyLnbVp77Z2t6rN2fD3UZEYfUq', date: '2025-01-19 09:05', status: 'completed' },
+  { id: 12, type: 'receive', crypto: 'TRY', amount: 1500.00, sender: 'Ahmed Hassan', sender_iban: 'TR33 0006 1005 1978 6457 8413 26', date: '2025-01-18 20:30', status: 'completed' }
 ];
 
 const FEATURED_CRYPTOS = ['BTC', 'ETH', 'ADA', 'DOT', 'SOL', 'MATIC', 'LINK', 'AVAX'];

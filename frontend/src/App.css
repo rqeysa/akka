@@ -153,7 +153,7 @@ body {
 .akka-logo-header span {
   font-size: 20px;
   font-weight: 700;
-  color: var(--akka-primary);
+  color: var(--akka-gray-900);
 }
 
 .header-actions {

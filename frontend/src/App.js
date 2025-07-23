@@ -276,7 +276,7 @@ function App() {
         <div className="header-content">
           <div className="logo-section">
             <div className="akka-logo-header">
-              <div className="logo-icon">A</div>
+              <div className="logo-icon"></div>
               <span>Akka</span>
             </div>
           </div>

@@ -261,7 +261,7 @@ function App() {
     return (
       <div className="akka-loading">
         <div className="akka-logo">
-          <div className="logo-icon">A</div>
+          <div className="logo-icon"></div>
           <span>Akka</span>
         </div>
         <div className="loading-spinner"></div>

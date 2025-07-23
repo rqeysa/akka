@@ -961,6 +961,21 @@ const MainApp = () => {
     logout();
   };
 
+  const getFilteredTransactions = () => {
+    switch(historyFilter) {
+      case 'buys':
+        return RECENT_TRANSACTIONS.filter(t => t.type === 'buy');
+      case 'sells':
+        return RECENT_TRANSACTIONS.filter(t => t.type === 'sell');
+      case 'sends':
+        return RECENT_TRANSACTIONS.filter(t => t.type === 'send');
+      case 'receives':
+        return RECENT_TRANSACTIONS.filter(t => t.type === 'receive');
+      default:
+        return RECENT_TRANSACTIONS;
+    }
+  };
+
   if (loading) {
     return (
       <div className="akka-loading">

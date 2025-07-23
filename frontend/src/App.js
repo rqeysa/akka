@@ -1157,14 +1157,41 @@ const MainApp = () => {
             <div className="history-header">
               <h2>History</h2>
               <div className="history-filters">
-                <button className="filter-btn active">All</button>
-                <button className="filter-btn">Buys</button>
-                <button className="filter-btn">Sells</button>
+                <button 
+                  className={`filter-btn ${historyFilter === 'all' ? 'active' : ''}`}
+                  onClick={() => setHistoryFilter('all')}
+                >
+                  All
+                </button>
+                <button 
+                  className={`filter-btn ${historyFilter === 'buys' ? 'active' : ''}`}
+                  onClick={() => setHistoryFilter('buys')}
+                >
+                  Buys
+                </button>
+                <button 
+                  className={`filter-btn ${historyFilter === 'sells' ? 'active' : ''}`}
+                  onClick={() => setHistoryFilter('sells')}
+                >
+                  Sells
+                </button>
+                <button 
+                  className={`filter-btn ${historyFilter === 'sends' ? 'active' : ''}`}
+                  onClick={() => setHistoryFilter('sends')}
+                >
+                  Sends
+                </button>
+                <button 
+                  className={`filter-btn ${historyFilter === 'receives' ? 'active' : ''}`}
+                  onClick={() => setHistoryFilter('receives')}
+                >
+                  Receives
+                </button>
               </div>
             </div>
 
             <div className="transactions-full-list">
-              {RECENT_TRANSACTIONS.map(transaction => (
+              {getFilteredTransactions().map(transaction => (
                 <TransactionItem key={transaction.id} transaction={transaction} />
               ))}
             </div>

@@ -1411,11 +1411,16 @@ const MainApp = () => {
             </div>
 
             <div className="market-search">
-              <input type="text" placeholder="Search cryptocurrency..." />
+              <input 
+                type="text" 
+                placeholder="Search cryptocurrency..." 
+                value={cryptoSearchQuery}
+                onChange={(e) => setCryptoSearchQuery(e.target.value)}
+              />
             </div>
 
             <div className="crypto-list">
-              {FEATURED_CRYPTOS.map(symbol => {
+              {getFilteredCryptos().map(symbol => {
                 const crypto = cryptoPrices[symbol];
                 if (!crypto) return null;
                 return (
@@ -1426,6 +1431,15 @@ const MainApp = () => {
                   />
                 );
               })}
+              
+              {getFilteredCryptos().length === 0 && cryptoSearchQuery && (
+                <div className="no-results">
+                  <p>No cryptocurrencies found matching "{cryptoSearchQuery}"</p>
+                  <button onClick={() => setCryptoSearchQuery('')} className="clear-search-btn">
+                    Clear search
+                  </button>
+                </div>
+              )}
             </div>
           </div>
         )}

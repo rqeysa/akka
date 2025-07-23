@@ -865,6 +865,7 @@ const MainApp = () => {
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [profilePage, setProfilePage] = useState('main'); // main, personal, security, payment, docs, help, settings
+  const [historyFilter, setHistoryFilter] = useState('all'); // all, buys, sells, sends, receives
 
   useEffect(() => {
     fetchCryptoPrices();

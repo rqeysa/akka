@@ -1226,6 +1226,37 @@ const MainApp = () => {
     }
   };
 
+  const getFilteredCryptos = () => {
+    if (!cryptoSearchQuery.trim()) {
+      return FEATURED_CRYPTOS;
+    }
+    
+    const query = cryptoSearchQuery.toLowerCase().trim();
+    return FEATURED_CRYPTOS.filter(symbol => {
+      const crypto = cryptoPrices[symbol];
+      if (!crypto) return false;
+      
+      return (
+        symbol.toLowerCase().includes(query) ||
+        crypto.name.toLowerCase().includes(query)
+      );
+    });
+  };
+
+  // Simulate price updates (in real app, this would come from WebSocket or API polling)
+  useEffect(() => {
+    const interval = setInterval(() => {
+      if (Object.keys(cryptoPrices).length > 0) {
+        // Add small random variations to simulate live prices (±0.5%)
+        const variation = (Math.random() - 0.5) * 0.01; // ±0.5%
+        // This is just for demonstration - real implementation would fetch from API
+        console.log('Price variation simulation:', variation);
+      }
+    }, 30000); // Update every 30 seconds for demo
+
+    return () => clearInterval(interval);
+  }, [cryptoPrices]);
+
   if (loading) {
     return (
       <div className="akka-loading">

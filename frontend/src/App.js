@@ -991,7 +991,7 @@ const MainApp = () => {
                 <span className="action-icon">+</span>
                 Buy
               </button>
-              <button className="action-btn secondary" onClick={() => setShowSellModal(true)}>
+              <button className="action-btn sell-btn" onClick={() => setShowSellModal(true)}>
                 <span className="action-icon">-</span>
                 Sell
               </button>

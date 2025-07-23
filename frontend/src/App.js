@@ -1118,54 +1118,456 @@ const MainApp = () => {
 
         {activeTab === 'profile' && (
           <div className="profile-content">
-            <div className="profile-header">
-              <div className="profile-avatar-large">
-                {user.name.charAt(0)}
-              </div>
-              <h2>{user.name}</h2>
-              <p>{user.email}</p>
-              <div className="verification-status">
-                <span className="verified-icon">✓</span>
-                Verified account
-              </div>
-            </div>
+            {profilePage === 'main' && (
+              <>
+                <div className="profile-header">
+                  <div className="profile-avatar-large">
+                    {user.name.charAt(0)}
+                  </div>
+                  <h2>{user.name}</h2>
+                  <p>{user.email}</p>
+                  <div className="verification-status">
+                    <span className="verified-icon">✓</span>
+                    Verified account
+                  </div>
+                </div>
 
-            <div className="profile-menu">
-              <div className="menu-item">
-                <span className="menu-icon">👤</span>
-                <span>Personal information</span>
-                <span className="menu-arrow">›</span>
-              </div>
-              <div className="menu-item">
-                <span className="menu-icon">🔒</span>
-                <span>Security</span>
-                <span className="menu-arrow">›</span>
-              </div>
-              <div className="menu-item">
-                <span className="menu-icon">💳</span>
-                <span>Payment methods</span>
-                <span className="menu-arrow">›</span>
-              </div>
-              <div className="menu-item">
-                <span className="menu-icon">📄</span>
-                <span>Documents</span>
-                <span className="menu-arrow">›</span>
-              </div>
-              <div className="menu-item">
-                <span className="menu-icon">❓</span>
-                <span>Help & support</span>
-                <span className="menu-arrow">›</span>
-              </div>
-              <div className="menu-item">
-                <span className="menu-icon">⚙️</span>
-                <span>Settings</span>
-                <span className="menu-arrow">›</span>
-              </div>
-            </div>
+                <div className="profile-menu">
+                  <div className="menu-item" onClick={() => setProfilePage('personal')}>
+                    <span className="menu-icon">👤</span>
+                    <span>Personal information</span>
+                    <span className="menu-arrow">›</span>
+                  </div>
+                  <div className="menu-item" onClick={() => setProfilePage('security')}>
+                    <span className="menu-icon">🔒</span>
+                    <span>Security</span>
+                    <span className="menu-arrow">›</span>
+                  </div>
+                  <div className="menu-item" onClick={() => setProfilePage('payment')}>
+                    <span className="menu-icon">💳</span>
+                    <span>Payment methods</span>
+                    <span className="menu-arrow">›</span>
+                  </div>
+                  <div className="menu-item" onClick={() => setProfilePage('docs')}>
+                    <span className="menu-icon">📄</span>
+                    <span>Documents</span>
+                    <span className="menu-arrow">›</span>
+                  </div>
+                  <div className="menu-item" onClick={() => setProfilePage('help')}>
+                    <span className="menu-icon">❓</span>
+                    <span>Help & support</span>
+                    <span className="menu-arrow">›</span>
+                  </div>
+                  <div className="menu-item" onClick={() => setProfilePage('settings')}>
+                    <span className="menu-icon">⚙️</span>
+                    <span>Settings</span>
+                    <span className="menu-arrow">›</span>
+                  </div>
+                </div>
 
-            <button className="logout-btn" onClick={handleLogout}>
-              Sign out
-            </button>
+                <button className="logout-btn" onClick={handleLogout}>
+                  Sign out
+                </button>
+              </>
+            )}
+
+            {profilePage === 'personal' && (
+              <div className="profile-subpage">
+                <div className="subpage-header">
+                  <button className="back-btn" onClick={() => setProfilePage('main')}>‹</button>
+                  <h2>Personal Information</h2>
+                </div>
+                
+                <div className="profile-form">
+                  <div className="form-section">
+                    <h3>Basic Information</h3>
+                    <div className="input-group">
+                      <label>Full Name</label>
+                      <input type="text" value={user.name} readOnly />
+                    </div>
+                    <div className="input-group">
+                      <label>Email Address</label>
+                      <input type="email" value={user.email} readOnly />
+                    </div>
+                    <div className="input-group">
+                      <label>Phone Number</label>
+                      <input type="tel" placeholder="+90 555 123 4567" />
+                    </div>
+                    <div className="input-group">
+                      <label>Date of Birth</label>
+                      <input type="date" value="1990-05-15" />
+                    </div>
+                  </div>
+
+                  <div className="form-section">
+                    <h3>Address Information</h3>
+                    <div className="input-group">
+                      <label>Country</label>
+                      <select>
+                        <option>Turkey</option>
+                        <option>Germany</option>
+                        <option>Netherlands</option>
+                      </select>
+                    </div>
+                    <div className="input-group">
+                      <label>City</label>
+                      <input type="text" value="Istanbul" />
+                    </div>
+                    <div className="input-group">
+                      <label>Address</label>
+                      <textarea placeholder="Enter your full address"></textarea>
+                    </div>
+                  </div>
+
+                  <button className="save-btn">Save Changes</button>
+                </div>
+              </div>
+            )}
+
+            {profilePage === 'security' && (
+              <div className="profile-subpage">
+                <div className="subpage-header">
+                  <button className="back-btn" onClick={() => setProfilePage('main')}>‹</button>
+                  <h2>Security</h2>
+                </div>
+                
+                <div className="security-content">
+                  <div className="security-section">
+                    <h3>Password & Authentication</h3>
+                    <div className="security-item">
+                      <div className="security-info">
+                        <span className="security-title">Password</span>
+                        <span className="security-desc">Last changed 30 days ago</span>
+                      </div>
+                      <button className="security-action">Change</button>
+                    </div>
+                    <div className="security-item">
+                      <div className="security-info">
+                        <span className="security-title">Two-Factor Authentication</span>
+                        <span className="security-desc enabled">Enabled via SMS</span>
+                      </div>
+                      <button className="security-action">Manage</button>
+                    </div>
+                  </div>
+
+                  <div className="security-section">
+                    <h3>Login Activity</h3>
+                    <div className="login-activity">
+                      <div className="activity-item">
+                        <div className="activity-info">
+                          <span className="activity-device">iPhone 15 Pro</span>
+                          <span className="activity-location">Istanbul, Turkey</span>
+                          <span className="activity-time">Active now</span>
+                        </div>
+                        <span className="current-device">Current</span>
+                      </div>
+                      <div className="activity-item">
+                        <div className="activity-info">
+                          <span className="activity-device">MacBook Pro</span>
+                          <span className="activity-location">Istanbul, Turkey</span>
+                          <span className="activity-time">2 hours ago</span>
+                        </div>
+                        <button className="logout-device">Sign out</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="security-section">
+                    <h3>Privacy Settings</h3>
+                    <div className="privacy-toggle">
+                      <span>Email notifications</span>
+                      <label className="toggle">
+                        <input type="checkbox" checked />
+                        <span className="slider"></span>
+                      </label>
+                    </div>
+                    <div className="privacy-toggle">
+                      <span>SMS notifications</span>
+                      <label className="toggle">
+                        <input type="checkbox" checked />
+                        <span className="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {profilePage === 'payment' && (
+              <div className="profile-subpage">
+                <div className="subpage-header">
+                  <button className="back-btn" onClick={() => setProfilePage('main')}>‹</button>
+                  <h2>Payment Methods</h2>
+                </div>
+                
+                <div className="payment-content">
+                  <div className="payment-section">
+                    <h3>Bank Accounts</h3>
+                    <div className="payment-item bank-account">
+                      <div className="payment-icon">🏦</div>
+                      <div className="payment-info">
+                        <span className="payment-title">Akka Bank</span>
+                        <span className="payment-desc">****7890 (Primary)</span>
+                      </div>
+                      <button className="payment-action">Manage</button>
+                    </div>
+                    <button className="add-payment-btn">+ Add Bank Account</button>
+                  </div>
+
+                  <div className="payment-section">
+                    <h3>Cards</h3>
+                    <div className="payment-item card">
+                      <div className="payment-icon">💳</div>
+                      <div className="payment-info">
+                        <span className="payment-title">Akka Virtual Card</span>
+                        <span className="payment-desc">****4567 • Expires 12/27</span>
+                      </div>
+                      <button className="payment-action">View</button>
+                    </div>
+                    <button className="add-payment-btn">+ Add Card</button>
+                  </div>
+
+                  <div className="payment-section">
+                    <h3>Transaction Limits</h3>
+                    <div className="limit-item">
+                      <span className="limit-title">Daily Send Limit</span>
+                      <span className="limit-value">€5,000</span>
+                    </div>
+                    <div className="limit-item">
+                      <span className="limit-title">Monthly Withdraw Limit</span>
+                      <span className="limit-value">€25,000</span>
+                    </div>
+                    <button className="increase-limits-btn">Request Limit Increase</button>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {profilePage === 'docs' && (
+              <div className="profile-subpage">
+                <div className="subpage-header">
+                  <button className="back-btn" onClick={() => setProfilePage('main')}>‹</button>
+                  <h2>Documents</h2>
+                </div>
+                
+                <div className="docs-content">
+                  <div className="docs-section">
+                    <h3>Identity Verification</h3>
+                    <div className="doc-item verified">
+                      <div className="doc-icon">✅</div>
+                      <div className="doc-info">
+                        <span className="doc-title">National ID</span>
+                        <span className="doc-status">Verified</span>
+                      </div>
+                      <button className="doc-action">View</button>
+                    </div>
+                    <div className="doc-item verified">
+                      <div className="doc-icon">✅</div>
+                      <div className="doc-info">
+                        <span className="doc-title">Proof of Address</span>
+                        <span className="doc-status">Verified</span>
+                      </div>
+                      <button className="doc-action">View</button>
+                    </div>
+                  </div>
+
+                  <div className="docs-section">
+                    <h3>Account Statements</h3>
+                    <div className="statement-item">
+                      <div className="statement-info">
+                        <span className="statement-title">January 2025</span>
+                        <span className="statement-date">Generated on Feb 1, 2025</span>
+                      </div>
+                      <button className="statement-download">Download PDF</button>
+                    </div>
+                    <div className="statement-item">
+                      <div className="statement-info">
+                        <span className="statement-title">December 2024</span>
+                        <span className="statement-date">Generated on Jan 1, 2025</span>
+                      </div>
+                      <button className="statement-download">Download PDF</button>
+                    </div>
+                  </div>
+
+                  <div className="docs-section">
+                    <h3>Tax Documents</h3>
+                    <div className="tax-item">
+                      <span className="tax-title">2024 Tax Report</span>
+                      <button className="tax-download">Download</button>
+                    </div>
+                    <div className="tax-info">
+                      <p>Your 2025 tax report will be available in January 2026.</p>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {profilePage === 'help' && (
+              <div className="profile-subpage">
+                <div className="subpage-header">
+                  <button className="back-btn" onClick={() => setProfilePage('main')}>‹</button>
+                  <h2>Help & Support</h2>
+                </div>
+                
+                <div className="help-content">
+                  <div className="help-section">
+                    <h3>Quick Help</h3>
+                    <div className="help-item">
+                      <span className="help-icon">🔍</span>
+                      <div className="help-info">
+                        <span className="help-title">How to buy crypto?</span>
+                        <span className="help-desc">Learn how to purchase cryptocurrency</span>
+                      </div>
+                    </div>
+                    <div className="help-item">
+                      <span className="help-icon">💰</span>
+                      <div className="help-info">
+                        <span className="help-title">Understanding fees</span>
+                        <span className="help-desc">Learn about trading and transaction fees</span>
+                      </div>
+                    </div>
+                    <div className="help-item">
+                      <span className="help-icon">🔒</span>
+                      <div className="help-info">
+                        <span className="help-title">Security best practices</span>
+                        <span className="help-desc">Keep your account safe and secure</span>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="help-section">
+                    <h3>Contact Support</h3>
+                    <div className="contact-options">
+                      <div className="contact-item">
+                        <span className="contact-icon">💬</span>
+                        <div className="contact-info">
+                          <span className="contact-title">Live Chat</span>
+                          <span className="contact-desc">Available 24/7</span>
+                        </div>
+                        <button className="contact-btn">Start Chat</button>
+                      </div>
+                      <div className="contact-item">
+                        <span className="contact-icon">📧</span>
+                        <div className="contact-info">
+                          <span className="contact-title">Email Support</span>
+                          <span className="contact-desc">support@akka.com</span>
+                        </div>
+                        <button className="contact-btn">Send Email</button>
+                      </div>
+                      <div className="contact-item">
+                        <span className="contact-icon">📞</span>
+                        <div className="contact-info">
+                          <span className="contact-title">Phone Support</span>
+                          <span className="contact-desc">+90 555 AKKA (2552)</span>
+                        </div>
+                        <button className="contact-btn">Call Now</button>
+                      </div>
+                    </div>
+                  </div>
+
+                  <div className="help-section">
+                    <h3>Resources</h3>
+                    <div className="resource-links">
+                      <a href="#" className="resource-link">📚 User Guide</a>
+                      <a href="#" className="resource-link">❓ FAQ</a>
+                      <a href="#" className="resource-link">📋 Terms of Service</a>
+                      <a href="#" className="resource-link">🔒 Privacy Policy</a>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            )}
+
+            {profilePage === 'settings' && (
+              <div className="profile-subpage">
+                <div className="subpage-header">
+                  <button className="back-btn" onClick={() => setProfilePage('main')}>‹</button>
+                  <h2>Settings</h2>
+                </div>
+                
+                <div className="settings-content">
+                  <div className="settings-section">
+                    <h3>Appearance</h3>
+                    <div className="setting-item">
+                      <span className="setting-title">Theme</span>
+                      <select className="setting-select">
+                        <option>Dark</option>
+                        <option>Light</option>
+                        <option>Auto</option>
+                      </select>
+                    </div>
+                    <div className="setting-item">
+                      <span className="setting-title">Language</span>
+                      <select className="setting-select">
+                        <option>English</option>
+                        <option>Türkçe</option>
+                        <option>Deutsch</option>
+                      </select>
+                    </div>
+                    <div className="setting-item">
+                      <span className="setting-title">Currency Display</span>
+                      <select className="setting-select">
+                        <option>EUR (€)</option>
+                        <option>USD ($)</option>
+                        <option>TRY (₺)</option>
+                      </select>
+                    </div>
+                  </div>
+
+                  <div className="settings-section">
+                    <h3>Notifications</h3>
+                    <div className="notification-toggle">
+                      <span>Price alerts</span>
+                      <label className="toggle">
+                        <input type="checkbox" checked />
+                        <span className="slider"></span>
+                      </label>
+                    </div>
+                    <div className="notification-toggle">
+                      <span>Transaction notifications</span>
+                      <label className="toggle">
+                        <input type="checkbox" checked />
+                        <span className="slider"></span>
+                      </label>
+                    </div>
+                    <div className="notification-toggle">
+                      <span>Marketing emails</span>
+                      <label className="toggle">
+                        <input type="checkbox" />
+                        <span className="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div className="settings-section">
+                    <h3>Advanced</h3>
+                    <div className="setting-item">
+                      <span className="setting-title">Auto-lock time</span>
+                      <select className="setting-select">
+                        <option>5 minutes</option>
+                        <option>15 minutes</option>
+                        <option>30 minutes</option>
+                        <option>Never</option>
+                      </select>
+                    </div>
+                    <div className="notification-toggle">
+                      <span>Biometric login</span>
+                      <label className="toggle">
+                        <input type="checkbox" checked />
+                        <span className="slider"></span>
+                      </label>
+                    </div>
+                  </div>
+
+                  <div className="settings-section danger">
+                    <h3>Account</h3>
+                    <button className="danger-btn">Export Account Data</button>
+                    <button className="danger-btn">Delete Account</button>
+                  </div>
+                </div>
+              </div>
+            )}
           </div>
         )}
       </main>

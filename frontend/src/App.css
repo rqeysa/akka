@@ -143,7 +143,11 @@ body {
 .akka-logo-header .logo-icon {
   width: 32px;
   height: 32px;
-  font-size: 16px;
+}
+
+.akka-logo-header .logo-icon::before {
+  width: 100%;
+  height: 60%;
 }
 
 .akka-logo-header span {

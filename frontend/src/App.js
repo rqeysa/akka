@@ -662,7 +662,7 @@ const MainApp = () => {
   const { user, logout } = useAuth();
   const [cryptoPrices, setCryptoPrices] = useState({});
   const [loading, setLoading] = useState(true);
-  const [activeTab, setActiveTab] = useState('market');
+  const [activeTab, setActiveTab] = useState('home');
   const [showBuyModal, setShowBuyModal] = useState(false);
   const [selectedCrypto, setSelectedCrypto] = useState(null);
   const [showSellModal, setShowSellModal] = useState(false);

@@ -1362,6 +1362,69 @@ body {
   line-height: 1.4;
 }
 
+/* Red Sell Button */
+.action-btn.sell-btn {
+  background: var(--akka-error);
+  color: white;
+}
+
+.action-btn.sell-btn:hover {
+  background: #DC2626;
+  transform: translateY(-1px);
+}
+
+/* Send/Receive Type Tabs */
+.send-type-tabs {
+  display: flex;
+  gap: 8px;
+  margin-top: 8px;
+}
+
+.send-type-tab {
+  flex: 1;
+  padding: 10px 16px;
+  border: 2px solid var(--akka-border);
+  border-radius: 8px;
+  background: var(--akka-surface);
+  color: var(--akka-gray-600);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.send-type-tab.active {
+  background: var(--akka-accent);
+  color: white;
+  border-color: var(--akka-accent);
+}
+
+.send-type-tab:hover:not(.active) {
+  border-color: var(--akka-accent);
+  color: var(--akka-gray-900);
+}
+
+/* Bank Details Styling */
+.bank-details {
+  margin-bottom: 16px;
+}
+
+.bank-info-item {
+  margin-bottom: 12px;
+}
+
+.bank-label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+  color: var(--akka-gray-600);
+  margin-bottom: 4px;
+}
+
+.bank-info-item .address-container {
+  margin-top: 4px;
+}
+
 /* Bottom Navigation */
 .akka-nav {
   position: fixed;

@@ -357,7 +357,13 @@ metadata:
 
 test_plan:
   current_focus:
-    - "All backend API endpoints tested and verified"
+    - "Authentication Flow - Login Form"
+    - "Authentication Flow - Signup Form"
+    - "Authentication State Management"
+    - "Bottom Navigation Tabs"
+    - "Crypto Price Data Integration"
+    - "Market Tab - Buy Buttons"
+    - "Buy Modal Functionality"
   stuck_tasks: []
   test_all: true
   test_priority: "high_first"

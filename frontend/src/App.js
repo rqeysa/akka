@@ -1424,12 +1424,15 @@ const MainApp = () => {
                   <div key={card.id} className="card-preview" onClick={() => setShowCardsSection(true)}>
                     <div className="card-preview-header">
                       <span className="card-type-icon">
-                        {card.type === 'virtual' ? '💳' : '🏧'}
+                        {card.type === 'debit' ? '💳' : '₿'}
                       </span>
                       <span className="card-name">{card.name}</span>
                     </div>
                     <div className="card-balance-preview">
                       €{card.balance.toFixed(2)}
+                    </div>
+                    <div className="card-connection-preview">
+                      {card.description}
                     </div>
                     <div className="card-spent-preview">
                       Spent: €{card.spent_this_month.toFixed(2)}

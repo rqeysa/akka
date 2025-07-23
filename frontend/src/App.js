@@ -917,8 +917,11 @@ const MainApp = () => {
     setSelectedCrypto(null);
   };
 
-  const handleLogout = () => {
-    logout();
+  const handleTabChange = (tab) => {
+    setActiveTab(tab);
+    if (tab === 'profile') {
+      setProfilePage('main');
+    }
   };
 
   if (loading) {

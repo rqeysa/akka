@@ -1157,7 +1157,9 @@ const MainApp = () => {
 
   const fetchCryptoPrices = async () => {
     try {
-      const response = await axios.get(`${API}/crypto/prices`);
+      // Request all FEATURED_CRYPTOS by passing symbols parameter
+      const symbolsParam = FEATURED_CRYPTOS.join(',');
+      const response = await axios.get(`${API}/crypto/prices?symbols=${symbolsParam}`);
       const prices = response.data.prices;
       
       // Convert USD to EUR (approximate)
@@ -1170,19 +1172,63 @@ const MainApp = () => {
       });
       
       setCryptoPrices(eurPrices);
+      console.log(`✅ Fetched ${Object.keys(eurPrices).length} cryptocurrencies:`, Object.keys(eurPrices).join(', '));
     } catch (error) {
       console.error('Error fetching crypto prices:', error);
-      // Fallback mock data in EUR
-      setCryptoPrices({
-        BTC: { symbol: 'BTC', name: 'Bitcoin', price: 109408, change_24h: 2.1, volume_24h: 13800000000 },
-        ETH: { symbol: 'ETH', name: 'Ethereum', price: 3073, change_24h: 1.5, volume_24h: 7360000000 },
-        ADA: { symbol: 'ADA', name: 'Cardano', price: 1.06, change_24h: 3.2, volume_24h: 460000000 },
-        DOT: { symbol: 'DOT', name: 'Polkadot', price: 7.00, change_24h: -1.8, volume_24h: 180000000 },
-        SOL: { symbol: 'SOL', name: 'Solana', price: 264, change_24h: 4.1, volume_24h: 1840000000 },
-        MATIC: { symbol: 'MATIC', name: 'Polygon', price: 0.45, change_24h: 2.8, volume_24h: 150000000 },
-        LINK: { symbol: 'LINK', name: 'Chainlink', price: 15.20, change_24h: 1.2, volume_24h: 280000000 },
-        AVAX: { symbol: 'AVAX', name: 'Avalanche', price: 45.60, change_24h: -0.8, volume_24h: 320000000 }
-      });
+      
+      // Try fallback to default endpoint
+      try {
+        const fallbackResponse = await axios.get(`${API}/crypto/prices`);
+        const fallbackPrices = fallbackResponse.data.prices;
+        
+        const eurPrices = {};
+        Object.keys(fallbackPrices).forEach(symbol => {
+          eurPrices[symbol] = {
+            ...fallbackPrices[symbol],
+            price: fallbackPrices[symbol].price * 0.92
+          };
+        });
+        
+        setCryptoPrices(eurPrices);
+        console.log(`⚠️ Using fallback data: ${Object.keys(eurPrices).length} cryptocurrencies`);
+      } catch (fallbackError) {
+        console.error('Fallback also failed:', fallbackError);
+        
+        // Enhanced fallback mock data with all 30 cryptocurrencies
+        setCryptoPrices({
+          BTC: { symbol: 'BTC', name: 'Bitcoin', price: 109408, change_24h: 2.1, volume_24h: 13800000000 },
+          ETH: { symbol: 'ETH', name: 'Ethereum', price: 3073, change_24h: 1.5, volume_24h: 7360000000 },
+          ADA: { symbol: 'ADA', name: 'Cardano', price: 1.06, change_24h: 3.2, volume_24h: 460000000 },
+          DOT: { symbol: 'DOT', name: 'Polkadot', price: 7.00, change_24h: -1.8, volume_24h: 180000000 },
+          SOL: { symbol: 'SOL', name: 'Solana', price: 264, change_24h: 4.1, volume_24h: 1840000000 },
+          AVAX: { symbol: 'AVAX', name: 'Avalanche', price: 45.60, change_24h: -0.8, volume_24h: 320000000 },
+          MATIC: { symbol: 'MATIC', name: 'Polygon', price: 0.45, change_24h: 2.8, volume_24h: 150000000 },
+          ATOM: { symbol: 'ATOM', name: 'Cosmos', price: 8.30, change_24h: 1.9, volume_24h: 95000000 },
+          LINK: { symbol: 'LINK', name: 'Chainlink', price: 15.20, change_24h: 1.2, volume_24h: 280000000 },
+          UNI: { symbol: 'UNI', name: 'Uniswap', price: 12.50, change_24h: -0.5, volume_24h: 120000000 },
+          AAVE: { symbol: 'AAVE', name: 'Aave', price: 285, change_24h: 3.4, volume_24h: 85000000 },
+          SAND: { symbol: 'SAND', name: 'The Sandbox', price: 0.52, change_24h: 5.2, volume_24h: 45000000 },
+          MANA: { symbol: 'MANA', name: 'Decentraland', price: 0.43, change_24h: 2.8, volume_24h: 38000000 },
+          CRV: { symbol: 'CRV', name: 'Curve DAO Token', price: 0.88, change_24h: -1.2, volume_24h: 25000000 },
+          SUSHI: { symbol: 'SUSHI', name: 'SushiSwap', price: 1.45, change_24h: 1.8, volume_24h: 32000000 },
+          YFI: { symbol: 'YFI', name: 'yearn.finance', price: 8420, change_24h: -2.1, volume_24h: 18000000 },
+          BAT: { symbol: 'BAT', name: 'Basic Attention Token', price: 0.24, change_24h: 0.8, volume_24h: 15000000 },
+          ZRX: { symbol: 'ZRX', name: '0x', price: 0.52, change_24h: 2.1, volume_24h: 12000000 },
+          XTZ: { symbol: 'XTZ', name: 'Tezos', price: 1.25, change_24h: 1.5, volume_24h: 28000000 },
+          ALGO: { symbol: 'ALGO', name: 'Algorand', price: 0.38, change_24h: 3.1, volume_24h: 22000000 },
+          VET: { symbol: 'VET', name: 'VeChain', price: 0.045, change_24h: 2.3, volume_24h: 35000000 },
+          ENJ: { symbol: 'ENJ', name: 'Enjin Coin', price: 0.28, change_24h: 4.2, volume_24h: 18000000 },
+          LRC: { symbol: 'LRC', name: 'Loopring', price: 0.18, change_24h: 1.7, volume_24h: 14000000 },
+          GRT: { symbol: 'GRT', name: 'The Graph', price: 0.21, change_24h: -0.8, volume_24h: 16000000 },
+          COMP: { symbol: 'COMP', name: 'Compound', price: 67.50, change_24h: 2.9, volume_24h: 25000000 },
+          MKR: { symbol: 'MKR', name: 'Maker', price: 1580, change_24h: -1.5, volume_24h: 42000000 },
+          SNX: { symbol: 'SNX', name: 'Synthetix', price: 2.85, change_24h: 3.8, volume_24h: 19000000 },
+          BAL: { symbol: 'BAL', name: 'Balancer', price: 2.95, change_24h: 1.2, volume_24h: 8000000 },
+          REN: { symbol: 'REN', name: 'Ren', price: 0.058, change_24h: -2.1, volume_24h: 6000000 },
+          KNC: { symbol: 'KNC', name: 'Kyber Network Crystal', price: 0.68, change_24h: 0.9, volume_24h: 9000000 }
+        });
+        console.log('🔄 Using enhanced mock data with all 30 cryptocurrencies');
+      }
     } finally {
       setLoading(false);
     }

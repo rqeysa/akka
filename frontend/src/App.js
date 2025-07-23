@@ -1036,6 +1036,27 @@ const MainApp = () => {
           onConfirm={handleConfirmBuy}
         />
       )}
+
+      {/* Sell Modal */}
+      {showSellModal && (
+        <SellModal
+          onClose={() => setShowSellModal(false)}
+        />
+      )}
+
+      {/* Send Modal */}
+      {showSendModal && (
+        <SendModal
+          onClose={() => setShowSendModal(false)}
+        />
+      )}
+
+      {/* Receive Modal */}
+      {showReceiveModal && (
+        <ReceiveModal
+          onClose={() => setShowReceiveModal(false)}
+        />
+      )}
     </div>
   );
 };

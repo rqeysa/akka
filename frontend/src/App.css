@@ -2586,6 +2586,50 @@ input:checked + .slider:before {
   color: var(--akka-success);
 }
 
+/* Search functionality */
+.market-search input {
+  width: 100%;
+  padding: 12px 16px;
+  border: 2px solid var(--akka-border);
+  border-radius: 12px;
+  font-size: 16px;
+  background: var(--akka-surface);
+  color: var(--akka-gray-900);
+  transition: border-color 0.2s ease;
+}
+
+.market-search input:focus {
+  outline: none;
+  border-color: var(--akka-accent);
+}
+
+.no-results {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--akka-gray-500);
+}
+
+.no-results p {
+  margin-bottom: 16px;
+  font-size: 16px;
+}
+
+.clear-search-btn {
+  background: var(--akka-accent);
+  color: white;
+  border: none;
+  padding: 8px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.clear-search-btn:hover {
+  background: #2563EB;
+  transform: translateY(-1px);
+}
+
 /* Bottom Navigation */
 .akka-nav {
   position: fixed;

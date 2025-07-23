@@ -1074,6 +1074,7 @@ const CardDetailsModal = ({ card, onClose }) => {
                 <div className="transaction-merchant">
                   <div className="merchant-name">{transaction.merchant}</div>
                   <div className="transaction-category">{transaction.category}</div>
+                  <div className="payment-source">{transaction.payment_source}</div>
                 </div>
                 <div className="transaction-details">
                   <div className="transaction-amount">-€{transaction.amount}</div>

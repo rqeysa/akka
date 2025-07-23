@@ -459,6 +459,9 @@ const MainApp = () => {
   const [activeTab, setActiveTab] = useState('market');
   const [showBuyModal, setShowBuyModal] = useState(false);
   const [selectedCrypto, setSelectedCrypto] = useState(null);
+  const [showSellModal, setShowSellModal] = useState(false);
+  const [showSendModal, setShowSendModal] = useState(false);
+  const [showReceiveModal, setShowReceiveModal] = useState(false);
 
   useEffect(() => {
     fetchCryptoPrices();

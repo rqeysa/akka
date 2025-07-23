@@ -586,15 +586,15 @@ const MainApp = () => {
                 <span className="action-icon">+</span>
                 Buy
               </button>
-              <button className="action-btn secondary">
+              <button className="action-btn secondary" onClick={() => setShowSellModal(true)}>
                 <span className="action-icon">-</span>
                 Sell
               </button>
-              <button className="action-btn secondary">
+              <button className="action-btn secondary" onClick={() => setShowSendModal(true)}>
                 <span className="action-icon">↗</span>
                 Send
               </button>
-              <button className="action-btn secondary">
+              <button className="action-btn secondary" onClick={() => setShowReceiveModal(true)}>
                 <span className="action-icon">↙</span>
                 Receive
               </button>

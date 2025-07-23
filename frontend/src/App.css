@@ -325,7 +325,7 @@ body {
 }
 
 .action-btn.primary {
-  background: linear-gradient(135deg, var(--akka-secondary) 0%, #FF8A65 100%);
+  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-secondary) 100%);
   color: white;
 }
 

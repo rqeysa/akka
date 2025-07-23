@@ -524,14 +524,26 @@ const SellModal = ({ onClose }) => {
 
 // Send Modal Component  
 const SendModal = ({ onClose }) => {
-  const [selectedCrypto, setSelectedCrypto] = useState('');
+  const [sendType, setSendType] = useState('crypto'); // 'crypto' or 'fiat'
+  const [selectedCurrency, setSelectedCurrency] = useState('');
   const [amount, setAmount] = useState('');
   const [recipient, setRecipient] = useState('');
+  const [recipientIBAN, setRecipientIBAN] = useState('');
+  const [recipientName, setRecipientName] = useState('');
   
   const userCryptos = Object.keys(DEMO_USER.crypto_portfolio);
+  const fiatCurrencies = [
+    { code: 'EUR', name: 'Euro', balance: DEMO_USER.balance_eur },
+    { code: 'USD', name: 'US Dollar', balance: 2650.75 }, // Mock USD balance
+    { code: 'TRY', name: 'Turkish Lira', balance: 5420.30 } // Mock TRY balance
+  ];
 
   const handleSend = () => {
-    alert(`Send initiated: ${amount} ${selectedCrypto} to ${recipient}`);
+    if (sendType === 'crypto') {
+      alert(`Send initiated: ${amount} ${selectedCurrency} to ${recipient}`);
+    } else {
+      alert(`Bank transfer initiated: ${amount} ${selectedCurrency} to ${recipientName} (IBAN: ${recipientIBAN})`);
+    }
     onClose();
   };
 
@@ -539,36 +551,97 @@ const SendModal = ({ onClose }) => {
     <div className="modal-overlay">
       <div className="buy-sell-modal">
         <div className="modal-header">
-          <h3>Send Crypto</h3>
+          <h3>Send Money</h3>
           <button className="close-btn" onClick={onClose}>×</button>
         </div>
         
         <div className="modal-content">
+          {/* Send Type Selection */}
           <div className="input-group">
-            <label>Select Crypto to Send</label>
-            <select 
-              value={selectedCrypto} 
-              onChange={(e) => setSelectedCrypto(e.target.value)}
-              className="crypto-select"
-            >
-              <option value="">Choose cryptocurrency</option>
-              {userCryptos.map(crypto => (
-                <option key={crypto} value={crypto}>
-                  {crypto} (Available: {DEMO_USER.crypto_portfolio[crypto].amount})
-                </option>
-              ))}
-            </select>
+            <label>Send Type</label>
+            <div className="send-type-tabs">
+              <button 
+                className={`send-type-tab ${sendType === 'crypto' ? 'active' : ''}`}
+                onClick={() => setSendType('crypto')}
+              >
+                Crypto
+              </button>
+              <button 
+                className={`send-type-tab ${sendType === 'fiat' ? 'active' : ''}`}
+                onClick={() => setSendType('fiat')}
+              >
+                Bank Transfer
+              </button>
+            </div>
           </div>
 
-          <div className="input-group">
-            <label>Recipient Address</label>
-            <input
-              type="text"
-              value={recipient}
-              onChange={(e) => setRecipient(e.target.value)}
-              placeholder="Enter wallet address or email"
-            />
-          </div>
+          {sendType === 'crypto' ? (
+            <>
+              <div className="input-group">
+                <label>Select Crypto to Send</label>
+                <select 
+                  value={selectedCurrency} 
+                  onChange={(e) => setSelectedCurrency(e.target.value)}
+                  className="crypto-select"
+                >
+                  <option value="">Choose cryptocurrency</option>
+                  {userCryptos.map(crypto => (
+                    <option key={crypto} value={crypto}>
+                      {crypto} (Available: {DEMO_USER.crypto_portfolio[crypto].amount})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="input-group">
+                <label>Recipient Wallet Address</label>
+                <input
+                  type="text"
+                  value={recipient}
+                  onChange={(e) => setRecipient(e.target.value)}
+                  placeholder="Enter wallet address"
+                />
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="input-group">
+                <label>Select Currency</label>
+                <select 
+                  value={selectedCurrency} 
+                  onChange={(e) => setSelectedCurrency(e.target.value)}
+                  className="crypto-select"
+                >
+                  <option value="">Choose currency</option>
+                  {fiatCurrencies.map(currency => (
+                    <option key={currency.code} value={currency.code}>
+                      {currency.name} ({currency.code}) - Balance: {currency.balance.toFixed(2)}
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="input-group">
+                <label>Recipient Name</label>
+                <input
+                  type="text"
+                  value={recipientName}
+                  onChange={(e) => setRecipientName(e.target.value)}
+                  placeholder="Enter recipient full name"
+                />
+              </div>
+
+              <div className="input-group">
+                <label>Recipient IBAN</label>
+                <input
+                  type="text"
+                  value={recipientIBAN}
+                  onChange={(e) => setRecipientIBAN(e.target.value)}
+                  placeholder="Enter IBAN (e.g., TR12 3456 7890 1234 5678 9012 34)"
+                />
+              </div>
+            </>
+          )}
 
           <div className="input-group">
             <label>Amount to Send</label>
@@ -576,16 +649,19 @@ const SendModal = ({ onClose }) => {
               type="number"
               value={amount}
               onChange={(e) => setAmount(e.target.value)}
-              placeholder={`0.00 ${selectedCrypto}`}
+              placeholder={`0.00 ${selectedCurrency}`}
             />
           </div>
 
           <button 
             className="confirm-buy-btn"
             onClick={handleSend}
-            disabled={!selectedCrypto || !amount || !recipient}
+            disabled={
+              !selectedCurrency || !amount || 
+              (sendType === 'crypto' ? !recipient : (!recipientName || !recipientIBAN))
+            }
           >
-            Send Crypto
+            {sendType === 'crypto' ? 'Send Crypto' : 'Send Bank Transfer'}
           </button>
         </div>
       </div>

@@ -671,7 +671,8 @@ const SendModal = ({ onClose }) => {
 
 // Receive Modal Component
 const ReceiveModal = ({ onClose }) => {
-  const [selectedCrypto, setSelectedCrypto] = useState('BTC');
+  const [receiveType, setReceiveType] = useState('crypto'); // 'crypto' or 'fiat'
+  const [selectedCurrency, setSelectedCurrency] = useState('BTC');
   
   const generateAddress = (crypto) => {
     // Mock addresses for demo
@@ -685,48 +686,167 @@ const ReceiveModal = ({ onClose }) => {
     return addresses[crypto] || '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
   };
 
-  const copyToClipboard = () => {
-    navigator.clipboard.writeText(generateAddress(selectedCrypto));
-    alert('Address copied to clipboard!');
+  const getBankDetails = (currency) => {
+    // Mock bank details for different currencies
+    const bankDetails = {
+      EUR: {
+        iban: 'TR12 0010 0000 0012 3456 7890 01',
+        accountName: 'Carlos Martinez',
+        bankName: 'Akka Bank',
+        swift: 'AKKATRXX'
+      },
+      USD: {
+        iban: 'TR13 0010 0000 0098 7654 3210 02',
+        accountName: 'Carlos Martinez',
+        bankName: 'Akka Bank',
+        swift: 'AKKATRXX'
+      },
+      TRY: {
+        iban: 'TR14 0010 0000 0055 1122 3344 03',
+        accountName: 'Carlos Martinez',
+        bankName: 'Akka Bank',
+        swift: 'AKKATRXX'
+      }
+    };
+    return bankDetails[currency] || bankDetails.EUR;
   };
+
+  const copyToClipboard = (text, type) => {
+    navigator.clipboard.writeText(text);
+    alert(`${type} copied to clipboard!`);
+  };
+
+  const fiatCurrencies = [
+    { code: 'EUR', name: 'Euro' },
+    { code: 'USD', name: 'US Dollar' },
+    { code: 'TRY', name: 'Turkish Lira' }
+  ];
 
   return (
     <div className="modal-overlay">
       <div className="buy-sell-modal">
         <div className="modal-header">
-          <h3>Receive Crypto</h3>
+          <h3>Receive Money</h3>
           <button className="close-btn" onClick={onClose}>×</button>
         </div>
         
         <div className="modal-content">
+          {/* Receive Type Selection */}
           <div className="input-group">
-            <label>Select Crypto to Receive</label>
-            <select 
-              value={selectedCrypto} 
-              onChange={(e) => setSelectedCrypto(e.target.value)}
-              className="crypto-select"
-            >
-              <option value="BTC">Bitcoin (BTC)</option>
-              <option value="ETH">Ethereum (ETH)</option>
-              <option value="ADA">Cardano (ADA)</option>
-              <option value="DOT">Polkadot (DOT)</option>
-              <option value="SOL">Solana (SOL)</option>
-            </select>
-          </div>
-
-          <div className="receive-address">
-            <label>Your {selectedCrypto} Address</label>
-            <div className="address-container">
-              <div className="address-text">{generateAddress(selectedCrypto)}</div>
-              <button className="copy-btn" onClick={copyToClipboard}>
-                Copy
+            <label>Receive Type</label>
+            <div className="send-type-tabs">
+              <button 
+                className={`send-type-tab ${receiveType === 'crypto' ? 'active' : ''}`}
+                onClick={() => setReceiveType('crypto')}
+              >
+                Crypto
+              </button>
+              <button 
+                className={`send-type-tab ${receiveType === 'fiat' ? 'active' : ''}`}
+                onClick={() => setReceiveType('fiat')}
+              >
+                Bank Transfer
               </button>
             </div>
           </div>
 
-          <div className="receive-instructions">
-            <p>Send only {selectedCrypto} to this address. Sending any other cryptocurrency may result in permanent loss.</p>
-          </div>
+          {receiveType === 'crypto' ? (
+            <>
+              <div className="input-group">
+                <label>Select Crypto to Receive</label>
+                <select 
+                  value={selectedCurrency} 
+                  onChange={(e) => setSelectedCurrency(e.target.value)}
+                  className="crypto-select"
+                >
+                  <option value="BTC">Bitcoin (BTC)</option>
+                  <option value="ETH">Ethereum (ETH)</option>
+                  <option value="ADA">Cardano (ADA)</option>
+                  <option value="DOT">Polkadot (DOT)</option>
+                  <option value="SOL">Solana (SOL)</option>
+                </select>
+              </div>
+
+              <div className="receive-address">
+                <label>Your {selectedCurrency} Address</label>
+                <div className="address-container">
+                  <div className="address-text">{generateAddress(selectedCurrency)}</div>
+                  <button className="copy-btn" onClick={() => copyToClipboard(generateAddress(selectedCurrency), 'Address')}>
+                    Copy
+                  </button>
+                </div>
+              </div>
+
+              <div className="receive-instructions">
+                <p>Send only {selectedCurrency} to this address. Sending any other cryptocurrency may result in permanent loss.</p>
+              </div>
+            </>
+          ) : (
+            <>
+              <div className="input-group">
+                <label>Select Currency</label>
+                <select 
+                  value={selectedCurrency} 
+                  onChange={(e) => setSelectedCurrency(e.target.value)}
+                  className="crypto-select"
+                >
+                  {fiatCurrencies.map(currency => (
+                    <option key={currency.code} value={currency.code}>
+                      {currency.name} ({currency.code})
+                    </option>
+                  ))}
+                </select>
+              </div>
+
+              <div className="bank-details">
+                <label>Your Bank Account Details</label>
+                
+                <div className="bank-info-item">
+                  <span className="bank-label">Account Name:</span>
+                  <div className="address-container">
+                    <div className="address-text">{getBankDetails(selectedCurrency).accountName}</div>
+                    <button className="copy-btn" onClick={() => copyToClipboard(getBankDetails(selectedCurrency).accountName, 'Account Name')}>
+                      Copy
+                    </button>
+                  </div>
+                </div>
+
+                <div className="bank-info-item">
+                  <span className="bank-label">IBAN:</span>
+                  <div className="address-container">
+                    <div className="address-text">{getBankDetails(selectedCurrency).iban}</div>
+                    <button className="copy-btn" onClick={() => copyToClipboard(getBankDetails(selectedCurrency).iban, 'IBAN')}>
+                      Copy
+                    </button>
+                  </div>
+                </div>
+
+                <div className="bank-info-item">
+                  <span className="bank-label">Bank Name:</span>
+                  <div className="address-container">
+                    <div className="address-text">{getBankDetails(selectedCurrency).bankName}</div>
+                    <button className="copy-btn" onClick={() => copyToClipboard(getBankDetails(selectedCurrency).bankName, 'Bank Name')}>
+                      Copy
+                    </button>
+                  </div>
+                </div>
+
+                <div className="bank-info-item">
+                  <span className="bank-label">SWIFT Code:</span>
+                  <div className="address-container">
+                    <div className="address-text">{getBankDetails(selectedCurrency).swift}</div>
+                    <button className="copy-btn" onClick={() => copyToClipboard(getBankDetails(selectedCurrency).swift, 'SWIFT Code')}>
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              </div>
+
+              <div className="receive-instructions">
+                <p>Share these bank details with the sender to receive {selectedCurrency} transfers. Processing time: 1-3 business days.</p>
+              </div>
+            </>
+          )}
         </div>
       </div>
     </div>

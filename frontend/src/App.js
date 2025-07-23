@@ -33,6 +33,50 @@ const DEMO_USER = {
   }
 };
 
+// User's Cards Data
+const USER_CARDS = [
+  {
+    id: "card-1",
+    type: "virtual",
+    name: "Akka Virtual Card",
+    number: "**** **** **** 4567",
+    balance: 1250.75,
+    currency: "EUR",
+    status: "active",
+    created_date: "2024-12-15",
+    monthly_limit: 5000,
+    spent_this_month: 1847.25,
+    last_transaction: "2025-01-22",
+    card_color: "gradient-blue"
+  },
+  {
+    id: "card-2", 
+    type: "physical",
+    name: "Akka Premium Card",
+    number: "**** **** **** 7891",
+    balance: 850.30,
+    currency: "EUR",
+    status: "active",
+    created_date: "2024-11-20",
+    monthly_limit: 3000,
+    spent_this_month: 924.70,
+    last_transaction: "2025-01-21",
+    card_color: "gradient-black"
+  }
+];
+
+// Card Spending History
+const CARD_SPENDING_HISTORY = [
+  { id: 1, card_id: "card-1", merchant: "Amazon", amount: 89.99, category: "Shopping", date: "2025-01-22 16:45", status: "completed" },
+  { id: 2, card_id: "card-1", merchant: "Starbucks", amount: 4.50, category: "Food & Drink", date: "2025-01-22 09:15", status: "completed" },
+  { id: 3, card_id: "card-2", merchant: "Shell", amount: 65.00, category: "Gas", date: "2025-01-21 18:30", status: "completed" },
+  { id: 4, card_id: "card-1", merchant: "Netflix", amount: 15.99, category: "Entertainment", date: "2025-01-21 12:00", status: "completed" },
+  { id: 5, card_id: "card-2", merchant: "Uber", amount: 23.40, category: "Transport", date: "2025-01-20 22:15", status: "completed" },
+  { id: 6, card_id: "card-1", merchant: "Migros", amount: 127.85, category: "Groceries", date: "2025-01-20 14:20", status: "completed" },
+  { id: 7, card_id: "card-2", merchant: "Apple Store", amount: 199.00, category: "Technology", date: "2025-01-19 16:30", status: "completed" },
+  { id: 8, card_id: "card-1", merchant: "Zara", amount: 85.50, category: "Shopping", date: "2025-01-19 13:45", status: "completed" }
+];
+
 const RECENT_TRANSACTIONS = [
   { id: 1, type: 'buy', crypto: 'BTC', amount: 0.025, eur_amount: 2970.50, date: '2025-01-22 14:30', status: 'completed' },
   { id: 2, type: 'sell', crypto: 'ETH', amount: 0.5, eur_amount: 1670.00, date: '2025-01-22 12:15', status: 'completed' },

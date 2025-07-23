@@ -346,6 +346,8 @@ const TransactionItem = ({ transaction }) => {
       case 'sell': return '↙';
       case 'deposit': return '+';
       case 'withdraw': return '↗';
+      case 'send': return '📤';
+      case 'receive': return '📥';
       default: return '•';
     }
   };
@@ -356,7 +358,30 @@ const TransactionItem = ({ transaction }) => {
       case 'sell': return `Sell ${transaction.crypto}`;
       case 'deposit': return `EUR Deposit`;
       case 'withdraw': return `Withdraw ${transaction.crypto}`;
+      case 'send': 
+        if (transaction.recipient_iban) {
+          return `Send ${transaction.crypto} to ${transaction.recipient}`;
+        } else {
+          return `Send ${transaction.crypto}`;
+        }
+      case 'receive':
+        if (transaction.sender) {
+          return `Receive ${transaction.crypto} from ${transaction.sender}`;
+        } else {
+          return `Receive ${transaction.crypto}`;
+        }
       default: return 'Transaction';
+    }
+  };
+
+  const getTransactionAmount = (transaction) => {
+    const isNegative = transaction.type === 'buy' || transaction.type === 'send';
+    const prefix = isNegative ? '-' : '+';
+    
+    if (transaction.eur_amount) {
+      return `${prefix}€${transaction.eur_amount}`;
+    } else {
+      return `${prefix}${transaction.amount} ${transaction.crypto}`;
     }
   };
 
@@ -370,7 +395,7 @@ const TransactionItem = ({ transaction }) => {
         <div className="transaction-date">{transaction.date}</div>
       </div>
       <div className="transaction-amount">
-        {transaction.eur_amount ? `€${transaction.eur_amount}` : `${transaction.amount} ${transaction.crypto}`}
+        {getTransactionAmount(transaction)}
         <div className={`transaction-status ${transaction.status}`}>
           {transaction.status === 'completed' ? 'Completed' : 'Pending'}
         </div>

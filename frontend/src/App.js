@@ -950,7 +950,7 @@ const MainApp = () => {
               </svg>
               <span className="notification-badge">3</span>
             </button>
-            <div className="user-avatar">
+            <div className="user-avatar" onClick={() => setActiveTab('profile')}>
               {user.name.charAt(0)}
             </div>
           </div>

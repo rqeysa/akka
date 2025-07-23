@@ -696,7 +696,7 @@ body {
 
 .buy-btn:hover {
   transform: translateY(-1px);
-  box-shadow: 0 4px 12px rgba(255, 107, 53, 0.3);
+  box-shadow: 0 4px 12px rgba(23, 236, 229, 0.3);
 }
 
 /* Portfolio Content */

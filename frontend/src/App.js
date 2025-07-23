@@ -37,44 +37,36 @@ const DEMO_USER = {
 const USER_CARDS = [
   {
     id: "card-1",
-    type: "virtual",
-    name: "Akka Virtual Card",
+    type: "debit",
+    name: "Akka Debit Card",
     number: "**** **** **** 4567",
-    balance: 1250.75,
+    balance: DEMO_USER.balance_eur, // Connected to EUR balance
     currency: "EUR",
     status: "active",
     created_date: "2024-12-15",
     monthly_limit: 5000,
     spent_this_month: 1847.25,
     last_transaction: "2025-01-22",
-    card_color: "gradient-blue"
+    card_color: "gradient-blue",
+    connected_to: "eur_balance",
+    description: "Connected to your EUR balance"
   },
   {
     id: "card-2", 
-    type: "physical",
-    name: "Akka Premium Card",
+    type: "crypto",
+    name: "Akka Crypto Card",
     number: "**** **** **** 7891",
-    balance: 850.30,
+    balance: DEMO_USER.total_portfolio, // Connected to crypto portfolio
     currency: "EUR",
     status: "active",
     created_date: "2024-11-20",
     monthly_limit: 3000,
     spent_this_month: 924.70,
     last_transaction: "2025-01-21",
-    card_color: "gradient-black"
+    card_color: "gradient-black",
+    connected_to: "crypto_portfolio",
+    description: "Connected to your crypto portfolio"
   }
-];
-
-// Card Spending History
-const CARD_SPENDING_HISTORY = [
-  { id: 1, card_id: "card-1", merchant: "Amazon", amount: 89.99, category: "Shopping", date: "2025-01-22 16:45", status: "completed" },
-  { id: 2, card_id: "card-1", merchant: "Starbucks", amount: 4.50, category: "Food & Drink", date: "2025-01-22 09:15", status: "completed" },
-  { id: 3, card_id: "card-2", merchant: "Shell", amount: 65.00, category: "Gas", date: "2025-01-21 18:30", status: "completed" },
-  { id: 4, card_id: "card-1", merchant: "Netflix", amount: 15.99, category: "Entertainment", date: "2025-01-21 12:00", status: "completed" },
-  { id: 5, card_id: "card-2", merchant: "Uber", amount: 23.40, category: "Transport", date: "2025-01-20 22:15", status: "completed" },
-  { id: 6, card_id: "card-1", merchant: "Migros", amount: 127.85, category: "Groceries", date: "2025-01-20 14:20", status: "completed" },
-  { id: 7, card_id: "card-2", merchant: "Apple Store", amount: 199.00, category: "Technology", date: "2025-01-19 16:30", status: "completed" },
-  { id: 8, card_id: "card-1", merchant: "Zara", amount: 85.50, category: "Shopping", date: "2025-01-19 13:45", status: "completed" }
 ];
 
 const RECENT_TRANSACTIONS = [

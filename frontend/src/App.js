@@ -958,7 +958,7 @@ const MainApp = () => {
               </svg>
               <span className="notification-badge">3</span>
             </button>
-            <div className="user-avatar" onClick={() => setActiveTab('profile')}>
+            <div className="user-avatar" onClick={() => handleTabChange('profile')}>
               {user.name.charAt(0)}
             </div>
           </div>

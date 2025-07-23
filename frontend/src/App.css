@@ -268,7 +268,7 @@ body {
 }
 
 .balance-card.main {
-  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-accent) 100%);
+  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-secondary) 100%);
   color: white;
   border: none;
 }

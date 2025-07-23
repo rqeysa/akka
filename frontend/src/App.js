@@ -985,7 +985,7 @@ const MainApp = () => {
             </div>
           </div>
           <div className="header-actions">
-            <button className="notification-btn">
+            <button className="notification-btn" onClick={() => handleTabChange('history')}>
               <svg width="20" height="20" fill="currentColor" viewBox="0 0 16 16">
                 <path d="M8 16a2 2 0 0 0 2-2H6a2 2 0 0 0 2 2zM8 1.918l-.797.161A4.002 4.002 0 0 0 4 6c0 .628-.134 2.197-.459 3.742-.16.767-.376 1.566-.663 2.258h10.244c-.287-.692-.502-1.49-.663-2.258C12.134 8.197 12 6.628 12 6a4.002 4.002 0 0 0-3.203-3.92L8 1.917z"/>
               </svg>

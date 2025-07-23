@@ -864,6 +864,7 @@ const MainApp = () => {
   const [showSellModal, setShowSellModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
+  const [profilePage, setProfilePage] = useState('main'); // main, personal, security, payment, docs, help, settings
 
   useEffect(() => {
     fetchCryptoPrices();

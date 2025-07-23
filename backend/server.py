@@ -163,10 +163,12 @@ async def signup(user_data: dict):
         }
         
         # Store user in database
-        await db.users.insert_one(user)
+        result = await db.users.insert_one(user)
         
         # Remove sensitive data from response
         user.pop("password", None)
+        # Remove MongoDB ObjectId from response
+        user.pop("_id", None)
         
         return {"success": True, "user": user}
     except Exception as e:

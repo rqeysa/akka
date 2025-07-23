@@ -929,6 +929,205 @@ const ReceiveModal = ({ onClose }) => {
   );
 };
 
+// Card Components
+const CardComponent = ({ card, onClick }) => {
+  const getCardGradient = (color) => {
+    switch(color) {
+      case 'gradient-blue':
+        return 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+      case 'gradient-black':
+        return 'linear-gradient(135deg, #2c3e50 0%, #34495e 100%)';
+      default:
+        return 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)';
+    }
+  };
+
+  return (
+    <div 
+      className="card-component" 
+      style={{background: getCardGradient(card.card_color)}}
+      onClick={() => onClick(card)}
+    >
+      <div className="card-header">
+        <div className="card-type">
+          {card.type === 'virtual' ? '💳' : '🏧'} {card.name}
+        </div>
+        <div className="card-status">
+          <span className={`status-dot ${card.status}`}></span>
+          {card.status}
+        </div>
+      </div>
+      
+      <div className="card-number">
+        {card.number}
+      </div>
+      
+      <div className="card-balance">
+        <div className="balance-label">Available Balance</div>
+        <div className="balance-amount">€{card.balance.toFixed(2)}</div>
+      </div>
+      
+      <div className="card-footer">
+        <div className="card-limit">
+          <span>Monthly: €{card.spent_this_month.toFixed(2)} / €{card.monthly_limit}</span>
+        </div>
+        <div className="card-chip">💎</div>
+      </div>
+    </div>
+  );
+};
+
+const CardDetailsModal = ({ card, onClose }) => {
+  if (!card) return null;
+
+  const cardTransactions = CARD_SPENDING_HISTORY.filter(t => t.card_id === card.id);
+  const monthlySpending = cardTransactions.reduce((sum, t) => sum + t.amount, 0);
+  
+  // Calculate spending by category
+  const spendingByCategory = cardTransactions.reduce((acc, transaction) => {
+    acc[transaction.category] = (acc[transaction.category] || 0) + transaction.amount;
+    return acc;
+  }, {});
+
+  return (
+    <div className="modal-overlay">
+      <div className="card-details-modal">
+        <div className="modal-header">
+          <h3>{card.name} Details</h3>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
+        
+        <div className="modal-content">
+          {/* Card Overview */}
+          <div className="card-overview">
+            <CardComponent card={card} onClick={() => {}} />
+          </div>
+
+          {/* Card Stats */}
+          <div className="card-stats">
+            <div className="stat-item">
+              <span className="stat-label">This Month Spent</span>
+              <span className="stat-value">€{card.spent_this_month.toFixed(2)}</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">Monthly Limit</span>
+              <span className="stat-value">€{card.monthly_limit}</span>
+            </div>
+            <div className="stat-item">
+              <span className="stat-label">Remaining</span>
+              <span className="stat-value positive">€{(card.monthly_limit - card.spent_this_month).toFixed(2)}</span>
+            </div>
+          </div>
+
+          {/* Spending by Category */}
+          <div className="spending-categories">
+            <h4>Spending by Category</h4>
+            {Object.entries(spendingByCategory).map(([category, amount]) => (
+              <div key={category} className="category-item">
+                <div className="category-info">
+                  <span className="category-name">{category}</span>
+                  <span className="category-amount">€{amount.toFixed(2)}</span>
+                </div>
+                <div className="category-bar">
+                  <div 
+                    className="category-fill" 
+                    style={{width: `${(amount / Math.max(...Object.values(spendingByCategory))) * 100}%`}}
+                  ></div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Recent Transactions */}
+          <div className="card-transactions">
+            <h4>Recent Transactions</h4>
+            {cardTransactions.slice(0, 5).map(transaction => (
+              <div key={transaction.id} className="card-transaction-item">
+                <div className="transaction-merchant">
+                  <div className="merchant-name">{transaction.merchant}</div>
+                  <div className="transaction-category">{transaction.category}</div>
+                </div>
+                <div className="transaction-details">
+                  <div className="transaction-amount">-€{transaction.amount}</div>
+                  <div className="transaction-date">{transaction.date.split(' ')[0]}</div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Card Actions */}
+          <div className="card-actions">
+            <button className="card-action-btn freeze">
+              🧊 Freeze Card
+            </button>
+            <button className="card-action-btn settings">
+              ⚙️ Card Settings
+            </button>
+            <button className="card-action-btn limits">
+              📊 Change Limits
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Cards Overview Component
+const CardsSection = ({ onClose }) => {
+  const [selectedCard, setSelectedCard] = useState(null);
+  
+  const totalBalance = USER_CARDS.reduce((sum, card) => sum + card.balance, 0);
+  const totalSpentThisMonth = USER_CARDS.reduce((sum, card) => sum + card.spent_this_month, 0);
+
+  return (
+    <div className="cards-section">
+      <div className="cards-header">
+        <button className="back-btn" onClick={onClose}>‹</button>
+        <h2>My Cards</h2>
+      </div>
+
+      {/* Cards Overview Stats */}
+      <div className="cards-overview-stats">
+        <div className="overview-stat">
+          <span className="stat-label">Total Balance</span>
+          <span className="stat-value">€{totalBalance.toFixed(2)}</span>
+        </div>
+        <div className="overview-stat">
+          <span className="stat-label">Spent This Month</span>
+          <span className="stat-value spent">€{totalSpentThisMonth.toFixed(2)}</span>
+        </div>
+      </div>
+
+      {/* Cards List */}
+      <div className="cards-list">
+        {USER_CARDS.map(card => (
+          <CardComponent 
+            key={card.id} 
+            card={card} 
+            onClick={setSelectedCard}
+          />
+        ))}
+      </div>
+
+      {/* Add New Card */}
+      <div className="add-card-section">
+        <button className="add-card-btn">
+          + Add New Card
+        </button>
+      </div>
+
+      {/* Card Details Modal */}
+      {selectedCard && (
+        <CardDetailsModal 
+          card={selectedCard}
+          onClose={() => setSelectedCard(null)}
+        />
+      )}
+    </div>
+  );
+};
+
 // Main App Component
 const MainApp = () => {
   const { user, logout } = useAuth();

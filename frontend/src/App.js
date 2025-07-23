@@ -92,7 +92,11 @@ const RECENT_TRANSACTIONS = [
   { id: 12, type: 'receive', crypto: 'TRY', amount: 1500.00, sender: 'Ahmed Hassan', sender_iban: 'TR33 0006 1005 1978 6457 8413 26', date: '2025-01-18 20:30', status: 'completed' }
 ];
 
-const FEATURED_CRYPTOS = ['BTC', 'ETH', 'ADA', 'DOT', 'SOL', 'MATIC', 'LINK', 'AVAX'];
+const FEATURED_CRYPTOS = [
+  'BTC', 'ETH', 'ADA', 'DOT', 'SOL', 'AVAX', 'MATIC', 'ATOM', 'LINK', 'UNI', 
+  'AAVE', 'SAND', 'MANA', 'CRV', 'SUSHI', 'YFI', 'BAT', 'ZRX', 'XTZ', 'ALGO',
+  'VET', 'ENJ', 'LRC', 'GRT', 'COMP', 'MKR', 'SNX', 'BAL', 'REN', 'KNC'
+];
 
 // Login Page Component
 const LoginPage = ({ onLogin, onSwitchToSignup }) => {

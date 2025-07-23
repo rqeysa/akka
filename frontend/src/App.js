@@ -451,6 +451,212 @@ const BuySellModal = ({ crypto, onClose, onConfirm }) => {
   );
 };
 
+// Sell Modal Component
+const SellModal = ({ onClose }) => {
+  const [selectedCrypto, setSelectedCrypto] = useState('');
+  const [amount, setAmount] = useState('');
+  const [eurAmount, setEurAmount] = useState('');
+  
+  const userCryptos = Object.keys(DEMO_USER.crypto_portfolio);
+
+  const handleSell = () => {
+    alert(`Sell order placed: ${amount} ${selectedCrypto} for €${eurAmount}`);
+    onClose();
+  };
+
+  return (
+    <div className="modal-overlay">
+      <div className="buy-sell-modal">
+        <div className="modal-header">
+          <h3>Sell Crypto</h3>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
+        
+        <div className="modal-content">
+          <div className="input-group">
+            <label>Select Crypto to Sell</label>
+            <select 
+              value={selectedCrypto} 
+              onChange={(e) => setSelectedCrypto(e.target.value)}
+              className="crypto-select"
+            >
+              <option value="">Choose cryptocurrency</option>
+              {userCryptos.map(crypto => (
+                <option key={crypto} value={crypto}>
+                  {crypto} (Available: {DEMO_USER.crypto_portfolio[crypto].amount})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="input-group">
+            <label>Amount to Sell</label>
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              placeholder={`0.00 ${selectedCrypto}`}
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Estimated EUR Value</label>
+            <input
+              type="number"
+              value={eurAmount}
+              onChange={(e) => setEurAmount(e.target.value)}
+              placeholder="0.00 EUR"
+            />
+          </div>
+
+          <button 
+            className="confirm-buy-btn"
+            onClick={handleSell}
+            disabled={!selectedCrypto || !amount}
+          >
+            Confirm Sale
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Send Modal Component  
+const SendModal = ({ onClose }) => {
+  const [selectedCrypto, setSelectedCrypto] = useState('');
+  const [amount, setAmount] = useState('');
+  const [recipient, setRecipient] = useState('');
+  
+  const userCryptos = Object.keys(DEMO_USER.crypto_portfolio);
+
+  const handleSend = () => {
+    alert(`Send initiated: ${amount} ${selectedCrypto} to ${recipient}`);
+    onClose();
+  };
+
+  return (
+    <div className="modal-overlay">
+      <div className="buy-sell-modal">
+        <div className="modal-header">
+          <h3>Send Crypto</h3>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
+        
+        <div className="modal-content">
+          <div className="input-group">
+            <label>Select Crypto to Send</label>
+            <select 
+              value={selectedCrypto} 
+              onChange={(e) => setSelectedCrypto(e.target.value)}
+              className="crypto-select"
+            >
+              <option value="">Choose cryptocurrency</option>
+              {userCryptos.map(crypto => (
+                <option key={crypto} value={crypto}>
+                  {crypto} (Available: {DEMO_USER.crypto_portfolio[crypto].amount})
+                </option>
+              ))}
+            </select>
+          </div>
+
+          <div className="input-group">
+            <label>Recipient Address</label>
+            <input
+              type="text"
+              value={recipient}
+              onChange={(e) => setRecipient(e.target.value)}
+              placeholder="Enter wallet address or email"
+            />
+          </div>
+
+          <div className="input-group">
+            <label>Amount to Send</label>
+            <input
+              type="number"
+              value={amount}
+              onChange={(e) => setAmount(e.target.value)}
+              placeholder={`0.00 ${selectedCrypto}`}
+            />
+          </div>
+
+          <button 
+            className="confirm-buy-btn"
+            onClick={handleSend}
+            disabled={!selectedCrypto || !amount || !recipient}
+          >
+            Send Crypto
+          </button>
+        </div>
+      </div>
+    </div>
+  );
+};
+
+// Receive Modal Component
+const ReceiveModal = ({ onClose }) => {
+  const [selectedCrypto, setSelectedCrypto] = useState('BTC');
+  
+  const generateAddress = (crypto) => {
+    // Mock addresses for demo
+    const addresses = {
+      BTC: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+      ETH: '0x742d35Cc6634C0532925a3b8D87f2B08',
+      ADA: 'addr1qxy2lpan99fcnr3qkm8uw5adyy7fx',
+      DOT: '13UVJyLnbVp77Z2t6rN2fD3UZEYfUq',
+      SOL: 'DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6Z'
+    };
+    return addresses[crypto] || '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa';
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(generateAddress(selectedCrypto));
+    alert('Address copied to clipboard!');
+  };
+
+  return (
+    <div className="modal-overlay">
+      <div className="buy-sell-modal">
+        <div className="modal-header">
+          <h3>Receive Crypto</h3>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
+        
+        <div className="modal-content">
+          <div className="input-group">
+            <label>Select Crypto to Receive</label>
+            <select 
+              value={selectedCrypto} 
+              onChange={(e) => setSelectedCrypto(e.target.value)}
+              className="crypto-select"
+            >
+              <option value="BTC">Bitcoin (BTC)</option>
+              <option value="ETH">Ethereum (ETH)</option>
+              <option value="ADA">Cardano (ADA)</option>
+              <option value="DOT">Polkadot (DOT)</option>
+              <option value="SOL">Solana (SOL)</option>
+            </select>
+          </div>
+
+          <div className="receive-address">
+            <label>Your {selectedCrypto} Address</label>
+            <div className="address-container">
+              <div className="address-text">{generateAddress(selectedCrypto)}</div>
+              <button className="copy-btn" onClick={copyToClipboard}>
+                Copy
+              </button>
+            </div>
+          </div>
+
+          <div className="receive-instructions">
+            <p>Send only {selectedCrypto} to this address. Sending any other cryptocurrency may result in permanent loss.</p>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Main App Component
 const MainApp = () => {
   const { user, logout } = useAuth();

@@ -1017,7 +1017,7 @@ const MainApp = () => {
             <div className="home-portfolio">
               <div className="section-header">
                 <h3>Your portfolio</h3>
-                <button className="see-all-btn" onClick={() => setActiveTab('portfolio')}>View all</button>
+                <button className="see-all-btn" onClick={() => handleTabChange('portfolio')}>View all</button>
               </div>
               <div className="portfolio-list">
                 {Object.entries(DEMO_USER.crypto_portfolio).map(([crypto, data]) => (

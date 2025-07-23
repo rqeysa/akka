@@ -145,6 +145,64 @@ class CoinMarketCapService:
 async def root():
     return {"message": "Welcome to Akka - Your Crypto Banking Super-App"}
 
+# Authentication endpoints
+@api_router.post("/auth/signup")
+async def signup(user_data: dict):
+    """Create a new user account"""
+    try:
+        # In a real app, you'd hash the password and validate data
+        user = {
+            "id": str(uuid.uuid4()),
+            "name": user_data.get("name"),
+            "email": user_data.get("email"),
+            "verified": False,
+            "balance_eur": 0.0,
+            "balance_try": 0.0,
+            "crypto_portfolio": {},
+            "created_at": datetime.utcnow()
+        }
+        
+        # Store user in database
+        await db.users.insert_one(user)
+        
+        # Remove sensitive data from response
+        user.pop("password", None)
+        
+        return {"success": True, "user": user}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.post("/auth/login")
+async def login(credentials: dict):
+    """Login user"""
+    try:
+        email = credentials.get("email")
+        password = credentials.get("password")
+        
+        # In a real app, you'd verify password hash
+        # For demo, we'll return a mock user
+        user = {
+            "id": str(uuid.uuid4()),
+            "name": email.split("@")[0].title(),
+            "email": email,
+            "verified": True,
+            "balance_eur": 3250.45,
+            "balance_try": 35750.20,
+            "crypto_portfolio": {
+                "BTC": {"amount": 0.125, "value": 14865.25},
+                "ETH": {"amount": 2.5, "value": 8350.00}
+            }
+        }
+        
+        return {"success": True, "user": user}
+    except Exception as e:
+        raise HTTPException(status_code=400, detail=str(e))
+
+@api_router.post("/auth/logout")
+async def logout():
+    """Logout user"""
+    return {"success": True, "message": "Logged out successfully"}
+
 @api_router.get("/crypto/prices")
 async def get_crypto_prices(symbols: str = Query(default="BTC,ETH,BNB,ADA,SOL,XRP,DOGE,AVAX,DOT,MATIC")):
     """Get real-time cryptocurrency prices"""

@@ -950,6 +950,22 @@ const CardComponent = ({ card, onClick }) => {
     }
   };
 
+  const getCardIcon = (type) => {
+    switch(type) {
+      case 'debit': return '💳';
+      case 'crypto': return '₿';
+      default: return '💳';
+    }
+  };
+
+  const getCardTypeText = (card) => {
+    switch(card.type) {
+      case 'debit': return 'EUR Debit Card';
+      case 'crypto': return 'Crypto Card';
+      default: return card.name;
+    }
+  };
+
   return (
     <div 
       className="card-component" 
@@ -958,7 +974,7 @@ const CardComponent = ({ card, onClick }) => {
     >
       <div className="card-header">
         <div className="card-type">
-          {card.type === 'virtual' ? '💳' : '🏧'} {card.name}
+          {getCardIcon(card.type)} {getCardTypeText(card)}
         </div>
         <div className="card-status">
           <span className={`status-dot ${card.status}`}></span>
@@ -973,6 +989,10 @@ const CardComponent = ({ card, onClick }) => {
       <div className="card-balance">
         <div className="balance-label">Available Balance</div>
         <div className="balance-amount">€{card.balance.toFixed(2)}</div>
+      </div>
+      
+      <div className="card-connection">
+        <div className="connection-text">{card.description}</div>
       </div>
       
       <div className="card-footer">

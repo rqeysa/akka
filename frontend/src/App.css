@@ -2171,6 +2171,421 @@ input:checked + .slider:before {
   opacity: 0.8;
 }
 
+/* Cards Quick Access */
+.cards-quick-access {
+  margin: 24px 0;
+}
+
+.cards-preview {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 12px;
+  margin-top: 16px;
+}
+
+.card-preview {
+  background: var(--akka-surface);
+  border: 1px solid var(--akka-border);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-preview:hover {
+  background: var(--akka-gray-50);
+  transform: translateY(-1px);
+}
+
+.card-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 12px;
+}
+
+.card-type-icon {
+  font-size: 16px;
+}
+
+.card-name {
+  font-size: 12px;
+  color: var(--akka-gray-600);
+  font-weight: 600;
+}
+
+.card-balance-preview {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akka-gray-900);
+  margin-bottom: 4px;
+}
+
+.card-spent-preview {
+  font-size: 11px;
+  color: var(--akka-gray-500);
+}
+
+/* Card Component */
+.card-component {
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-bottom: 16px;
+  position: relative;
+  overflow: hidden;
+}
+
+.card-component:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+.card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 20px;
+}
+
+.card-type {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.card-status {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.status-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: #10B981;
+}
+
+.status-dot.active {
+  background: #10B981;
+}
+
+.card-number {
+  font-size: 18px;
+  font-weight: 600;
+  letter-spacing: 2px;
+  margin-bottom: 20px;
+  font-family: 'Courier New', monospace;
+}
+
+.card-balance {
+  margin-bottom: 16px;
+}
+
+.balance-label {
+  font-size: 12px;
+  opacity: 0.8;
+  margin-bottom: 4px;
+}
+
+.balance-amount {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.card-limit {
+  font-size: 11px;
+  opacity: 0.8;
+}
+
+.card-chip {
+  font-size: 20px;
+}
+
+/* Cards Section */
+.cards-section {
+  padding: 0;
+  height: 100vh;
+  overflow-y: auto;
+}
+
+.cards-header {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 20px;
+  border-bottom: 1px solid var(--akka-border);
+  background: var(--akka-surface);
+}
+
+.cards-header h2 {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--akka-gray-900);
+  margin: 0;
+}
+
+.cards-overview-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  padding: 20px;
+  background: var(--akka-surface);
+}
+
+.overview-stat {
+  text-align: center;
+  padding: 16px;
+  border: 1px solid var(--akka-border);
+  border-radius: 12px;
+}
+
+.overview-stat .stat-label {
+  display: block;
+  font-size: 12px;
+  color: var(--akka-gray-500);
+  margin-bottom: 8px;
+}
+
+.overview-stat .stat-value {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--akka-gray-900);
+}
+
+.overview-stat .stat-value.spent {
+  color: var(--akka-warning);
+}
+
+.cards-list {
+  padding: 20px;
+}
+
+.add-card-section {
+  padding: 0 20px 20px;
+}
+
+.add-card-btn {
+  width: 100%;
+  padding: 16px;
+  border: 2px dashed var(--akka-border);
+  background: transparent;
+  color: var(--akka-accent);
+  border-radius: 12px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.add-card-btn:hover {
+  border-color: var(--akka-accent);
+  background: rgba(59, 130, 246, 0.1);
+}
+
+/* Card Details Modal */
+.card-details-modal {
+  background: var(--akka-surface);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.card-overview {
+  padding: 20px;
+  padding-bottom: 0;
+}
+
+.card-overview .card-component {
+  margin-bottom: 0;
+}
+
+.card-stats {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 16px;
+  padding: 20px;
+  border-bottom: 1px solid var(--akka-border);
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 12px;
+  color: var(--akka-gray-500);
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akka-gray-900);
+}
+
+.stat-value.positive {
+  color: var(--akka-success);
+}
+
+.spending-categories {
+  padding: 20px;
+  border-bottom: 1px solid var(--akka-border);
+}
+
+.spending-categories h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akka-gray-900);
+  margin-bottom: 16px;
+}
+
+.category-item {
+  margin-bottom: 12px;
+}
+
+.category-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 4px;
+}
+
+.category-name {
+  font-size: 14px;
+  color: var(--akka-gray-900);
+}
+
+.category-amount {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--akka-gray-600);
+}
+
+.category-bar {
+  height: 4px;
+  background: var(--akka-gray-100);
+  border-radius: 2px;
+  overflow: hidden;
+}
+
+.category-fill {
+  height: 100%;
+  background: var(--akka-accent);
+  border-radius: 2px;
+  transition: width 0.3s ease;
+}
+
+.card-transactions {
+  padding: 20px;
+  border-bottom: 1px solid var(--akka-border);
+}
+
+.card-transactions h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akka-gray-900);
+  margin-bottom: 16px;
+}
+
+.card-transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--akka-border);
+}
+
+.card-transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-merchant {
+  flex: 1;
+}
+
+.merchant-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--akka-gray-900);
+  margin-bottom: 2px;
+}
+
+.transaction-category {
+  font-size: 12px;
+  color: var(--akka-gray-500);
+}
+
+.transaction-details {
+  text-align: right;
+}
+
+.card-transaction-item .transaction-amount {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--akka-error);
+  margin-bottom: 2px;
+}
+
+.card-transaction-item .transaction-date {
+  font-size: 12px;
+  color: var(--akka-gray-500);
+}
+
+.card-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  padding: 20px;
+}
+
+.card-action-btn {
+  padding: 12px 8px;
+  border: 1px solid var(--akka-border);
+  background: var(--akka-surface);
+  color: var(--akka-gray-900);
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.card-action-btn:hover {
+  background: var(--akka-gray-50);
+  border-color: var(--akka-accent);
+}
+
+.card-action-btn.freeze:hover {
+  border-color: var(--akka-accent);
+  color: var(--akka-accent);
+}
+
+.card-action-btn.settings:hover {
+  border-color: var(--akka-gray-400);
+}
+
+.card-action-btn.limits:hover {
+  border-color: var(--akka-success);
+  color: var(--akka-success);
+}
+
 /* Bottom Navigation */
 .akka-nav {
   position: fixed;

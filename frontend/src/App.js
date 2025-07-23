@@ -924,6 +924,10 @@ const MainApp = () => {
     }
   };
 
+  const handleLogout = () => {
+    logout();
+  };
+
   if (loading) {
     return (
       <div className="akka-loading">

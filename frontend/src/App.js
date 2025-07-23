@@ -1022,7 +1022,7 @@ const MainApp = () => {
             <div className="recent-activity">
               <div className="section-header">
                 <h3>Recent activity</h3>
-                <button className="see-all-btn">View all</button>
+                <button className="see-all-btn" onClick={() => setActiveTab('history')}>View all</button>
               </div>
               <div className="transactions-list">
                 {RECENT_TRANSACTIONS.slice(0, 3).map(transaction => (

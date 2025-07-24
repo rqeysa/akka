@@ -33,6 +33,38 @@ const DEMO_USER = {
   }
 };
 
+// User's Multi-Currency Balances
+const CURRENCY_BALANCES = {
+  EUR: { 
+    balance: 3250.45, 
+    symbol: '€', 
+    name: 'Euro',
+    flag: '🇪🇺',
+    change_24h: 0.0 // Base currency
+  },
+  USD: { 
+    balance: 3540.25, 
+    symbol: '$', 
+    name: 'US Dollar',
+    flag: '🇺🇸',
+    change_24h: 1.2 // vs EUR
+  },
+  TRY: { 
+    balance: 89750.30, 
+    symbol: '₺', 
+    name: 'Turkish Lira',
+    flag: '🇹🇷',
+    change_24h: -0.8 // vs EUR
+  },
+  GBP: { 
+    balance: 2780.90, 
+    symbol: '£', 
+    name: 'British Pound',
+    flag: '🇬🇧',
+    change_24h: 0.3 // vs EUR
+  }
+};
+
 // User's Cards Data
 const USER_CARDS = [
   {

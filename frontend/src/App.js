@@ -44,9 +44,10 @@ let USER_TRANSACTION_HISTORY = [
 ];
 
 // User's Multi-Currency Balances with Bank Account Info
-const CURRENCY_BALANCES = {
+// Currency balances using state
+const getCurrencyBalances = (userBalances) => ({
   EUR: { 
-    balance: 3250.45, 
+    balance: userBalances.eur, 
     symbol: '€', 
     name: 'Euro',
     flag: '🇪🇺',

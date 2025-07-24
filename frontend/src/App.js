@@ -586,7 +586,7 @@ const CryptoListItem = ({ crypto, onBuy }) => {
   );
 };
 
-const PortfolioItem = ({ crypto, data }) => (
+const PortfolioItem = ({ crypto, data, onSell }) => (
   <div className="portfolio-item">
     <div className="portfolio-crypto">
       <div className={`crypto-icon ${crypto.toLowerCase()}`}>
@@ -600,6 +600,14 @@ const PortfolioItem = ({ crypto, data }) => (
     <div className="portfolio-value">
       <div className="value-eur">€{data.value.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
       <div className="value-change positive">+2.45%</div>
+      {onSell && (
+        <button 
+          className="portfolio-sell-btn"
+          onClick={() => onSell(crypto)}
+        >
+          Sell
+        </button>
+      )}
     </div>
   </div>
 );

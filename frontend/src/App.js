@@ -1801,8 +1801,8 @@ const MainApp = () => {
   };
 
   const handleConfirmBuy = (crypto, amount, eurAmount) => {
-    // Simulate purchase
-    alert(`Purchase confirmed: ${amount} ${crypto.symbol} for €${eurAmount}`);
+    // Use simulation instead of simple alert
+    simulateBuyCrypto(crypto, amount, eurAmount);
     setShowBuyModal(false);
     setSelectedCrypto(null);
   };

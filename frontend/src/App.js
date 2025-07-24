@@ -1712,10 +1712,39 @@ const MainApp = () => {
   
   const handleCurrencyClick = (currencyCode) => {
     // Only allow click if not currently swiping
-    if (swiperInstance && swiperInstance.allowClick !== false) {
+    if (!touchStart) { // Only allow click if not in a swipe gesture
       setSelectedCurrencyAccount(currencyCode);
       setShowBankAccountModal(true);
     }
+  };
+
+  // Touch handlers for manual swipe implementation
+  const handleTouchStart = (e) => {
+    setTouchEnd(null);
+    setTouchStart(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchMove = (e) => {
+    setTouchEnd(e.targetTouches[0].clientX);
+  };
+
+  const handleTouchEnd = () => {
+    if (!touchStart || !touchEnd) return;
+    
+    const distance = touchStart - touchEnd;
+    const isLeftSwipe = distance > 50;
+    const isRightSwipe = distance < -50;
+
+    if (isLeftSwipe && currentCurrencyIndex < totalSlides - 1) {
+      setCurrentCurrencyIndex(currentCurrencyIndex + 1);
+    }
+    if (isRightSwipe && currentCurrencyIndex > 0) {
+      setCurrentCurrencyIndex(currentCurrencyIndex - 1);
+    }
+    
+    // Reset touch states
+    setTouchStart(null);
+    setTouchEnd(null);
   };
 
   // Initialize Swiper

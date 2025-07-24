@@ -3150,6 +3150,7 @@ const MainApp = () => {
         <SendModal
           onClose={() => setShowSendModal(false)}
           onSendComplete={simulateSendMoney}
+          userBalances={userBalances}
         />
       )}
 

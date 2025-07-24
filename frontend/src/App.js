@@ -267,7 +267,7 @@ const PasscodeEntry = () => {
             <input
               key={index}
               ref={el => inputRefs.current[index] = el}
-              type="text"
+              type="password"
               inputMode="numeric"
               pattern="\d*"
               maxLength="1"

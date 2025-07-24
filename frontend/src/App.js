@@ -2528,7 +2528,12 @@ const MainApp = () => {
               <h3>Asset breakdown</h3>
               <div className="assets-list">
                 {Object.entries(DEMO_USER.crypto_portfolio).map(([crypto, data]) => (
-                  <PortfolioItem key={crypto} crypto={crypto} data={data} />
+                  <PortfolioItem 
+                    key={crypto} 
+                    crypto={crypto} 
+                    data={data} 
+                    onSell={handleSellFromPortfolio}
+                  />
                 ))}
               </div>
             </div>

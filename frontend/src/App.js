@@ -1400,6 +1400,13 @@ const CardsSection = () => {
           onClose={() => setSelectedCard(null)}
         />
       )}
+
+      {/* Apply for New Card Modal */}
+      {showApplyModal && (
+        <ApplyCardModal 
+          onClose={() => setShowApplyModal(false)}
+        />
+      )}
     </div>
   );
 };

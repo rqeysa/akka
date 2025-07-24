@@ -1352,6 +1352,7 @@ const CardDetailsModal = ({ card, onClose }) => {
 // Cards Overview Component
 const CardsSection = () => {
   const [selectedCard, setSelectedCard] = useState(null);
+  const [showApplyModal, setShowApplyModal] = useState(false);
   
   const totalBalance = USER_CARDS.reduce((sum, card) => sum + card.balance, 0);
   const totalSpentThisMonth = USER_CARDS.reduce((sum, card) => sum + card.spent_this_month, 0);

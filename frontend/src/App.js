@@ -1551,11 +1551,9 @@ const MainApp = () => {
   // Touch/swipe state for manual carousel
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
-  
-  // Touch/swipe handling for manual carousel
-  const [touchStart, setTouchStart] = useState(null);
-  const [touchEnd, setTouchEnd] = useState(null);
-  const [isDragging, setIsDragging] = useState(false);
+
+  const currencyKeys = Object.keys(CURRENCY_BALANCES);
+  const totalSlides = currencyKeys.length + 1; // Include crypto portfolio
 
   useEffect(() => {
     fetchCryptoPrices();

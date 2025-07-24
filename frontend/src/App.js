@@ -1721,6 +1721,42 @@ const BankAccountModal = ({ currencyCode, onClose, userBalances }) => {
               📄 Download Statement
             </button>
           </div>
+
+          {/* Transaction History */}
+          <div className="account-history-section">
+            <h4>Recent Transactions</h4>
+            {currencyTransactions.length > 0 ? (
+              <div className="account-transactions-list">
+                {currencyTransactions.map(transaction => (
+                  <div key={transaction.id} className="account-transaction-item">
+                    <div className="transaction-info">
+                      <div className="transaction-type">
+                        {transaction.type === 'sell' && '💰 Crypto Sale'}
+                        {transaction.type === 'buy' && '💳 Crypto Purchase'}
+                        {transaction.type === 'send' && '📤 Money Sent'}
+                        {transaction.type === 'deposit' && '💰 Deposit'}
+                        {transaction.type === 'receive' && '📥 Money Received'}
+                      </div>
+                      <div className="transaction-date">{transaction.date}</div>
+                    </div>
+                    <div className="transaction-amount">
+                      {transaction.eur_amount ? (
+                        <span className={transaction.type === 'sell' || transaction.type === 'deposit' || transaction.type === 'receive' ? 'positive' : 'negative'}>
+                          {transaction.type === 'sell' || transaction.type === 'deposit' || transaction.type === 'receive' ? '+' : '-'}€{transaction.eur_amount.toFixed(2)}
+                        </span>
+                      ) : (
+                        <span>{transaction.amount} {transaction.crypto}</span>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="no-transactions">
+                <p>No recent {currencyCode} transactions</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

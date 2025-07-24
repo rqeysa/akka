@@ -1558,6 +1558,13 @@ const BankAccountModal = ({ currencyCode, onClose, userBalances }) => {
   if (!currencyCode || !CURRENCY_BALANCES[currencyCode]) return null;
   
   const currency = CURRENCY_BALANCES[currencyCode];
+  
+  // Filter transactions for this specific currency
+  const currencyTransactions = USER_TRANSACTION_HISTORY.filter(transaction => 
+    transaction.crypto === currencyCode || 
+    (currencyCode === 'EUR' && (transaction.type === 'sell' || transaction.type === 'deposit'))
+  ).slice(0, 10); // Show last 10 transactions
+
   const bankInfo = currency.bank_info;
 
   const copyToClipboard = (text, label) => {

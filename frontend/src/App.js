@@ -1960,46 +1960,52 @@ const MainApp = () => {
       <main className="akka-main">
         {activeTab === 'home' && !showCardsSection && (
           <div className="home-content">
-            {/* Swipeable Portfolio Summary */}
-            <div className="portfolio-summary">
-              <div className="portfolio-swiper-container">
-                <button className="portfolio-nav-btn portfolio-nav-prev">
-                  ‹
-                </button>
-                
-                <div className="portfolio-swiper swiper">
-                  <div className="swiper-wrapper">
+            {/* Compact Currency Balance Carousel */}
+            <div className="currency-balance-section">
+              <div className="currency-slider-container">
+                <div 
+                  className="currency-slide-wrapper"
+                  onTouchStart={handleTouchStart}
+                  onTouchMove={handleTouchMove}
+                  onTouchEnd={handleTouchEnd}
+                  onMouseDown={handleMouseDown}
+                  onMouseMove={handleMouseMove}
+                  onMouseUp={handleMouseUp}
+                  onMouseLeave={handleMouseUp}
+                >
+                  <div 
+                    className="currency-slides"
+                    style={{ transform: `translateX(-${currentCurrencyIndex * 100}%)` }}
+                  >
                     {/* Currency slides */}
                     {currencyKeys.map((currencyCode) => {
                       const currency = CURRENCY_BALANCES[currencyCode];
                       return (
                         <div 
                           key={currencyCode} 
-                          className="swiper-slide"
+                          className="currency-slide"
                           onClick={() => handleCurrencyClick(currencyCode)}
                         >
-                          <div className="balance-card main">
-                            <div className="balance-header-portfolio">
-                              <div className="currency-info-portfolio">
-                                <span className="currency-flag-main">{currency.flag}</span>
-                                <div className="currency-details-portfolio">
-                                  <span className="balance-label">{currency.name} Balance</span>
-                                  <span className="currency-code-main">{currencyCode}</span>
+                          <div className="currency-balance-card">
+                            <div className="balance-header">
+                              <div className="currency-info">
+                                <span className="currency-flag-large">{currency.flag}</span>
+                                <div className="currency-details">
+                                  <span className="currency-name">{currency.name} Balance</span>
+                                  <span className="currency-code-small">{currencyCode}</span>
                                 </div>
                               </div>
-                              <div className="balance-change-portfolio">
+                              <div className="balance-change">
                                 <span className={`change-indicator ${currency.change_24h >= 0 ? 'positive' : 'negative'}`}>
                                   {currency.change_24h >= 0 ? '+' : ''}{currency.change_24h}%
                                 </span>
                               </div>
                             </div>
                             
-                            <div className="balance-amount-main">
-                              {currency.symbol}{currency.balance.toLocaleString()}
-                            </div>
-                            
-                            <div className="tap-hint-portfolio">
-                              <span>Tap to view account details</span>
+                            <div className="main-balance">
+                              <div className="balance-amount">
+                                {currency.symbol}{currency.balance.toLocaleString()}
+                              </div>
                             </div>
                           </div>
                         </div>
@@ -2007,40 +2013,46 @@ const MainApp = () => {
                     })}
                     
                     {/* Crypto portfolio slide */}
-                    <div className="swiper-slide">
-                      <div className="balance-card main crypto">
-                        <div className="balance-header-portfolio">
-                          <div className="currency-info-portfolio">
-                            <span className="currency-flag-main">₿</span>
-                            <div className="currency-details-portfolio">
-                              <span className="balance-label">Total portfolio value</span>
-                              <span className="currency-code-main">CRYPTO</span>
+                    <div className="currency-slide">
+                      <div className="currency-balance-card">
+                        <div className="balance-header">
+                          <div className="currency-info">
+                            <span className="currency-flag-large">₿</span>
+                            <div className="currency-details">
+                              <span className="currency-name">Total portfolio value</span>
+                              <span className="currency-code-small">CRYPTO</span>
                             </div>
                           </div>
-                          <div className="balance-change-portfolio">
+                          <div className="balance-change">
                             <span className="change-indicator positive">+2.23%</span>
                           </div>
                         </div>
                         
-                        <div className="balance-amount-main">
-                          €{DEMO_USER.total_portfolio.toLocaleString()}
-                        </div>
-                        
-                        <div className="tap-hint-portfolio">
-                          <span>Your crypto investments</span>
+                        <div className="main-balance">
+                          <div className="balance-amount">
+                            €{DEMO_USER.total_portfolio.toLocaleString()}
+                          </div>
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
-                
-                <button className="portfolio-nav-btn portfolio-nav-next">
-                  ›
-                </button>
               </div>
               
-              {/* Custom pagination dots */}
-              <div className="portfolio-pagination"></div>
+              {/* Pagination indicators */}
+              <div className="currency-indicators">
+                {[...currencyKeys, 'CRYPTO'].map((_, index) => (
+                  <button
+                    key={index}
+                    className={`indicator ${index === currentCurrencyIndex ? 'active' : ''}`}
+                    onClick={() => setCurrentCurrencyIndex(index)}
+                  />
+                ))}
+              </div>
+              
+              <div className="tap-hint">
+                <span>Swipe left or right to see other accounts</span>
+              </div>
             </div>
 
             {/* Quick Actions */}

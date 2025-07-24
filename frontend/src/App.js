@@ -1381,6 +1381,23 @@ const MainApp = () => {
     });
   };
 
+  // Currency slider functions
+  const currencyKeys = Object.keys(CURRENCY_BALANCES);
+  const currentCurrency = currencyKeys[currentCurrencyIndex];
+  
+  const nextCurrency = () => {
+    setCurrentCurrencyIndex((prev) => (prev + 1) % currencyKeys.length);
+  };
+  
+  const prevCurrency = () => {
+    setCurrentCurrencyIndex((prev) => (prev - 1 + currencyKeys.length) % currencyKeys.length);
+  };
+  
+  const handleCurrencyClick = (currencyCode) => {
+    setSelectedCurrencyAccount(currencyCode);
+    setShowBankAccountModal(true);
+  };
+
   // Simulate price updates (in real app, this would come from WebSocket or API polling)
   useEffect(() => {
     const interval = setInterval(() => {

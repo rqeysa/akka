@@ -1718,7 +1718,7 @@ const MainApp = () => {
     const initSwiper = () => {
       if (window.Swiper && !swiperInstance) {
         const swiper = new window.Swiper('.portfolio-swiper', {
-          // Core settings
+          // Core settings for horizontal swiping only
           direction: 'horizontal',
           slidesPerView: 1,
           spaceBetween: 0,
@@ -1727,19 +1727,27 @@ const MainApp = () => {
           effect: 'slide',
           loop: false,
           
-          // Touch/drag settings for horizontal swiping
+          // Optimize touch/drag settings for horizontal swiping only
           touchRatio: 1,
-          touchAngle: 45,
-          threshold: 5,
+          touchAngle: 30, // More restrictive angle for horizontal-only
+          threshold: 10,
           grabCursor: true,
           simulateTouch: true,
           allowTouchMove: true,
           touchStartPreventDefault: false,
+          resistance: true,
+          resistanceRatio: 0.85,
           
-          // Prevent click during swipe
-          preventClicks: true,
-          preventClicksPropagation: true,
+          // Prevent vertical scrolling during horizontal swipe
+          nested: false,
+          passiveListeners: false,
+          
+          // Click handling during swipe
+          preventClicks: false,
+          preventClicksPropagation: false,
           slideToClickedSlide: false,
+          allowSlideNext: true,
+          allowSlidePrev: true,
           
           // Keyboard navigation
           keyboard: {
@@ -1747,7 +1755,7 @@ const MainApp = () => {
             onlyInViewport: true,
           },
           
-          // Disable mouse wheel
+          // Disable mouse wheel for horizontal-only swiping
           mousewheel: {
             enabled: false,
           },
@@ -1771,15 +1779,34 @@ const MainApp = () => {
             slideChange: function() {
               setCurrentCurrencyIndex(this.activeIndex);
             },
-            touchStart: function() {
-              // Disable click events during touch
-              this.allowClick = false;
-            },
-            touchEnd: function() {
-              // Re-enable click events after a short delay
-              setTimeout(() => {
-                this.allowClick = true;
+            touchStart: function(swiper, event) {
+              // Disable click during active touch/swipe
+              swiper.allowClick = false;
+              swiper.clickTimeout = setTimeout(() => {
+                swiper.allowClick = true;
               }, 300);
+            },
+            touchEnd: function(swiper) {
+              // Re-enable clicks after touch ends
+              clearTimeout(swiper.clickTimeout);
+              setTimeout(() => {
+                swiper.allowClick = true;
+              }, 200);
+            },
+            touchMove: function(swiper, event) {
+              // Ensure only horizontal movement
+              const touchAngle = Math.atan2(
+                Math.abs(swiper.touches.diff.y),
+                Math.abs(swiper.touches.diff.x)
+              ) * 180 / Math.PI;
+              
+              if (touchAngle > 30) {
+                // Prevent swiper from moving if angle is too vertical
+                swiper.allowTouchMove = false;
+                setTimeout(() => {
+                  swiper.allowTouchMove = true;
+                }, 100);
+              }
             }
           },
         });

@@ -1733,6 +1733,8 @@ const MainApp = () => {
   const [swiperInstance, setSwiperInstance] = useState(null);
   const [currentLanguage, setCurrentLanguage] = useState('English'); // Language state
   const [settingsChanged, setSettingsChanged] = useState(false); // Track if settings need saving
+  const [showTransactionSuccess, setShowTransactionSuccess] = useState(false); // Show transaction success
+  const [lastTransaction, setLastTransaction] = useState(null); // Store last transaction details
   
   // Touch/swipe state for manual carousel
   const [touchStart, setTouchStart] = useState(null);

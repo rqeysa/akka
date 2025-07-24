@@ -2138,7 +2138,12 @@ const MainApp = () => {
 
             {/* Quick Actions */}
             <div className="quick-actions">
-              <button className="action-btn primary" onClick={() => setShowBuyModal(true)}>
+              <button className="action-btn primary" onClick={() => {
+                // Set default crypto to BTC for Quick Action Buy
+                const defaultCrypto = cryptoPrices.BTC || { symbol: 'BTC', price: 120000, name: 'Bitcoin' };
+                setSelectedCrypto(defaultCrypto);
+                setShowBuyModal(true);
+              }}>
                 <span className="action-icon">+</span>
                 Buy
               </button>

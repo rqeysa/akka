@@ -321,9 +321,9 @@ frontend:
 
   - task: "Quick Action Buttons"
     implemented: true
-    working: true
+    working: false
     file: "frontend/src/App.js"
-    stuck_count: 0
+    stuck_count: 1
     priority: "high"
     needs_retesting: false
     status_history:
@@ -336,30 +336,39 @@ frontend:
         - working: true
           agent: "main"
           comment: "FIXED: Added onClick handlers and modal components for Sell, Send, and Receive buttons. All 4 quick action buttons now work perfectly with proper modal interfaces."
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL REGRESSION: ALL Quick Action buttons (Buy, Sell, Send, Receive) are now BROKEN. None of them open modals when clicked. This is a major functionality failure that prevents core app functionality. The buttons are visible and clickable but no modals appear."
 
   - task: "Portfolio Display"
     implemented: true
-    working: "NA"
+    working: true
     file: "frontend/src/App.js"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: "NA"
           agent: "testing"
           comment: "Ready for testing - Portfolio tab content, asset breakdown, mock data display"
+        - working: true
+          agent: "testing"
+          comment: "✅ PORTFOLIO DISPLAY WORKING: Portfolio tab shows comprehensive crypto portfolio with BTC (0.125 BTC, €14,865.25), ETH (2.5 ETH, €8,350.00), ADA (1500 ADA, €1,725.00), DOT (75 DOT, €525.00), SOL (12 SOL, €3,168.00). All values and percentages display correctly."
 
   - task: "Transaction History Display"
     implemented: true
-    working: "NA"
+    working: true
     file: "frontend/src/App.js"
     stuck_count: 0
     priority: "medium"
-    needs_retesting: true
+    needs_retesting: false
     status_history:
         - working: "NA"
           agent: "testing"
           comment: "Ready for testing - History tab, transaction list, filter buttons"
+        - working: true
+          agent: "testing"
+          comment: "✅ TRANSACTION HISTORY PERFECT: History tab displays comprehensive transaction list with recent activity (Buy BTC €2970.5, Sell ETH €1670, EUR Deposit €500). Found 5 filter buttons that work correctly for filtering transactions by type."
 
   - task: "Balance Card Sizing & Horizontal Swipe Functionality"
     implemented: true

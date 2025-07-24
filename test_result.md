@@ -375,6 +375,7 @@ metadata:
 
 test_plan:
   current_focus:
+    - "Balance Card Sizing & Horizontal Swipe Functionality"
     - "Authentication Flow - Login Form"
     - "Authentication Flow - Signup Form"
     - "Authentication State Management"
@@ -382,7 +383,8 @@ test_plan:
     - "Crypto Price Data Integration"
     - "Market Tab - Buy Buttons"
     - "Buy Modal Functionality"
-  stuck_tasks: []
+  stuck_tasks:
+    - "Balance Card Sizing & Horizontal Swipe Functionality"
   test_all: true
   test_priority: "high_first"
 

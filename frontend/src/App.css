@@ -2744,11 +2744,14 @@ input:checked + .slider:before {
 
 .currency-balance-card {
   background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
-  border-radius: 16px;
-  padding: 20px;
+  border-radius: 12px;
+  padding: 16px;
   color: white;
   position: relative;
   overflow: hidden;
+  min-height: 120px;
+  max-width: 320px;
+  margin: 0 auto;
 }
 
 .balance-header {

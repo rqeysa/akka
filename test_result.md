@@ -424,6 +424,54 @@ frontend:
           agent: "testing"
           comment: "❌ PROFILE MENU INCOMPLETE: Profile tab shows user info (test, test@akka.com, ✓ Verified account) and logout button works, but profile menu items (Personal Information, Security, Payment methods, Documents, Help & support, Settings) are missing or not properly implemented."
 
+  - task: "Balance Card Click Modals"
+    implemented: true
+    working: false
+    file: "frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL ISSUE: Balance card clicks are NOT opening bank account detail modals. Users cannot access their bank account information (IBAN, account numbers, etc.) which is essential functionality."
+
+  - task: "Crypto Portfolio Modal Click"
+    implemented: true
+    working: false
+    file: "frontend/src/App.js"
+    stuck_count: 0
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL ISSUE: Crypto balance clicks are NOT opening the crypto portfolio modal. Users cannot access detailed crypto portfolio information, addresses, and portfolio management features."
+
+  - task: "Cards Section Navigation"
+    implemented: true
+    working: false
+    file: "frontend/src/App.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ CARDS SECTION MISSING: 'View all' link for cards section is not found. Users cannot access detailed card management, card details, spending history, and card controls."
+
+  - task: "Modal Close Functionality"
+    implemented: true
+    working: "NA"
+    file: "frontend/src/App.js"
+    stuck_count: 0
+    priority: "medium"
+    needs_retesting: true
+    status_history:
+        - working: "NA"
+          agent: "testing"
+          comment: "Ready for testing - Modal close buttons (×) and overlay click functionality. Cannot test thoroughly due to modals not opening."
+
 metadata:
   created_by: "testing_agent"
   version: "1.0"

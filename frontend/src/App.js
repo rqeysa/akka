@@ -2457,8 +2457,8 @@ const MainApp = () => {
           </div>
         )}
 
-        {activeTab === 'home' && showCardsSection && (
-          <CardsSection onClose={() => setShowCardsSection(false)} />
+        {activeTab === 'cards' && (
+          <CardsSection />
         )}
 
         {activeTab === 'market' && (

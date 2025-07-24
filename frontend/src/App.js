@@ -1403,6 +1403,13 @@ const CryptoPortfolioModal = ({ onClose }) => {
     alert(`${type} copied to clipboard!`);
   };
 
+  const handleSellCrypto = (symbol) => {
+    // Close portfolio modal and open sell modal with pre-selected crypto
+    onClose();
+    // Need to trigger sell modal with selected crypto - we'll add this functionality
+    alert(`Sell ${symbol} functionality will open sell modal with ${symbol} pre-selected`);
+  };
+
   return (
     <div className="modal-overlay">
       <div className="crypto-portfolio-modal">

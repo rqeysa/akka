@@ -3165,6 +3165,7 @@ const MainApp = () => {
         <BankAccountModal
           currencyCode={selectedCurrencyAccount}
           onClose={() => setShowBankAccountModal(false)}
+          userBalances={userBalances}
         />
       )}
       

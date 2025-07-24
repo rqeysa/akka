@@ -2079,8 +2079,11 @@ const MainApp = () => {
   };
 
   const handleCurrencyClick = (currencyCode) => {
-    // Only allow click if not currently swiping
-    if (!touchStart) { // Only allow click if not in a swipe gesture
+    // Allow click if not in the middle of a swipe gesture
+    // On mobile, touchStart might be briefly set, so we check if user is actually swiping
+    const isActuallySwiping = touchStart && touchEnd && Math.abs(touchStart - touchEnd) > 50;
+    
+    if (!isActuallySwiping) {
       if (currencyCode === 'CRYPTO') {
         // Show crypto portfolio modal
         setShowCryptoPortfolioModal(true);

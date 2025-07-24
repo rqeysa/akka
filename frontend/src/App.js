@@ -2361,6 +2361,13 @@ const MainApp = () => {
                     <div 
                       className="clean-balance-card crypto"
                       onClick={() => handleCurrencyClick('CRYPTO')}
+                      onTouchEnd={(e) => {
+                        // Prevent click if this was a swipe gesture
+                        if (!touchStart || !touchEnd || Math.abs(touchStart - touchEnd) < 50) {
+                          handleCurrencyClick('CRYPTO');
+                        }
+                        e.preventDefault();
+                      }}
                     >
                       <div className="balance-header-clean">
                         <div className="currency-info-clean">

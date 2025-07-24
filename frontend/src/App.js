@@ -817,8 +817,9 @@ const SellModal = ({ onClose, preselectedCrypto = null, onSellComplete }) => {
             <input
               type="number"
               value={eurAmount}
-              onChange={(e) => setEurAmount(e.target.value)}
               placeholder="0.00 EUR"
+              readOnly
+              className="readonly-input"
             />
           </div>
 

@@ -23,13 +23,16 @@ const DEMO_USER = {
   email: "carlos@akka.com",
   verified: true,
   balance_eur: 3250.45,
-  total_portfolio: 8750.30,
   crypto_portfolio: {
     BTC: { amount: 0.1250, value: 14865.25 },
     ETH: { amount: 2.5, value: 8350.00 },
     ADA: { amount: 1500, value: 1725.00 },
     DOT: { amount: 75, value: 525.00 },
     SOL: { amount: 12, value: 3168.00 }
+  },
+  // Calculate total portfolio dynamically
+  get total_portfolio() {
+    return Object.values(this.crypto_portfolio).reduce((total, crypto) => total + crypto.value, 0);
   }
 };
 

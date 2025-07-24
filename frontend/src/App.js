@@ -1548,6 +1548,10 @@ const MainApp = () => {
   const [selectedCurrencyAccount, setSelectedCurrencyAccount] = useState(null);
   const [swiperInstance, setSwiperInstance] = useState(null);
   
+  // Touch/swipe state for manual carousel
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  
   // Touch/swipe handling for manual carousel
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);

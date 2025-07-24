@@ -1706,8 +1706,11 @@ const MainApp = () => {
   };
   
   const handleCurrencyClick = (currencyCode) => {
-    setSelectedCurrencyAccount(currencyCode);
-    setShowBankAccountModal(true);
+    // Only handle click if swiper allows it (not during swipe)
+    if (swiperInstance && swiperInstance.allowClick !== false) {
+      setSelectedCurrencyAccount(currencyCode);
+      setShowBankAccountModal(true);
+    }
   };
 
   // Initialize Swiper

@@ -36,6 +36,13 @@ let DEMO_USER = {
   }
 };
 
+// User's transaction history (will be updated with new transactions)
+let USER_TRANSACTION_HISTORY = [
+  { id: Date.now() + 1, type: 'buy', crypto: 'BTC', amount: 0.025, eur_amount: 2970.50, date: '2025-01-22 14:30', status: 'completed' },
+  { id: Date.now() + 2, type: 'sell', crypto: 'ETH', amount: 0.5, eur_amount: 1670.00, date: '2025-01-22 12:15', status: 'completed' },
+  { id: Date.now() + 3, type: 'deposit', crypto: 'EUR', amount: 500.00, date: '2025-01-21 18:45', status: 'completed' }
+];
+
 // User's Multi-Currency Balances with Bank Account Info
 const CURRENCY_BALANCES = {
   EUR: { 

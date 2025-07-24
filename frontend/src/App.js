@@ -1744,6 +1744,10 @@ const MainApp = () => {
   const [settingsChanged, setSettingsChanged] = useState(false); // Track if settings need saving
   const [showTransactionSuccess, setShowTransactionSuccess] = useState(false); // Show transaction success
   const [lastTransaction, setLastTransaction] = useState(null); // Store last transaction details
+  const [userBalances, setUserBalances] = useState({ // State for user balances to force re-render
+    eur: DEMO_USER.balance_eur,
+    crypto_portfolio: { ...DEMO_USER.crypto_portfolio }
+  });
   
   // Touch/swipe state for manual carousel
   const [touchStart, setTouchStart] = useState(null);

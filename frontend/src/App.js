@@ -1715,16 +1715,28 @@ const MainApp = () => {
     const initSwiper = () => {
       if (window.Swiper && !swiperInstance) {
         const swiper = new window.Swiper('.portfolio-swiper', {
+          // Core settings
+          direction: 'horizontal',
           slidesPerView: 1,
           spaceBetween: 0,
           centeredSlides: true,
           speed: 300,
           effect: 'slide',
+          loop: false,
           
-          // Touch/drag settings
+          // Touch/drag settings for horizontal swiping
           touchRatio: 1,
           touchAngle: 45,
+          threshold: 5,
           grabCursor: true,
+          simulateTouch: true,
+          allowTouchMove: true,
+          touchStartPreventDefault: false,
+          
+          // Prevent click during swipe
+          preventClicks: true,
+          preventClicksPropagation: true,
+          slideToClickedSlide: false,
           
           // Keyboard navigation
           keyboard: {
@@ -1732,7 +1744,7 @@ const MainApp = () => {
             onlyInViewport: true,
           },
           
-          // Mouse wheel
+          // Disable mouse wheel
           mousewheel: {
             enabled: false,
           },
@@ -1745,7 +1757,7 @@ const MainApp = () => {
             bulletActiveClass: 'portfolio-bullet-active',
           },
           
-          // Navigation arrows (keep for accessibility)
+          // Navigation arrows
           navigation: {
             nextEl: '.portfolio-nav-next',
             prevEl: '.portfolio-nav-prev',
@@ -1756,6 +1768,16 @@ const MainApp = () => {
             slideChange: function() {
               setCurrentCurrencyIndex(this.activeIndex);
             },
+            touchStart: function() {
+              // Disable click events during touch
+              this.allowClick = false;
+            },
+            touchEnd: function() {
+              // Re-enable click events after a short delay
+              setTimeout(() => {
+                this.allowClick = true;
+              }, 300);
+            }
           },
         });
         

@@ -749,8 +749,20 @@ const SellModal = ({ onClose, preselectedCrypto = null, onSellComplete }) => {
   
   const userCryptos = Object.keys(DEMO_USER.crypto_portfolio);
 
+  // Calculate EUR amount when crypto amount changes
+  useEffect(() => {
+    if (amount && selectedCrypto && DEMO_USER.crypto_portfolio[selectedCrypto]) {
+      const cryptoData = DEMO_USER.crypto_portfolio[selectedCrypto];
+      const pricePerUnit = cryptoData.value / cryptoData.amount;
+      const calculatedEurAmount = (parseFloat(amount) * pricePerUnit).toFixed(2);
+      setEurAmount(calculatedEurAmount);
+    } else {
+      setEurAmount('');
+    }
+  }, [amount, selectedCrypto]);
+
   const handleSell = () => {
-    if (onSellComplete) {
+    if (onSellComplete && amount && eurAmount) {
       onSellComplete(selectedCrypto, amount, eurAmount);
     } else {
       alert(`Sell order placed: ${amount} ${selectedCrypto} for €${eurAmount}`);

@@ -3278,6 +3278,159 @@ input:checked + .slider:before {
   font-weight: 700;
 }
 
+/* Header User Greeting */
+.user-greeting {
+  margin-top: 8px;
+  text-align: left;
+}
+
+.user-greeting span {
+  font-size: 16px;
+  color: white;
+  font-weight: 600;
+  display: block;
+  margin-bottom: 4px;
+}
+
+.user-greeting .verification-badge {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.user-greeting .verified-icon {
+  color: var(--akka-success);
+  font-size: 12px;
+  font-weight: bold;
+}
+
+.user-greeting .verification-badge {
+  font-size: 12px;
+  color: var(--akka-gray-300);
+}
+
+/* Simplified Portfolio Summary with Slider */
+.portfolio-summary {
+  margin: 20px 0;
+}
+
+.portfolio-slider-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.portfolio-nav-btn {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--akka-border);
+  border-radius: 50%;
+  background: var(--akka-surface);
+  color: var(--akka-gray-600);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.portfolio-nav-btn:hover {
+  border-color: var(--akka-accent);
+  color: var(--akka-accent);
+  transform: scale(1.05);
+}
+
+.portfolio-slide-wrapper {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.portfolio-slides {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.portfolio-slide {
+  min-width: 100%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.portfolio-slide:hover {
+  transform: scale(1.02);
+}
+
+.balance-header-portfolio {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.currency-info-portfolio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.currency-flag-main {
+  font-size: 20px;
+}
+
+.currency-details-portfolio {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.currency-code-main {
+  font-size: 11px;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+.balance-change-portfolio {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 8px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.balance-amount-main {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 8px;
+}
+
+.tap-hint-portfolio {
+  text-align: center;
+}
+
+.tap-hint-portfolio span {
+  font-size: 11px;
+  opacity: 0.7;
+  font-style: italic;
+  color: white;
+}
+
+.portfolio-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.balance-card.crypto {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
 /* Bottom Navigation */
 .akka-nav {
   position: fixed;

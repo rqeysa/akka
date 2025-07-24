@@ -846,7 +846,7 @@ const SellModal = ({ onClose, preselectedCrypto = null, onSellComplete }) => {
 };
 
 // Send Modal Component  
-const SendModal = ({ onClose, onSendComplete }) => {
+const SendModal = ({ onClose, onSendComplete, userBalances }) => {
   const [sendType, setSendType] = useState('crypto'); // 'crypto' or 'fiat'
   const [selectedCurrency, setSelectedCurrency] = useState('');
   const [amount, setAmount] = useState('');
@@ -856,7 +856,7 @@ const SendModal = ({ onClose, onSendComplete }) => {
   
   const userCryptos = Object.keys(DEMO_USER.crypto_portfolio);
   const fiatCurrencies = [
-    { code: 'EUR', name: 'Euro', balance: DEMO_USER.balance_eur },
+    { code: 'EUR', name: 'Euro', balance: userBalances.eur },
     { code: 'USD', name: 'US Dollar', balance: 2650.75 }, // Mock USD balance
     { code: 'TRY', name: 'Turkish Lira', balance: 5420.30 } // Mock TRY balance
   ];

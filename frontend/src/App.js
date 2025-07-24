@@ -1665,6 +1665,7 @@ const MainApp = () => {
   const [selectedCurrencyAccount, setSelectedCurrencyAccount] = useState(null);
   const [showCryptoPortfolioModal, setShowCryptoPortfolioModal] = useState(false);
   const [swiperInstance, setSwiperInstance] = useState(null);
+  const [currentLanguage, setCurrentLanguage] = useState('English'); // Language state
   
   // Touch/swipe state for manual carousel
   const [touchStart, setTouchStart] = useState(null);

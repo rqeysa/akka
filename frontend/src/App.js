@@ -1237,7 +1237,9 @@ const MainApp = () => {
   const [showCardsSection, setShowCardsSection] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [cryptoSearchQuery, setCryptoSearchQuery] = useState('');
-  const [selectedCurrency, setSelectedCurrency] = useState('EUR'); // EUR, USD, TRY, GBP
+  const [currentCurrencyIndex, setCurrentCurrencyIndex] = useState(0); // For sliding
+  const [showBankAccountModal, setShowBankAccountModal] = useState(false);
+  const [selectedCurrencyAccount, setSelectedCurrencyAccount] = useState(null);
 
   useEffect(() => {
     fetchCryptoPrices();

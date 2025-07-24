@@ -3427,6 +3427,63 @@ input:checked + .slider:before {
   background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
 }
 
+/* Portfolio card content styles */
+.balance-header-portfolio {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 12px;
+}
+
+.currency-info-portfolio {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.currency-flag-main {
+  font-size: 20px;
+}
+
+.currency-details-portfolio {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.currency-code-main {
+  font-size: 11px;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+.balance-change-portfolio {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 8px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.balance-amount-main {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+  margin-bottom: 8px;
+}
+
+.tap-hint-portfolio {
+  text-align: center;
+}
+
+.tap-hint-portfolio span {
+  font-size: 11px;
+  opacity: 0.7;
+  font-style: italic;
+  color: white;
+}
+
 /* Bottom Navigation */
 .akka-nav {
   position: fixed;

@@ -742,7 +742,7 @@ const BuySellModal = ({ crypto, onClose, onConfirm }) => {
 };
 
 // Sell Modal Component
-const SellModal = ({ onClose, preselectedCrypto = null }) => {
+const SellModal = ({ onClose, preselectedCrypto = null, onSellComplete }) => {
   const [selectedCrypto, setSelectedCrypto] = useState(preselectedCrypto?.symbol || '');
   const [amount, setAmount] = useState('');
   const [eurAmount, setEurAmount] = useState('');
@@ -750,7 +750,11 @@ const SellModal = ({ onClose, preselectedCrypto = null }) => {
   const userCryptos = Object.keys(DEMO_USER.crypto_portfolio);
 
   const handleSell = () => {
-    alert(`Sell order placed: ${amount} ${selectedCrypto} for €${eurAmount}`);
+    if (onSellComplete) {
+      onSellComplete(selectedCrypto, amount, eurAmount);
+    } else {
+      alert(`Sell order placed: ${amount} ${selectedCrypto} for €${eurAmount}`);
+    }
     onClose();
   };
 

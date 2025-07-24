@@ -1779,6 +1779,7 @@ const MainApp = () => {
                     className="portfolio-slides" 
                     style={{transform: `translateX(-${currentCurrencyIndex * 100}%)`}}
                   >
+                    {/* Currency slides */}
                     {currencyKeys.map((currencyCode, index) => {
                       const currency = CURRENCY_BALANCES[currencyCode];
                       return (
@@ -1814,13 +1815,8 @@ const MainApp = () => {
                         </div>
                       );
                     })}
-                  </div>
-                  
-                  {/* Add crypto portfolio slide */}
-                  <div 
-                    className="portfolio-slides crypto-portfolio-slide" 
-                    style={{transform: `translateX(-${currentCurrencyIndex * 100}%)`}}
-                  >
+                    
+                    {/* Crypto portfolio slide */}
                     <div className="portfolio-slide">
                       <div className="balance-card main crypto">
                         <div className="balance-header-portfolio">
@@ -1839,6 +1835,10 @@ const MainApp = () => {
                         <div className="balance-amount-main">
                           €{DEMO_USER.total_portfolio.toLocaleString()}
                         </div>
+                        
+                        <div className="tap-hint-portfolio">
+                          <span>Your crypto investments</span>
+                        </div>
                       </div>
                     </div>
                   </div>
@@ -1850,7 +1850,7 @@ const MainApp = () => {
               </div>
               
               <div className="portfolio-indicators">
-                {[...currencyKeys, 'crypto'].map((_, index) => (
+                {Array.from({length: totalSlides}).map((_, index) => (
                   <span
                     key={index}
                     className={`indicator ${index === currentCurrencyIndex ? 'active' : ''}`}

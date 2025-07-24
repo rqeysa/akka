@@ -1858,6 +1858,8 @@ const MainApp = () => {
     setSelectedCrypto({ symbol: cryptoSymbol, name: cryptoSymbol });
     setShowSellModal(true);
   };
+
+  const handleCurrencyClick = (currencyCode) => {
     // Only allow click if not currently swiping
     if (!touchStart) { // Only allow click if not in a swipe gesture
       if (currencyCode === 'CRYPTO') {

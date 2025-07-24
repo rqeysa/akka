@@ -3149,6 +3149,105 @@ const MainApp = () => {
   );
 };
 
+// Transaction Success Modal Component
+const TransactionSuccessModal = ({ transaction, onClose }) => {
+  if (!transaction) return null;
+
+  const getSuccessMessage = () => {
+    switch (transaction.type) {
+      case 'buy':
+        return `Successfully purchased ${transaction.amount} ${transaction.crypto}!`;
+      case 'sell':
+        return `Successfully sold ${transaction.amount} ${transaction.crypto}!`;
+      case 'send':
+        return `Successfully sent ${transaction.amount} ${transaction.crypto}!`;
+      default:
+        return 'Transaction completed successfully!';
+    }
+  };
+
+  const getBalanceInfo = () => {
+    if (transaction.type === 'buy' || transaction.type === 'sell') {
+      return (
+        <>
+          <div className="balance-update">
+            <span className="balance-label">{transaction.crypto} Balance:</span>
+            <span className="balance-value">{transaction.currentBalance} {transaction.crypto}</span>
+          </div>
+          <div className="balance-update">
+            <span className="balance-label">EUR Balance:</span>
+            <span className="balance-value">€{transaction.currentEurBalance.toFixed(2)}</span>
+          </div>
+        </>
+      );
+    } else if (transaction.type === 'send') {
+      return (
+        <div className="balance-update">
+          <span className="balance-label">Remaining {transaction.crypto} Balance:</span>
+          <span className="balance-value">{transaction.currentBalance} {transaction.crypto}</span>
+        </div>
+      );
+    }
+  };
+
+  return (
+    <div className="modal-overlay">
+      <div className="transaction-success-modal">
+        <div className="success-header">
+          <div className="success-icon">✅</div>
+          <h3>Transaction Successful!</h3>
+        </div>
+        
+        <div className="success-content">
+          <div className="transaction-details">
+            <h4>{getSuccessMessage()}</h4>
+            
+            <div className="transaction-summary">
+              <div className="summary-row">
+                <span>Amount:</span>
+                <span className="highlight">{transaction.amount} {transaction.crypto}</span>
+              </div>
+              
+              {transaction.eur_amount && (
+                <div className="summary-row">
+                  <span>Value:</span>
+                  <span className="highlight">€{transaction.eur_amount.toFixed(2)}</span>
+                </div>
+              )}
+              
+              <div className="summary-row">
+                <span>Date:</span>
+                <span>{transaction.date}</span>
+              </div>
+              
+              {transaction.recipient && (
+                <div className="summary-row">
+                  <span>Recipient:</span>
+                  <span>{transaction.recipient}</span>
+                </div>
+              )}
+            </div>
+
+            <div className="current-balances">
+              <h5>Updated Balances:</h5>
+              {getBalanceInfo()}
+            </div>
+          </div>
+          
+          <div className="success-actions">
+            <button className="btn-secondary" onClick={onClose}>
+              View Portfolio
+            </button>
+            <button className="btn-primary" onClick={onClose}>
+              Continue Trading
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Auth Provider Component
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);

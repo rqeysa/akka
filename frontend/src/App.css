@@ -2836,32 +2836,15 @@ input:checked + .slider:before {
   margin-bottom: 16px;
 }
 
-.currency-nav-btn {
-  width: 40px;
-  height: 40px;
-  border: 2px solid var(--akka-border);
-  border-radius: 50%;
-  background: var(--akka-surface);
-  color: var(--akka-gray-600);
-  font-size: 18px;
-  font-weight: 700;
-  cursor: pointer;
-  transition: all 0.2s ease;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-}
-
-.currency-nav-btn:hover {
-  border-color: var(--akka-accent);
-  color: var(--akka-accent);
-  transform: scale(1.05);
-}
-
 .currency-slide-wrapper {
   flex: 1;
   overflow: hidden;
-  border-radius: 16px;
+  border-radius: 12px;
+  cursor: grab;
+}
+
+.currency-slide-wrapper:active {
+  cursor: grabbing;
 }
 
 .currency-slides {
@@ -2871,16 +2854,7 @@ input:checked + .slider:before {
 
 .currency-slide {
   min-width: 100%;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.currency-slide:hover {
-  transform: scale(1.02);
-}
-
-.currency-slide .currency-balance-card {
-  margin: 0;
+  flex-shrink: 0;
 }
 
 .tap-hint {

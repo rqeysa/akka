@@ -2451,6 +2451,14 @@ const MainApp = () => {
           onClose={() => setShowReceiveModal(false)}
         />
       )}
+
+      {/* Bank Account Modal */}
+      {showBankAccountModal && (
+        <BankAccountModal
+          currencyCode={selectedCurrencyAccount}
+          onClose={() => setShowBankAccountModal(false)}
+        />
+      )}
     </div>
   );
 };

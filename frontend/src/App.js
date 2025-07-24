@@ -2298,7 +2298,7 @@ const MainApp = () => {
 
       {/* Main Content */}
       <main className="akka-main">
-        {activeTab === 'home' && !showCardsSection && (
+        {activeTab === 'home' && (
           <div className="home-content">
             {/* Clean Currency Balance Carousel - No Container Box */}
             <div className="currency-slider-container">

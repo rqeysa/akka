@@ -2740,10 +2740,16 @@ const MainApp = () => {
                     </div>
                     <div className="setting-item">
                       <span className="setting-title">Language</span>
-                      <select className="setting-select">
-                        <option>English</option>
-                        <option>Türkçe</option>
-                        <option>Deutsch</option>
+                      <select 
+                        className="setting-select" 
+                        value={currentLanguage}
+                        onChange={(e) => handleLanguageChange(e.target.value)}
+                      >
+                        <option value="English">English</option>
+                        <option value="Türkçe">Türkçe</option>
+                        <option value="Deutsch">Deutsch</option>
+                        <option value="Español">Español</option>
+                        <option value="Français">Français</option>
                       </select>
                     </div>
                     <div className="setting-item">

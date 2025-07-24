@@ -1881,6 +1881,68 @@ const MainApp = () => {
     alert(`Settings saved! Language set to ${currentLanguage}. Full app translation coming soon!`);
   };
 
+  // Simulate buying crypto and update portfolio
+  const simulateBuyCrypto = (crypto, amount, eurAmount) => {
+    // Update crypto portfolio
+    if (DEMO_USER.crypto_portfolio[crypto.symbol]) {
+      DEMO_USER.crypto_portfolio[crypto.symbol].amount += parseFloat(amount);
+      DEMO_USER.crypto_portfolio[crypto.symbol].value += parseFloat(eurAmount);
+    } else {
+      // Add new crypto to portfolio
+      DEMO_USER.crypto_portfolio[crypto.symbol] = {
+        amount: parseFloat(amount),
+        value: parseFloat(eurAmount)
+      };
+    }
+    
+    // Deduct EUR from balance
+    DEMO_USER.balance_eur -= parseFloat(eurAmount);
+    
+    // Force re-render by updating currency balances
+    setCurrentCurrencyIndex(currentCurrencyIndex);
+    
+    alert(`✅ Purchase successful! Bought ${amount} ${crypto.symbol} for €${eurAmount}. Check your portfolio!`);
+  };
+
+  // Simulate selling crypto and update portfolio
+  const simulateSellCrypto = (cryptoSymbol, amount, eurAmount) => {
+    if (DEMO_USER.crypto_portfolio[cryptoSymbol]) {
+      // Reduce crypto amount and value
+      DEMO_USER.crypto_portfolio[cryptoSymbol].amount -= parseFloat(amount);
+      DEMO_USER.crypto_portfolio[cryptoSymbol].value -= parseFloat(eurAmount);
+      
+      // If amount becomes 0 or negative, remove from portfolio
+      if (DEMO_USER.crypto_portfolio[cryptoSymbol].amount <= 0) {
+        delete DEMO_USER.crypto_portfolio[cryptoSymbol];
+      }
+      
+      // Add EUR to balance
+      DEMO_USER.balance_eur += parseFloat(eurAmount);
+      
+      // Force re-render
+      setCurrentCurrencyIndex(currentCurrencyIndex);
+      
+      alert(`✅ Sale successful! Sold ${amount} ${cryptoSymbol} for €${eurAmount}. EUR added to your balance!`);
+    }
+  };
+
+  // Simulate sending money
+  const simulateSendMoney = (currency, amount, recipient) => {
+    if (currency === 'EUR') {
+      DEMO_USER.balance_eur -= parseFloat(amount);
+    } else if (DEMO_USER.crypto_portfolio[currency]) {
+      DEMO_USER.crypto_portfolio[currency].amount -= parseFloat(amount);
+      // Recalculate value proportionally
+      const ratio = DEMO_USER.crypto_portfolio[currency].amount / (DEMO_USER.crypto_portfolio[currency].amount + parseFloat(amount));
+      DEMO_USER.crypto_portfolio[currency].value *= ratio;
+    }
+    
+    // Force re-render
+    setCurrentCurrencyIndex(currentCurrencyIndex);
+    
+    alert(`✅ Transfer successful! Sent ${amount} ${currency} to ${recipient}. Check your updated balance!`);
+  };
+
   // Handle selling crypto from portfolio
   const handleSellFromPortfolio = (cryptoSymbol) => {
     setSelectedCrypto({ symbol: cryptoSymbol, name: cryptoSymbol });

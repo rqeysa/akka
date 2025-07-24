@@ -3084,6 +3084,29 @@ input:checked + .slider:before {
   margin-bottom: 12px;
 }
 
+.crypto-value {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.sell-crypto-btn {
+  background: var(--akka-error);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.sell-crypto-btn:hover {
+  background: #DC2626;
+  transform: translateY(-1px);
+}
+
 .crypto-info {
   display: flex;
   align-items: center;

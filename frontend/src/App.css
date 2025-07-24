@@ -3373,6 +3373,10 @@ input:checked + .slider:before {
 .portfolio-swiper .swiper-slide .balance-card {
   margin: 0;
   height: 100%;
+  /* Compact card sizing */
+  padding: 16px;
+  min-height: 120px;
+  max-height: 140px;
 }
 
 /* Custom Pagination Dots */

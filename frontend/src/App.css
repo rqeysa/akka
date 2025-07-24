@@ -3309,12 +3309,12 @@ input:checked + .slider:before {
   color: var(--akka-gray-300);
 }
 
-/* Simplified Portfolio Summary with Slider */
+/* Swiper Portfolio Styles */
 .portfolio-summary {
   margin: 20px 0;
 }
 
-.portfolio-slider-container {
+.portfolio-swiper-container {
   display: flex;
   align-items: center;
   gap: 12px;
@@ -3335,6 +3335,7 @@ input:checked + .slider:before {
   display: flex;
   align-items: center;
   justify-content: center;
+  z-index: 10;
 }
 
 .portfolio-nav-btn:hover {
@@ -3343,88 +3344,83 @@ input:checked + .slider:before {
   transform: scale(1.05);
 }
 
-.portfolio-slide-wrapper {
+.portfolio-nav-btn:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+  transform: none;
+}
+
+.portfolio-swiper {
   flex: 1;
-  overflow: hidden;
+  border-radius: 16px;
+  overflow: visible !important;
+}
+
+.portfolio-swiper .swiper-wrapper {
+  align-items: stretch;
+}
+
+.portfolio-swiper .swiper-slide {
+  cursor: pointer;
+  transition: transform 0.2s ease;
   border-radius: 16px;
 }
 
-.portfolio-slides {
-  display: flex;
-  transition: transform 0.3s ease;
-}
-
-.portfolio-slide {
-  min-width: 100%;
-  cursor: pointer;
-  transition: transform 0.2s ease;
-}
-
-.portfolio-slide:hover {
+.portfolio-swiper .swiper-slide:hover {
   transform: scale(1.02);
 }
 
-.balance-header-portfolio {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  margin-bottom: 12px;
+.portfolio-swiper .swiper-slide .balance-card {
+  margin: 0;
+  height: 100%;
 }
 
-.currency-info-portfolio {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.currency-flag-main {
-  font-size: 20px;
-}
-
-.currency-details-portfolio {
-  display: flex;
-  flex-direction: column;
-  gap: 2px;
-}
-
-.currency-code-main {
-  font-size: 11px;
-  opacity: 0.7;
-  font-weight: 500;
-}
-
-.balance-change-portfolio {
-  background: rgba(255, 255, 255, 0.15);
-  padding: 4px 8px;
-  border-radius: 12px;
-  backdrop-filter: blur(10px);
-}
-
-.balance-amount-main {
-  font-size: 32px;
-  font-weight: 700;
-  line-height: 1.2;
-  color: white;
-  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
-  margin-bottom: 8px;
-}
-
-.tap-hint-portfolio {
-  text-align: center;
-}
-
-.tap-hint-portfolio span {
-  font-size: 11px;
-  opacity: 0.7;
-  font-style: italic;
-  color: white;
-}
-
-.portfolio-indicators {
+/* Custom Pagination Dots */
+.portfolio-pagination {
   display: flex;
   justify-content: center;
   gap: 8px;
   margin-top: 12px;
+}
+
+.portfolio-bullet {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--akka-gray-300);
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+.portfolio-bullet-active {
+  background: var(--akka-accent) !important;
+  transform: scale(1.2);
+}
+
+.portfolio-bullet:hover {
+  background: var(--akka-accent);
+  opacity: 0.7;
+}
+
+/* Swiper overrides */
+.portfolio-swiper .swiper-slide-active {
+  z-index: 2;
+}
+
+.portfolio-swiper .swiper-slide-prev,
+.portfolio-swiper .swiper-slide-next {
+  z-index: 1;
+}
+
+/* Remove old slider styles that are no longer needed */
+.portfolio-slider-container,
+.portfolio-slide-wrapper,
+.portfolio-slides,
+.portfolio-slide,
+.portfolio-indicators,
+.indicator {
+  /* These classes are now handled by Swiper */
 }
 
 .balance-card.crypto {

@@ -2935,6 +2935,7 @@ const MainApp = () => {
       {showCryptoPortfolioModal && (
         <CryptoPortfolioModal 
           onClose={() => setShowCryptoPortfolioModal(false)}
+          onSellCrypto={handleSellFromPortfolio}
         />
       )}
     </div>

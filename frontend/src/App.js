@@ -2886,6 +2886,12 @@ const MainApp = () => {
           onClose={() => setShowBankAccountModal(false)}
         />
       )}
+      
+      {showCryptoPortfolioModal && (
+        <CryptoPortfolioModal 
+          onClose={() => setShowCryptoPortfolioModal(false)}
+        />
+      )}
     </div>
   );
 };

@@ -1926,95 +1926,89 @@ const MainApp = () => {
       <main className="akka-main">
         {activeTab === 'home' && !showCardsSection && (
           <div className="home-content">
-            {/* Compact Currency Balance Carousel */}
-            <div className="currency-balance-section">
-              <div className="currency-slider-container">
+            {/* Clean Currency Balance Carousel - No Container Box */}
+            <div className="currency-slider-container">
+              <div 
+                className="currency-slide-wrapper"
+                onTouchStart={handleTouchStart}
+                onTouchMove={handleTouchMove}
+                onTouchEnd={handleTouchEnd}
+              >
                 <div 
-                  className="currency-slide-wrapper"
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
+                  className="currency-slides"
+                  style={{ transform: `translateX(-${currentCurrencyIndex * 100}%)` }}
                 >
-                  <div 
-                    className="currency-slides"
-                    style={{ transform: `translateX(-${currentCurrencyIndex * 100}%)` }}
-                  >
-                    {/* Currency slides */}
-                    {currencyKeys.map((currencyCode) => {
-                      const currency = CURRENCY_BALANCES[currencyCode];
-                      return (
-                        <div 
-                          key={currencyCode} 
-                          className="currency-slide"
-                          onClick={() => handleCurrencyClick(currencyCode)}
-                        >
-                          <div className="currency-balance-card">
-                            <div className="balance-header">
-                              <div className="currency-info">
-                                <span className="currency-flag-large">{currency.flag}</span>
-                                <div className="currency-details">
-                                  <span className="currency-name">{currency.name} Balance</span>
-                                  <span className="currency-code-small">{currencyCode}</span>
-                                </div>
-                              </div>
-                              <div className="balance-change">
-                                <span className={`change-indicator ${currency.change_24h >= 0 ? 'positive' : 'negative'}`}>
-                                  {currency.change_24h >= 0 ? '+' : ''}{currency.change_24h}%
-                                </span>
+                  {/* Currency slides */}
+                  {currencyKeys.map((currencyCode) => {
+                    const currency = CURRENCY_BALANCES[currencyCode];
+                    return (
+                      <div 
+                        key={currencyCode} 
+                        className="currency-slide"
+                        onClick={() => handleCurrencyClick(currencyCode)}
+                      >
+                        <div className="clean-balance-card">
+                          <div className="balance-header-clean">
+                            <div className="currency-info-clean">
+                              <span className="currency-flag-large">{currency.flag}</span>
+                              <div className="currency-details-clean">
+                                <span className="currency-name-clean">{currency.name} Balance</span>
+                                <span className="currency-code-clean">{currencyCode}</span>
                               </div>
                             </div>
-                            
-                            <div className="main-balance">
-                              <div className="balance-amount">
-                                {currency.symbol}{currency.balance.toLocaleString()}
-                              </div>
+                            <div className="balance-change-clean">
+                              <span className={`change-indicator ${currency.change_24h >= 0 ? 'positive' : 'negative'}`}>
+                                {currency.change_24h >= 0 ? '+' : ''}{currency.change_24h}%
+                              </span>
+                            </div>
+                          </div>
+                          
+                          <div className="main-balance-clean">
+                            <div className="balance-amount-clean">
+                              {currency.symbol}{currency.balance.toLocaleString()}
                             </div>
                           </div>
                         </div>
-                      );
-                    })}
-                    
-                    {/* Crypto portfolio slide */}
-                    <div className="currency-slide">
-                      <div className="currency-balance-card">
-                        <div className="balance-header">
-                          <div className="currency-info">
-                            <span className="currency-flag-large">₿</span>
-                            <div className="currency-details">
-                              <span className="currency-name">Total portfolio value</span>
-                              <span className="currency-code-small">CRYPTO</span>
-                            </div>
-                          </div>
-                          <div className="balance-change">
-                            <span className="change-indicator positive">+2.23%</span>
+                      </div>
+                    );
+                  })}
+                  
+                  {/* Crypto portfolio slide */}
+                  <div className="currency-slide">
+                    <div className="clean-balance-card crypto">
+                      <div className="balance-header-clean">
+                        <div className="currency-info-clean">
+                          <span className="currency-flag-large">₿</span>
+                          <div className="currency-details-clean">
+                            <span className="currency-name-clean">Total portfolio value</span>
+                            <span className="currency-code-clean">CRYPTO</span>
                           </div>
                         </div>
-                        
-                        <div className="main-balance">
-                          <div className="balance-amount">
-                            €{DEMO_USER.total_portfolio.toLocaleString()}
-                          </div>
+                        <div className="balance-change-clean">
+                          <span className="change-indicator positive">+2.23%</span>
+                        </div>
+                      </div>
+                      
+                      <div className="main-balance-clean">
+                        <div className="balance-amount-clean">
+                          €{DEMO_USER.total_portfolio.toLocaleString()}
                         </div>
                       </div>
                     </div>
                   </div>
                 </div>
               </div>
-              
-              {/* Pagination indicators */}
-              <div className="currency-indicators">
-                {[...currencyKeys, 'CRYPTO'].map((_, index) => (
-                  <button
-                    key={index}
-                    className={`indicator ${index === currentCurrencyIndex ? 'active' : ''}`}
-                    onClick={() => setCurrentCurrencyIndex(index)}
-                  />
-                ))}
-              </div>
-              
-              <div className="tap-hint">
-                <span>Swipe left or right to see other accounts</span>
-              </div>
+            </div>
+            
+            {/* Pagination indicators */}
+            <div className="currency-indicators-clean">
+              {[...currencyKeys, 'CRYPTO'].map((_, index) => (
+                <button
+                  key={index}
+                  className={`indicator-clean ${index === currentCurrencyIndex ? 'active' : ''}`}
+                  onClick={() => setCurrentCurrencyIndex(index)}
+                />
+              ))}
             </div>
 
             {/* Quick Actions */}

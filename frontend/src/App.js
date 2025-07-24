@@ -1825,9 +1825,7 @@ const MainApp = () => {
     }
   };
   
-  const handleTabChange = (tab) => {
-    setActiveTab(tab);
-  };
+
 
   const handleCurrencyClick = (currencyCode) => {
     // Only allow click if not currently swiping

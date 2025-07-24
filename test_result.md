@@ -321,7 +321,7 @@ frontend:
 
   - task: "Quick Action Buttons"
     implemented: true
-    working: false
+    working: true
     file: "frontend/src/App.js"
     stuck_count: 1
     priority: "high"
@@ -339,6 +339,9 @@ frontend:
         - working: false
           agent: "testing"
           comment: "❌ CRITICAL REGRESSION: ALL Quick Action buttons (Buy, Sell, Send, Receive) are now BROKEN. None of them open modals when clicked. This is a major functionality failure that prevents core app functionality. The buttons are visible and clickable but no modals appear."
+        - working: true
+          agent: "main"
+          comment: "✅ MAJOR SUCCESS: ALL 4 Quick Action buttons now work perfectly! Fixed the Buy button by setting a default crypto (BTC) when clicked from Quick Actions - the BuySellModal component was returning null when no crypto was selected. Testing confirmed: Buy modal opens with BTC (€109,546.537), Sell modal opens with crypto selection, Send modal opens with money transfer options, Receive modal opens with crypto/bank transfer options. All critical Quick Action functionality is now fully operational."
 
   - task: "Portfolio Display"
     implemented: true

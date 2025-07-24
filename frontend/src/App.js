@@ -1699,14 +1699,14 @@ const MainApp = () => {
   const currentCurrency = currencyKeys[currentCurrencyIndex];
   
   const nextCurrency = () => {
-    if (swiperInstance) {
-      swiperInstance.slideNext();
+    if (currentCurrencyIndex < totalSlides - 1) {
+      setCurrentCurrencyIndex(currentCurrencyIndex + 1);
     }
   };
   
   const prevCurrency = () => {
-    if (swiperInstance) {
-      swiperInstance.slidePrev();
+    if (currentCurrencyIndex > 0) {
+      setCurrentCurrencyIndex(currentCurrencyIndex - 1);
     }
   };
   

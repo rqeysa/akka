@@ -2437,7 +2437,7 @@ const MainApp = () => {
                 <button className="see-all-btn" onClick={() => handleTabChange('history')}>View all</button>
               </div>
               <div className="transactions-list">
-                {RECENT_TRANSACTIONS.slice(0, 3).map(transaction => (
+                {USER_TRANSACTION_HISTORY.slice(0, 3).map(transaction => (
                   <TransactionItem key={transaction.id} transaction={transaction} />
                 ))}
               </div>

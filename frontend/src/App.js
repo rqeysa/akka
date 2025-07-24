@@ -3027,6 +3027,7 @@ const MainApp = () => {
       {showSendModal && (
         <SendModal
           onClose={() => setShowSendModal(false)}
+          onSendComplete={simulateSendMoney}
         />
       )}
 

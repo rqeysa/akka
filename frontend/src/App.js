@@ -1733,7 +1733,6 @@ const MainApp = () => {
   const [showReceiveModal, setShowReceiveModal] = useState(false);
   const [profilePage, setProfilePage] = useState('main'); // main, personal, security, payment, docs, help, settings
   const [historyFilter, setHistoryFilter] = useState('all'); // all, buys, sells, sends, receives
-  const [showCardsSection, setShowCardsSection] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [cryptoSearchQuery, setCryptoSearchQuery] = useState('');
   const [currentCurrencyIndex, setCurrentCurrencyIndex] = useState(0); // For sliding

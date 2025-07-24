@@ -16,8 +16,8 @@ const useAuth = () => {
   return context;
 };
 
-// Mock user data for demo
-const DEMO_USER = {
+// Mock user data for demo - now mutable for transaction simulation
+let DEMO_USER = {
   id: "demo-user-123",
   name: "Carlos Martinez",
   email: "carlos@akka.com",

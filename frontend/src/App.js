@@ -1360,6 +1360,120 @@ const CardsSection = ({ onClose }) => {
   );
 };
 
+// Crypto Portfolio Modal Component
+const CryptoPortfolioModal = ({ onClose }) => {
+  const cryptoAddresses = {
+    BTC: {
+      address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',
+      balance: DEMO_USER.crypto_portfolio.BTC.amount,
+      value: DEMO_USER.crypto_portfolio.BTC.value,
+      name: 'Bitcoin'
+    },
+    ETH: {
+      address: '0x742d35Cc6634C0532925a3b8D87f2B08A1',
+      balance: DEMO_USER.crypto_portfolio.ETH.amount,
+      value: DEMO_USER.crypto_portfolio.ETH.value,
+      name: 'Ethereum'
+    },
+    ADA: {
+      address: 'addr1qxy2lpan99fcnr3qkm8uw5adyy7fx9382',
+      balance: DEMO_USER.crypto_portfolio.ADA.amount,
+      value: DEMO_USER.crypto_portfolio.ADA.value,
+      name: 'Cardano'
+    },
+    DOT: {
+      address: '13UVJyLnbVp77Z2t6rN2fD3UZEYfUq84Hs',
+      balance: DEMO_USER.crypto_portfolio.DOT.amount,
+      value: DEMO_USER.crypto_portfolio.DOT.value,
+      name: 'Polkadot'
+    },
+    SOL: {
+      address: 'DYw8jCTfwHNRJhhmFcbXvVDTqWMEVFBX6Z',
+      balance: DEMO_USER.crypto_portfolio.SOL.amount,
+      value: DEMO_USER.crypto_portfolio.SOL.value,
+      name: 'Solana'
+    }
+  };
+
+  const copyToClipboard = (text, type) => {
+    navigator.clipboard.writeText(text);
+    alert(`${type} copied to clipboard!`);
+  };
+
+  return (
+    <div className="modal-overlay">
+      <div className="crypto-portfolio-modal">
+        <div className="modal-header">
+          <h3>My Crypto Portfolio</h3>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
+        
+        <div className="modal-content">
+          {/* Portfolio Summary */}
+          <div className="crypto-portfolio-summary">
+            <div className="portfolio-total">
+              <span className="portfolio-label">Total Portfolio Value</span>
+              <span className="portfolio-amount">€{DEMO_USER.total_portfolio.toLocaleString()}</span>
+            </div>
+            <div className="portfolio-change">
+              <span className="change-indicator positive">+2.23% (24h)</span>
+            </div>
+          </div>
+
+          {/* Crypto Assets */}
+          <div className="crypto-assets-section">
+            <h4>Your Crypto Assets</h4>
+            {Object.entries(cryptoAddresses).map(([symbol, crypto]) => (
+              <div key={symbol} className="crypto-asset-item">
+                <div className="crypto-asset-header">
+                  <div className="crypto-info">
+                    <div className={`crypto-icon ${symbol.toLowerCase()}`}>
+                      {symbol.charAt(0)}
+                    </div>
+                    <div className="crypto-details">
+                      <span className="crypto-name">{crypto.name} ({symbol})</span>
+                      <span className="crypto-balance">{crypto.balance} {symbol}</span>
+                    </div>
+                  </div>
+                  <div className="crypto-value">
+                    <span className="value-eur">€{crypto.value.toLocaleString()}</span>
+                  </div>
+                </div>
+                
+                <div className="crypto-address-section">
+                  <span className="address-label">Your {symbol} Address:</span>
+                  <div className="address-container">
+                    <span className="crypto-address">{crypto.address}</span>
+                    <button 
+                      className="copy-address-btn" 
+                      onClick={() => copyToClipboard(crypto.address, `${symbol} Address`)}
+                    >
+                      Copy
+                    </button>
+                  </div>
+                </div>
+              </div>
+            ))}
+          </div>
+
+          {/* Quick Actions */}
+          <div className="crypto-actions-section">
+            <button className="crypto-action-btn buy">
+              📈 Buy More Crypto
+            </button>
+            <button className="crypto-action-btn sell">
+              📉 Sell Crypto
+            </button>
+            <button className="crypto-action-btn send">
+              📤 Send Crypto
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Bank Account Details Modal
 const BankAccountModal = ({ currencyCode, onClose }) => {
   if (!currencyCode || !CURRENCY_BALANCES[currencyCode]) return null;

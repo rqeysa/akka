@@ -2676,7 +2676,7 @@ function App() {
 
 // Auth Wrapper Component
 const AuthWrapper = ({ authMode, setAuthMode }) => {
-  const { user, login, signup, loading } = useAuth();
+  const { user, login, signup, loading, isPasscodeRequired } = useAuth();
 
   if (loading) {
     return (
@@ -2690,12 +2690,17 @@ const AuthWrapper = ({ authMode, setAuthMode }) => {
     );
   }
 
-  // If user is logged in, show main app
-  if (user) {
+  // Show passcode entry if user is logged in but passcode is required
+  if (user && isPasscodeRequired) {
+    return <PasscodeEntry />;
+  }
+
+  // Show main app if user is authenticated and passcode is verified
+  if (user && !isPasscodeRequired) {
     return <MainApp />;
   }
 
-  // If not logged in, show auth pages
+  // Show login/signup if no user
   if (authMode === 'login') {
     return (
       <LoginPage

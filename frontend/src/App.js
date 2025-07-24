@@ -106,7 +106,7 @@ const getCurrencyBalances = (userBalances) => ({
       swift: 'AKKAGBXX'
     }
   }
-};
+});
 
 // User's Cards Data
 const USER_CARDS = [

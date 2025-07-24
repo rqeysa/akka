@@ -1552,9 +1552,6 @@ const MainApp = () => {
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
   const [isDragging, setIsDragging] = useState(false);
-  
-  const currencyKeys = Object.keys(CURRENCY_BALANCES);
-  const totalSlides = currencyKeys.length + 1; // +1 for crypto portfolio
 
   useEffect(() => {
     fetchCryptoPrices();

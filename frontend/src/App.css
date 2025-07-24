@@ -3107,6 +3107,34 @@ input:checked + .slider:before {
   transform: translateY(-1px);
 }
 
+/* Settings Save Button */
+.settings-save-section {
+  position: sticky;
+  bottom: 0;
+  background: var(--akka-surface);
+  padding: 20px;
+  margin: 20px -20px -20px -20px;
+  border-top: 1px solid var(--akka-border);
+}
+
+.save-settings-btn {
+  width: 100%;
+  background: var(--akka-success);
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.save-settings-btn:hover {
+  background: #059669;
+  transform: translateY(-1px);
+}
+
 .crypto-info {
   display: flex;
   align-items: center;

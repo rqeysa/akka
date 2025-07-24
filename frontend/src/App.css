@@ -3135,6 +3135,133 @@ input:checked + .slider:before {
   transform: translateY(-1px);
 }
 
+/* Transaction Success Modal */
+.transaction-success-modal {
+  background: var(--akka-surface);
+  border-radius: 16px;
+  padding: 32px;
+  max-width: 400px;
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  animation: modalSlideIn 0.3s ease-out;
+}
+
+.success-header {
+  text-align: center;
+  margin-bottom: 24px;
+}
+
+.success-icon {
+  font-size: 48px;
+  margin-bottom: 12px;
+}
+
+.success-header h3 {
+  color: var(--akka-text);
+  margin: 0;
+  font-size: 24px;
+  font-weight: 600;
+}
+
+.transaction-details h4 {
+  color: var(--akka-success);
+  margin: 0 0 20px 0;
+  font-size: 18px;
+  text-align: center;
+}
+
+.transaction-summary {
+  background: var(--akka-background);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 20px;
+}
+
+.summary-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 8px;
+}
+
+.summary-row:last-child {
+  margin-bottom: 0;
+}
+
+.summary-row .highlight {
+  font-weight: 600;
+  color: var(--akka-primary);
+}
+
+.current-balances {
+  margin-bottom: 24px;
+}
+
+.current-balances h5 {
+  color: var(--akka-text);
+  margin: 0 0 12px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.balance-update {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 8px 0;
+  border-bottom: 1px solid var(--akka-border);
+}
+
+.balance-update:last-child {
+  border-bottom: none;
+}
+
+.balance-label {
+  color: var(--akka-text-secondary);
+  font-size: 14px;
+}
+
+.balance-value {
+  font-weight: 600;
+  color: var(--akka-success);
+}
+
+.success-actions {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.success-actions button {
+  flex: 1;
+  padding: 12px 20px;
+  border-radius: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.btn-secondary {
+  background: var(--akka-surface-variant);
+  color: var(--akka-text);
+  border: 1px solid var(--akka-border);
+}
+
+.btn-secondary:hover {
+  background: var(--akka-surface-hover);
+}
+
+.btn-primary {
+  background: var(--akka-primary);
+  color: white;
+  border: none;
+}
+
+.btn-primary:hover {
+  background: var(--akka-primary-dark);
+}
+
 .crypto-info {
   display: flex;
   align-items: center;

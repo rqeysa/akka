@@ -2467,12 +2467,14 @@ const MainApp = () => {
 const AuthProvider = ({ children }) => {
   const [user, setUser] = useState(null);
   const [loading, setLoading] = useState(true);
+  const [isPasscodeRequired, setIsPasscodeRequired] = useState(false);
 
   useEffect(() => {
     // Check for stored user session
     const storedUser = localStorage.getItem('akka_user');
     if (storedUser) {
       setUser(JSON.parse(storedUser));
+      setIsPasscodeRequired(true); // Require passcode after login
     }
     setLoading(false);
   }, []);
@@ -2480,16 +2482,29 @@ const AuthProvider = ({ children }) => {
   const login = (userData) => {
     setUser(userData);
     localStorage.setItem('akka_user', JSON.stringify(userData));
+    setIsPasscodeRequired(true); // Require passcode after successful login
   };
 
   const signup = (userData) => {
     setUser(userData);
     localStorage.setItem('akka_user', JSON.stringify(userData));
+    setIsPasscodeRequired(true); // Require passcode after successful signup
   };
 
   const logout = () => {
     setUser(null);
+    setIsPasscodeRequired(false);
     localStorage.removeItem('akka_user');
+  };
+
+  const verifyPasscode = (passcode) => {
+    // In a real app, this would verify against a stored/encrypted passcode
+    const correctPasscode = '123456'; // Demo passcode
+    if (passcode === correctPasscode) {
+      setIsPasscodeRequired(false);
+      return true;
+    }
+    return false;
   };
 
   const value = {
@@ -2497,7 +2512,9 @@ const AuthProvider = ({ children }) => {
     login,
     signup,
     logout,
-    loading
+    loading,
+    isPasscodeRequired,
+    verifyPasscode
   };
 
   return (

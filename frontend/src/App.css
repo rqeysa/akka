@@ -3262,6 +3262,25 @@ input:checked + .slider:before {
   background: var(--akka-primary-dark);
 }
 
+/* Portfolio Sell Button */
+.portfolio-sell-btn {
+  background: var(--akka-error);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  margin-top: 4px;
+}
+
+.portfolio-sell-btn:hover {
+  background: #DC2626;
+  transform: translateY(-1px);
+}
+
 .crypto-info {
   display: flex;
   align-items: center;

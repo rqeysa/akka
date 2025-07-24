@@ -1713,8 +1713,13 @@ const MainApp = () => {
   const handleCurrencyClick = (currencyCode) => {
     // Only allow click if not currently swiping
     if (!touchStart) { // Only allow click if not in a swipe gesture
-      setSelectedCurrencyAccount(currencyCode);
-      setShowBankAccountModal(true);
+      if (currencyCode === 'CRYPTO') {
+        // Handle crypto portfolio click - show crypto portfolio details
+        alert('Crypto Portfolio Details - Feature coming soon!');
+      } else {
+        setSelectedCurrencyAccount(currencyCode);
+        setShowBankAccountModal(true);
+      }
     }
   };
 

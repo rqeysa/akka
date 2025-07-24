@@ -2792,7 +2792,7 @@ input:checked + .slider:before {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin-top: 16px;
+  margin: 24px 0 32px 0; /* More space above and below */
 }
 
 .indicator-clean {

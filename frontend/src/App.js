@@ -1870,9 +1870,15 @@ const MainApp = () => {
   // Handle language change
   const handleLanguageChange = (language) => {
     setCurrentLanguage(language);
+    setSettingsChanged(true); // Mark settings as changed
+  };
+
+  // Save settings
+  const saveSettings = () => {
     // Store in localStorage for persistence
-    localStorage.setItem('akka_language', language);
-    alert(`Language changed to ${language}. Full app translation coming soon!`);
+    localStorage.setItem('akka_language', currentLanguage);
+    setSettingsChanged(false);
+    alert(`Settings saved! Language set to ${currentLanguage}. Full app translation coming soon!`);
   };
 
   // Handle selling crypto from portfolio

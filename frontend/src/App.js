@@ -3011,6 +3011,7 @@ const MainApp = () => {
         <SellModal
           onClose={() => setShowSellModal(false)}
           preselectedCrypto={selectedCrypto}
+          onSellComplete={simulateSellCrypto}
         />
       )}
 

@@ -1447,6 +1447,12 @@ const CryptoPortfolioModal = ({ onClose }) => {
                   </div>
                   <div className="crypto-value">
                     <span className="value-eur">€{crypto.value.toLocaleString()}</span>
+                    <button 
+                      className="sell-crypto-btn"
+                      onClick={() => handleSellCrypto(symbol)}
+                    >
+                      Sell
+                    </button>
                   </div>
                 </div>
                 

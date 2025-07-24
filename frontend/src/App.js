@@ -2429,35 +2429,6 @@ const MainApp = () => {
               </button>
             </div>
 
-            {/* Cards Quick Access */}
-            <div className="cards-quick-access">
-              <div className="section-header">
-                <h3>My Cards</h3>
-                <button className="see-all-btn" onClick={() => setShowCardsSection(true)}>View all</button>
-              </div>
-              <div className="cards-preview">
-                {USER_CARDS.slice(0, 2).map(card => (
-                  <div key={card.id} className="card-preview" onClick={() => setShowCardsSection(true)}>
-                    <div className="card-preview-header">
-                      <span className="card-type-icon">
-                        {card.type === 'debit' ? '💳' : '₿'}
-                      </span>
-                      <span className="card-name">{card.name}</span>
-                    </div>
-                    <div className="card-balance-preview">
-                      €{card.balance.toFixed(2)}
-                    </div>
-                    <div className="card-connection-preview">
-                      {card.description}
-                    </div>
-                    <div className="card-spent-preview">
-                      Spent: €{card.spent_this_month.toFixed(2)}
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
-
             {/* Portfolio */}
             <div className="home-portfolio">
               <div className="section-header">

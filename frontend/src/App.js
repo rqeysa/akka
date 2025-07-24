@@ -1853,7 +1853,11 @@ const MainApp = () => {
     alert(`Language changed to ${language}. Full app translation coming soon!`);
   };
 
-  const handleCurrencyClick = (currencyCode) => {
+  // Handle selling crypto from portfolio
+  const handleSellFromPortfolio = (cryptoSymbol) => {
+    setSelectedCrypto({ symbol: cryptoSymbol, name: cryptoSymbol });
+    setShowSellModal(true);
+  };
     // Only allow click if not currently swiping
     if (!touchStart) { // Only allow click if not in a swipe gesture
       if (currencyCode === 'CRYPTO') {

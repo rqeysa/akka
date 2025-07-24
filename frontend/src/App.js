@@ -1851,7 +1851,6 @@ const MainApp = () => {
       }
     }
   };
-  };
 
   // Touch handlers for manual swipe implementation
   const handleTouchStart = (e) => {

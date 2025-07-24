@@ -1554,7 +1554,8 @@ const CryptoPortfolioModal = ({ onClose, onSellCrypto }) => {
 };
 
 // Bank Account Details Modal
-const BankAccountModal = ({ currencyCode, onClose }) => {
+const BankAccountModal = ({ currencyCode, onClose, userBalances }) => {
+  const CURRENCY_BALANCES = getCurrencyBalances(userBalances);
   if (!currencyCode || !CURRENCY_BALANCES[currencyCode]) return null;
   
   const currency = CURRENCY_BALANCES[currencyCode];

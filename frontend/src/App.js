@@ -1221,6 +1221,173 @@ const CardsSection = ({ onClose }) => {
   );
 };
 
+// Bank Account Details Modal
+const BankAccountModal = ({ currencyCode, onClose }) => {
+  if (!currencyCode || !CURRENCY_BALANCES[currencyCode]) return null;
+  
+  const currency = CURRENCY_BALANCES[currencyCode];
+  const bankInfo = currency.bank_info;
+
+  const copyToClipboard = (text, label) => {
+    navigator.clipboard.writeText(text);
+    alert(`${label} copied to clipboard!`);
+  };
+
+  return (
+    <div className="modal-overlay">
+      <div className="bank-account-modal">
+        <div className="modal-header">
+          <h3>{currency.flag} {currency.name} Account</h3>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
+        
+        <div className="modal-content">
+          {/* Account Balance */}
+          <div className="account-balance-summary">
+            <div className="balance-info">
+              <span className="balance-label">Available Balance</span>
+              <span className="balance-amount">{currency.symbol}{currency.balance.toLocaleString()}</span>
+            </div>
+            <div className="account-status">
+              <span className="status-indicator active"></span>
+              <span>Active Account</span>
+            </div>
+          </div>
+
+          {/* Bank Account Details */}
+          <div className="bank-details-section">
+            <h4>Account Information</h4>
+            
+            <div className="bank-detail-item">
+              <span className="detail-label">Account Holder</span>
+              <div className="detail-value-container">
+                <span className="detail-value">{bankInfo.account_name}</span>
+                <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.account_name, 'Account Name')}>
+                  Copy
+                </button>
+              </div>
+            </div>
+
+            <div className="bank-detail-item">
+              <span className="detail-label">Bank Name</span>
+              <div className="detail-value-container">
+                <span className="detail-value">{bankInfo.bank_name}</span>
+                <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.bank_name, 'Bank Name')}>
+                  Copy
+                </button>
+              </div>
+            </div>
+
+            <div className="bank-detail-item">
+              <span className="detail-label">Account Type</span>
+              <div className="detail-value-container">
+                <span className="detail-value">{bankInfo.account_type}</span>
+              </div>
+            </div>
+
+            {bankInfo.iban && (
+              <div className="bank-detail-item">
+                <span className="detail-label">IBAN</span>
+                <div className="detail-value-container">
+                  <span className="detail-value iban">{bankInfo.iban}</span>
+                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.iban, 'IBAN')}>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {bankInfo.account_number && (
+              <div className="bank-detail-item">
+                <span className="detail-label">Account Number</span>
+                <div className="detail-value-container">
+                  <span className="detail-value">{bankInfo.account_number}</span>
+                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.account_number, 'Account Number')}>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {bankInfo.routing_number && (
+              <div className="bank-detail-item">
+                <span className="detail-label">Routing Number</span>
+                <div className="detail-value-container">
+                  <span className="detail-value">{bankInfo.routing_number}</span>
+                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.routing_number, 'Routing Number')}>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {bankInfo.sort_code && (
+              <div className="bank-detail-item">
+                <span className="detail-label">Sort Code</span>
+                <div className="detail-value-container">
+                  <span className="detail-value">{bankInfo.sort_code}</span>
+                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.sort_code, 'Sort Code')}>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {bankInfo.swift && (
+              <div className="bank-detail-item">
+                <span className="detail-label">SWIFT/BIC</span>
+                <div className="detail-value-container">
+                  <span className="detail-value">{bankInfo.swift}</span>
+                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.swift, 'SWIFT Code')}>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {bankInfo.bic && (
+              <div className="bank-detail-item">
+                <span className="detail-label">BIC</span>
+                <div className="detail-value-container">
+                  <span className="detail-value">{bankInfo.bic}</span>
+                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.bic, 'BIC')}>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            )}
+
+            {bankInfo.branch_code && (
+              <div className="bank-detail-item">
+                <span className="detail-label">Branch Code</span>
+                <div className="detail-value-container">
+                  <span className="detail-value">{bankInfo.branch_code}</span>
+                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.branch_code, 'Branch Code')}>
+                    Copy
+                  </button>
+                </div>
+              </div>
+            )}
+          </div>
+
+          {/* Quick Actions */}
+          <div className="account-actions">
+            <button className="account-action-btn transfer">
+              💸 Transfer Money
+            </button>
+            <button className="account-action-btn deposit">
+              💰 Deposit Funds
+            </button>
+            <button className="account-action-btn statement">
+              📄 Download Statement
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Main App Component
 const MainApp = () => {
   const { user, logout } = useAuth();

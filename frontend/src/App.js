@@ -2136,7 +2136,7 @@ const MainApp = () => {
 
             {/* Quick Actions */}
             <div className="quick-actions">
-              <button className="action-btn primary" onClick={() => handleTabChange('market')}>
+              <button className="action-btn primary" onClick={() => setShowBuyModal(true)}>
                 <span className="action-icon">+</span>
                 Buy
               </button>

@@ -1689,14 +1689,15 @@ const MainApp = () => {
 
   // Currency slider functions
   const currencyKeys = Object.keys(CURRENCY_BALANCES);
+  const totalSlides = currencyKeys.length + 1; // Include crypto portfolio
   const currentCurrency = currencyKeys[currentCurrencyIndex];
   
   const nextCurrency = () => {
-    setCurrentCurrencyIndex((prev) => (prev + 1) % currencyKeys.length);
+    setCurrentCurrencyIndex((prev) => (prev + 1) % totalSlides);
   };
   
   const prevCurrency = () => {
-    setCurrentCurrencyIndex((prev) => (prev - 1 + currencyKeys.length) % currencyKeys.length);
+    setCurrentCurrencyIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
   };
   
   const handleCurrencyClick = (currencyCode) => {

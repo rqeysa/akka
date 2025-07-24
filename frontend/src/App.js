@@ -2541,7 +2541,7 @@ const MainApp = () => {
           </div>
         )}
 
-        {activeTab === 'portfolio' && (
+        {activeTab === 'profile' && (
           <div className="profile-content">
             {profilePage === 'main' && (
               <>

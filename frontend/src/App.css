@@ -2656,6 +2656,156 @@ input:checked + .slider:before {
   transform: translateY(-1px);
 }
 
+/* Clickable Logo */
+.akka-logo {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.akka-logo:hover {
+  opacity: 0.8;
+  transform: scale(1.02);
+}
+
+.akka-logo-header {
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.akka-logo-header:hover {
+  opacity: 0.8;
+  transform: scale(1.02);
+}
+
+/* Currency Balance Section */
+.currency-balance-section {
+  margin: 20px 0;
+  background: var(--akka-surface);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--akka-border);
+}
+
+.currency-selector {
+  display: flex;
+  gap: 8px;
+  margin-bottom: 20px;
+  overflow-x: auto;
+  padding: 0 0 4px 0;
+}
+
+.currency-tab {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 16px;
+  border: 2px solid var(--akka-border);
+  border-radius: 20px;
+  background: transparent;
+  color: var(--akka-gray-500);
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+.currency-tab.active {
+  background: var(--akka-accent);
+  color: white;
+  border-color: var(--akka-accent);
+}
+
+.currency-tab:hover:not(.active) {
+  border-color: var(--akka-accent);
+  color: var(--akka-accent);
+}
+
+.currency-flag {
+  font-size: 14px;
+}
+
+.currency-code {
+  font-size: 11px;
+  font-weight: 700;
+}
+
+.currency-balance-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 16px;
+  padding: 20px;
+  color: white;
+  position: relative;
+  overflow: hidden;
+}
+
+.balance-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.currency-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.currency-flag-large {
+  font-size: 24px;
+}
+
+.currency-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.currency-name {
+  font-size: 14px;
+  font-weight: 600;
+  opacity: 0.9;
+}
+
+.currency-code-small {
+  font-size: 11px;
+  opacity: 0.7;
+  font-weight: 500;
+}
+
+.balance-change {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 8px;
+  border-radius: 12px;
+  backdrop-filter: blur(10px);
+}
+
+.change-indicator {
+  font-size: 12px;
+  font-weight: 600;
+}
+
+.change-indicator.positive {
+  color: #10B981;
+}
+
+.change-indicator.negative {
+  color: #EF4444;
+}
+
+.main-balance {
+  text-align: left;
+}
+
+.main-balance .balance-amount {
+  font-size: 32px;
+  font-weight: 700;
+  line-height: 1.2;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
 /* Bottom Navigation */
 .akka-nav {
   position: fixed;

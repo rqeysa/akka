@@ -3145,6 +3145,14 @@ const MainApp = () => {
           onSellCrypto={handleSellFromPortfolio}
         />
       )}
+
+      {/* Transaction Success Modal */}
+      {showTransactionSuccess && (
+        <TransactionSuccessModal
+          transaction={lastTransaction}
+          onClose={() => setShowTransactionSuccess(false)}
+        />
+      )}
     </div>
   );
 };

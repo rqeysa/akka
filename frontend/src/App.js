@@ -1694,17 +1694,89 @@ const MainApp = () => {
   const currentCurrency = currencyKeys[currentCurrencyIndex];
   
   const nextCurrency = () => {
-    setCurrentCurrencyIndex((prev) => (prev + 1) % totalSlides);
+    if (swiperInstance) {
+      swiperInstance.slideNext();
+    }
   };
   
   const prevCurrency = () => {
-    setCurrentCurrencyIndex((prev) => (prev - 1 + totalSlides) % totalSlides);
+    if (swiperInstance) {
+      swiperInstance.slidePrev();
+    }
   };
   
   const handleCurrencyClick = (currencyCode) => {
     setSelectedCurrencyAccount(currencyCode);
     setShowBankAccountModal(true);
   };
+
+  // Initialize Swiper
+  useEffect(() => {
+    const initSwiper = () => {
+      if (window.Swiper && !swiperInstance) {
+        const swiper = new window.Swiper('.portfolio-swiper', {
+          slidesPerView: 1,
+          spaceBetween: 0,
+          centeredSlides: true,
+          speed: 300,
+          effect: 'slide',
+          
+          // Touch/drag settings
+          touchRatio: 1,
+          touchAngle: 45,
+          grabCursor: true,
+          
+          // Keyboard navigation
+          keyboard: {
+            enabled: true,
+            onlyInViewport: true,
+          },
+          
+          // Mouse wheel
+          mousewheel: {
+            enabled: false,
+          },
+          
+          // Pagination dots
+          pagination: {
+            el: '.portfolio-pagination',
+            clickable: true,
+            bulletClass: 'portfolio-bullet',
+            bulletActiveClass: 'portfolio-bullet-active',
+          },
+          
+          // Navigation arrows (keep for accessibility)
+          navigation: {
+            nextEl: '.portfolio-nav-next',
+            prevEl: '.portfolio-nav-prev',
+          },
+          
+          // Callbacks
+          on: {
+            slideChange: function() {
+              setCurrentCurrencyIndex(this.activeIndex);
+            },
+          },
+        });
+        
+        setSwiperInstance(swiper);
+      }
+    };
+
+    // Check if Swiper is loaded, if not wait a bit
+    if (window.Swiper) {
+      initSwiper();
+    } else {
+      const checkSwiper = setInterval(() => {
+        if (window.Swiper) {
+          initSwiper();
+          clearInterval(checkSwiper);
+        }
+      }, 100);
+      
+      return () => clearInterval(checkSwiper);
+    }
+  }, [swiperInstance]);
 
   // Simulate price updates (in real app, this would come from WebSocket or API polling)
   useEffect(() => {

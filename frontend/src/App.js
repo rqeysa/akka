@@ -1838,6 +1838,8 @@ const MainApp = () => {
     localStorage.setItem('akka_language', language);
     alert(`Language changed to ${language}. Full app translation coming soon!`);
   };
+
+  const handleCurrencyClick = (currencyCode) => {
     // Only allow click if not currently swiping
     if (!touchStart) { // Only allow click if not in a swipe gesture
       if (currencyCode === 'CRYPTO') {
@@ -1848,6 +1850,7 @@ const MainApp = () => {
         setShowBankAccountModal(true);
       }
     }
+  };
   };
 
   // Touch handlers for manual swipe implementation

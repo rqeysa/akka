@@ -2688,13 +2688,132 @@ input:checked + .slider:before {
   transform: scale(1.02);
 }
 
-/* Currency Balance Section */
-.currency-balance-section {
+/* Clean Currency Balance Cards - No Container Box */
+.currency-slider-container {
   margin: 20px 0;
-  background: var(--akka-surface);
-  border-radius: 16px;
+}
+
+.currency-slide-wrapper {
+  overflow: hidden;
+  border-radius: 12px;
+  cursor: grab;
+}
+
+.currency-slide-wrapper:active {
+  cursor: grabbing;
+}
+
+.currency-slides {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.currency-slide {
+  min-width: 100%;
+  flex-shrink: 0;
+}
+
+.clean-balance-card {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  border-radius: 12px;
   padding: 20px;
-  border: 1px solid var(--akka-border);
+  color: white;
+  position: relative;
+  overflow: hidden;
+  margin: 0;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.clean-balance-card:hover {
+  transform: translateY(-2px);
+}
+
+.clean-balance-card.crypto {
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+}
+
+.balance-header-clean {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-start;
+  margin-bottom: 16px;
+}
+
+.currency-info-clean {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.currency-flag-large {
+  font-size: 24px;
+}
+
+.currency-details-clean {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.currency-name-clean {
+  font-size: 14px;
+  opacity: 0.9;
+  font-weight: 500;
+}
+
+.currency-code-clean {
+  font-size: 11px;
+  opacity: 0.7;
+  font-weight: 600;
+}
+
+.balance-change-clean {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 8px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.main-balance-clean {
+  text-align: left;
+}
+
+.balance-amount-clean {
+  font-size: 28px;
+  font-weight: 700;
+  line-height: 1.2;
+  color: white;
+  text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Clean Pagination Indicators */
+.currency-indicators-clean {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 16px;
+}
+
+.indicator-clean {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--akka-gray-300);
+  border: none;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  opacity: 1;
+}
+
+.indicator-clean.active {
+  background: var(--akka-accent);
+  transform: scale(1.2);
+}
+
+.indicator-clean:hover {
+  background: var(--akka-accent);
+  opacity: 0.7;
 }
 
 .currency-selector {

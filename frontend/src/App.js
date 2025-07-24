@@ -2541,53 +2541,7 @@ const MainApp = () => {
           </div>
         )}
 
-        {activeTab === 'history' && (
-          <div className="history-content">
-            <div className="history-header">
-              <h2>History</h2>
-              <div className="history-filters">
-                <button 
-                  className={`filter-btn ${historyFilter === 'all' ? 'active' : ''}`}
-                  onClick={() => setHistoryFilter('all')}
-                >
-                  All
-                </button>
-                <button 
-                  className={`filter-btn ${historyFilter === 'buys' ? 'active' : ''}`}
-                  onClick={() => setHistoryFilter('buys')}
-                >
-                  Buys
-                </button>
-                <button 
-                  className={`filter-btn ${historyFilter === 'sells' ? 'active' : ''}`}
-                  onClick={() => setHistoryFilter('sells')}
-                >
-                  Sells
-                </button>
-                <button 
-                  className={`filter-btn ${historyFilter === 'sends' ? 'active' : ''}`}
-                  onClick={() => setHistoryFilter('sends')}
-                >
-                  Sends
-                </button>
-                <button 
-                  className={`filter-btn ${historyFilter === 'receives' ? 'active' : ''}`}
-                  onClick={() => setHistoryFilter('receives')}
-                >
-                  Receives
-                </button>
-              </div>
-            </div>
-
-            <div className="transactions-full-list">
-              {getFilteredTransactions().map(transaction => (
-                <TransactionItem key={transaction.id} transaction={transaction} />
-              ))}
-            </div>
-          </div>
-        )}
-
-        {activeTab === 'profile' && (
+        {activeTab === 'portfolio' && (
           <div className="profile-content">
             {profilePage === 'main' && (
               <>

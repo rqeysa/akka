@@ -817,7 +817,7 @@ const SellModal = ({ onClose, preselectedCrypto = null, onSellComplete }) => {
 };
 
 // Send Modal Component  
-const SendModal = ({ onClose }) => {
+const SendModal = ({ onClose, onSendComplete }) => {
   const [sendType, setSendType] = useState('crypto'); // 'crypto' or 'fiat'
   const [selectedCurrency, setSelectedCurrency] = useState('');
   const [amount, setAmount] = useState('');
@@ -833,10 +833,18 @@ const SendModal = ({ onClose }) => {
   ];
 
   const handleSend = () => {
-    if (sendType === 'crypto') {
-      alert(`Send initiated: ${amount} ${selectedCurrency} to ${recipient}`);
+    if (onSendComplete) {
+      if (sendType === 'crypto') {
+        onSendComplete(selectedCurrency, amount, recipient);
+      } else {
+        onSendComplete(selectedCurrency, amount, recipientName);
+      }
     } else {
-      alert(`Bank transfer initiated: ${amount} ${selectedCurrency} to ${recipientName} (IBAN: ${recipientIBAN})`);
+      if (sendType === 'crypto') {
+        alert(`Send initiated: ${amount} ${selectedCurrency} to ${recipient}`);
+      } else {
+        alert(`Bank transfer initiated: ${amount} ${selectedCurrency} to ${recipientName} (IBAN: ${recipientIBAN})`);
+      }
     }
     onClose();
   };

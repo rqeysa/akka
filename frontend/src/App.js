@@ -1173,6 +1173,7 @@ const MainApp = () => {
   const [showCardsSection, setShowCardsSection] = useState(false);
   const [selectedCard, setSelectedCard] = useState(null);
   const [cryptoSearchQuery, setCryptoSearchQuery] = useState('');
+  const [selectedCurrency, setSelectedCurrency] = useState('EUR'); // EUR, USD, TRY, GBP
 
   useEffect(() => {
     fetchCryptoPrices();

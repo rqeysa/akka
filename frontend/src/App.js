@@ -1755,7 +1755,7 @@ const MainApp = () => {
   const [touchStart, setTouchStart] = useState(null);
   const [touchEnd, setTouchEnd] = useState(null);
 
-  const currencyKeys = Object.keys(CURRENCY_BALANCES);
+  const currencyKeys = Object.keys(getCurrencyBalances(userBalances));
   const totalSlides = currencyKeys.length + 1; // Include crypto portfolio
 
   useEffect(() => {

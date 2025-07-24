@@ -1660,6 +1660,7 @@ const MainApp = () => {
   const [currentCurrencyIndex, setCurrentCurrencyIndex] = useState(0); // For sliding
   const [showBankAccountModal, setShowBankAccountModal] = useState(false);
   const [selectedCurrencyAccount, setSelectedCurrencyAccount] = useState(null);
+  const [showCryptoPortfolioModal, setShowCryptoPortfolioModal] = useState(false);
   const [swiperInstance, setSwiperInstance] = useState(null);
   
   // Touch/swipe state for manual carousel

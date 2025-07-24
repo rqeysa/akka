@@ -1475,13 +1475,34 @@ const CryptoPortfolioModal = ({ onClose, onSellCrypto }) => {
 
           {/* Quick Actions */}
           <div className="crypto-actions-section">
-            <button className="crypto-action-btn buy">
+            <button 
+              className="crypto-action-btn buy"
+              onClick={() => {
+                onClose();
+                // Could trigger buy modal here if needed
+                alert('Buy More Crypto - will open Buy modal');
+              }}
+            >
               📈 Buy More Crypto
             </button>
-            <button className="crypto-action-btn sell">
+            <button 
+              className="crypto-action-btn sell"
+              onClick={() => {
+                onClose();
+                if (onSellCrypto) {
+                  onSellCrypto('BTC'); // Default to BTC for general sell
+                }
+              }}
+            >
               📉 Sell Crypto
             </button>
-            <button className="crypto-action-btn send">
+            <button 
+              className="crypto-action-btn send"
+              onClick={() => {
+                onClose();
+                alert('Send Crypto - will open Send modal');
+              }}
+            >
               📤 Send Crypto
             </button>
           </div>

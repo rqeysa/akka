@@ -1842,23 +1842,20 @@ const MainApp = () => {
           <div className="home-content">
             {/* Swipeable Portfolio Summary */}
             <div className="portfolio-summary">
-              <div className="portfolio-slider-container">
-                <button className="portfolio-nav-btn prev" onClick={prevCurrency}>
+              <div className="portfolio-swiper-container">
+                <button className="portfolio-nav-btn portfolio-nav-prev">
                   ‹
                 </button>
                 
-                <div className="portfolio-slide-wrapper">
-                  <div 
-                    className="portfolio-slides" 
-                    style={{transform: `translateX(-${currentCurrencyIndex * 100}%)`}}
-                  >
+                <div className="portfolio-swiper swiper">
+                  <div className="swiper-wrapper">
                     {/* Currency slides */}
-                    {currencyKeys.map((currencyCode, index) => {
+                    {currencyKeys.map((currencyCode) => {
                       const currency = CURRENCY_BALANCES[currencyCode];
                       return (
                         <div 
                           key={currencyCode} 
-                          className="portfolio-slide"
+                          className="swiper-slide"
                           onClick={() => handleCurrencyClick(currencyCode)}
                         >
                           <div className="balance-card main">
@@ -1890,7 +1887,7 @@ const MainApp = () => {
                     })}
                     
                     {/* Crypto portfolio slide */}
-                    <div className="portfolio-slide">
+                    <div className="swiper-slide">
                       <div className="balance-card main crypto">
                         <div className="balance-header-portfolio">
                           <div className="currency-info-portfolio">
@@ -1917,20 +1914,13 @@ const MainApp = () => {
                   </div>
                 </div>
                 
-                <button className="portfolio-nav-btn next" onClick={nextCurrency}>
+                <button className="portfolio-nav-btn portfolio-nav-next">
                   ›
                 </button>
               </div>
               
-              <div className="portfolio-indicators">
-                {Array.from({length: totalSlides}).map((_, index) => (
-                  <span
-                    key={index}
-                    className={`indicator ${index === currentCurrencyIndex ? 'active' : ''}`}
-                    onClick={() => setCurrentCurrencyIndex(index)}
-                  />
-                ))}
-              </div>
+              {/* Custom pagination dots */}
+              <div className="portfolio-pagination"></div>
             </div>
 
             {/* Quick Actions */}

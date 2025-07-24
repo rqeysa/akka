@@ -166,6 +166,145 @@ const FEATURED_CRYPTOS = [
   'VET', 'ENJ', 'LRC', 'GRT', 'COMP', 'MKR', 'SNX', 'BAL', 'REN', 'KNC'
 ];
 
+// Passcode Entry Component
+const PasscodeEntry = () => {
+  const [passcode, setPasscode] = useState(['', '', '', '', '', '']);
+  const [error, setError] = useState('');
+  const [isShaking, setIsShaking] = useState(false);
+  const { verifyPasscode } = useAuth();
+  const inputRefs = useRef([]);
+
+  const handleInputChange = (index, value) => {
+    if (value.length > 1) return; // Only allow single digit
+    
+    const newPasscode = [...passcode];
+    newPasscode[index] = value;
+    setPasscode(newPasscode);
+    setError('');
+
+    // Auto-focus next input
+    if (value && index < 5) {
+      inputRefs.current[index + 1]?.focus();
+    }
+
+    // Auto-verify when all 6 digits are entered
+    if (newPasscode.every(digit => digit !== '') && newPasscode.join('').length === 6) {
+      setTimeout(() => {
+        handleVerifyPasscode(newPasscode.join(''));
+      }, 100);
+    }
+  };
+
+  const handleKeyDown = (index, e) => {
+    // Handle backspace
+    if (e.key === 'Backspace' && !passcode[index] && index > 0) {
+      inputRefs.current[index - 1]?.focus();
+    }
+  };
+
+  const handleVerifyPasscode = (code) => {
+    const isValid = verifyPasscode(code);
+    if (!isValid) {
+      setError('Incorrect passcode. Please try again.');
+      setIsShaking(true);
+      setPasscode(['', '', '', '', '', '']);
+      setTimeout(() => {
+        setIsShaking(false);
+        inputRefs.current[0]?.focus();
+      }, 500);
+    }
+  };
+
+  const handleNumberPadClick = (number) => {
+    const firstEmptyIndex = passcode.findIndex(digit => digit === '');
+    if (firstEmptyIndex !== -1) {
+      handleInputChange(firstEmptyIndex, number.toString());
+    }
+  };
+
+  const handleDelete = () => {
+    const lastFilledIndex = passcode.map((digit, index) => digit !== '' ? index : -1)
+                                   .filter(index => index !== -1)
+                                   .pop();
+    if (lastFilledIndex !== undefined) {
+      const newPasscode = [...passcode];
+      newPasscode[lastFilledIndex] = '';
+      setPasscode(newPasscode);
+      inputRefs.current[lastFilledIndex]?.focus();
+    }
+  };
+
+  useEffect(() => {
+    // Focus first input on mount
+    inputRefs.current[0]?.focus();
+  }, []);
+
+  return (
+    <div className="passcode-container">
+      <div className="passcode-content">
+        <div className="passcode-header">
+          <div className="akka-logo-passcode">
+            <div className="logo-icon"></div>
+            <span className="logo-text">akka</span>
+          </div>
+          <h2>Enter your passcode</h2>
+          <p>Please enter your 6-digit passcode to continue</p>
+        </div>
+
+        <div className={`passcode-inputs ${isShaking ? 'shake' : ''}`}>
+          {passcode.map((digit, index) => (
+            <input
+              key={index}
+              ref={el => inputRefs.current[index] = el}
+              type="text"
+              inputMode="numeric"
+              pattern="\d*"
+              maxLength="1"
+              value={digit}
+              onChange={(e) => handleInputChange(index, e.target.value)}
+              onKeyDown={(e) => handleKeyDown(index, e)}
+              className="passcode-digit"
+            />
+          ))}
+        </div>
+
+        {error && (
+          <div className="passcode-error">
+            <span>{error}</span>
+          </div>
+        )}
+
+        <div className="number-pad">
+          <div className="number-grid">
+            {[1, 2, 3, 4, 5, 6, 7, 8, 9].map(number => (
+              <button
+                key={number}
+                className="number-btn"
+                onClick={() => handleNumberPadClick(number)}
+              >
+                {number}
+              </button>
+            ))}
+            <div></div> {/* Empty space */}
+            <button className="number-btn" onClick={() => handleNumberPadClick(0)}>
+              0
+            </button>
+            <button className="delete-btn" onClick={handleDelete}>
+              <svg width="24" height="24" fill="currentColor" viewBox="0 0 16 16">
+                <path d="M5.83 5.146a.5.5 0 0 0 0 .708L7.975 8l-2.147 2.146a.5.5 0 0 0 .707.708l2.147-2.147 2.146 2.147a.5.5 0 0 0 .708-.708L9.39 8l2.146-2.146a.5.5 0 0 0-.707-.708L8.683 7.293 6.536 5.146a.5.5 0 0 0-.707 0z"/>
+              </svg>
+            </button>
+          </div>
+        </div>
+
+        <div className="passcode-help">
+          <p>Demo passcode: <strong>123456</strong></p>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Login Page Component
 const LoginPage = ({ onLogin, onSwitchToSignup }) => {
   const [email, setEmail] = useState('');

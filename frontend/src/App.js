@@ -2313,7 +2313,7 @@ const MainApp = () => {
                 >
                   {/* Currency slides */}
                   {currencyKeys.map((currencyCode) => {
-                    const currency = CURRENCY_BALANCES[currencyCode];
+                    const currency = getCurrencyBalances(userBalances)[currencyCode];
                     return (
                       <div 
                         key={currencyCode} 

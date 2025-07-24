@@ -343,6 +343,18 @@ frontend:
           agent: "testing"
           comment: "Ready for testing - History tab, transaction list, filter buttons"
 
+  - task: "Balance Card Sizing & Horizontal Swipe Functionality"
+    implemented: true
+    working: false
+    file: "frontend/src/App.js"
+    stuck_count: 1
+    priority: "high"
+    needs_retesting: false
+    status_history:
+        - working: false
+          agent: "testing"
+          comment: "❌ CRITICAL ISSUES CONFIRMED: 1) Balance cards are EXTREMELY oversized at 738.7px width (38.5% of screen width) - user complaint is 100% VALID. Cards should be compact (<350px) but are currently taking up most of screen width. 2) Horizontal swipe functionality is NOT WORKING PROPERLY - touch/swipe gestures fail to change slides, though navigation arrows and pagination dots work. User wants compact cards with working horizontal swipe. Screenshots captured showing oversized cards. Both reported issues are confirmed and need immediate fixing."
+
   - task: "Profile Menu Items"
     implemented: true
     working: "NA"

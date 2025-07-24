@@ -1349,6 +1349,184 @@ const CardDetailsModal = ({ card, onClose }) => {
   );
 };
 
+// Apply for New Card Modal Component
+const ApplyCardModal = ({ onClose }) => {
+  const [cardType, setCardType] = useState('debit');
+  const [applicationStep, setApplicationStep] = useState(1);
+  const [applicationData, setApplicationData] = useState({
+    cardType: 'debit',
+    annualIncome: '',
+    employmentStatus: '',
+    monthlySpending: '',
+    reason: ''
+  });
+
+  const handleInputChange = (field, value) => {
+    setApplicationData(prev => ({
+      ...prev,
+      [field]: value
+    }));
+  };
+
+  const handleNextStep = () => {
+    if (applicationStep < 3) {
+      setApplicationStep(applicationStep + 1);
+    }
+  };
+
+  const handleSubmitApplication = () => {
+    alert('🎉 Card application submitted successfully! You will receive an update within 2-3 business days.');
+    onClose();
+  };
+
+  return (
+    <div className="modal-overlay">
+      <div className="apply-card-modal">
+        <div className="modal-header">
+          <h3>Apply for New Card</h3>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
+        
+        <div className="application-progress">
+          <div className={`progress-step ${applicationStep >= 1 ? 'active' : ''}`}>1</div>
+          <div className={`progress-step ${applicationStep >= 2 ? 'active' : ''}`}>2</div>
+          <div className={`progress-step ${applicationStep >= 3 ? 'active' : ''}`}>3</div>
+        </div>
+
+        <div className="modal-content">
+          {applicationStep === 1 && (
+            <div className="application-step">
+              <h4>Choose Card Type</h4>
+              
+              <div className="card-type-options">
+                <div 
+                  className={`card-type-option ${cardType === 'debit' ? 'selected' : ''}`}
+                  onClick={() => {
+                    setCardType('debit');
+                    handleInputChange('cardType', 'debit');
+                  }}
+                >
+                  <div className="card-icon">💳</div>
+                  <div className="card-type-info">
+                    <h5>Akka Debit Card</h5>
+                    <p>Spend your balance instantly</p>
+                    <span className="card-benefit">No fees • Instant approval</span>
+                  </div>
+                </div>
+
+                <div 
+                  className={`card-type-option ${cardType === 'credit' ? 'selected' : ''}`}
+                  onClick={() => {
+                    setCardType('credit');
+                    handleInputChange('cardType', 'credit');
+                  }}
+                >
+                  <div className="card-icon">💎</div>
+                  <div className="card-type-info">
+                    <h5>Akka Credit Card</h5>
+                    <p>Build credit with rewards</p>
+                    <span className="card-benefit">1% cashback • Credit building</span>
+                  </div>
+                </div>
+              </div>
+
+              <button className="next-step-btn" onClick={handleNextStep}>
+                Continue Application
+              </button>
+            </div>
+          )}
+
+          {applicationStep === 2 && (
+            <div className="application-step">
+              <h4>Financial Information</h4>
+              
+              <div className="form-group">
+                <label>Annual Income (EUR)</label>
+                <select 
+                  value={applicationData.annualIncome}
+                  onChange={(e) => handleInputChange('annualIncome', e.target.value)}
+                >
+                  <option value="">Select income range</option>
+                  <option value="under-25k">Under €25,000</option>
+                  <option value="25k-50k">€25,000 - €50,000</option>
+                  <option value="50k-75k">€50,000 - €75,000</option>
+                  <option value="75k-100k">€75,000 - €100,000</option>
+                  <option value="over-100k">Over €100,000</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Employment Status</label>
+                <select 
+                  value={applicationData.employmentStatus}
+                  onChange={(e) => handleInputChange('employmentStatus', e.target.value)}
+                >
+                  <option value="">Select employment status</option>
+                  <option value="employed">Full-time employed</option>
+                  <option value="self-employed">Self-employed</option>
+                  <option value="part-time">Part-time employed</option>
+                  <option value="student">Student</option>
+                  <option value="retired">Retired</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Monthly Spending (EUR)</label>
+                <input 
+                  type="number"
+                  placeholder="e.g. 1500"
+                  value={applicationData.monthlySpending}
+                  onChange={(e) => handleInputChange('monthlySpending', e.target.value)}
+                />
+              </div>
+
+              <button className="next-step-btn" onClick={handleNextStep}>
+                Continue
+              </button>
+            </div>
+          )}
+
+          {applicationStep === 3 && (
+            <div className="application-step">
+              <h4>Final Details</h4>
+              
+              <div className="form-group">
+                <label>Why do you need this card?</label>
+                <textarea 
+                  placeholder="e.g. Travel, online shopping, business expenses..."
+                  value={applicationData.reason}
+                  onChange={(e) => handleInputChange('reason', e.target.value)}
+                  rows="4"
+                />
+              </div>
+
+              <div className="application-summary">
+                <h5>Application Summary</h5>
+                <div className="summary-item">
+                  <span>Card Type:</span>
+                  <span>{applicationData.cardType === 'debit' ? 'Akka Debit Card' : 'Akka Credit Card'}</span>
+                </div>
+                <div className="summary-item">
+                  <span>Annual Income:</span>
+                  <span>{applicationData.annualIncome}</span>
+                </div>
+                <div className="summary-item">
+                  <span>Employment:</span>
+                  <span>{applicationData.employmentStatus}</span>
+                </div>
+              </div>
+
+              <button className="submit-application-btn" onClick={handleSubmitApplication}>
+                Submit Application
+              </button>
+            </div>
+          )}
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // Cards Overview Component
 const CardsSection = () => {
   const [selectedCard, setSelectedCard] = useState(null);

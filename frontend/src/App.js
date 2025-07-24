@@ -1980,7 +1980,10 @@ const MainApp = () => {
                   
                   {/* Crypto portfolio slide */}
                   <div className="currency-slide">
-                    <div className="clean-balance-card crypto">
+                    <div 
+                      className="clean-balance-card crypto"
+                      onClick={() => handleCurrencyClick('CRYPTO')}
+                    >
                       <div className="balance-header-clean">
                         <div className="currency-info-clean">
                           <span className="currency-flag-large">₿</span>

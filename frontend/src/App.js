@@ -1854,15 +1854,15 @@ const MainApp = () => {
   const getFilteredTransactions = () => {
     switch(historyFilter) {
       case 'buys':
-        return RECENT_TRANSACTIONS.filter(t => t.type === 'buy');
+        return USER_TRANSACTION_HISTORY.filter(t => t.type === 'buy');
       case 'sells':
-        return RECENT_TRANSACTIONS.filter(t => t.type === 'sell');
+        return USER_TRANSACTION_HISTORY.filter(t => t.type === 'sell');
       case 'sends':
-        return RECENT_TRANSACTIONS.filter(t => t.type === 'send');
+        return USER_TRANSACTION_HISTORY.filter(t => t.type === 'send');
       case 'receives':
-        return RECENT_TRANSACTIONS.filter(t => t.type === 'receive');
+        return USER_TRANSACTION_HISTORY.filter(t => t.type === 'receive');
       default:
-        return RECENT_TRANSACTIONS;
+        return USER_TRANSACTION_HISTORY;
     }
   };
 

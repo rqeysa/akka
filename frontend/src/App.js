@@ -1438,6 +1438,12 @@ const CryptoPortfolioModal = ({ onClose, onSellCrypto }) => {
     }
   };
 
+  // Filter crypto transactions
+  const cryptoTransactions = USER_TRANSACTION_HISTORY.filter(transaction => 
+    transaction.type === 'buy' || transaction.type === 'sell' || 
+    (transaction.type === 'send' && transaction.crypto !== 'EUR')
+  ).slice(0, 10);
+
   const copyToClipboard = (text, type) => {
     navigator.clipboard.writeText(text);
     alert(`${type} copied to clipboard!`);

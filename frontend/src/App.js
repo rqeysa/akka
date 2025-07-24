@@ -2322,6 +2322,13 @@ const MainApp = () => {
                         key={currencyCode} 
                         className="currency-slide"
                         onClick={() => handleCurrencyClick(currencyCode)}
+                        onTouchEnd={(e) => {
+                          // Prevent click if this was a swipe gesture
+                          if (!touchStart || !touchEnd || Math.abs(touchStart - touchEnd) < 50) {
+                            handleCurrencyClick(currencyCode);
+                          }
+                          e.preventDefault();
+                        }}
                       >
                         <div className="clean-balance-card">
                           <div className="balance-header-clean">

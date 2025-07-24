@@ -1829,8 +1829,8 @@ const MainApp = () => {
     // Only allow click if not currently swiping
     if (!touchStart) { // Only allow click if not in a swipe gesture
       if (currencyCode === 'CRYPTO') {
-        // Handle crypto portfolio click - show crypto portfolio details
-        alert('Crypto Portfolio Details - Feature coming soon!');
+        // Show crypto portfolio modal
+        setShowCryptoPortfolioModal(true);
       } else {
         setSelectedCurrencyAccount(currencyCode);
         setShowBankAccountModal(true);

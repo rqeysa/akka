@@ -2787,17 +2787,18 @@ input:checked + .slider:before {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
-/* Clean Pagination Indicators */
+/* Clean Pagination Indicators with Proper Spacing */
 .currency-indicators-clean {
   display: flex;
   justify-content: center;
   gap: 8px;
-  margin: 24px 0 32px 0; /* More space above and below */
+  margin: 24px 0 40px 0; /* Increased bottom margin for more space */
+  padding: 8px 0; /* Additional padding for visual separation */
 }
 
 .indicator-clean {
-  width: 8px;
-  height: 8px;
+  width: 10px;
+  height: 10px;
   border-radius: 50%;
   background: var(--akka-gray-300);
   border: none;
@@ -2808,7 +2809,7 @@ input:checked + .slider:before {
 
 .indicator-clean.active {
   background: var(--akka-accent);
-  transform: scale(1.2);
+  transform: scale(1.3);
 }
 
 .indicator-clean:hover {

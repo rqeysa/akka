@@ -2817,6 +2817,267 @@ input:checked + .slider:before {
   text-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
+/* Updated Currency Slider Styles */
+.currency-balance-section {
+  margin: 20px 0;
+  background: var(--akka-surface);
+  border-radius: 16px;
+  padding: 20px;
+  border: 1px solid var(--akka-border);
+}
+
+.currency-slider-container {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.currency-nav-btn {
+  width: 40px;
+  height: 40px;
+  border: 2px solid var(--akka-border);
+  border-radius: 50%;
+  background: var(--akka-surface);
+  color: var(--akka-gray-600);
+  font-size: 18px;
+  font-weight: 700;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.currency-nav-btn:hover {
+  border-color: var(--akka-accent);
+  color: var(--akka-accent);
+  transform: scale(1.05);
+}
+
+.currency-slide-wrapper {
+  flex: 1;
+  overflow: hidden;
+  border-radius: 16px;
+}
+
+.currency-slides {
+  display: flex;
+  transition: transform 0.3s ease;
+}
+
+.currency-slide {
+  min-width: 100%;
+  cursor: pointer;
+  transition: transform 0.2s ease;
+}
+
+.currency-slide:hover {
+  transform: scale(1.02);
+}
+
+.currency-slide .currency-balance-card {
+  margin: 0;
+}
+
+.tap-hint {
+  text-align: center;
+  margin-top: 12px;
+}
+
+.tap-hint span {
+  font-size: 11px;
+  opacity: 0.7;
+  font-style: italic;
+}
+
+.currency-indicators {
+  display: flex;
+  justify-content: center;
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--akka-gray-300);
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.indicator.active {
+  background: var(--akka-accent);
+  transform: scale(1.2);
+}
+
+.indicator:hover {
+  background: var(--akka-accent);
+  opacity: 0.7;
+}
+
+/* Bank Account Modal */
+.bank-account-modal {
+  background: var(--akka-surface);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.account-balance-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 20px 20px 0 0;
+}
+
+.balance-info {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.balance-info .balance-label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.balance-info .balance-amount {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.account-status {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 12px;
+}
+
+.status-indicator {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+}
+
+.bank-details-section {
+  padding: 20px;
+}
+
+.bank-details-section h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akka-gray-900);
+  margin-bottom: 16px;
+}
+
+.bank-detail-item {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  margin-bottom: 20px;
+  padding-bottom: 16px;
+  border-bottom: 1px solid var(--akka-border);
+}
+
+.bank-detail-item:last-child {
+  border-bottom: none;
+  margin-bottom: 0;
+}
+
+.detail-label {
+  font-size: 12px;
+  color: var(--akka-gray-500);
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.5px;
+}
+
+.detail-value-container {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 12px;
+}
+
+.detail-value {
+  font-size: 14px;
+  color: var(--akka-gray-900);
+  font-weight: 600;
+  flex: 1;
+}
+
+.detail-value.iban {
+  font-family: 'Courier New', monospace;
+  letter-spacing: 1px;
+}
+
+.copy-detail-btn {
+  padding: 6px 12px;
+  background: var(--akka-accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.copy-detail-btn:hover {
+  background: #2563EB;
+  transform: translateY(-1px);
+}
+
+.account-actions {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  padding: 0 20px 20px;
+}
+
+.account-action-btn {
+  padding: 12px 8px;
+  border: 1px solid var(--akka-border);
+  background: var(--akka-surface);
+  color: var(--akka-gray-900);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.account-action-btn:hover {
+  background: var(--akka-gray-50);
+  border-color: var(--akka-accent);
+  transform: translateY(-1px);
+}
+
+.account-action-btn.transfer:hover {
+  border-color: var(--akka-accent);
+  color: var(--akka-accent);
+}
+
+.account-action-btn.deposit:hover {
+  border-color: var(--akka-success);
+  color: var(--akka-success);
+}
+
+.account-action-btn.statement:hover {
+  border-color: var(--akka-gray-400);
+}
+
 /* Bottom Navigation */
 .akka-nav {
   position: fixed;

@@ -2860,6 +2860,15 @@ const MainApp = () => {
                     <button className="danger-btn">Export Account Data</button>
                     <button className="danger-btn">Delete Account</button>
                   </div>
+
+                  {/* Save Settings Button */}
+                  {settingsChanged && (
+                    <div className="settings-save-section">
+                      <button className="save-settings-btn" onClick={saveSettings}>
+                        💾 Save Settings
+                      </button>
+                    </div>
+                  )}
                 </div>
               </div>
             )}

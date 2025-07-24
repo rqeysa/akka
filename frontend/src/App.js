@@ -1346,9 +1346,9 @@ const MainApp = () => {
       <header className="akka-header">
         <div className="header-content">
           <div className="logo-section">
-            <div className="akka-logo-header">
+            <div className="akka-logo-header" onClick={() => handleTabChange('home')}>
               <div className="logo-icon"></div>
-              <span>Akka</span>
+              <span>akka</span>
             </div>
           </div>
           <div className="header-actions">

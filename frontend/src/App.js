@@ -1831,7 +1831,13 @@ const MainApp = () => {
   
 
 
-  const handleCurrencyClick = (currencyCode) => {
+  // Handle language change
+  const handleLanguageChange = (language) => {
+    setCurrentLanguage(language);
+    // Store in localStorage for persistence
+    localStorage.setItem('akka_language', language);
+    alert(`Language changed to ${language}. Full app translation coming soon!`);
+  };
     // Only allow click if not currently swiping
     if (!touchStart) { // Only allow click if not in a swipe gesture
       if (currencyCode === 'CRYPTO') {

@@ -3262,6 +3262,252 @@ input:checked + .slider:before {
   background: var(--akka-primary-dark);
 }
 
+/* Transaction History in Modals */
+.account-history-section,
+.crypto-history-section {
+  margin-top: 24px;
+  padding-top: 20px;
+  border-top: 1px solid var(--akka-border);
+}
+
+.account-history-section h4,
+.crypto-history-section h4 {
+  color: var(--akka-text);
+  margin: 0 0 16px 0;
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.account-transactions-list,
+.crypto-transactions-list {
+  max-height: 200px;
+  overflow-y: auto;
+}
+
+.account-transaction-item,
+.crypto-transaction-item {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 0;
+  border-bottom: 1px solid var(--akka-border-light);
+}
+
+.account-transaction-item:last-child,
+.crypto-transaction-item:last-child {
+  border-bottom: none;
+}
+
+.transaction-info {
+  flex: 1;
+}
+
+.transaction-type {
+  font-weight: 600;
+  color: var(--akka-text);
+  font-size: 14px;
+}
+
+.transaction-date {
+  font-size: 12px;
+  color: var(--akka-text-secondary);
+  margin-top: 2px;
+}
+
+.transaction-amount {
+  text-align: right;
+}
+
+.transaction-amount .positive {
+  color: var(--akka-success);
+}
+
+.transaction-amount .negative {
+  color: var(--akka-error);
+}
+
+.crypto-amount {
+  font-weight: 600;
+  color: var(--akka-text);
+  font-size: 14px;
+}
+
+.eur-equivalent {
+  font-size: 12px;
+  color: var(--akka-text-secondary);
+}
+
+.no-transactions {
+  text-align: center;
+  padding: 20px;
+  color: var(--akka-text-secondary);
+}
+
+/* Apply Card Modal */
+.apply-card-modal {
+  background: var(--akka-surface);
+  border-radius: 16px;
+  padding: 24px;
+  max-width: 500px;
+  width: 90%;
+  margin: 0 auto;
+  position: relative;
+  max-height: 80vh;
+  overflow-y: auto;
+}
+
+.application-progress {
+  display: flex;
+  justify-content: center;
+  gap: 20px;
+  margin: 20px 0;
+}
+
+.progress-step {
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  background: var(--akka-surface-variant);
+  color: var(--akka-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 600;
+  border: 2px solid var(--akka-border);
+}
+
+.progress-step.active {
+  background: var(--akka-primary);
+  color: white;
+  border-color: var(--akka-primary);
+}
+
+.application-step h4 {
+  color: var(--akka-text);
+  margin: 0 0 20px 0;
+  text-align: center;
+}
+
+.card-type-options {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  margin-bottom: 24px;
+}
+
+.card-type-option {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border: 2px solid var(--akka-border);
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.card-type-option.selected {
+  border-color: var(--akka-primary);
+  background: var(--akka-primary-light);
+}
+
+.card-type-option:hover {
+  border-color: var(--akka-primary);
+}
+
+.card-icon {
+  font-size: 32px;
+  margin-right: 16px;
+}
+
+.card-type-info h5 {
+  margin: 0 0 4px 0;
+  color: var(--akka-text);
+}
+
+.card-type-info p {
+  margin: 0 0 4px 0;
+  color: var(--akka-text-secondary);
+  font-size: 14px;
+}
+
+.card-benefit {
+  font-size: 12px;
+  color: var(--akka-success);
+  font-weight: 600;
+}
+
+.form-group {
+  margin-bottom: 16px;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 6px;
+  color: var(--akka-text);
+  font-weight: 600;
+}
+
+.form-group select,
+.form-group input,
+.form-group textarea {
+  width: 100%;
+  padding: 12px;
+  border: 1px solid var(--akka-border);
+  border-radius: 8px;
+  background: var(--akka-surface);
+  color: var(--akka-text);
+  font-size: 14px;
+}
+
+.form-group select:focus,
+.form-group input:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--akka-primary);
+}
+
+.application-summary {
+  background: var(--akka-surface-variant);
+  padding: 16px;
+  border-radius: 8px;
+  margin-bottom: 20px;
+}
+
+.application-summary h5 {
+  margin: 0 0 12px 0;
+  color: var(--akka-text);
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 8px;
+}
+
+.summary-item:last-child {
+  margin-bottom: 0;
+}
+
+.next-step-btn,
+.submit-application-btn {
+  width: 100%;
+  background: var(--akka-primary);
+  color: white;
+  border: none;
+  padding: 14px 20px;
+  border-radius: 12px;
+  font-size: 16px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.next-step-btn:hover,
+.submit-application-btn:hover {
+  background: var(--akka-primary-dark);
+  transform: translateY(-1px);
+}
+
 /* Portfolio Sell Button */
 .portfolio-sell-btn {
   background: var(--akka-error);

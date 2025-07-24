@@ -489,16 +489,12 @@ metadata:
 
 test_plan:
   current_focus:
-    - "Quick Action Buttons"
-    - "Buy Modal Functionality"
-    - "Balance Card Click Modals"
-    - "Crypto Portfolio Modal Click"
     - "Profile Menu Items"
-    - "Cards Section Navigation"
+    - "Cards Section Navigation"  
+    - "Pagination Dots Spacing"
   stuck_tasks:
-    - "Quick Action Buttons"
-    - "Buy Modal Functionality"
-  test_all: true
+    - "Profile Menu Items"
+  test_all: false
   test_priority: "high_first"
 
 agent_communication:

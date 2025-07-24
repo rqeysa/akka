@@ -1406,8 +1406,9 @@ const CryptoPortfolioModal = ({ onClose, onSellCrypto }) => {
   const handleSellCrypto = (symbol) => {
     // Close portfolio modal and open sell modal with pre-selected crypto
     onClose();
-    // Need to trigger sell modal with selected crypto - we'll add this functionality
-    alert(`Sell ${symbol} functionality will open sell modal with ${symbol} pre-selected`);
+    if (onSellCrypto) {
+      onSellCrypto(symbol);
+    }
   };
 
   return (

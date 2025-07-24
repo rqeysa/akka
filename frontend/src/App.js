@@ -1388,8 +1388,8 @@ const CardsSection = () => {
 
       {/* Add New Card */}
       <div className="add-card-section">
-        <button className="add-card-btn">
-          + Add New Card
+        <button className="add-card-btn" onClick={() => setShowApplyModal(true)}>
+          + Apply for New Card
         </button>
       </div>
 

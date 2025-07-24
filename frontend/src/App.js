@@ -1350,7 +1350,7 @@ const CardDetailsModal = ({ card, onClose }) => {
 };
 
 // Cards Overview Component
-const CardsSection = ({ onClose }) => {
+const CardsSection = () => {
   const [selectedCard, setSelectedCard] = useState(null);
   
   const totalBalance = USER_CARDS.reduce((sum, card) => sum + card.balance, 0);
@@ -1359,7 +1359,6 @@ const CardsSection = ({ onClose }) => {
   return (
     <div className="cards-section">
       <div className="cards-header">
-        <button className="back-btn" onClick={onClose}>‹</button>
         <h2>My Cards</h2>
       </div>
 

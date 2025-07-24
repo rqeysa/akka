@@ -1944,6 +1944,12 @@ const MainApp = () => {
     // Deduct EUR from balance
     DEMO_USER.balance_eur -= parseFloat(eurAmount);
     
+    // Update state to force re-render
+    setUserBalances({
+      eur: DEMO_USER.balance_eur,
+      crypto_portfolio: { ...DEMO_USER.crypto_portfolio }
+    });
+    
     // Add to transaction history
     const newTransaction = {
       id: Date.now(),
@@ -1967,9 +1973,6 @@ const MainApp = () => {
       currentEurBalance: DEMO_USER.balance_eur
     });
     
-    // Force re-render by updating currency balances
-    setCurrentCurrencyIndex(currentCurrencyIndex);
-    
     // Show success modal
     setShowTransactionSuccess(true);
   };
@@ -1988,6 +1991,12 @@ const MainApp = () => {
       
       // Add EUR to balance
       DEMO_USER.balance_eur += parseFloat(eurAmount);
+      
+      // Update state to force re-render
+      setUserBalances({
+        eur: DEMO_USER.balance_eur,
+        crypto_portfolio: { ...DEMO_USER.crypto_portfolio }
+      });
       
       // Add to transaction history
       const newTransaction = {
@@ -2012,9 +2021,6 @@ const MainApp = () => {
         currentEurBalance: DEMO_USER.balance_eur
       });
       
-      // Force re-render
-      setCurrentCurrencyIndex(currentCurrencyIndex);
-      
       // Show success modal
       setShowTransactionSuccess(true);
     }
@@ -2030,6 +2036,12 @@ const MainApp = () => {
       const ratio = DEMO_USER.crypto_portfolio[currency].amount / (DEMO_USER.crypto_portfolio[currency].amount + parseFloat(amount));
       DEMO_USER.crypto_portfolio[currency].value *= ratio;
     }
+    
+    // Update state to force re-render
+    setUserBalances({
+      eur: DEMO_USER.balance_eur,
+      crypto_portfolio: { ...DEMO_USER.crypto_portfolio }
+    });
     
     // Add to transaction history
     const newTransaction = {
@@ -2053,9 +2065,6 @@ const MainApp = () => {
       currentBalance: currency === 'EUR' ? DEMO_USER.balance_eur : DEMO_USER.crypto_portfolio[currency]?.amount || 0,
       currentEurBalance: DEMO_USER.balance_eur
     });
-    
-    // Force re-render
-    setCurrentCurrencyIndex(currentCurrencyIndex);
     
     // Show success modal
     setShowTransactionSuccess(true);

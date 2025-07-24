@@ -33,35 +33,67 @@ const DEMO_USER = {
   }
 };
 
-// User's Multi-Currency Balances
+// User's Multi-Currency Balances with Bank Account Info
 const CURRENCY_BALANCES = {
   EUR: { 
     balance: 3250.45, 
     symbol: '€', 
     name: 'Euro',
     flag: '🇪🇺',
-    change_24h: 0.0 // Base currency
+    change_24h: 0.0, // Base currency
+    bank_info: {
+      account_name: 'Carlos Martinez',
+      iban: 'DE89 3704 0044 0532 0130 00',
+      bic: 'AKKAEUXX',
+      bank_name: 'Akka Bank Europe',
+      account_type: 'Current Account',
+      sort_code: '37-04-00'
+    }
   },
   USD: { 
     balance: 3540.25, 
     symbol: '$', 
     name: 'US Dollar',
     flag: '🇺🇸',
-    change_24h: 1.2 // vs EUR
+    change_24h: 1.2, // vs EUR
+    bank_info: {
+      account_name: 'Carlos Martinez',
+      account_number: '1234567890',
+      routing_number: '021000021',
+      bank_name: 'Akka Bank USA',
+      account_type: 'Checking Account',
+      swift: 'AKKAUSXX'
+    }
   },
   TRY: { 
     balance: 89750.30, 
     symbol: '₺', 
     name: 'Turkish Lira',
     flag: '🇹🇷',
-    change_24h: -0.8 // vs EUR
+    change_24h: -0.8, // vs EUR
+    bank_info: {
+      account_name: 'Carlos Martinez',
+      iban: 'TR33 0006 1005 1978 6457 8413 26',
+      bank_name: 'Akka Bank Türkiye',
+      account_type: 'Vadesiz Hesap',
+      branch_code: '1005',
+      swift: 'AKKATRXX'
+    }
   },
   GBP: { 
     balance: 2780.90, 
     symbol: '£', 
     name: 'British Pound',
     flag: '🇬🇧',
-    change_24h: 0.3 // vs EUR
+    change_24h: 0.3, // vs EUR
+    bank_info: {
+      account_name: 'Carlos Martinez',
+      account_number: '12345678',
+      sort_code: '20-00-00',
+      bank_name: 'Akka Bank UK',
+      account_type: 'Current Account',
+      swift: 'AKKAGBXX'
+    }
   }
 };
 

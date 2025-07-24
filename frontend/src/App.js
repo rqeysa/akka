@@ -1552,6 +1552,38 @@ const CryptoPortfolioModal = ({ onClose, onSellCrypto }) => {
               📤 Send Crypto
             </button>
           </div>
+
+          {/* Crypto Transaction History */}
+          <div className="crypto-history-section">
+            <h4>Recent Crypto Transactions</h4>
+            {cryptoTransactions.length > 0 ? (
+              <div className="crypto-transactions-list">
+                {cryptoTransactions.map(transaction => (
+                  <div key={transaction.id} className="crypto-transaction-item">
+                    <div className="transaction-info">
+                      <div className="transaction-type">
+                        {transaction.type === 'buy' && '💳 Bought'} 
+                        {transaction.type === 'sell' && '💰 Sold'}
+                        {transaction.type === 'send' && '📤 Sent'}
+                        {' '}{transaction.crypto}
+                      </div>
+                      <div className="transaction-date">{transaction.date}</div>
+                    </div>
+                    <div className="transaction-amount">
+                      <div className="crypto-amount">{transaction.amount} {transaction.crypto}</div>
+                      {transaction.eur_amount && (
+                        <div className="eur-equivalent">€{transaction.eur_amount.toFixed(2)}</div>
+                      )}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            ) : (
+              <div className="no-transactions">
+                <p>No recent crypto transactions</p>
+              </div>
+            )}
+          </div>
         </div>
       </div>
     </div>

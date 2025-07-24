@@ -3014,6 +3014,228 @@ input:checked + .slider:before {
   opacity: 0.7;
 }
 
+/* Crypto Portfolio Modal */
+.crypto-portfolio-modal {
+  background: var(--akka-surface);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.crypto-portfolio-summary {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 20px;
+  background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);
+  color: white;
+  border-radius: 20px 20px 0 0;
+}
+
+.portfolio-total {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.portfolio-label {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.portfolio-amount {
+  font-size: 24px;
+  font-weight: 700;
+}
+
+.portfolio-change {
+  background: rgba(255, 255, 255, 0.15);
+  padding: 4px 8px;
+  border-radius: 8px;
+  backdrop-filter: blur(10px);
+}
+
+.crypto-assets-section {
+  padding: 20px;
+}
+
+.crypto-assets-section h4 {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akka-gray-900);
+  margin-bottom: 16px;
+}
+
+.crypto-asset-item {
+  margin-bottom: 20px;
+  padding: 16px;
+  border: 1px solid var(--akka-border);
+  border-radius: 12px;
+  background: var(--akka-surface);
+}
+
+.crypto-asset-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 12px;
+}
+
+.crypto-info {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.crypto-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: white;
+}
+
+.crypto-icon.btc {
+  background: #f7931a;
+}
+
+.crypto-icon.eth {
+  background: #627eea;
+}
+
+.crypto-icon.ada {
+  background: #0033ad;
+}
+
+.crypto-icon.dot {
+  background: #e6007a;
+}
+
+.crypto-icon.sol {
+  background: #14f195;
+}
+
+.crypto-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.crypto-name {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--akka-gray-900);
+}
+
+.crypto-balance {
+  font-size: 12px;
+  color: var(--akka-gray-500);
+}
+
+.crypto-value {
+  text-align: right;
+}
+
+.value-eur {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--akka-gray-900);
+}
+
+.crypto-address-section {
+  margin-top: 12px;
+}
+
+.address-label {
+  font-size: 12px;
+  color: var(--akka-gray-500);
+  display: block;
+  margin-bottom: 4px;
+}
+
+.address-container {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.crypto-address {
+  font-family: 'Courier New', monospace;
+  font-size: 11px;
+  color: var(--akka-gray-700);
+  flex: 1;
+  background: var(--akka-gray-50);
+  padding: 6px 8px;
+  border-radius: 6px;
+  word-break: break-all;
+}
+
+.copy-address-btn {
+  padding: 6px 12px;
+  background: var(--akka-accent);
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.copy-address-btn:hover {
+  background: #2563EB;
+  transform: translateY(-1px);
+}
+
+.crypto-actions-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  gap: 12px;
+  padding: 0 20px 20px;
+}
+
+.crypto-action-btn {
+  padding: 12px 8px;
+  border: 1px solid var(--akka-border);
+  background: var(--akka-surface);
+  color: var(--akka-gray-900);
+  border-radius: 8px;
+  font-size: 11px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  text-align: center;
+}
+
+.crypto-action-btn:hover {
+  background: var(--akka-gray-50);
+  border-color: var(--akka-accent);
+  transform: translateY(-1px);
+}
+
+.crypto-action-btn.buy:hover {
+  border-color: var(--akka-success);
+  color: var(--akka-success);
+}
+
+.crypto-action-btn.sell:hover {
+  border-color: var(--akka-error);
+  color: var(--akka-error);
+}
+
+.crypto-action-btn.send:hover {
+  border-color: var(--akka-accent);
+  color: var(--akka-accent);
+}
+
 /* Bank Account Modal */
 .bank-account-modal {
   background: var(--akka-surface);

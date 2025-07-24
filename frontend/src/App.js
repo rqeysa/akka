@@ -1547,6 +1547,14 @@ const MainApp = () => {
   const [showBankAccountModal, setShowBankAccountModal] = useState(false);
   const [selectedCurrencyAccount, setSelectedCurrencyAccount] = useState(null);
   const [swiperInstance, setSwiperInstance] = useState(null);
+  
+  // Touch/swipe handling for manual carousel
+  const [touchStart, setTouchStart] = useState(null);
+  const [touchEnd, setTouchEnd] = useState(null);
+  const [isDragging, setIsDragging] = useState(false);
+  
+  const currencyKeys = Object.keys(CURRENCY_BALANCES);
+  const totalSlides = currencyKeys.length + 1; // +1 for crypto portfolio
 
   useEffect(() => {
     fetchCryptoPrices();

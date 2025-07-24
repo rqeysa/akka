@@ -1931,10 +1931,34 @@ const MainApp = () => {
     // Deduct EUR from balance
     DEMO_USER.balance_eur -= parseFloat(eurAmount);
     
+    // Add to transaction history
+    const newTransaction = {
+      id: Date.now(),
+      type: 'buy',
+      crypto: crypto.symbol,
+      amount: parseFloat(amount),
+      eur_amount: parseFloat(eurAmount),
+      date: new Date().toLocaleString('en-GB', { 
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit'
+      }).replace(',', ''),
+      status: 'completed'
+    };
+    USER_TRANSACTION_HISTORY.unshift(newTransaction);
+    
+    // Set transaction success data
+    setLastTransaction({
+      ...newTransaction,
+      action: 'purchased',
+      currentBalance: DEMO_USER.crypto_portfolio[crypto.symbol].amount,
+      currentEurBalance: DEMO_USER.balance_eur
+    });
+    
     // Force re-render by updating currency balances
     setCurrentCurrencyIndex(currentCurrencyIndex);
     
-    alert(`✅ Purchase successful! Bought ${amount} ${crypto.symbol} for €${eurAmount}. Check your portfolio!`);
+    // Show success modal
+    setShowTransactionSuccess(true);
   };
 
   // Simulate selling crypto and update portfolio
@@ -1952,10 +1976,34 @@ const MainApp = () => {
       // Add EUR to balance
       DEMO_USER.balance_eur += parseFloat(eurAmount);
       
+      // Add to transaction history
+      const newTransaction = {
+        id: Date.now(),
+        type: 'sell',
+        crypto: cryptoSymbol,
+        amount: parseFloat(amount),
+        eur_amount: parseFloat(eurAmount),
+        date: new Date().toLocaleString('en-GB', { 
+          year: 'numeric', month: '2-digit', day: '2-digit',
+          hour: '2-digit', minute: '2-digit'
+        }).replace(',', ''),
+        status: 'completed'
+      };
+      USER_TRANSACTION_HISTORY.unshift(newTransaction);
+      
+      // Set transaction success data
+      setLastTransaction({
+        ...newTransaction,
+        action: 'sold',
+        currentBalance: DEMO_USER.crypto_portfolio[cryptoSymbol]?.amount || 0,
+        currentEurBalance: DEMO_USER.balance_eur
+      });
+      
       // Force re-render
       setCurrentCurrencyIndex(currentCurrencyIndex);
       
-      alert(`✅ Sale successful! Sold ${amount} ${cryptoSymbol} for €${eurAmount}. EUR added to your balance!`);
+      // Show success modal
+      setShowTransactionSuccess(true);
     }
   };
 
@@ -1970,10 +2018,34 @@ const MainApp = () => {
       DEMO_USER.crypto_portfolio[currency].value *= ratio;
     }
     
+    // Add to transaction history
+    const newTransaction = {
+      id: Date.now(),
+      type: 'send',
+      crypto: currency,
+      amount: parseFloat(amount),
+      recipient: recipient,
+      date: new Date().toLocaleString('en-GB', { 
+        year: 'numeric', month: '2-digit', day: '2-digit',
+        hour: '2-digit', minute: '2-digit'
+      }).replace(',', ''),
+      status: 'completed'
+    };
+    USER_TRANSACTION_HISTORY.unshift(newTransaction);
+    
+    // Set transaction success data
+    setLastTransaction({
+      ...newTransaction,
+      action: 'sent',
+      currentBalance: currency === 'EUR' ? DEMO_USER.balance_eur : DEMO_USER.crypto_portfolio[currency]?.amount || 0,
+      currentEurBalance: DEMO_USER.balance_eur
+    });
+    
     // Force re-render
     setCurrentCurrencyIndex(currentCurrencyIndex);
     
-    alert(`✅ Transfer successful! Sent ${amount} ${currency} to ${recipient}. Check your updated balance!`);
+    // Show success modal
+    setShowTransactionSuccess(true);
   };
 
   // Handle selling crypto from portfolio

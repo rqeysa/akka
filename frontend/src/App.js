@@ -1402,6 +1402,45 @@ const MainApp = () => {
       <main className="akka-main">
         {activeTab === 'home' && !showCardsSection && (
           <div className="home-content">
+            {/* Swipeable Currency Balances */}
+            <div className="currency-balance-section">
+              <div className="currency-selector">
+                {Object.keys(CURRENCY_BALANCES).map(currency => (
+                  <button
+                    key={currency}
+                    className={`currency-tab ${selectedCurrency === currency ? 'active' : ''}`}
+                    onClick={() => setSelectedCurrency(currency)}
+                  >
+                    <span className="currency-flag">{CURRENCY_BALANCES[currency].flag}</span>
+                    <span className="currency-code">{currency}</span>
+                  </button>
+                ))}
+              </div>
+              
+              <div className="currency-balance-card">
+                <div className="balance-header">
+                  <div className="currency-info">
+                    <span className="currency-flag-large">{CURRENCY_BALANCES[selectedCurrency].flag}</span>
+                    <div className="currency-details">
+                      <span className="currency-name">{CURRENCY_BALANCES[selectedCurrency].name}</span>
+                      <span className="currency-code-small">{selectedCurrency}</span>
+                    </div>
+                  </div>
+                  <div className="balance-change">
+                    <span className={`change-indicator ${CURRENCY_BALANCES[selectedCurrency].change_24h >= 0 ? 'positive' : 'negative'}`}>
+                      {CURRENCY_BALANCES[selectedCurrency].change_24h >= 0 ? '+' : ''}{CURRENCY_BALANCES[selectedCurrency].change_24h}%
+                    </span>
+                  </div>
+                </div>
+                
+                <div className="main-balance">
+                  <span className="balance-amount">
+                    {CURRENCY_BALANCES[selectedCurrency].symbol}{CURRENCY_BALANCES[selectedCurrency].balance.toLocaleString()}
+                  </span>
+                </div>
+              </div>
+            </div>
+
             {/* Portfolio Summary */}
             <div className="portfolio-summary">
               <div className="summary-header">
@@ -1415,13 +1454,8 @@ const MainApp = () => {
               <div className="balance-cards">
                 <div className="balance-card main">
                   <div className="balance-label">Total portfolio value</div>
-                  <div className="balance-amount">€{DEMO_USER.total_portfolio.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
-                  <div className="balance-change positive">+€245.30 (+2.87%)</div>
-                </div>
-                
-                <div className="balance-card secondary">
-                  <div className="balance-label">EUR Balance</div>
-                  <div className="balance-amount">€{DEMO_USER.balance_eur.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
+                  <div className="balance-amount">€{DEMO_USER.total_portfolio.toLocaleString()}</div>
+                  <div className="balance-change positive">+€225.30 (+2.23%)</div>
                 </div>
               </div>
             </div>

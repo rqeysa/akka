@@ -742,8 +742,8 @@ const BuySellModal = ({ crypto, onClose, onConfirm }) => {
 };
 
 // Sell Modal Component
-const SellModal = ({ onClose }) => {
-  const [selectedCrypto, setSelectedCrypto] = useState('');
+const SellModal = ({ onClose, preselectedCrypto = null }) => {
+  const [selectedCrypto, setSelectedCrypto] = useState(preselectedCrypto?.symbol || '');
   const [amount, setAmount] = useState('');
   const [eurAmount, setEurAmount] = useState('');
   

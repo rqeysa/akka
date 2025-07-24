@@ -1740,6 +1740,13 @@ const MainApp = () => {
               <div className="logo-icon"></div>
               <span>akka</span>
             </div>
+            <div className="user-greeting">
+              <span>Hello, {user.name.split(' ')[0]} 👋</span>
+              <div className="verification-badge">
+                <span className="verified-icon">✓</span>
+                Verified
+              </div>
+            </div>
           </div>
           <div className="header-actions">
             <button className="notification-btn" onClick={() => handleTabChange('history')}>

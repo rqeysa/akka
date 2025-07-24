@@ -1902,13 +1902,6 @@ const MainApp = () => {
               <div className="currency-slider-container">
                 <div 
                   className="currency-slide-wrapper"
-                  onTouchStart={handleTouchStart}
-                  onTouchMove={handleTouchMove}
-                  onTouchEnd={handleTouchEnd}
-                  onMouseDown={handleMouseDown}
-                  onMouseMove={handleMouseMove}
-                  onMouseUp={handleMouseUp}
-                  onMouseLeave={handleMouseUp}
                 >
                   <div 
                     className="currency-slides"

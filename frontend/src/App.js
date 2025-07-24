@@ -1364,7 +1364,7 @@ const CardsSection = ({ onClose }) => {
 };
 
 // Crypto Portfolio Modal Component
-const CryptoPortfolioModal = ({ onClose }) => {
+const CryptoPortfolioModal = ({ onClose, onSellCrypto }) => {
   const cryptoAddresses = {
     BTC: {
       address: '1A1zP1eP5QGefi2DMPTfTL5SLmv7DivfNa',

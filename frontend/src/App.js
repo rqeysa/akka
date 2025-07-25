@@ -3501,6 +3501,15 @@ const TransactionSuccessModal = ({ transaction, onClose }) => {
     }
   };
 
+  const getTransactionIcon = () => {
+    switch (transaction.type) {
+      case 'buy': return '🟢';
+      case 'sell': return '🔴';
+      case 'send': return '📤';
+      default: return '✅';
+    }
+  };
+
   const getBalanceInfo = () => {
     if (transaction.type === 'buy' || transaction.type === 'sell') {
       return (
@@ -3527,55 +3536,68 @@ const TransactionSuccessModal = ({ transaction, onClose }) => {
 
   return (
     <div className="modal-overlay">
-      <div className="transaction-success-modal">
+      <div className="transaction-success-modal enhanced">
         <div className="success-header">
-          <div className="success-icon">✅</div>
+          <div className="success-icon-large">{getTransactionIcon()}</div>
           <h3>Transaction Successful!</h3>
+          <p className="success-subtitle">{getSuccessMessage()}</p>
         </div>
         
         <div className="success-content">
-          <div className="transaction-details">
-            <h4>{getSuccessMessage()}</h4>
-            
-            <div className="transaction-summary">
-              <div className="summary-row">
-                <span>Amount:</span>
-                <span className="highlight">{transaction.amount} {transaction.crypto}</span>
+          <div className="transaction-card">
+            <div className="transaction-details">
+              <div className="detail-row">
+                <span className="detail-label">Transaction ID:</span>
+                <span className="detail-value">#{transaction.id || 'TX' + Date.now()}</span>
+              </div>
+              
+              <div className="detail-row">
+                <span className="detail-label">Amount:</span>
+                <span className="detail-value highlight">{transaction.amount} {transaction.crypto}</span>
               </div>
               
               {transaction.eur_amount && (
-                <div className="summary-row">
-                  <span>Value:</span>
-                  <span className="highlight">€{transaction.eur_amount.toFixed(2)}</span>
+                <div className="detail-row">
+                  <span className="detail-label">Value:</span>
+                  <span className="detail-value highlight">€{transaction.eur_amount.toFixed(2)}</span>
                 </div>
               )}
               
-              <div className="summary-row">
-                <span>Date:</span>
-                <span>{transaction.date}</span>
+              <div className="detail-row">
+                <span className="detail-label">Date & Time:</span>
+                <span className="detail-value">{transaction.date}</span>
+              </div>
+              
+              <div className="detail-row">
+                <span className="detail-label">Status:</span>
+                <span className="detail-value success-status">✓ Completed</span>
               </div>
               
               {transaction.recipient && (
-                <div className="summary-row">
-                  <span>Recipient:</span>
-                  <span>{transaction.recipient}</span>
+                <div className="detail-row">
+                  <span className="detail-label">Recipient:</span>
+                  <span className="detail-value">{transaction.recipient}</span>
                 </div>
               )}
             </div>
 
             <div className="current-balances">
-              <h5>Updated Balances:</h5>
+              <h5>📊 Updated Balances</h5>
               {getBalanceInfo()}
             </div>
           </div>
           
           <div className="success-actions">
-            <button className="btn-secondary" onClick={onClose}>
-              View Portfolio
+            <button className="btn-secondary modern" onClick={onClose}>
+              📱 View Portfolio
             </button>
-            <button className="btn-primary" onClick={onClose}>
-              Continue Trading
+            <button className="btn-primary modern" onClick={onClose}>
+              💱 Continue Trading
             </button>
+          </div>
+          
+          <div className="transaction-footer">
+            <p>🔒 Your funds are secure • Transaction processed instantly</p>
           </div>
         </div>
       </div>

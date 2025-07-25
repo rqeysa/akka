@@ -1998,6 +1998,7 @@ const MainApp = () => {
   const [showSellModal, setShowSellModal] = useState(false);
   const [showSendModal, setShowSendModal] = useState(false);
   const [showReceiveModal, setShowReceiveModal] = useState(false);
+  const [showHistoryModal, setShowHistoryModal] = useState(false);
   const [profilePage, setProfilePage] = useState('main'); // main, personal, security, payment, docs, help, settings
   const [historyFilter, setHistoryFilter] = useState('all'); // all, buys, sells, sends, receives
   const [selectedCard, setSelectedCard] = useState(null);

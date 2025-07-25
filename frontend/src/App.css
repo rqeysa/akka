@@ -3165,6 +3165,267 @@ input:checked + .slider:before {
   transform: translateY(-1px);
 }
 
+/* Crypto Details Modal */
+.crypto-details-modal {
+  background: var(--akka-surface);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+.crypto-info-header {
+  padding: 20px;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+
+.crypto-icon-large {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 24px;
+  color: white;
+  background: rgba(255, 255, 255, 0.2);
+  backdrop-filter: blur(10px);
+}
+
+.crypto-main-info {
+  flex: 1;
+}
+
+.crypto-name-large {
+  font-size: 24px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.crypto-full-name {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 8px;
+}
+
+.crypto-current-price {
+  font-size: 28px;
+  font-weight: 700;
+  margin-bottom: 4px;
+}
+
+.price-change {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.price-change.positive {
+  color: #10B981;
+}
+
+.price-change.negative {
+  color: #EF4444;
+}
+
+.holdings-summary {
+  padding: 20px;
+  background: var(--akka-gray-50);
+}
+
+.holding-card {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  text-align: center;
+  border: 1px solid var(--akka-border);
+}
+
+.holding-label {
+  font-size: 12px;
+  color: var(--akka-gray-500);
+  margin-bottom: 8px;
+}
+
+.holding-amount {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--akka-gray-900);
+  margin-bottom: 4px;
+}
+
+.holding-value {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--akka-success);
+}
+
+.price-chart-section {
+  padding: 20px;
+}
+
+.chart-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.chart-header h4 {
+  margin: 0;
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--akka-gray-900);
+}
+
+.chart-period-tabs {
+  display: flex;
+  gap: 8px;
+}
+
+.period-tab {
+  padding: 6px 12px;
+  border: 1px solid var(--akka-border);
+  background: transparent;
+  color: var(--akka-gray-600);
+  border-radius: 8px;
+  font-size: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.period-tab.active {
+  background: var(--akka-accent);
+  color: white;
+  border-color: var(--akka-accent);
+}
+
+.chart-placeholder {
+  background: white;
+  border: 1px solid var(--akka-border);
+  border-radius: 12px;
+  padding: 16px;
+  margin-bottom: 12px;
+}
+
+.price-chart-svg {
+  width: 100%;
+  height: 120px;
+  margin-bottom: 16px;
+}
+
+.chart-stats {
+  display: flex;
+  justify-content: space-around;
+}
+
+.stat-item {
+  text-align: center;
+}
+
+.stat-label {
+  display: block;
+  font-size: 12px;
+  color: var(--akka-gray-500);
+  margin-bottom: 4px;
+}
+
+.stat-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--akka-gray-900);
+}
+
+.crypto-actions {
+  padding: 0 20px 20px;
+  display: flex;
+  gap: 12px;
+}
+
+.crypto-action-button {
+  flex: 1;
+  padding: 16px;
+  border: none;
+  border-radius: 12px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-family: inherit;
+}
+
+.crypto-action-button.buy-btn {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: white;
+}
+
+.crypto-action-button.sell-btn {
+  background: linear-gradient(135deg, #EF4444 0%, #DC2626 100%);
+  color: white;
+}
+
+.crypto-action-button:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+}
+
+.action-icon {
+  font-size: 20px;
+}
+
+.action-content {
+  text-align: left;
+}
+
+.action-title {
+  font-size: 14px;
+  font-weight: 600;
+  margin-bottom: 2px;
+}
+
+.action-subtitle {
+  font-size: 12px;
+  opacity: 0.8;
+}
+
+.market-stats {
+  padding: 0 20px 20px;
+  background: var(--akka-gray-50);
+  margin: 0 20px;
+  border-radius: 12px;
+}
+
+.stat-row {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  border-bottom: 1px solid var(--akka-border);
+}
+
+.stat-row:last-child {
+  border-bottom: none;
+}
+
+.stat-row .stat-label {
+  font-size: 14px;
+  color: var(--akka-gray-600);
+}
+
+.stat-row .stat-value {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--akka-gray-900);
+}
+
 /* Enhanced Transaction Success Modal */
 .transaction-success-modal.enhanced {
   background: var(--akka-surface);

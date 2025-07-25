@@ -1833,7 +1833,7 @@ const CryptoPortfolioModal = ({ onClose, onSellCrypto }) => {
 };
 
 // Bank Account Details Modal
-const BankAccountModal = ({ currencyCode, onClose, userBalances }) => {
+const BankAccountModal = ({ currencyCode, onClose, userBalances, setShowSendModal, setShowReceiveModal }) => {
   const CURRENCY_BALANCES = getCurrencyBalances(userBalances);
   if (!currencyCode || !CURRENCY_BALANCES[currencyCode]) return null;
   

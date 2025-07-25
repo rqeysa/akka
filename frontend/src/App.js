@@ -3561,6 +3561,24 @@ const MainApp = () => {
         </button>
       </nav>
 
+      {/* Crypto Details Modal */}
+      {showCryptoDetailsModal && selectedCryptoDetails && (
+        <CryptoDetailsModal
+          crypto={selectedCryptoDetails.crypto}
+          data={selectedCryptoDetails.data}
+          onClose={() => setShowCryptoDetailsModal(false)}
+          onBuy={(crypto) => {
+            setSelectedCrypto(crypto);
+            setShowBuyModal(true);
+          }}
+          onSell={(crypto) => {
+            setSelectedCrypto({ symbol: crypto });
+            setShowSellModal(true);
+          }}
+          cryptoPrices={cryptoPrices}
+        />
+      )}
+
       {/* History Modal */}
       {showHistoryModal && (
         <HistoryModal

@@ -1056,6 +1056,8 @@ const HistoryModal = ({ onClose, historyFilter, setHistoryFilter }) => {
   );
 };
 
+// Receive Modal Component
+const ReceiveModal = ({ onClose }) => {
   const [receiveType, setReceiveType] = useState('crypto'); // 'crypto' or 'fiat'
   const [selectedCurrency, setSelectedCurrency] = useState('BTC');
   

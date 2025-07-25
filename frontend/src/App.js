@@ -2759,7 +2759,20 @@ const MainApp = () => {
               </button>
             </div>
 
-            {/* Cards Section - Moved to Middle */}
+            {/* Portfolio - Now First */}
+            <div className="home-portfolio">
+              <div className="section-header">
+                <h3>Your portfolio</h3>
+                <button className="see-all-btn" onClick={() => handleTabChange('portfolio')}>View all</button>
+              </div>
+              <div className="portfolio-list">
+                {Object.entries(DEMO_USER.crypto_portfolio).map(([crypto, data]) => (
+                  <PortfolioItem key={crypto} crypto={crypto} data={data} onClick={() => handleCryptoDetails(crypto, data)} />
+                ))}
+              </div>
+            </div>
+
+            {/* Cards Section - Now After Portfolio */}
             <div className="home-cards-section">
               <div className="section-header">
                 <h3>Your cards</h3>
@@ -2778,19 +2791,6 @@ const MainApp = () => {
                       Spent this month: €{card.spent_this_month.toLocaleString()}
                     </div>
                   </div>
-                ))}
-              </div>
-            </div>
-
-            {/* Portfolio - Now After Cards */}
-            <div className="home-portfolio">
-              <div className="section-header">
-                <h3>Your portfolio</h3>
-                <button className="see-all-btn" onClick={() => handleTabChange('portfolio')}>View all</button>
-              </div>
-              <div className="portfolio-list">
-                {Object.entries(DEMO_USER.crypto_portfolio).map(([crypto, data]) => (
-                  <PortfolioItem key={crypto} crypto={crypto} data={data} />
                 ))}
               </div>
             </div>

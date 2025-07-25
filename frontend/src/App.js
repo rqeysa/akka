@@ -1991,13 +1991,21 @@ const BankAccountModal = ({ currencyCode, onClose, userBalances }) => {
 
           {/* Quick Actions */}
           <div className="account-actions">
-            <button className="account-action-btn transfer">
+            <button className="account-action-btn transfer" onClick={() => {
+              onClose();
+              setShowSendModal(true);
+            }}>
               💸 Transfer Money
             </button>
-            <button className="account-action-btn deposit">
+            <button className="account-action-btn deposit" onClick={() => {
+              onClose();
+              setShowReceiveModal(true);
+            }}>
               💰 Deposit Funds
             </button>
-            <button className="account-action-btn statement">
+            <button className="account-action-btn statement" onClick={() => {
+              alert(`📄 Downloading ${currencyCode} account statement...`);
+            }}>
               📄 Download Statement
             </button>
           </div>

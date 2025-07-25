@@ -1979,203 +1979,153 @@ const BankAccountModal = ({ currencyCode, onClose, userBalances, setShowSendModa
 
   const bankInfo = currency.bank_info;
 
-  const copyToClipboard = (text, label) => {
-    navigator.clipboard.writeText(text);
-    alert(`${label} copied to clipboard!`);
-  };
-
   return (
     <div className="modal-overlay">
-      <div className="bank-account-modal">
-        <div className="modal-header">
+      <div className="bank-account-modal-modern">
+        <div className="modal-header-modern">
+          <button className="back-btn" onClick={onClose}>
+            ← Back
+          </button>
           <h3>{currency.flag} {currency.name} Account</h3>
           <button className="close-btn" onClick={onClose}>×</button>
         </div>
-        
-        <div className="modal-content">
-          {/* Account Balance */}
-          <div className="account-balance-summary">
-            <div className="balance-info">
-              <span className="balance-label">Available Balance</span>
-              <span className="balance-amount">{currency.symbol}{currency.balance.toLocaleString()}</span>
+
+        <div className="account-summary-section">
+          {/* Account Holder Info */}
+          <div className="account-holder-card">
+            <div className="holder-avatar">
+              <span>👤</span>
             </div>
-            <div className="account-status">
-              <span className="status-indicator active"></span>
+            <div className="holder-details">
+              <div className="holder-name">{bankInfo.account_name}</div>
+              <div className="holder-id">Customer ID: AKK-{Math.random().toString().substr(2, 6)}</div>
+            </div>
+          </div>
+
+          {/* Main Balance Display */}
+          <div className="main-balance-card">
+            <div className="balance-label">Available Balance</div>
+            <div className="balance-amount">{currency.symbol}{currency.balance.toLocaleString()}</div>
+            <div className="balance-subtitle">
+              {currency.name} • Current Account
+            </div>
+            <div className="account-status-modern">
+              <span className="status-indicator-modern active"></span>
               <span>Active Account</span>
             </div>
           </div>
 
-          {/* Bank Account Details */}
-          <div className="bank-details-section">
-            <h4>Account Information</h4>
-            
-            <div className="bank-detail-item">
-              <span className="detail-label">Account Holder</span>
-              <div className="detail-value-container">
-                <span className="detail-value">{bankInfo.account_name}</span>
-                <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.account_name, 'Account Name')}>
-                  Copy
-                </button>
-              </div>
-            </div>
-
-            <div className="bank-detail-item">
+          {/* Account Details Grid */}
+          <div className="account-details-grid">
+            <div className="detail-item-modern">
               <span className="detail-label">Bank Name</span>
-              <div className="detail-value-container">
-                <span className="detail-value">{bankInfo.bank_name}</span>
-                <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.bank_name, 'Bank Name')}>
-                  Copy
-                </button>
-              </div>
+              <span className="detail-value">{bankInfo.bank_name}</span>
             </div>
-
-            <div className="bank-detail-item">
-              <span className="detail-label">Account Type</span>
-              <div className="detail-value-container">
-                <span className="detail-value">{bankInfo.account_type}</span>
-              </div>
+            <div className="detail-item-modern">
+              <span className="detail-label">IBAN</span>
+              <span className="detail-value">{bankInfo.iban}</span>
             </div>
-
-            {bankInfo.iban && (
-              <div className="bank-detail-item">
-                <span className="detail-label">IBAN</span>
-                <div className="detail-value-container">
-                  <span className="detail-value iban">{bankInfo.iban}</span>
-                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.iban, 'IBAN')}>
-                    Copy
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {bankInfo.account_number && (
-              <div className="bank-detail-item">
-                <span className="detail-label">Account Number</span>
-                <div className="detail-value-container">
-                  <span className="detail-value">{bankInfo.account_number}</span>
-                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.account_number, 'Account Number')}>
-                    Copy
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {bankInfo.routing_number && (
-              <div className="bank-detail-item">
-                <span className="detail-label">Routing Number</span>
-                <div className="detail-value-container">
-                  <span className="detail-value">{bankInfo.routing_number}</span>
-                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.routing_number, 'Routing Number')}>
-                    Copy
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {bankInfo.sort_code && (
-              <div className="bank-detail-item">
-                <span className="detail-label">Sort Code</span>
-                <div className="detail-value-container">
-                  <span className="detail-value">{bankInfo.sort_code}</span>
-                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.sort_code, 'Sort Code')}>
-                    Copy
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {bankInfo.swift && (
-              <div className="bank-detail-item">
-                <span className="detail-label">SWIFT/BIC</span>
-                <div className="detail-value-container">
-                  <span className="detail-value">{bankInfo.swift}</span>
-                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.swift, 'SWIFT Code')}>
-                    Copy
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {bankInfo.bic && (
-              <div className="bank-detail-item">
-                <span className="detail-label">BIC</span>
-                <div className="detail-value-container">
-                  <span className="detail-value">{bankInfo.bic}</span>
-                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.bic, 'BIC')}>
-                    Copy
-                  </button>
-                </div>
-              </div>
-            )}
-
-            {bankInfo.branch_code && (
-              <div className="bank-detail-item">
-                <span className="detail-label">Branch Code</span>
-                <div className="detail-value-container">
-                  <span className="detail-value">{bankInfo.branch_code}</span>
-                  <button className="copy-detail-btn" onClick={() => copyToClipboard(bankInfo.branch_code, 'Branch Code')}>
-                    Copy
-                  </button>
-                </div>
-              </div>
-            )}
+            <div className="detail-item-modern">
+              <span className="detail-label">Sort Code</span>
+              <span className="detail-value">{bankInfo.sort_code}</span>
+            </div>
+            <div className="detail-item-modern">
+              <span className="detail-label">BIC/SWIFT</span>
+              <span className="detail-value">{bankInfo.bic}</span>
+            </div>
           </div>
+        </div>
 
-          {/* Quick Actions */}
-          <div className="account-actions">
-            <button className="account-action-btn transfer" onClick={() => {
-              onClose();
-              setShowSendModal(true);
-            }}>
-              💸 Transfer Money
-            </button>
-            <button className="account-action-btn deposit" onClick={() => {
-              onClose();
-              setShowReceiveModal(true);
-            }}>
-              💰 Deposit Funds
-            </button>
-            <button className="account-action-btn statement" onClick={() => {
-              alert(`📄 Downloading ${currencyCode} account statement...`);
-            }}>
-              📄 Download Statement
-            </button>
-          </div>
+        {/* Quick Actions */}
+        <div className="account-actions-modern">
+          <button className="action-btn-modern transfer" onClick={() => {
+            onClose();
+            setShowSendModal(true);
+          }}>
+            <div className="action-icon">💸</div>
+            <div className="action-text">
+              <div className="action-title">Transfer Money</div>
+              <div className="action-subtitle">Send to bank or wallet</div>
+            </div>
+          </button>
+          
+          <button className="action-btn-modern deposit" onClick={() => {
+            onClose();
+            setShowReceiveModal(true);
+          }}>
+            <div className="action-icon">💰</div>
+            <div className="action-text">
+              <div className="action-title">Add Funds</div>
+              <div className="action-subtitle">Deposit or top up</div>
+            </div>
+          </button>
+          
+          <button className="action-btn-modern statement" onClick={() => {
+            alert(`📄 Downloading ${currency.name} account statement...`);
+          }}>
+            <div className="action-icon">📄</div>
+            <div className="action-text">
+              <div className="action-title">Statement</div>
+              <div className="action-subtitle">Download PDF</div>
+            </div>
+          </button>
+        </div>
 
-          {/* Transaction History */}
-          <div className="account-history-section">
+        {/* Recent Transactions Section */}
+        <div className="recent-transactions-section">
+          <div className="section-header-modern">
             <h4>Recent Transactions</h4>
+            <span className="transaction-count">{currencyTransactions.length} transactions</span>
+          </div>
+          
+          <div className="transactions-list-modern">
             {currencyTransactions.length > 0 ? (
-              <div className="account-transactions-list">
-                {currencyTransactions.map(transaction => (
-                  <div key={transaction.id} className="account-transaction-item">
-                    <div className="transaction-info">
-                      <div className="transaction-type">
-                        {transaction.type === 'sell' && '💰 Crypto Sale'}
-                        {transaction.type === 'buy' && '💳 Crypto Purchase'}
-                        {transaction.type === 'send' && '📤 Money Sent'}
-                        {transaction.type === 'deposit' && '💰 Deposit'}
-                        {transaction.type === 'receive' && '📥 Money Received'}
-                      </div>
-                      <div className="transaction-date">{transaction.date}</div>
+              currencyTransactions.map((transaction, index) => (
+                <div key={index} className="transaction-item-modern">
+                  <div className="transaction-icon">
+                    {transaction.type === 'buy' && '📈'}
+                    {transaction.type === 'sell' && '📉'}
+                    {transaction.type === 'send' && '📤'}
+                    {transaction.type === 'receive' && '📥'}
+                    {transaction.type === 'deposit' && '💰'}
+                  </div>
+                  <div className="transaction-details">
+                    <div className="transaction-title">
+                      {transaction.type === 'buy' && `Buy ${transaction.crypto}`}
+                      {transaction.type === 'sell' && `Sell ${transaction.crypto}`}
+                      {transaction.type === 'send' && `Send ${transaction.crypto}`}
+                      {transaction.type === 'receive' && `Receive ${transaction.crypto}`}
+                      {transaction.type === 'deposit' && `${currency.name} Deposit`}
                     </div>
-                    <div className="transaction-amount">
-                      {transaction.eur_amount ? (
-                        <span className={transaction.type === 'sell' || transaction.type === 'deposit' || transaction.type === 'receive' ? 'positive' : 'negative'}>
-                          {transaction.type === 'sell' || transaction.type === 'deposit' || transaction.type === 'receive' ? '+' : '-'}€{transaction.eur_amount.toFixed(2)}
-                        </span>
-                      ) : (
-                        <span>{transaction.amount} {transaction.crypto}</span>
-                      )}
+                    <div className="transaction-subtitle">
+                      {transaction.date} • #{transaction.id || `TX${Date.now()}`}
                     </div>
                   </div>
-                ))}
-              </div>
+                  <div className="transaction-amount">
+                    <div className={`amount ${transaction.type === 'buy' || transaction.type === 'deposit' ? 'positive' : 'negative'}`}>
+                      {(transaction.type === 'buy' || transaction.type === 'deposit') ? '+' : '-'}
+                      {currency.symbol}{(transaction.eur_amount || transaction.amount || 0).toLocaleString()}
+                    </div>
+                  </div>
+                </div>
+              ))
             ) : (
-              <div className="no-transactions">
-                <p>No recent {currencyCode} transactions</p>
+              <div className="no-transactions-modern">
+                <div className="empty-icon">📝</div>
+                <div className="empty-title">No transactions yet</div>
+                <div className="empty-subtitle">Your {currency.name} transaction history will appear here</div>
               </div>
             )}
+          </div>
+        </div>
+
+        {/* Account Footer Info */}
+        <div className="account-footer">
+          <div className="footer-info">
+            🔒 Your account is protected by bank-level security
+          </div>
+          <div className="footer-details">
+            Account opened: January 2024 • Last login: Today
           </div>
         </div>
       </div>

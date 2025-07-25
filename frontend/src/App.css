@@ -804,6 +804,11 @@ body {
 
 /* Quick Actions - Consistent with Akka Design */
 .quick-actions {
+  display: flex;
+  gap: 8px;
+  margin: 20px 0 32px 0;
+  padding: 0 4px;
+}
 
 .portfolio-details {
   display: flex;

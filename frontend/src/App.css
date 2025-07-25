@@ -582,7 +582,227 @@ body {
   overflow: hidden;
 }
 
-/* Portfolio Item */
+/* Portfolio Items - Fixed Font Sizes & Akka Design Consistency */
+.portfolio-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px;
+  background: var(--akka-surface);
+  border: 1px solid var(--akka-border-light);
+  border-radius: 12px;
+  margin-bottom: 12px;
+  transition: all 0.2s ease;
+}
+
+.portfolio-item:hover {
+  background: var(--akka-surface-hover);
+  border-color: var(--akka-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.portfolio-crypto {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.crypto-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 16px;
+  color: white;
+  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-accent) 100%);
+}
+
+.crypto-icon.btc {
+  background: linear-gradient(135deg, #f7931e 0%, #f2a900 100%);
+}
+
+.crypto-icon.eth {
+  background: linear-gradient(135deg, #627eea 0%, #4e6de6 100%);
+}
+
+.crypto-icon.ada {
+  background: linear-gradient(135deg, #0033ad 0%, #1e3a8a 100%);
+}
+
+.crypto-icon.dot {
+  background: linear-gradient(135deg, #e6007a 0%, #d10065 100%);
+}
+
+.crypto-icon.sol {
+  background: linear-gradient(135deg, #00ffa3 0%, #00c076 100%);
+}
+
+.portfolio-details {
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+}
+
+.portfolio-crypto-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--akka-text);
+}
+
+.portfolio-amount {
+  font-size: 13px;
+  color: var(--akka-text-secondary);
+  font-weight: 500;
+}
+
+.portfolio-value {
+  text-align: right;
+  display: flex;
+  flex-direction: column;
+  gap: 2px;
+  align-items: flex-end;
+}
+
+/* Fixed Font Sizes - Made Smaller & Consistent */
+.value-eur {
+  font-weight: 700;
+  font-size: 16px; /* Reduced from larger size */
+  color: var(--akka-text);
+  line-height: 1.2;
+}
+
+.value-change {
+  font-size: 12px; /* Reduced from larger size */
+  font-weight: 500;
+  line-height: 1.2;
+}
+
+.value-change.positive {
+  color: var(--akka-success);
+}
+
+.value-change.negative {
+  color: var(--akka-error);
+}
+
+.portfolio-sell-btn {
+  background: linear-gradient(135deg, var(--akka-error) 0%, #dc2626 100%);
+  color: white;
+  border: none;
+  padding: 6px 12px;
+  border-radius: 8px;
+  font-size: 12px;
+  font-weight: 600;
+  cursor: pointer;
+  margin-top: 6px;
+  transition: all 0.2s ease;
+}
+
+.portfolio-sell-btn:hover {
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(239, 68, 68, 0.3);
+}
+
+/* Cards Section - Consistent with Akka Design */
+.home-cards-section {
+  margin: 24px 0;
+}
+
+.cards-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.card-preview {
+  background: var(--akka-surface);
+  border: 1px solid var(--akka-border-light);
+  border-radius: 12px;
+  padding: 16px;
+  transition: all 0.2s ease;
+  cursor: pointer;
+}
+
+.card-preview:hover {
+  background: var(--akka-surface-hover);
+  border-color: var(--akka-accent);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.card-preview-header {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 8px;
+}
+
+.card-type-icon {
+  font-size: 18px;
+}
+
+.card-name {
+  font-weight: 600;
+  font-size: 16px;
+  color: var(--akka-text);
+}
+
+.card-connection-preview {
+  font-size: 13px;
+  color: var(--akka-text-secondary);
+  margin-bottom: 8px;
+}
+
+.card-balance-preview {
+  font-weight: 700;
+  font-size: 18px;
+  color: var(--akka-success);
+  margin-bottom: 4px;
+}
+
+.card-spent-preview {
+  font-size: 12px;
+  color: var(--akka-text-secondary);
+}
+
+/* Section Headers - Consistent Akka Design */
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+
+.section-header h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--akka-text);
+  margin: 0;
+}
+
+.see-all-btn {
+  background: none;
+  border: none;
+  color: var(--akka-accent);
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  padding: 8px 12px;
+  border-radius: 8px;
+  transition: all 0.2s ease;
+}
+
+.see-all-btn:hover {
+  background: var(--akka-accent-light);
+  color: var(--akka-accent-dark);
+}
+
+/* Quick Actions - Consistent with Akka Design */
 .portfolio-item {
   display: flex;
   justify-content: space-between;

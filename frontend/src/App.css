@@ -883,6 +883,7 @@ body {
   background: var(--akka-gray-100);
 }
 
+/* Portfolio Items - Fixed Font Sizes & Akka Design Consistency */
 .portfolio-details {
   display: flex;
   flex-direction: column;

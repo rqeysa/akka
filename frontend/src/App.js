@@ -587,8 +587,8 @@ const CryptoListItem = ({ crypto, onBuy }) => {
   );
 };
 
-const PortfolioItem = ({ crypto, data, onSell }) => (
-  <div className="portfolio-item">
+const PortfolioItem = ({ crypto, data, onSell, onClick }) => (
+  <div className="portfolio-item" onClick={onClick} style={{ cursor: onClick ? 'pointer' : 'default' }}>
     <div className="portfolio-crypto">
       <div className={`crypto-icon ${crypto.toLowerCase()}`}>
         {crypto.charAt(0)}
@@ -604,7 +604,10 @@ const PortfolioItem = ({ crypto, data, onSell }) => (
       {onSell && (
         <button 
           className="portfolio-sell-btn"
-          onClick={() => onSell(crypto)}
+          onClick={(e) => {
+            e.stopPropagation();
+            onSell(crypto);
+          }}
         >
           Sell
         </button>

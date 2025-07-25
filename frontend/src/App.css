@@ -803,50 +803,7 @@ body {
 }
 
 /* Quick Actions - Consistent with Akka Design */
-.portfolio-item {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  padding: 16px 20px;
-  border-bottom: 1px solid var(--akka-border);
-  transition: background-color 0.2s ease;
-}
-
-.portfolio-item:last-child {
-  border-bottom: none;
-}
-
-.portfolio-item:hover {
-  background: var(--akka-gray-50);
-}
-
-.portfolio-crypto {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-}
-
-.crypto-icon {
-  width: 40px;
-  height: 40px;
-  border-radius: 12px;
-  background: linear-gradient(135deg, var(--akka-primary) 0%, var(--akka-secondary) 100%);
-  color: white;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 16px;
-}
-
-.crypto-icon.btc { background: linear-gradient(135deg, #F7931A 0%, #FF9500 100%); }
-.crypto-icon.eth { background: linear-gradient(135deg, #627EEA 0%, #8A92B2 100%); }
-.crypto-icon.ada { background: linear-gradient(135deg, #0033AD 0%, #1E3A8A 100%); }
-.crypto-icon.dot { background: linear-gradient(135deg, #E6007A 0%, #F5A2C0 100%); }
-.crypto-icon.sol { background: linear-gradient(135deg, #9945FF 0%, #14F195 100%); }
-.crypto-icon.matic { background: linear-gradient(135deg, #8247E5 0%, #A663FF 100%); }
-.crypto-icon.link { background: linear-gradient(135deg, #2A5ADA 0%, #4A7BFF 100%); }
-.crypto-icon.avax { background: linear-gradient(135deg, #E84142 0%, #FF6B6B 100%); }
+.quick-actions {
 
 .portfolio-details {
   display: flex;

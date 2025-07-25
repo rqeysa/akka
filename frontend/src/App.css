@@ -3165,6 +3165,360 @@ input:checked + .slider:before {
   transform: translateY(-1px);
 }
 
+/* Modern Bank Account Modal */
+.bank-account-modal-modern {
+  background: var(--akka-surface);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 90vh;
+  overflow-y: auto;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.25);
+}
+
+.modal-header-modern {
+  padding: 20px;
+  background: linear-gradient(135deg, #1f2937 0%, #374151 100%);
+  color: white;
+  border-radius: 20px 20px 0 0;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.back-btn {
+  background: none;
+  border: none;
+  color: white;
+  font-size: 16px;
+  cursor: pointer;
+  padding: 8px;
+  border-radius: 8px;
+  transition: background 0.2s ease;
+}
+
+.back-btn:hover {
+  background: rgba(255, 255, 255, 0.1);
+}
+
+.account-summary-section {
+  padding: 20px;
+}
+
+.account-holder-card {
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  background: var(--akka-gray-50);
+  padding: 16px;
+  border-radius: 12px;
+  margin-bottom: 20px;
+}
+
+.holder-avatar {
+  width: 50px;
+  height: 50px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 20px;
+  color: white;
+}
+
+.holder-details {
+  flex: 1;
+}
+
+.holder-name {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--akka-text);
+  margin-bottom: 4px;
+}
+
+.holder-id {
+  font-size: 13px;
+  color: var(--akka-gray-600);
+}
+
+.main-balance-card {
+  background: linear-gradient(135deg, #10B981 0%, #059669 100%);
+  color: white;
+  padding: 24px;
+  border-radius: 16px;
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+.balance-label {
+  font-size: 14px;
+  opacity: 0.9;
+  margin-bottom: 8px;
+}
+
+.balance-amount {
+  font-size: 32px;
+  font-weight: 700;
+  margin-bottom: 8px;
+}
+
+.balance-subtitle {
+  font-size: 14px;
+  opacity: 0.8;
+  margin-bottom: 12px;
+}
+
+.account-status-modern {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+}
+
+.status-indicator-modern {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #10B981;
+}
+
+.account-details-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.detail-item-modern {
+  background: white;
+  padding: 16px;
+  border-radius: 12px;
+  border: 1px solid var(--akka-border);
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.detail-item-modern .detail-label {
+  font-size: 12px;
+  color: var(--akka-gray-500);
+  font-weight: 500;
+}
+
+.detail-item-modern .detail-value {
+  font-size: 14px;
+  color: var(--akka-text);
+  font-weight: 600;
+  word-break: break-all;
+}
+
+.account-actions-modern {
+  padding: 0 20px 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.action-btn-modern {
+  background: white;
+  border: 1px solid var(--akka-border);
+  border-radius: 12px;
+  padding: 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  font-family: inherit;
+}
+
+.action-btn-modern:hover {
+  background: var(--akka-gray-50);
+  transform: translateY(-1px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn-modern.transfer:hover {
+  border-color: #3B82F6;
+  background: rgba(59, 130, 246, 0.05);
+}
+
+.action-btn-modern.deposit:hover {
+  border-color: #10B981;
+  background: rgba(16, 185, 129, 0.05);
+}
+
+.action-btn-modern.statement:hover {
+  border-color: #8B5CF6;
+  background: rgba(139, 92, 246, 0.05);
+}
+
+.action-icon {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--akka-gray-50);
+  border-radius: 10px;
+}
+
+.action-text {
+  flex: 1;
+  text-align: left;
+}
+
+.action-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--akka-text);
+  margin-bottom: 2px;
+}
+
+.action-subtitle {
+  font-size: 13px;
+  color: var(--akka-gray-600);
+}
+
+.recent-transactions-section {
+  padding: 0 20px 20px;
+}
+
+.section-header-modern {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+  padding: 0 4px;
+}
+
+.section-header-modern h4 {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--akka-text);
+  margin: 0;
+}
+
+.transaction-count {
+  font-size: 12px;
+  color: var(--akka-gray-500);
+  background: var(--akka-gray-100);
+  padding: 4px 8px;
+  border-radius: 6px;
+}
+
+.transactions-list-modern {
+  background: white;
+  border: 1px solid var(--akka-border);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
+.transaction-item-modern {
+  display: flex;
+  align-items: center;
+  padding: 16px;
+  border-bottom: 1px solid var(--akka-border);
+  transition: background 0.2s ease;
+}
+
+.transaction-item-modern:last-child {
+  border-bottom: none;
+}
+
+.transaction-item-modern:hover {
+  background: var(--akka-gray-50);
+}
+
+.transaction-item-modern .transaction-icon {
+  width: 40px;
+  height: 40px;
+  border-radius: 10px;
+  background: var(--akka-gray-100);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 18px;
+  margin-right: 12px;
+}
+
+.transaction-item-modern .transaction-details {
+  flex: 1;
+}
+
+.transaction-title {
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--akka-text);
+  margin-bottom: 2px;
+}
+
+.transaction-subtitle {
+  font-size: 12px;
+  color: var(--akka-gray-500);
+}
+
+.transaction-amount {
+  text-align: right;
+}
+
+.transaction-amount .amount {
+  font-size: 14px;
+  font-weight: 600;
+}
+
+.transaction-amount .amount.positive {
+  color: var(--akka-success);
+}
+
+.transaction-amount .amount.negative {
+  color: var(--akka-error);
+}
+
+.no-transactions-modern {
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.empty-icon {
+  font-size: 32px;
+  margin-bottom: 12px;
+}
+
+.empty-title {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--akka-text);
+  margin-bottom: 4px;
+}
+
+.empty-subtitle {
+  font-size: 13px;
+  color: var(--akka-gray-500);
+}
+
+.account-footer {
+  padding: 16px 20px;
+  background: var(--akka-gray-50);
+  border-top: 1px solid var(--akka-border);
+  text-align: center;
+}
+
+.footer-info {
+  font-size: 13px;
+  color: var(--akka-gray-600);
+  margin-bottom: 4px;
+}
+
+.footer-details {
+  font-size: 12px;
+  color: var(--akka-gray-500);
+}
+
 /* Crypto Details Modal */
 .crypto-details-modal {
   background: var(--akka-surface);

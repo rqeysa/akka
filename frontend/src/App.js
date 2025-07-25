@@ -2194,6 +2194,11 @@ const MainApp = () => {
     }
   };
 
+  const handleCryptoDetails = (crypto, data) => {
+    setSelectedCryptoDetails({ crypto, data });
+    setShowCryptoDetailsModal(true);
+  };
+
   const handleLogout = () => {
     logout();
   };

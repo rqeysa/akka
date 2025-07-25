@@ -1000,8 +1000,62 @@ const SendModal = ({ onClose, onSendComplete, userBalances }) => {
   );
 };
 
-// Receive Modal Component
-const ReceiveModal = ({ onClose }) => {
+// History Modal Component
+const HistoryModal = ({ onClose, historyFilter, setHistoryFilter }) => {
+  const getFilteredTransactions = (filter) => {
+    if (filter === 'all') return USER_TRANSACTION_HISTORY;
+    return USER_TRANSACTION_HISTORY.filter(transaction => {
+      switch(filter) {
+        case 'buys': return transaction.type === 'buy';
+        case 'sells': return transaction.type === 'sell';
+        case 'sends': return transaction.type === 'send';
+        case 'receives': return transaction.type === 'receive';
+        case 'deposits': return transaction.type === 'deposit';
+        default: return true;
+      }
+    });
+  };
+
+  return (
+    <div className="modal-overlay">
+      <div className="history-modal">
+        <div className="modal-header">
+          <h3>Transaction History</h3>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
+        
+        <div className="modal-content">
+          {/* History Filters */}
+          <div className="history-filters">
+            {['all', 'buys', 'sells', 'sends', 'receives', 'deposits'].map(filter => (
+              <button
+                key={filter}
+                className={`filter-btn ${historyFilter === filter ? 'active' : ''}`}
+                onClick={() => setHistoryFilter(filter)}
+              >
+                {filter.charAt(0).toUpperCase() + filter.slice(1)}
+              </button>
+            ))}
+          </div>
+
+          {/* Transaction List */}
+          <div className="transactions-list">
+            {getFilteredTransactions(historyFilter).map(transaction => (
+              <TransactionItem key={transaction.id} transaction={transaction} />
+            ))}
+            
+            {getFilteredTransactions(historyFilter).length === 0 && (
+              <div className="no-transactions">
+                <p>No transactions found for the selected filter</p>
+              </div>
+            )}
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
   const [receiveType, setReceiveType] = useState('crypto'); // 'crypto' or 'fiat'
   const [selectedCurrency, setSelectedCurrency] = useState('BTC');
   

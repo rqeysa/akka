@@ -2182,7 +2182,37 @@ input:checked + .slider:before {
   opacity: 0.8;
 }
 
-/* Cards Quick Access */
+/* History Modal */
+.history-modal {
+  background: var(--akka-surface);
+  border-radius: 20px;
+  width: 100%;
+  max-width: 500px;
+  max-height: 85vh;
+  overflow-y: auto;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.2);
+}
+
+/* Home Cards Section */
+.home-cards-section {
+  margin: 24px 0;
+}
+
+.home-cards-section .section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 16px;
+}
+
+.home-cards-section h3 {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--akka-gray-900);
+  margin: 0;
+}
+
+/* Cards Preview Grid */
 .cards-quick-access {
   margin: 24px 0;
 }

@@ -2694,7 +2694,30 @@ const MainApp = () => {
               </button>
             </div>
 
-            {/* Portfolio */}
+            {/* Cards Section - Moved to Middle */}
+            <div className="home-cards-section">
+              <div className="section-header">
+                <h3>Your cards</h3>
+                <button className="see-all-btn" onClick={() => handleTabChange('cards')}>View all</button>
+              </div>
+              <div className="cards-preview">
+                {USER_CARDS.slice(0, 2).map(card => (
+                  <div key={card.id} className="card-preview" onClick={() => setSelectedCard(card)}>
+                    <div className="card-preview-header">
+                      <span className="card-type-icon">💳</span>
+                      <span className="card-name">{card.name}</span>
+                    </div>
+                    <div className="card-connection-preview">{card.description}</div>
+                    <div className="card-balance-preview">€{card.balance.toLocaleString()}</div>
+                    <div className="card-spent-preview">
+                      Spent this month: €{card.spent_this_month.toLocaleString()}
+                    </div>
+                  </div>
+                ))}
+              </div>
+            </div>
+
+            {/* Portfolio - Now After Cards */}
             <div className="home-portfolio">
               <div className="section-header">
                 <h3>Your portfolio</h3>

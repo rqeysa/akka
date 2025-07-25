@@ -802,12 +802,85 @@ body {
   color: var(--akka-accent-dark);
 }
 
-/* Quick Actions - Consistent with Akka Design */
+/* Quick Actions - Back to Original Size */
 .quick-actions {
   display: flex;
-  gap: 8px;
-  margin: 20px 0 32px 0;
+  gap: 12px;
+  margin: 24px 0 32px 0;
   padding: 0 4px;
+}
+
+.action-btn {
+  flex: 1;
+  background: var(--akka-surface);
+  border: 1px solid var(--akka-border);
+  border-radius: 16px;
+  padding: 20px 16px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 8px;
+  font-family: inherit;
+  font-size: 14px;
+  font-weight: 600;
+  color: var(--akka-text);
+}
+
+.action-btn:hover {
+  background: var(--akka-surface-hover);
+  transform: translateY(-2px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.1);
+}
+
+.action-btn.primary {
+  background: linear-gradient(135deg, var(--akka-primary) 0%, #2563EB 100%);
+  color: white;
+  border: none;
+}
+
+.action-btn.primary:hover {
+  background: linear-gradient(135deg, #2563EB 0%, var(--akka-primary) 100%);
+}
+
+.action-btn.sell-btn {
+  background: linear-gradient(135deg, var(--akka-error) 0%, #DC2626 100%);
+  color: white;
+  border: none;
+}
+
+.action-btn.sell-btn:hover {
+  background: linear-gradient(135deg, #DC2626 0%, var(--akka-error) 100%);
+}
+
+.action-btn.secondary {
+  background: var(--akka-surface);
+  color: var(--akka-text);
+}
+
+.action-btn.secondary:hover {
+  background: var(--akka-surface-hover);
+}
+
+.action-icon {
+  font-size: 24px;
+  width: 40px;
+  height: 40px;
+  border-radius: 12px;
+  background: rgba(255, 255, 255, 0.1);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.action-btn.primary .action-icon,
+.action-btn.sell-btn .action-icon {
+  background: rgba(255, 255, 255, 0.2);
+}
+
+.action-btn.secondary .action-icon {
+  background: var(--akka-gray-100);
 }
 
 .portfolio-details {

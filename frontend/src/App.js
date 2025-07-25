@@ -3471,6 +3471,8 @@ const MainApp = () => {
           currencyCode={selectedCurrencyAccount}
           onClose={() => setShowBankAccountModal(false)}
           userBalances={userBalances}
+          setShowSendModal={setShowSendModal}
+          setShowReceiveModal={setShowReceiveModal}
         />
       )}
       

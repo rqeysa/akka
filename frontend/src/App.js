@@ -1003,6 +1003,135 @@ const SendModal = ({ onClose, onSendComplete, userBalances }) => {
   );
 };
 
+// Crypto Details Modal Component
+const CryptoDetailsModal = ({ crypto, data, onClose, onBuy, onSell, cryptoPrices }) => {
+  if (!crypto || !data) return null;
+
+  const cryptoPrice = cryptoPrices[crypto];
+  const pricePerUnit = data.value / data.amount;
+  
+  return (
+    <div className="modal-overlay">
+      <div className="crypto-details-modal">
+        <div className="modal-header">
+          <h3>{crypto} Details</h3>
+          <button className="close-btn" onClick={onClose}>×</button>
+        </div>
+        
+        <div className="modal-content">
+          {/* Crypto Info Header */}
+          <div className="crypto-info-header">
+            <div className={`crypto-icon-large ${crypto.toLowerCase()}`}>
+              {crypto.charAt(0)}
+            </div>
+            <div className="crypto-main-info">
+              <div className="crypto-name-large">{crypto}</div>
+              <div className="crypto-full-name">{cryptoPrice?.name || `${crypto} Token`}</div>
+              <div className="crypto-current-price">€{pricePerUnit.toLocaleString(undefined, {minimumFractionDigits: 2, maximumFractionDigits: 2})}</div>
+              <div className="price-change positive">+2.45% (24h)</div>
+            </div>
+          </div>
+
+          {/* Holdings Summary */}
+          <div className="holdings-summary">
+            <div className="holding-card">
+              <div className="holding-label">Your Holdings</div>
+              <div className="holding-amount">{data.amount} {crypto}</div>
+              <div className="holding-value">€{data.value.toLocaleString(undefined, {minimumFractionDigits: 2})}</div>
+            </div>
+          </div>
+
+          {/* Price Chart Placeholder */}
+          <div className="price-chart-section">
+            <div className="chart-header">
+              <h4>📈 Price Chart (7 Days)</h4>
+              <div className="chart-period-tabs">
+                <button className="period-tab active">7D</button>
+                <button className="period-tab">1M</button>
+                <button className="period-tab">3M</button>
+                <button className="period-tab">1Y</button>
+              </div>
+            </div>
+            <div className="chart-placeholder">
+              <svg viewBox="0 0 400 120" className="price-chart-svg">
+                <defs>
+                  <linearGradient id="priceGradient" x1="0%" y1="0%" x2="0%" y2="100%">
+                    <stop offset="0%" stopColor="#10B981" stopOpacity="0.3"/>
+                    <stop offset="100%" stopColor="#10B981" stopOpacity="0.05"/>
+                  </linearGradient>
+                </defs>
+                <path d="M0,80 Q50,40 100,60 T200,50 T300,30 T400,45" 
+                      stroke="#10B981" 
+                      strokeWidth="3" 
+                      fill="none"/>
+                <path d="M0,80 Q50,40 100,60 T200,50 T300,30 T400,45 L400,120 L0,120 Z" 
+                      fill="url(#priceGradient)"/>
+              </svg>
+              <div className="chart-stats">
+                <div className="stat-item">
+                  <span className="stat-label">24h High</span>
+                  <span className="stat-value">€{(pricePerUnit * 1.03).toLocaleString()}</span>
+                </div>
+                <div className="stat-item">
+                  <span className="stat-label">24h Low</span>
+                  <span className="stat-value">€{(pricePerUnit * 0.97).toLocaleString()}</span>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          {/* Action Buttons */}
+          <div className="crypto-actions">
+            <button 
+              className="crypto-action-button buy-btn"
+              onClick={() => {
+                onClose();
+                onBuy(cryptoPrice || { symbol: crypto, price: pricePerUnit, name: crypto });
+              }}
+            >
+              <span className="action-icon">📈</span>
+              <div className="action-content">
+                <div className="action-title">Buy More</div>
+                <div className="action-subtitle">Purchase additional {crypto}</div>
+              </div>
+            </button>
+            
+            <button 
+              className="crypto-action-button sell-btn"
+              onClick={() => {
+                onClose();
+                onSell(crypto);
+              }}
+            >
+              <span className="action-icon">📉</span>
+              <div className="action-content">
+                <div className="action-title">Sell {crypto}</div>
+                <div className="action-subtitle">Convert to EUR</div>
+              </div>
+            </button>
+          </div>
+
+          {/* Market Stats */}
+          <div className="market-stats">
+            <div className="stat-row">
+              <span className="stat-label">Market Cap</span>
+              <span className="stat-value">€2.1T</span>
+            </div>
+            <div className="stat-row">
+              <span className="stat-label">24h Volume</span>
+              <span className="stat-value">€45.2B</span>
+            </div>
+            <div className="stat-row">
+              <span className="stat-label">Circulating Supply</span>
+              <span className="stat-value">19.8M {crypto}</span>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  );
+};
+
 // History Modal Component
 const HistoryModal = ({ onClose, historyFilter, setHistoryFilter }) => {
   const getFilteredTransactions = (filter) => {

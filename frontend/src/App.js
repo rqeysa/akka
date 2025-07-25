@@ -3414,6 +3414,15 @@ const MainApp = () => {
         </button>
       </nav>
 
+      {/* History Modal */}
+      {showHistoryModal && (
+        <HistoryModal
+          onClose={() => setShowHistoryModal(false)}
+          historyFilter={historyFilter}
+          setHistoryFilter={setHistoryFilter}
+        />
+      )}
+
       {/* Buy/Sell Modal */}
       {showBuyModal && (
         <BuySellModal

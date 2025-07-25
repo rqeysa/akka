@@ -2071,6 +2071,8 @@ const MainApp = () => {
   const [showBankAccountModal, setShowBankAccountModal] = useState(false);
   const [selectedCurrencyAccount, setSelectedCurrencyAccount] = useState(null);
   const [showCryptoPortfolioModal, setShowCryptoPortfolioModal] = useState(false);
+  const [showCryptoDetailsModal, setShowCryptoDetailsModal] = useState(false);
+  const [selectedCryptoDetails, setSelectedCryptoDetails] = useState(null);
   const [swiperInstance, setSwiperInstance] = useState(null);
   const [currentLanguage, setCurrentLanguage] = useState('English'); // Language state
   const [settingsChanged, setSettingsChanged] = useState(false); // Track if settings need saving
